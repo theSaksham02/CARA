@@ -5,10 +5,10 @@
 This repository is intentionally a **code-free scaffold**.  
 All non-README files are empty placeholders; implementation will be written by the team.
 
-## Team owners
+## Team assignments
 
-- **Saksham Mishra**: frontend flow, repository structure, and integration coordination
-- **Nirmal**: shared REST API, backend modules, and protocol-engine integration
+- **Project owner: Saksham Mishra**
+- **Nirmal**: shared REST API integration support and backend handoff receiver
 - **Diya**: IMCI rule extraction and triage protocol authoring
 - **Eman**: SOAP note formatting rules and keywords
 - **Anaaya**: impact metrics, test cases, and demo narrative
@@ -30,18 +30,18 @@ All non-README files are empty placeholders; implementation will be written by t
 
 ## Root files
 
-| File | Job | How it will be filled | Owner |
+| File | Job | How it will be filled | Assignee |
 | --- | --- | --- | --- |
 | `.gitignore` | Ignore generated/local files | Add ignore rules for node, python cache, db, and env files | Saksham Mishra |
-| `docker-compose.yml` | Local multi-service run config | Define frontend + backend services with shared env values | Nirmal |
+| `docker-compose.yml` | Local multi-service run config | Define frontend + backend services with shared env values | Saksham Mishra |
 | `architecture-flow.png` | Product architecture reference | Keep updated when app flow changes | Saksham Mishra |
 
 ## Folder responsibilities
 
-| Folder | Job | How it will be filled | Owner |
+| Folder | Job | How it will be filled | Assignee |
 | --- | --- | --- | --- |
 | `frontend/` | UI shells and browser modules | Add HTML/CSS/JS implementation for FieldView and ClinIQ | Saksham Mishra |
-| `backend/` | API, controllers, engine, and db setup | Add Express routes, controller logic, and persistence layer | Nirmal |
+| `backend/` | API, controllers, engine, and db setup | Add Express routes, controller logic, and persistence layer | Saksham Mishra |
 | `ml/` | Protocol rules, SOAP formatter inputs, impact data | Add validated protocol JSON and formatter logic | Diya, Eman, Anaaya |
 
 ## Datasets and sources for ML team
@@ -122,3 +122,20 @@ Output: { "urgency": "Red", "reason": "Danger sign: difficulty breathing in chil
 ### Day 3
 - **All three**: test live system with Anaaya's test cases  
   Ship check: **"Does CARA give RED for Amara? Yes? Ship."**
+
+## Person-specific README locations
+
+- **Diya**: `ml/protocols/README.md`
+- **Eman**: `ml/soap/README.md`
+- **Anaaya**: `ml/impact/README.md` and `ml/tests/README.md`
+
+## Shared start checklist (all three)
+
+1. Install **VS Code**.
+2. Install **Node.js** (**Eman required**, optional for others).
+3. Get added to the GitHub repo.
+4. Create personal branch:
+   - `diya/protocols`
+   - `eman/soap`
+   - `anaaya/impact`
+5. Read your README first, then fill your assigned files.
