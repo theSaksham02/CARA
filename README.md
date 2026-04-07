@@ -1,4 +1,4 @@
-# CARA Scaffold (No Code)
+# CARA Scaffold
 
 ![CARA architecture flow](./architecture-flow.png)
 
