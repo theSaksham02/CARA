@@ -1,3 +1,5 @@
+import { initMotion } from "./motion.js";
+
 const routes = {
   about: "about.html",
   research: "research.html",
@@ -81,76 +83,5 @@ const wireRoutes = () => {
   });
 };
 
-const animateShellOnScroll = () => {
-  const toggle = () => {
-    document.body.classList.toggle("is-scrolled", window.scrollY > 16);
-  };
-
-  toggle();
-  window.addEventListener("scroll", toggle, { passive: true });
-};
-
-const collectRevealTargets = () => {
-  const targets = new Set();
-  const selectors = [
-    "body > nav",
-    "body > header",
-    "body > aside",
-    "body > main",
-    "body > section",
-    "body > footer",
-    "main > section",
-    "main > div",
-    "section > div",
-    "footer > div",
-  ];
-
-  selectors.forEach((selector) => {
-    document.querySelectorAll(selector).forEach((element) => {
-      if (element.children.length === 0 && element.textContent.trim().length === 0) return;
-      targets.add(element);
-    });
-  });
-
-  return [...targets];
-};
-
-const wireReveals = () => {
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReducedMotion) {
-    document.documentElement.classList.add("reduced-motion");
-  }
-
-  const targets = collectRevealTargets();
-  targets.forEach((element, index) => {
-    element.dataset.reveal = "true";
-    element.style.setProperty("--cara-delay", `${Math.min(index * 70, 320)}ms`);
-  });
-
-  if (prefersReducedMotion) {
-    targets.forEach((element) => element.classList.add("is-visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.14,
-      rootMargin: "0px 0px -8% 0px",
-    }
-  );
-
-  targets.forEach((element) => observer.observe(element));
-};
-
-document.documentElement.classList.add("js");
 wireRoutes();
-wireReveals();
-animateShellOnScroll();
+initMotion();
