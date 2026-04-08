@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CARA — One health worker. Three times the capacity.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#fed6ab",
+                        "surface-dim": "#e3d9c6",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#d6c786",
+                        "surface-tint": "#536526",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#e7c096",
+                        "primary": "#445518",
+                        "on-primary-fixed-variant": "#3c4c0f",
+                        "error": "#ba1a1a",
+                        "surface": "#fff8f1",
+                        "on-tertiary-fixed-variant": "#514713",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#45483c",
+                        "outline-variant": "#c6c8b7",
+                        "surface-container-high": "#f1e7d4",
+                        "primary-fixed-dim": "#bacf84",
+                        "surface-container-low": "#fdf2df",
+                        "inverse-primary": "#bacf84",
+                        "tertiary": "#6a5e29",
+                        "background": "#fff8f1",
+                        "on-primary-container": "#daf0a1",
+                        "secondary": "#765937",
+                        "surface-container": "#f7edda",
+                        "on-primary-fixed": "#151f00",
+                        "on-secondary-fixed": "#2b1700",
+                        "on-secondary-container": "#795b39",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#ece1cf",
+                        "surface-bright": "#fff8f1",
+                        "secondary-fixed": "#ffddba",
+                        "primary-container": "#5c6e2e",
+                        "inverse-on-surface": "#faf0dc",
+                        "on-background": "#201b10",
+                        "surface-container-highest": "#ece1cf",
+                        "on-surface": "#201b10",
+                        "primary-fixed": "#d6eb9d",
+                        "tertiary-container": "#baab6d",
+                        "on-tertiary-container": "#493f0c",
+                        "error-container": "#ffdad6",
+                        "outline": "#76786a",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5c4122",
+                        "tertiary-fixed": "#f3e3a0",
+                        "on-tertiary-fixed": "#211b00",
+                        "inverse-surface": "#353023"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .font-serif { font-family: 'Newsreader', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="bg-[#fff8f1] dark:bg-stone-950 flex justify-between items-center w-full px-8 py-6 max-w-[1440px] mx-auto sticky top-0 z-50 transition-all duration-300">
+<div class="text-3xl font-serif italic text-[#445518] dark:text-[#ece1cf] tracking-tight">CARA</div>
+<div class="hidden md:flex gap-12">
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Research</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Join Us</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">The Ward</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Patient Compass</a>
+</div>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-semibold hover:scale-[1.02] hover:bg-primary-container transition-all shadow-[0_20px_40px_rgba(32,27,16,0.05)]">
+            Access Platform →
+        </button>
+</nav>
+<!-- Hero Section -->
+<section class="max-w-[1440px] mx-auto px-8 py-16 md:py-32 grid md:grid-cols-2 gap-16 items-center">
+<div class="flex flex-col gap-8 text-left">
+<span class="text-primary font-bold tracking-[0.2em] uppercase text-sm">WHO-Compliant · Offline-First · Open Source</span>
+<h1 class="text-7xl md:text-8xl font-serif text-on-surface leading-[0.95] tracking-tight">
+                One health worker. <br/>Three times the capacity.
+            </h1>
+<p class="text-xl text-on-surface-variant max-w-lg leading-relaxed">
+                CARA gives community health workers in rural clinics AI-assisted triage, voice-to-note documentation, and automated follow-up — all without internet.
+            </p>
+<div class="flex flex-wrap gap-6 pt-4">
+<button class="bg-primary text-on-primary px-10 py-5 rounded-full text-lg font-bold hover:scale-[1.02] hover:bg-primary-container transition-all shadow-xl">
+                    Enter The Ward →
+                </button>
+<button class="border-2 border-outline-variant/20 text-on-surface px-10 py-5 rounded-full text-lg font-bold hover:scale-[1.02] transition-all">
+                    View Patient Compass
+                </button>
+</div>
+</div>
+<div class="relative">
+<!-- Triage UI Mockup -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_40px_80px_rgba(32,27,16,0.1)] border border-outline-variant/10">
+<div class="flex items-center justify-between mb-8">
+<span class="font-bold text-sm text-stone-500 uppercase tracking-widest">Active Triage Queue</span>
+<span class="material-symbols-outlined text-primary">more_horiz</span>
+</div>
+<div class="space-y-4">
+<!-- High Urgency -->
+<div class="bg-error-container/20 p-6 rounded-lg flex items-center justify-between group transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-error rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">priority_high</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Patient #482</h4>
+<p class="text-sm opacity-70">Severe Respiratory Distress</p>
+</div>
+</div>
+<span class="bg-error/10 text-error px-4 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Immediate</span>
+</div>
+<!-- Medium Urgency -->
+<div class="bg-secondary-container/20 p-6 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Patient #483</h4>
+<p class="text-sm opacity-70">Persistent Fever &gt; 3 Days</p>
+</div>
+</div>
+<span class="bg-secondary/10 text-secondary px-4 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">High Priority</span>
+</div>
+<!-- Low Urgency -->
+<div class="bg-primary/5 p-6 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Patient #484</h4>
+<p class="text-sm opacity-70">Routine Post-Natal Check</p>
+</div>
+</div>
+<span class="bg-primary/10 text-primary px-4 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Stable</span>
+</div>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -z-10 -bottom-10 -right-10 w-64 h-64 bg-primary-fixed/30 blur-[100px] rounded-full"></div>
+</div>
+</section>
+<!-- Stats Bar -->
+<section class="bg-surface-container-low py-16">
+<div class="max-w-[1440px] mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-4 items-center text-center">
+<div class="flex flex-col gap-1">
+<span class="text-4xl font-serif text-primary">1 Billion+</span>
+<span class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Healthcare Access GAP</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-4xl font-serif text-primary">500,000</span>
+<span class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">CHWs Targeted</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-4xl font-serif text-primary">3×</span>
+<span class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Patient Capacity</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-4xl font-serif text-primary">60 sec</span>
+<span class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">to clinical note</span>
+</div>
+</div>
+</section>
+<!-- Module Bento Grid -->
+<section class="max-w-[1440px] mx-auto px-8 py-32">
+<div class="grid md:grid-cols-3 md:grid-rows-2 gap-8 h-auto md:h-[700px]">
+<!-- Card 1: Large AI Triage -->
+<div class="md:col-span-2 md:row-span-2 bg-surface-container-lowest rounded-xl p-12 flex flex-col justify-between shadow-[0_20px_40px_rgba(32,27,16,0.03)] group hover:scale-[1.01] transition-transform">
+<div>
+<div class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center mb-10 overflow-hidden relative">
+<span class="material-symbols-outlined text-primary text-3xl" data-weight="fill">pulse_alert</span>
+<div class="absolute inset-0 bg-primary/20 animate-ping rounded-full"></div>
+</div>
+<h2 class="text-5xl font-serif mb-6">AI Triage Bot</h2>
+<p class="text-xl text-on-surface-variant max-w-md leading-relaxed">
+                        Symptoms are mapped directly to WHO IMCI protocols in real-time. Offline processing ensures no patient waits for a connection.
+                    </p>
+</div>
+<div class="mt-12 overflow-hidden rounded-lg bg-surface h-64 border border-outline-variant/10 relative">
+<img alt="Healthcare worker using digital tablet" class="w-full h-full object-cover grayscale opacity-50 mix-blend-multiply" data-alt="close up of a hand using a digital tablet displaying medical charts in a bright clinic setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVppw8rkQwKAMbVoTN8e6-O8twnnWMOlqD6wMfKSZbTa42QQFETi8bl-XaAOM4ZKYnx1kPrLi48vMeLo7jdgpL1-DKyvm1JWvhFl6Jk3gj8jgO7_9BSYQH4OndlZY988Ue787HEp--MWBS3O0o4kcaLI1peanD_qKTD0Sa9nf0qyuHC--sSYiE8BzvymtQDkWB7MYa_g0EYv3nZ_uKbCHxLnQ8tAOzy6cLgnjGVBpTPlKuy_JkfavxcnCojl-cL0sK7GpySRjAwC-B"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+</div>
+</div>
+<!-- Card 2: Voice to SOAP -->
+<div class="bg-[#f2f4e8] rounded-xl p-8 flex flex-col justify-between shadow-[0_20px_40px_rgba(32,27,16,0.03)]">
+<div>
+<span class="material-symbols-outlined text-primary-container text-4xl mb-6">mic</span>
+<h3 class="text-3xl font-serif mb-4">Voice to SOAP Note</h3>
+<p class="text-on-surface-variant text-base leading-relaxed">
+                        Convert spoken diagnostic observations into structured clinical records instantly.
+                    </p>
+</div>
+<div class="bg-white/50 p-4 rounded-lg mt-6 border border-primary/5">
+<div class="flex gap-2 mb-2">
+<div class="w-1 h-4 bg-primary/30 rounded-full"></div>
+<div class="w-1 h-6 bg-primary rounded-full"></div>
+<div class="w-1 h-8 bg-primary rounded-full"></div>
+<div class="w-1 h-4 bg-primary/30 rounded-full"></div>
+</div>
+<span class="text-xs font-mono opacity-40 italic">Transcribing...</span>
+</div>
+</div>
+<!-- Card 3: Follow-up Engine -->
+<div class="bg-surface-container-high rounded-xl p-8 flex flex-col justify-between shadow-[0_20px_40px_rgba(32,27,16,0.03)]">
+<div>
+<span class="material-symbols-outlined text-primary-container text-4xl mb-6">calendar_month</span>
+<h3 class="text-3xl font-serif mb-4">Follow-up Engine</h3>
+<p class="text-on-surface-variant text-base leading-relaxed">
+                        Automated scheduling for critical post-visit checks via SMS and local reminders.
+                    </p>
+</div>
+<div class="flex -space-x-4 mt-8">
+<div class="w-12 h-12 rounded-full border-4 border-surface-container-high bg-stone-200"></div>
+<div class="w-12 h-12 rounded-full border-4 border-surface-container-high bg-stone-300"></div>
+<div class="w-12 h-12 rounded-full border-4 border-surface-container-high bg-primary/20 flex items-center justify-center font-bold text-primary">+12</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="bg-surface py-32 border-t border-outline-variant/10">
+<div class="max-w-[1440px] mx-auto px-8">
+<div class="text-center mb-24">
+<h2 class="text-6xl font-serif mb-6">The Last-Mile Protocol</h2>
+<p class="text-xl text-on-surface-variant">Simple enough for any device, powerful enough for any diagnosis.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-16">
+<div class="flex flex-col gap-6">
+<span class="text-6xl font-serif text-primary/20 italic">01</span>
+<h4 class="text-2xl font-bold">Unbox &amp; Deploy</h4>
+<p class="text-on-surface-variant leading-relaxed">Health workers open CARA on any $150 Android device. Pre-loaded with local languages and WHO medical libraries.</p>
+</div>
+<div class="flex flex-col gap-6">
+<span class="text-6xl font-serif text-primary/20 italic">02</span>
+<h4 class="text-2xl font-bold">Icon-Led Intake</h4>
+<p class="text-on-surface-variant leading-relaxed">Symptoms are entered via clear, intuitive icons designed for speed and clinical accuracy in high-volume environments.</p>
+</div>
+<div class="flex flex-col gap-6">
+<span class="text-6xl font-serif text-primary/20 italic">03</span>
+<h4 class="text-2xl font-bold">Intelligent Triage</h4>
+<p class="text-on-surface-variant leading-relaxed">Local AI suggests urgency levels immediately, highlighting high-risk patients before they reach the counter.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Impact Section -->
+<section class="bg-primary text-on-primary py-32 overflow-hidden relative">
+<div class="max-w-[1440px] mx-auto px-8 grid md:grid-cols-2 gap-24 relative z-10">
+<div>
+<h2 class="text-7xl font-serif mb-12">The Impact <br/>on the Ground</h2>
+<p class="text-xl text-on-primary/80 max-w-lg mb-12 leading-relaxed">
+                    By offloading clinical documentation and triage to assisted AI, we're not just saving time—we're creating a new layer of healthcare capacity where it's needed most.
+                </p>
+<button class="bg-primary-container text-on-primary px-12 py-5 rounded-full font-bold hover:scale-105 transition-all">
+                    Download Impact Report
+                </button>
+</div>
+<div class="grid grid-cols-1 gap-12">
+<div class="border-b border-on-primary/10 pb-8">
+<span class="text-8xl font-serif block mb-2">80-100</span>
+<span class="text-xl font-bold uppercase tracking-widest opacity-60">Patients Screened Per Day</span>
+</div>
+<div class="border-b border-on-primary/10 pb-8">
+<span class="text-8xl font-serif block mb-2">80%</span>
+<span class="text-xl font-bold uppercase tracking-widest opacity-60">Follow-up Adherence</span>
+</div>
+<div>
+<span class="text-8xl font-serif block mb-2">1.5M</span>
+<span class="text-xl font-bold uppercase tracking-widest opacity-60">Doctor Equivalents Created</span>
+</div>
+</div>
+</div>
+<!-- Decorative organic shape -->
+<div class="absolute top-0 right-0 w-[50%] h-full bg-primary-container/20 -skew-x-12 translate-x-32"></div>
+</section>
+<!-- Testimonial Marquee -->
+<section class="py-32 bg-surface-container-low overflow-hidden">
+<div class="flex whitespace-nowrap gap-12 animate-marquee py-4">
+<div class="flex-none w-[500px] bg-surface-container-lowest p-12 rounded-xl shadow-sm">
+<p class="text-2xl font-serif italic text-on-surface mb-8">"CARA has turned my clinic from a place of chaos into a place of precision. I can see more patients while being more thorough."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-200"></div>
+<div>
+<p class="font-bold">Aamina K.</p>
+<p class="text-sm opacity-60">CHW, Turkana County</p>
+</div>
+</div>
+</div>
+<div class="flex-none w-[500px] bg-surface-container-lowest p-12 rounded-xl shadow-sm">
+<p class="text-2xl font-serif italic text-on-surface mb-8">"The offline voice-to-note feature is a game changer. We finally have digitized records for everyone in the ward."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-200"></div>
+<div>
+<p class="font-bold">Dr. Samuel O.</p>
+<p class="text-sm opacity-60">Public Health Advisor, WHO</p>
+</div>
+</div>
+</div>
+<div class="flex-none w-[500px] bg-surface-container-lowest p-12 rounded-xl shadow-sm">
+<p class="text-2xl font-serif italic text-on-surface mb-8">"Finally, a technology that respects the reality of the last mile instead of trying to force Silicon Valley tools into it."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-200"></div>
+<div>
+<p class="font-bold">Jean-Claude M.</p>
+<p class="text-sm opacity-60">Ministry of Health, Rwanda</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-[#ece1cf] dark:bg-stone-900 w-full px-12 py-16 flex flex-col items-center gap-8 text-center rounded-t-[32px]">
+<div class="text-2xl font-serif italic text-[#445518] dark:text-[#ece1cf]">CARA</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">Research</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">Join Us</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">The Ward</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">Patient Compass</a>
+</div>
+<p class="font-sans Manrope text-sm tracking-wide text-stone-600 dark:text-stone-400 max-w-lg mt-4">
+            © 2024 CARA. Open Source · Privacy-first · Built for the last mile
+        </p>
+</footer>
+<style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            animation: marquee 40s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+    </style>
+<script src="./js/router.js" type="module"></script>
+</body></html>

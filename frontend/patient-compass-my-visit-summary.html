@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,700&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Instrument+Serif&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#e3d9c6",
+                    "on-tertiary-container": "#493f0c",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#faf0dc",
+                    "secondary-fixed-dim": "#e7c096",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "surface-container-highest": "#ece1cf",
+                    "on-background": "#201b10",
+                    "on-error": "#ffffff",
+                    "secondary": "#765937",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#ffddba",
+                    "on-surface-variant": "#45483c",
+                    "primary-container": "#5c6e2e",
+                    "primary-fixed": "#d6eb9d",
+                    "on-primary-fixed": "#151f00",
+                    "inverse-primary": "#bacf84",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fed6ab",
+                    "outline-variant": "#c6c8b7",
+                    "tertiary-fixed": "#f3e3a0",
+                    "surface-container-high": "#f1e7d4",
+                    "background": "#fff8f1",
+                    "primary": "#445518",
+                    "surface-container": "#f7edda",
+                    "tertiary-container": "#baab6d",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#6a5e29",
+                    "primary-fixed-dim": "#bacf84",
+                    "on-secondary-container": "#795b39",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#daf0a1",
+                    "surface": "#fff8f1",
+                    "surface-variant": "#ece1cf",
+                    "surface-tint": "#536526",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "on-secondary-fixed": "#2b1700",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "outline": "#76786a",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "surface-container-low": "#fdf2df",
+                    "on-surface": "#201b10",
+                    "inverse-surface": "#353023",
+                    "on-tertiary-fixed": "#211b00",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#fff8f1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"],
+                    "instrument": ["Instrument Serif", "serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            background-color: #fff8f1;
+            color: #201b10;
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="min-h-screen pb-32">
+<!-- Shared TopNavBar -->
+<header class="bg-[#fff8f1] dark:bg-stone-950 font-serif text-lg leading-relaxed Newsreader docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center px-6 py-4 w-full h-20">
+<div class="font-serif text-2xl font-bold text-[#445518] dark:text-[#ece1cf]">CARA</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-[#201b10] dark:text-[#ece1cf] opacity-70 hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full" href="#">Home</a>
+<a class="text-[#445518] dark:text-[#ece1cf] font-bold border-b-2 border-[#445518] px-3 py-1 scale-102 active:scale-95 transition-transform duration-200" href="#">My Visit</a>
+<a class="text-[#201b10] dark:text-[#ece1cf] opacity-70 hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full" href="#">My Medicines</a>
+<a class="text-[#201b10] dark:text-[#ece1cf] opacity-70 hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full" href="#">Return Date</a>
+</div>
+<div class="flex items-center gap-4 text-[#445518] dark:text-[#ece1cf]">
+<span class="material-symbols-outlined cursor-pointer p-2 rounded-full hover:bg-[#fdf2df]" data-icon="translate">translate</span>
+<span class="material-symbols-outlined cursor-pointer p-2 rounded-full hover:bg-[#fdf2df]" data-icon="record_voice_over">record_voice_over</span>
+</div>
+</div>
+<div class="bg-[#fdf2df] dark:bg-stone-900 h-[2px] w-full"></div>
+</header>
+<main class="max-w-4xl mx-auto px-6 pt-8">
+<!-- Page Title & Header -->
+<section class="mb-10">
+<h1 class="font-instrument text-6xl md:text-7xl text-primary mb-4 leading-none">Your Visit Today</h1>
+<div class="bg-surface-container-low p-6 rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="Health Worker" class="w-full h-full object-cover" data-alt="portrait of a kind-faced middle-aged male healthcare worker in a clean clinic setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtArIFrhFisFqiCTb5IHt1G3FwLHgb616OarCizAgAy4WtYWNvRdE4_8zi1HcALExZGQ5f_Bfud8Gs6CHLX_i0FQAicDTbfcRW8q9oDoDq_9p6e-vWs0WzoyHBV_uBCS2V_x8wUGK5gnIbhJx5_252-mlPtD9QmdsEYRKqgs_2hFU4_WeLbPE5udlXCDDFJDahmV90ly30IL80eiISjbEKA1Dm-pv64ZufyqQnDAuhdGiBAXsY2rqSa5l1WaCHw6_Cq0GHPXsLgzQ3"/>
+</div>
+<div>
+<p class="text-on-surface-variant font-medium text-sm">Health Worker</p>
+<p class="text-xl font-bold">Dr. Elena Rodriguez</p>
+</div>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-semibold">October 24, 2023 • 10:30 AM</span>
+</div>
+</div>
+</section>
+<!-- Summary Status Card -->
+<section class="mb-12">
+<div class="bg-primary text-on-primary p-8 rounded-xl flex items-center justify-between shadow-[0_20px_40px_rgba(68,85,24,0.1)]">
+<div class="flex items-center gap-6">
+<div class="bg-primary-container p-4 rounded-full">
+<span class="material-symbols-outlined text-4xl" data-icon="assignment_turned_in" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-1">Your visit summary is ready</h2>
+<p class="opacity-90">Tap the button to hear your notes aloud.</p>
+</div>
+</div>
+<button class="bg-surface-container-lowest text-primary p-4 rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl" data-icon="volume_up" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+</section>
+<!-- Care Plan Section -->
+<section class="mb-12">
+<h3 class="text-3xl font-headline font-bold mb-8 text-on-background px-2">What to do next</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Action Card 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl hover:bg-primary-fixed transition-colors group">
+<div class="bg-surface-container-low w-16 h-16 rounded-full flex items-center justify-center mb-6 group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="medication" style="font-variation-settings: 'FILL' 1;">medication</span>
+</div>
+<h4 class="text-xl font-bold mb-2">Take your medicine</h4>
+<p class="text-on-surface-variant group-hover:text-primary transition-colors">Twice a day, after meals. Check your medicine bag for labels.</p>
+</div>
+<!-- Action Card 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl hover:bg-primary-fixed transition-colors group">
+<div class="bg-surface-container-low w-16 h-16 rounded-full flex items-center justify-center mb-6 group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="bed" style="font-variation-settings: 'FILL' 1;">bed</span>
+</div>
+<h4 class="text-xl font-bold mb-2">Rest</h4>
+<p class="text-on-surface-variant group-hover:text-primary transition-colors">Avoid heavy lifting for 3 days. Try to sleep 8 hours.</p>
+</div>
+<!-- Action Card 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl hover:bg-primary-fixed transition-colors group">
+<div class="bg-surface-container-low w-16 h-16 rounded-full flex items-center justify-center mb-6 group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="water_drop" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<h4 class="text-xl font-bold mb-2">Drink water</h4>
+<p class="text-on-surface-variant group-hover:text-primary transition-colors">Keep a bottle near you. Sip water throughout the day.</p>
+</div>
+</div>
+</section>
+<!-- Notes & Referrals Bento -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-12">
+<!-- Notes Section -->
+<div class="md:col-span-3 bg-surface-container-high p-8 rounded-xl relative overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<h3 class="text-2xl font-bold">Notes from Dr. Elena</h3>
+<button class="bg-surface-container-lowest p-2 rounded-full text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+<div class="space-y-4 text-lg leading-relaxed text-on-surface">
+<p>"Your cough is getting better, but the lungs still sound a bit tired. We want to make sure you finish all the pills I gave you today."</p>
+<p>"If you feel very dizzy or have a hot fever, please come back to see us right away. Otherwise, follow the rest plan."</p>
+</div>
+<div class="mt-8 pt-6 border-t-4 border-surface-container-highest flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+<span class="text-sm font-bold uppercase tracking-wider opacity-60">Simplified for clarity</span>
+</div>
+</div>
+<!-- Referral Card -->
+<div class="md:col-span-2 bg-secondary-container p-8 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="account_tree">account_tree</span>
+<h3 class="text-xl font-bold text-on-secondary-container">Referral Info</h3>
+</div>
+<p class="text-on-secondary-container mb-6 leading-relaxed">
+                        You have been referred to the <strong>Eye Clinic</strong> for a checkup next week.
+                    </p>
+</div>
+<div class="bg-white/40 p-4 rounded-lg backdrop-blur-sm border border-white/20">
+<p class="text-sm font-bold mb-1">Referral Location</p>
+<p class="text-lg">City General - West Wing</p>
+<div class="mt-4 w-full h-24 rounded-lg bg-surface-dim overflow-hidden relative">
+<img alt="Map" class="w-full h-full object-cover opacity-80" data-alt="a stylized map showing a medical center building with a pin on it in a warm color palette" data-location="City General Hospital" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt6R_wDfYGPvGqU4SkjRLd8s9UaH7wLfziujmWqs8JNUgFI2ysn2P4gnDuWMschMBR6boJLHQqjnhVV9FzEUjEQVpMW41NL-ikCAEPKTPk65Bh-B_tiYau-rpY1898NmzbSdVV5KOTizFOz_2RuH6HI7f22L_x37mnIhIE_7b_bh7ajPhPkdiB1w_0twtps2lRTLuK2voExMllGImOUpEi1GaW8Df3vUGZE_EjUTuD7QVzd3zNzRVUgCHzLH3rNqJT4pxARuGAyAay"/>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Shared BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-4 h-28 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-[0_-10px_40px_rgba(32,27,16,0.05)] rounded-t-[32px]">
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-sans text-[18px] font-semibold Manrope">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#fdf2df] dark:bg-[#445518] text-[#445518] dark:text-white rounded-full px-6 py-3 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" href="#">
+<span class="material-symbols-outlined active-nav-icon" data-icon="medical_services">medical_services</span>
+<span class="font-sans text-[18px] font-semibold Manrope">My Visit</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="medication">medication</span>
+<span class="font-sans text-[18px] font-semibold Manrope">My Medicines</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-sans text-[18px] font-semibold Manrope">Return Date</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-sans text-[18px] font-semibold Manrope">Help</span>
+</a>
+</nav>
+<script src="./js/router.js" type="module"></script>
+</body></html>

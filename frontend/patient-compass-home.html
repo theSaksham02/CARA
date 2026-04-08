@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CARA | Patient Compass</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Premium Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#e3d9c6",
+                    "on-tertiary-container": "#493f0c",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#faf0dc",
+                    "secondary-fixed-dim": "#e7c096",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "surface-container-highest": "#ece1cf",
+                    "on-background": "#201b10",
+                    "on-error": "#ffffff",
+                    "secondary": "#765937",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#ffddba",
+                    "on-surface-variant": "#45483c",
+                    "primary-container": "#5c6e2e",
+                    "primary-fixed": "#d6eb9d",
+                    "on-primary-fixed": "#151f00",
+                    "inverse-primary": "#bacf84",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fed6ab",
+                    "outline-variant": "#c6c8b7",
+                    "tertiary-fixed": "#f3e3a0",
+                    "surface-container-high": "#f1e7d4",
+                    "background": "#fff8f1",
+                    "primary": "#445518",
+                    "surface-container": "#f7edda",
+                    "tertiary-container": "#baab6d",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#6a5e29",
+                    "primary-fixed-dim": "#bacf84",
+                    "on-secondary-container": "#795b39",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#daf0a1",
+                    "surface": "#fff8f1",
+                    "surface-variant": "#ece1cf",
+                    "surface-tint": "#536526",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "on-secondary-fixed": "#2b1700",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "outline": "#76786a",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "surface-container-low": "#fdf2df",
+                    "on-surface": "#201b10",
+                    "inverse-surface": "#353023",
+                    "on-tertiary-fixed": "#211b00",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#fff8f1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Manrope', sans-serif;
+        background-color: #fff8f1;
+        -webkit-font-smoothing: antialiased;
+      }
+      .serif-display {
+        font-family: 'Newsreader', serif;
+      }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="text-on-surface">
+<!-- Top Navigation Anchor (Shared Component Execution) -->
+<nav class="bg-[#fff8f1] dark:bg-stone-950 flex justify-between items-center px-6 py-4 w-full h-20 sticky top-0 z-50">
+<div class="font-serif text-2xl font-bold text-[#445518] dark:text-[#ece1cf]">CARA</div>
+<div class="flex gap-4">
+<button class="material-symbols-outlined text-[#445518] dark:text-[#ece1cf] text-2xl hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors p-2 rounded-full">translate</button>
+<button class="material-symbols-outlined text-[#445518] dark:text-[#ece1cf] text-2xl hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors p-2 rounded-full">record_voice_over</button>
+</div>
+</nav>
+<div class="bg-[#fdf2df] dark:bg-stone-900 h-[2px] w-full"></div>
+<main class="max-w-2xl mx-auto px-4 pt-8 pb-32 space-y-8">
+<!-- Welcome Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_20px_40px_rgba(32,27,16,0.05)] flex justify-between items-start">
+<div class="space-y-2">
+<h1 class="serif-display text-4xl font-semibold text-primary leading-tight">Hello, Amara 👋</h1>
+<p class="text-lg text-on-surface-variant font-medium">Here is your health summary from today.</p>
+</div>
+<button class="bg-surface-container-low p-4 rounded-full hover:scale-105 active:scale-95 transition-all text-primary">
+<span class="material-symbols-outlined text-3xl">volume_up</span>
+</button>
+</section>
+<!-- Urgent Health Status Card -->
+<section class="bg-error-container/40 rounded-xl p-8 space-y-6 relative overflow-hidden">
+<div class="flex items-center gap-6">
+<div class="w-24 h-24 bg-error flex items-center justify-center rounded-full shadow-lg shrink-0">
+<span class="material-symbols-outlined text-white text-5xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="space-y-1">
+<h2 class="text-2xl font-extrabold text-on-error-container uppercase tracking-tight">See the doctor NOW</h2>
+<p class="text-lg text-on-error-container/80">Your symptoms need immediate attention.</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2 hover:bg-primary-container transition-colors shadow-md">
+                    What should I do? <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="bg-white/50 backdrop-blur-sm p-4 rounded-full text-error">
+<span class="material-symbols-outlined text-3xl">volume_up</span>
+</button>
+</div>
+</section>
+<!-- Infographic Strip -->
+<div class="grid grid-cols-3 gap-3">
+<!-- Fever -->
+<div class="bg-surface-container-high p-5 rounded-lg flex flex-col items-center text-center space-y-3">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-primary-container mb-1">
+<span class="material-symbols-outlined text-4xl">device_thermostat</span>
+</div>
+<span class="font-bold text-sm text-on-surface">Fever</span>
+<button class="text-primary-container/60"><span class="material-symbols-outlined text-2xl">volume_up</span></button>
+</div>
+<!-- Breathing fast -->
+<div class="bg-surface-container-high p-5 rounded-lg flex flex-col items-center text-center space-y-3">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-primary-container mb-1">
+<span class="material-symbols-outlined text-4xl">air</span>
+</div>
+<span class="font-bold text-sm text-on-surface">Breathing fast</span>
+<button class="text-primary-container/60"><span class="material-symbols-outlined text-2xl">volume_up</span></button>
+</div>
+<!-- Not drinking -->
+<div class="bg-surface-container-high p-5 rounded-lg flex flex-col items-center text-center space-y-3">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-primary-container mb-1">
+<span class="material-symbols-outlined text-4xl">water_drop</span>
+</div>
+<span class="font-bold text-sm text-on-surface">Not drinking</span>
+<button class="text-primary-container/60"><span class="material-symbols-outlined text-2xl">volume_up</span></button>
+</div>
+</div>
+<!-- Return Date Card -->
+<section class="bg-surface-container p-8 rounded-xl flex items-center justify-between border-2 border-primary/10">
+<div class="flex items-start gap-6">
+<div class="bg-primary-fixed w-20 h-20 rounded-2xl flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-on-primary-fixed text-4xl">event</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-xl font-bold text-on-surface">Come back on: Thursday, 17 April</h3>
+<p class="text-on-surface-variant font-medium">For your TB check-up</p>
+<div class="pt-4 flex gap-3">
+<button class="bg-primary text-on-primary px-6 py-3 rounded-full font-bold flex items-center gap-2 text-sm">
+                            Add to phone
+                        </button>
+<button class="bg-surface-container-highest p-3 rounded-full text-primary">
+<span class="material-symbols-outlined text-2xl">volume_up</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Anchor (Full Width Hero Style Image) -->
+<div class="w-full h-48 rounded-xl overflow-hidden relative">
+<img alt="Patient Care Context" class="w-full h-full object-cover grayscale opacity-30" data-alt="soft blurred medical background with warm golden hour sunlight reflecting off clean medical surfaces in a clinical setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPBiZ-ro5WwPYefGnJD2kAS0IZL3CCeYCJ6nFz4_DRfbP18S6uthOye8pmdOc0hXt6kFDrSbaV_jFe13jtUuf0BHB0aKw1RdFLTs2NYZpCsrt-K_1xfgZcpGpODLjR2DkmOhvE8bUy9ZL0lRiD0jtOaW5NIo4zKEYlnd_MwGhJBRLg2qrh7NIZ5i5EQAnhECOCGPDxFf8NloqRooqk36c27o9jPq5sWbLBFTnjJuHeUo5lIYcazzj-9t1CqUSE4HDVwPBiLT10k1CU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Shared Component Execution) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-4 h-28 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-[0_-10px_40px_rgba(32,27,16,0.05)] rounded-t-[32px]">
+<!-- Home Active -->
+<a class="flex flex-col items-center justify-center bg-[#fdf2df] dark:bg-[#445518] text-[#445518] dark:text-white rounded-full px-6 py-3 hover:scale-105 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-sans text-[11px] font-semibold tracking-wide">Home</span>
+</a>
+<!-- My Visit Inactive -->
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-sans text-[11px] font-semibold tracking-wide">My Visit</span>
+</a>
+<!-- My Medicines Inactive -->
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform" href="#">
+<span class="material-symbols-outlined">medication</span>
+<span class="font-sans text-[11px] font-semibold tracking-wide">Medicines</span>
+</a>
+<!-- Return Date Inactive -->
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-sans text-[11px] font-semibold tracking-wide">Next Visit</span>
+</a>
+<!-- Help Inactive -->
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-sans text-[11px] font-semibold tracking-wide">Help</span>
+</a>
+</nav>
+<script src="./js/router.js" type="module"></script>
+</body></html>

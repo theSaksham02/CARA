@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fed6ab",
+                    "surface-dim": "#e3d9c6",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "surface-tint": "#536526",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#e7c096",
+                    "primary": "#445518",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "error": "#ba1a1a",
+                    "surface": "#fff8f1",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#45483c",
+                    "outline-variant": "#c6c8b7",
+                    "surface-container-high": "#f1e7d4",
+                    "primary-fixed-dim": "#bacf84",
+                    "surface-container-low": "#fdf2df",
+                    "inverse-primary": "#bacf84",
+                    "tertiary": "#6a5e29",
+                    "background": "#fff8f1",
+                    "on-primary-container": "#daf0a1",
+                    "secondary": "#765937",
+                    "surface-container": "#f7edda",
+                    "on-primary-fixed": "#151f00",
+                    "on-secondary-fixed": "#2b1700",
+                    "on-secondary-container": "#795b39",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#ece1cf",
+                    "surface-bright": "#fff8f1",
+                    "secondary-fixed": "#ffddba",
+                    "primary-container": "#5c6e2e",
+                    "inverse-on-surface": "#faf0dc",
+                    "on-background": "#201b10",
+                    "surface-container-highest": "#ece1cf",
+                    "on-surface": "#201b10",
+                    "primary-fixed": "#d6eb9d",
+                    "tertiary-container": "#baab6d",
+                    "on-tertiary-container": "#493f0c",
+                    "error-container": "#ffdad6",
+                    "outline": "#76786a",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "tertiary-fixed": "#f3e3a0",
+                    "on-tertiary-fixed": "#211b00",
+                    "inverse-surface": "#353023"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #fff8f1; color: #201b10; }
+        .font-serif { font-family: 'Newsreader', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-[#fff8f1] dark:bg-stone-950 docked full-width top-0 sticky z-50">
+<nav class="flex justify-between items-center w-full px-8 py-6 max-w-[1440px] mx-auto">
+<div class="text-3xl font-serif italic text-[#445518] dark:text-[#ece1cf] tracking-tight">CARA</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300 font-sans Manrope text-sm tracking-wide" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300 font-sans Manrope text-sm tracking-wide" href="#">Research</a>
+<a class="text-[#445518] dark:text-[#ece1cf] border-b-2 border-[#445518] dark:border-[#ece1cf] pb-1 hover:scale-105 transition-all duration-300 font-sans Manrope text-sm tracking-wide" href="#">Join Us</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300 font-sans Manrope text-sm tracking-wide" href="#">The Ward</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300 font-sans Manrope text-sm tracking-wide" href="#">Patient Compass</a>
+</div>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-sans Manrope font-bold hover:scale-105 hover:bg-primary-container transition-all duration-300">
+                Access Platform →
+            </button>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative pt-24 pb-32 px-8 flex flex-col items-center text-center max-w-[1440px] mx-auto overflow-hidden">
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-fixed/20 blur-[100px] rounded-full"></div>
+<div class="absolute top-1/2 -right-24 w-64 h-64 bg-secondary-fixed/20 blur-[80px] rounded-full"></div>
+<h1 class="font-serif italic text-6xl md:text-8xl text-primary leading-tight tracking-tight max-w-4xl mb-8 relative z-10">
+                Build healthcare for the last mile.
+            </h1>
+<p class="font-body text-xl text-stone-600 max-w-2xl mx-auto leading-relaxed relative z-10">
+                We are building the open-source infrastructure that connects isolated clinics to global health intelligence. Join our mission to redefine clinical authority.
+            </p>
+</section>
+<!-- Opportunity Columns (Asymmetric Grid) -->
+<section class="px-8 pb-32 max-w-[1440px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Column 1: Developers -->
+<div class="bg-surface-container-lowest p-10 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.05)] hover:scale-[1.02] transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-4xl mb-6" data-icon="code">code</span>
+<h3 class="font-serif italic text-3xl text-primary mb-4">For Developers (OSS)</h3>
+<p class="font-body text-stone-600 mb-8 leading-relaxed">
+                        Contribute to our core engine. We leverage offline-first architectures and privacy-preserving data models for low-connectivity environments.
+                    </p>
+<a class="text-primary font-bold inline-flex items-center gap-2 group" href="#">
+                        Explore Github <span class="group-hover:translate-x-1 transition-transform">→</span>
+</a>
+</div>
+<!-- Column 2: Health Workers -->
+<div class="bg-surface-container-low p-10 rounded-xl hover:scale-[1.02] transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-4xl mb-6" data-icon="medical_services">medical_services</span>
+<h3 class="font-serif italic text-3xl text-primary mb-4">For Health Workers (Pilot)</h3>
+<p class="font-body text-stone-600 mb-8 leading-relaxed">
+                        Bring CARA to your clinic. Test our clinical decision support tools in real-world scenarios and help us refine human-centric health UI.
+                    </p>
+<a class="text-primary font-bold inline-flex items-center gap-2 group" href="#">
+                        Apply for Pilot <span class="group-hover:translate-x-1 transition-transform">→</span>
+</a>
+</div>
+<!-- Column 3: Organizations -->
+<div class="bg-surface-container p-10 rounded-xl hover:scale-[1.02] transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-4xl mb-6" data-icon="corporate_fare">corporate_fare</span>
+<h3 class="font-serif italic text-3xl text-primary mb-4">For Organizations (Partner)</h3>
+<p class="font-body text-stone-600 mb-8 leading-relaxed">
+                        Scale impact across networks. We partner with NGOs and health ministries to deploy robust, ethical healthcare data pipelines.
+                    </p>
+<a class="text-primary font-bold inline-flex items-center gap-2 group" href="#">
+                        Partner with Us <span class="group-hover:translate-x-1 transition-transform">→</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Join Form Section -->
+<section class="bg-[#fdf2df] py-32 px-8">
+<div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-20 items-start">
+<div class="md:w-1/3">
+<h2 class="font-serif italic text-5xl text-primary mb-6 leading-tight">Begin the Conversation</h2>
+<p class="text-stone-600 mb-8 font-body">Whether you are an engineer or an epidemiologist, your expertise is the bridge to the last mile.</p>
+<div class="flex items-center gap-3 text-primary font-bold">
+<span class="material-symbols-outlined" data-icon="schedule" data-weight="fill" style="font-variation-settings: 'FILL' 1;">schedule</span>
+<span class="font-body text-sm tracking-wide">We respond within 48 hours</span>
+</div>
+</div>
+<div class="md:w-2/3 w-full">
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-stone-600 text-sm font-bold ml-2">Name</label>
+<input class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all" placeholder="Your name" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-stone-600 text-sm font-bold ml-2">Email</label>
+<input class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all" placeholder="your@email.com" type="email"/>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-stone-600 text-sm font-bold ml-2">Role</label>
+<select class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all appearance-none cursor-pointer">
+<option>Select your primary focus</option>
+<option>Developer (OSS)</option>
+<option>Health Professional</option>
+<option>Policy Maker / Researcher</option>
+<option>Philanthropy / Org Partner</option>
+</select>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-stone-600 text-sm font-bold ml-2">Message</label>
+<textarea class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all resize-none" placeholder="How would you like to contribute?" rows="5"></textarea>
+</div>
+<div class="md:col-span-2 mt-4">
+<button class="w-full bg-primary text-on-primary py-5 rounded-full font-bold text-lg hover:bg-primary-container hover:scale-[1.01] active:scale-[0.98] transition-all shadow-lg shadow-primary/10" type="submit">
+                                Send Message
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- Aesthetic Imagery Section -->
+<section class="py-32 px-8 max-w-[1440px] mx-auto">
+<div class="h-[600px] rounded-xl overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Modern clinical research environment with soft afternoon sunlight reflecting off glass and warm wooden surfaces for a human-centric healthcare feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD99ZrBcpsH7oyDy-V1ao5Nimr4bTh3oC9t_5-tDn6lW7qDFsSNuC2VhHgxKteY0TvFXr0nIVA5HD_y49R42dWv3KVTACQsE9qAo0RvLz7dGvxy0vEBmLVPDUVM7efH6jyXn5phuyCDCbDYZccRQNVOVElZsIGLoUEVzlG96Yct3hLzlcZj93h4fHklI59QGRFMH1yBQFXLi_qIjPlIX1SOU8OvxY9pdmnin61qtg34FyhPCJJSUB94FmZbsq7o2VkbJSjEZ8SGwNgw"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+<div class="absolute bottom-12 left-12 max-w-lg">
+<p class="font-serif italic text-4xl text-white">"Technology is just the ink. The human archive is the story we write together."</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#ece1cf] dark:bg-stone-900 full-width rounded-t-[32px]">
+<div class="w-full px-12 py-16 flex flex-col items-center gap-8 text-center">
+<div class="text-2xl font-serif italic text-[#445518] dark:text-[#ece1cf]">CARA</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans Manrope text-sm tracking-wide" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans Manrope text-sm tracking-wide" href="#">Research</a>
+<a class="text-[#445518] font-bold hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans Manrope text-sm tracking-wide" href="#">Join Us</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans Manrope text-sm tracking-wide" href="#">The Ward</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans Manrope text-sm tracking-wide" href="#">Patient Compass</a>
+</div>
+<div class="pt-8 border-t border-stone-400/20 w-full max-w-2xl text-stone-600 dark:text-stone-400 font-sans Manrope text-sm tracking-wide">
+                © 2024 CARA. Open Source · Privacy-first · Built for the last mile
+            </div>
+</div>
+</footer>
+<script src="./js/router.js" type="module"></script>
+</body></html>

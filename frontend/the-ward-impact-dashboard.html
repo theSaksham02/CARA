@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Instrument+Serif:ital@0;1&amp;family=Satoshi:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#f1e7d4",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#f7edda",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#bacf84",
+                    "surface": "#fff8f1",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "surface-bright": "#fff8f1",
+                    "primary-fixed-dim": "#bacf84",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#2b1700",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "primary-container": "#5c6e2e",
+                    "tertiary-container": "#baab6d",
+                    "background": "#fff8f1",
+                    "surface-dim": "#e3d9c6",
+                    "inverse-surface": "#353023",
+                    "on-tertiary-fixed": "#211b00",
+                    "on-secondary-container": "#795b39",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#e7c096",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "error-container": "#ffdad6",
+                    "secondary": "#765937",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#faf0dc",
+                    "tertiary-fixed": "#f3e3a0",
+                    "surface-tint": "#536526",
+                    "secondary-container": "#fed6ab",
+                    "tertiary": "#6a5e29",
+                    "on-surface": "#201b10",
+                    "on-secondary": "#ffffff",
+                    "outline": "#76786a",
+                    "surface-container-low": "#fdf2df",
+                    "surface-variant": "#ece1cf",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "on-primary-container": "#daf0a1",
+                    "surface-container-highest": "#ece1cf",
+                    "primary-fixed": "#d6eb9d",
+                    "primary": "#445518",
+                    "outline-variant": "#c6c8b7",
+                    "on-surface-variant": "#45483c",
+                    "on-background": "#201b10",
+                    "secondary-fixed": "#ffddba",
+                    "on-primary-fixed": "#151f00",
+                    "on-tertiary-container": "#493f0c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"],
+                    "instrument": ["Instrument Serif", "serif"],
+                    "satoshi": ["Satoshi", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #fff8f1;
+            color: #201b10;
+        }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="flex flex-col h-full py-8 px-4 h-screen w-[240px] fixed left-0 top-0 border-r-0 bg-[#EDE6D6] transition-colors duration-300 font-['Satoshi'] text-sm tracking-tight z-50">
+<div class="mb-10 px-4">
+<h1 class="font-['Newsreader'] italic text-2xl text-[#5C6E2E]">The Ward</h1>
+<p class="text-xs text-stone-500 font-medium">Clinician Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-[#ece1cf] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-[#ece1cf] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span>Patient Queue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-[#ece1cf] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>SOAP Notes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-[#ece1cf] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span>AI Assistant</span>
+</a>
+<!-- Active Tab: Impact -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#5C6E2E] font-bold border-r-4 border-[#5C6E2E] bg-[#ece1cf]/50" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span>Impact</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-[#ece1cf] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>Audit Log</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-500 hover:bg-[#ece1cf] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pt-4 border-t border-stone-200/50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high">
+<img alt="Doctor Avatar" class="w-full h-full object-cover" data-alt="professional portrait of a confident african american doctor in a white coat with a friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUbZGKHfwOcL4UyZ5wm8DqOmLSErQjrhnnSU2QAEvnqfgpMK0N1yYgknrcZl1DiYBVct8DnAq3c2RjJNeuBqx_hPShtYQJ5yh8OAo6R0pGZc6Te51eFnuHWXKqEKbLvRvErDjGOpfd1lL6U6LTzvh0xmUYERc6WLphVdS9uCy7CJNJkXyfZudX-Oj8-YusspkW-GN3yc-zScf0gzWMe2nV1baZyHNYzrCdLNDOfcOkUgujDHQAaWVyjgQ-OQbNFspc97M4BTRU0bL8"/>
+</div>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate">Dr. Aris Thorne</p>
+<p class="text-[10px] text-stone-500">Chief Resident</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-[240px] relative">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 right-0 h-16 z-40 flex justify-between items-center w-[calc(100%-240px)] px-8 bg-[#F6F1E7]/80 backdrop-blur-xl transition-colors duration-300">
+<div class="flex items-center gap-4">
+<div class="flex items-center text-xs font-medium text-stone-400 gap-2">
+<span>Portal</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-[#5C6E2E] font-semibold">Clinic Impact</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-stone-400">
+<button class="hover:text-[#5C6E2E] transition-colors"><span class="material-symbols-outlined">sync</span></button>
+<button class="hover:text-[#5C6E2E] transition-colors"><span class="material-symbols-outlined">calendar_today</span></button>
+<div class="relative">
+<button class="hover:text-[#5C6E2E] transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-[#F6F1E7]"></span>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Body -->
+<div class="pt-24 pb-12 px-8 max-w-7xl mx-auto space-y-12">
+<!-- Hero Title & Filters -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="font-instrument text-7xl md:text-8xl text-on-surface tracking-tight">Clinic Impact</h2>
+<p class="text-on-surface-variant max-w-md mt-4 font-body leading-relaxed">
+                        Quantifying human outcome through real-time operational data. A visual audit of care efficiency and community health resilience.
+                    </p>
+</div>
+<!-- Date Filter Chips -->
+<div class="flex bg-surface-container p-1 rounded-full w-fit h-fit">
+<button class="px-6 py-2 rounded-full text-sm font-medium transition-all text-on-surface-variant hover:text-on-surface">Today</button>
+<button class="px-6 py-2 rounded-full text-sm font-medium transition-all text-on-surface-variant hover:text-on-surface">Week</button>
+<button class="px-6 py-2 rounded-full text-sm font-bold bg-primary text-on-primary shadow-sm">Month</button>
+</div>
+</section>
+<!-- KPI Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between min-h-[160px] shadow-sm hover:shadow-md transition-shadow">
+<span class="text-on-surface-variant text-sm font-medium">Patients Managed</span>
+<div class="mt-4">
+<div class="text-5xl font-instrument italic">1,284</div>
+<div class="flex items-center gap-1 text-primary text-xs mt-1 font-bold">
+<span class="material-symbols-outlined text-xs">trending_up</span> +12% vs last month
+                        </div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between min-h-[160px] shadow-sm hover:shadow-md transition-shadow">
+<span class="text-on-surface-variant text-sm font-medium">RED Cases Resolved</span>
+<div class="mt-4">
+<div class="text-5xl font-instrument italic">94.2%</div>
+<div class="flex items-center gap-1 text-primary text-xs mt-1 font-bold">
+<span class="material-symbols-outlined text-xs">check_circle</span> Target: &gt;90%
+                        </div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between min-h-[160px] shadow-sm hover:shadow-md transition-shadow">
+<span class="text-on-surface-variant text-sm font-medium">Follow-up Rate</span>
+<div class="mt-4">
+<div class="text-5xl font-instrument italic">88%</div>
+<div class="flex items-center gap-1 text-on-secondary-fixed-variant text-xs mt-1 font-bold">
+<span class="material-symbols-outlined text-xs">schedule</span> Active Retention
+                        </div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between min-h-[160px] shadow-sm hover:shadow-md transition-shadow">
+<span class="text-on-surface-variant text-sm font-medium">Avg Documentation Time</span>
+<div class="mt-4">
+<div class="text-5xl font-instrument italic text-[#5C6E2E]">2.4m</div>
+<div class="flex items-center gap-1 text-primary text-xs mt-1 font-bold">
+<span class="material-symbols-outlined text-xs">bolt</span> -40% with CARA AI
+                        </div>
+</div>
+</div>
+</section>
+<!-- Charts Section: Bento Asymmetry -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Chart 1: Bar Chart (The Comparison) -->
+<div class="lg:col-span-8 bg-surface-container-lowest p-8 rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="flex justify-between items-start mb-10">
+<div>
+<h3 class="text-2xl font-headline italic text-on-surface">Patients per day — This Week vs Last Week</h3>
+<p class="text-sm text-on-surface-variant mt-1">Daily patient volume trend analysis</p>
+</div>
+<div class="flex gap-4 items-center text-xs font-medium">
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-primary"></span> This Week</div>
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-secondary-fixed-dim"></span> Last Week</div>
+</div>
+</div>
+<div class="flex-1 flex items-end justify-between gap-4 h-[300px] border-b border-surface-variant pt-8">
+<!-- Bar Groups -->
+<div class="flex flex-col items-center flex-1 gap-2 group">
+<div class="flex items-end gap-1 w-full h-full">
+<div class="bg-secondary-fixed-dim w-1/2 h-[60%] rounded-t-md transition-all group-hover:opacity-80"></div>
+<div class="bg-primary w-1/2 h-[75%] rounded-t-md transition-all group-hover:scale-y-105"></div>
+</div>
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant">Mon</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 group">
+<div class="flex items-end gap-1 w-full h-full">
+<div class="bg-secondary-fixed-dim w-1/2 h-[50%] rounded-t-md transition-all group-hover:opacity-80"></div>
+<div class="bg-primary w-1/2 h-[65%] rounded-t-md transition-all group-hover:scale-y-105"></div>
+</div>
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant">Tue</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 group">
+<div class="flex items-end gap-1 w-full h-full">
+<div class="bg-secondary-fixed-dim w-1/2 h-[80%] rounded-t-md transition-all group-hover:opacity-80"></div>
+<div class="bg-primary w-1/2 h-[90%] rounded-t-md transition-all group-hover:scale-y-105"></div>
+</div>
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant">Wed</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 group">
+<div class="flex items-end gap-1 w-full h-full">
+<div class="bg-secondary-fixed-dim w-1/2 h-[40%] rounded-t-md transition-all group-hover:opacity-80"></div>
+<div class="bg-primary w-1/2 h-[55%] rounded-t-md transition-all group-hover:scale-y-105"></div>
+</div>
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant">Thu</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 group">
+<div class="flex items-end gap-1 w-full h-full">
+<div class="bg-secondary-fixed-dim w-1/2 h-[65%] rounded-t-md transition-all group-hover:opacity-80"></div>
+<div class="bg-primary w-1/2 h-[85%] rounded-t-md transition-all group-hover:scale-y-105"></div>
+</div>
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant">Fri</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 group">
+<div class="flex items-end gap-1 w-full h-full">
+<div class="bg-secondary-fixed-dim w-1/2 h-[30%] rounded-t-md transition-all group-hover:opacity-80"></div>
+<div class="bg-primary w-1/2 h-[45%] rounded-t-md transition-all group-hover:scale-y-105"></div>
+</div>
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant">Sat</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-2 group">
+<div class="flex items-end gap-1 w-full h-full">
+<div class="bg-secondary-fixed-dim w-1/2 h-[20%] rounded-t-md transition-all group-hover:opacity-80"></div>
+<div class="bg-primary w-1/2 h-[35%] rounded-t-md transition-all group-hover:scale-y-105"></div>
+</div>
+<span class="text-[10px] uppercase tracking-wider text-on-surface-variant">Sun</span>
+</div>
+</div>
+</div>
+<!-- Chart 2: Donut Chart (Proportional Analysis) -->
+<div class="lg:col-span-4 bg-[#EDE6D6] p-8 rounded-xl flex flex-col">
+<h3 class="text-xl font-headline italic text-on-surface mb-8">Conditions Seen Today</h3>
+<div class="relative flex-1 flex flex-col justify-center items-center">
+<!-- Simulated Donut Chart using SVG and CSS -->
+<div class="relative w-48 h-48 rounded-full border-[16px] border-surface-container-high flex items-center justify-center">
+<div class="absolute inset-0 rounded-full border-[16px] border-primary border-t-transparent border-r-transparent transform -rotate-45"></div>
+<div class="absolute inset-0 rounded-full border-[16px] border-secondary transform rotate-90 border-t-transparent border-l-transparent border-b-transparent"></div>
+<div class="text-center">
+<span class="block text-3xl font-headline italic">142</span>
+<span class="text-[10px] uppercase font-bold text-stone-500">Total Cases</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="mt-10 grid grid-cols-2 gap-x-4 gap-y-3 w-full text-xs font-medium">
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary"></span> Pneumonia (42%)</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary"></span> Diarrhoea (28%)</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span> Malaria (18%)</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-outline-variant"></span> Other (12%)</div>
+</div>
+</div>
+</div>
+<!-- Chart 3: Horizontal Comparison (Operational Advantage) -->
+<div class="lg:col-span-12 bg-surface-container-low p-8 lg:p-12 rounded-xl">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-12">
+<div>
+<h3 class="text-3xl font-headline italic text-on-surface">With CARA vs Without CARA</h3>
+<p class="text-on-surface-variant mt-2 max-w-lg leading-relaxed">
+                                Comparative operational metrics highlighting the impact of AI-assisted clinical workflows on administrative burden.
+                            </p>
+</div>
+<div class="mt-6 md:mt-0 px-6 py-3 bg-surface-container-lowest rounded-full border border-outline-variant/20 text-sm font-bold text-primary italic">
+                            +68% Efficiency Gain
+                        </div>
+</div>
+<div class="space-y-10">
+<!-- Row 1: Documentation -->
+<div class="space-y-4">
+<div class="flex justify-between text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+<span>Documentation Minutes (Per Patient)</span>
+<span>Time Saved (Avg)</span>
+</div>
+<div class="space-y-2">
+<div class="relative h-10 w-full bg-surface-container-highest rounded-full overflow-hidden flex items-center">
+<div class="h-full bg-secondary-fixed text-on-secondary-container flex items-center px-4 font-bold text-sm w-[75%]">
+                                        Without CARA (8.5m)
+                                    </div>
+</div>
+<div class="relative h-10 w-full bg-surface-container-highest rounded-full overflow-hidden flex items-center">
+<div class="h-full bg-primary text-on-primary flex items-center px-4 font-bold text-sm w-[25%]">
+                                        With CARA (2.4m)
+                                    </div>
+</div>
+</div>
+</div>
+<!-- Row 2: Diagnostic Accuracy -->
+<div class="space-y-4">
+<div class="flex justify-between text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+<span>Diagnostic Protocol Adherence</span>
+<span>Clinical Fidelity</span>
+</div>
+<div class="space-y-2">
+<div class="relative h-10 w-full bg-surface-container-highest rounded-full overflow-hidden flex items-center">
+<div class="h-full bg-secondary-fixed text-on-secondary-container flex items-center px-4 font-bold text-sm w-[62%]">
+                                        Manual Triage (62%)
+                                    </div>
+</div>
+<div class="relative h-10 w-full bg-surface-container-highest rounded-full overflow-hidden flex items-center">
+<div class="h-full bg-primary text-on-primary flex items-center px-4 font-bold text-sm w-[98%]">
+                                        CARA Assisted (98%)
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Section -->
+<footer class="pt-12 border-t border-surface-variant flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-sm text-on-surface-variant italic font-body">
+                    Data sourced from WHO CHW Capacity Report 2023
+                </p>
+<div class="flex gap-8">
+<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">Download PDF Report</a>
+<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">Export Raw CSV</a>
+<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+</footer>
+</div>
+</main>
+<!-- FAB Suppression: Not rendered as per instructions for Impact/Dashboard screen -->
+<script src="./js/router.js" type="module"></script>
+</body></html>

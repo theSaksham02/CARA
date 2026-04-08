@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Ward - Patient Queue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Satoshi:wght@300;400;500;700;900&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#f1e7d4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f7edda",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#bacf84",
+                        "surface": "#fff8f1",
+                        "on-secondary-fixed-variant": "#5c4122",
+                        "surface-bright": "#fff8f1",
+                        "primary-fixed-dim": "#bacf84",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#2b1700",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#514713",
+                        "primary-container": "#5c6e2e",
+                        "tertiary-container": "#baab6d",
+                        "background": "#fff8f1",
+                        "surface-dim": "#e3d9c6",
+                        "inverse-surface": "#353023",
+                        "on-tertiary-fixed": "#211b00",
+                        "on-secondary-container": "#795b39",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#e7c096",
+                        "on-primary-fixed-variant": "#3c4c0f",
+                        "error-container": "#ffdad6",
+                        "secondary": "#765937",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#faf0dc",
+                        "tertiary-fixed": "#f3e3a0",
+                        "surface-tint": "#536526",
+                        "secondary-container": "#fed6ab",
+                        "tertiary": "#6a5e29",
+                        "on-surface": "#201b10",
+                        "on-secondary": "#ffffff",
+                        "outline": "#76786a",
+                        "surface-container-low": "#fdf2df",
+                        "surface-variant": "#ece1cf",
+                        "tertiary-fixed-dim": "#d6c786",
+                        "on-primary-container": "#daf0a1",
+                        "surface-container-highest": "#ece1cf",
+                        "primary-fixed": "#d6eb9d",
+                        "primary": "#445518",
+                        "outline-variant": "#c6c8b7",
+                        "on-surface-variant": "#45483c",
+                        "on-background": "#201b10",
+                        "secondary-fixed": "#ffddba",
+                        "on-primary-fixed": "#151f00",
+                        "on-tertiary-container": "#493f0c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"],
+                        "instrument": ["Instrument Serif", "serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; background-color: #fff8f1; color: #201b10; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<aside class="flex flex-col h-full py-8 px-4 h-screen w-[240px] fixed left-0 top-0 border-r-0 bg-[#EDE6D6] transition-colors duration-300 z-50 font-['Satoshi'] text-sm tracking-tight">
+<div class="mb-12 px-2">
+<h1 class="font-['Newsreader'] italic text-2xl text-[#5C6E2E]">The Ward</h1>
+<p class="text-stone-500 text-[10px] uppercase tracking-[0.2em] mt-1 font-bold">Clinician Portal</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-[#ece1cf] transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<!-- Active State: Patient Queue -->
+<a class="flex items-center gap-3 px-4 py-3 text-[#5C6E2E] font-bold border-r-4 border-[#5C6E2E] bg-[#ece1cf]/50 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="groups">groups</span>
+<span>Patient Queue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-[#ece1cf] transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="description">description</span>
+<span>SOAP Notes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-[#ece1cf] transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="smart_toy">smart_toy</span>
+<span>AI Assistant</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-[#ece1cf] transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="monitoring">monitoring</span>
+<span>Impact</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-[#ece1cf] transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="history">history</span>
+<span>Audit Log</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-stone-300/30">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-[#ece1cf] transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 right-0 h-16 z-40 flex justify-between items-center w-[calc(100%-240px)] ml-[240px] px-8 bg-[#F6F1E7]/80 backdrop-blur-xl font-['Satoshi'] font-medium">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-stone-400 text-sm">
+<span>The Ward</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-[#5C6E2E] font-semibold">Patient Queue</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-lg" data-icon="search">search</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-1.5 text-sm w-64 focus:ring-2 focus:ring-primary/20" placeholder="Search patients..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-stone-500">
+<span class="material-symbols-outlined cursor-pointer hover:text-[#5C6E2E] transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-[#5C6E2E] transition-colors" data-icon="sync">sync</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-[#5C6E2E] transition-colors" data-icon="calendar_today">calendar_today</span>
+</div>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="Doctor Avatar" data-alt="professional portrait of a male doctor in clinical attire with soft studio lighting and warm tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWt2OZxussAecesnmEcEjKwAjlpDU_0Ea9KG4bJhp34u9i-DS7whtjiBGqIljxRX8iZmXOYR8x9XJTz16kOlDWFpaVEdA9iIAZp6BqZbKifDjt1_vD7wrtvwwDFpCV5eSDhHlwMzoeUtOkPTt5PR24ZqHl0QvmFdHxKC_pxZ69gGWfh97TBnEVmxgTaMa_IOZKmrmB-fxhmj70vpG-LaA0v-IjGThvD5AfYbqpvIZHZ9umvtHy8zYpWoZ6i6W_JZRjRxmSjPPprEl5"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-[240px] mt-16 p-8 flex gap-8">
+<div class="flex-1 max-w-[calc(100%-400px)]">
+<!-- Header Section -->
+<div class="mb-10">
+<h2 class="font-instrument text-6xl text-on-surface mb-6 italic">Patient Queue</h2>
+<!-- Filter Bar -->
+<div class="flex items-center gap-3">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary font-medium text-sm transition-transform active:scale-95">All</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant bg-surface-container-low text-on-surface-variant font-medium text-sm hover:bg-surface-container transition-colors">RED</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant bg-surface-container-low text-on-surface-variant font-medium text-sm hover:bg-surface-container transition-colors">YELLOW</button>
+<button class="px-6 py-2 rounded-full border border-outline-variant bg-surface-container-low text-on-surface-variant font-medium text-sm hover:bg-surface-container transition-colors">GREEN</button>
+<div class="ml-auto flex items-center gap-2 text-on-surface-variant text-sm bg-surface-container-low px-4 py-2 rounded-lg">
+<span class="material-symbols-outlined text-lg" data-icon="sort">sort</span>
+<span>Latest First</span>
+</div>
+</div>
+</div>
+<!-- Queue Table Section -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/30 border-b border-surface-variant">
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Priority</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Name</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Age</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Symptoms</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Protocol</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Triage Time</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant">
+<!-- RED ROW -->
+<tr class="hover:bg-surface-container-low/50 transition-colors border-l-8 border-error/40 group">
+<td class="px-6 py-5">
+<span class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-[10px] font-black">CRITICAL</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-bold text-on-surface">Elena Rodriguez</p>
+<p class="text-xs text-on-surface-variant">ID: #WARD-8821</p>
+</td>
+<td class="px-6 py-5 text-sm">42</td>
+<td class="px-6 py-5 text-sm">Acute dyspnea, chest tightness</td>
+<td class="px-6 py-5">
+<span class="bg-surface-container-high px-2 py-1 rounded text-xs">P-Cardio-04</span>
+</td>
+<td class="px-6 py-5 text-sm font-medium text-error">08:14 AM</td>
+<td class="px-6 py-5">
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-primary text-on-primary rounded-lg hover:bg-primary-container transition-colors" title="Open SOAP">
+<span class="material-symbols-outlined text-sm" data-icon="edit_note">edit_note</span>
+</button>
+<button class="p-2 bg-surface-container text-on-surface rounded-lg hover:bg-surface-container-high transition-colors" title="View Record">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- YELLOW ROW -->
+<tr class="hover:bg-surface-container-low/50 transition-colors border-l-8 border-tertiary/40 group bg-surface-container-lowest ring-1 ring-inset ring-surface-variant/50">
+<td class="px-6 py-5">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-black">URGENT</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-bold text-on-surface">James T. Sterling</p>
+<p class="text-xs text-on-surface-variant">ID: #WARD-9021</p>
+</td>
+<td class="px-6 py-5 text-sm">68</td>
+<td class="px-6 py-5 text-sm">Lower abdominal pain, fever</td>
+<td class="px-6 py-5">
+<span class="bg-surface-container-high px-2 py-1 rounded text-xs">P-GI-12</span>
+</td>
+<td class="px-6 py-5 text-sm font-medium text-tertiary">08:22 AM</td>
+<td class="px-6 py-5">
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-primary text-on-primary rounded-lg hover:bg-primary-container transition-colors" title="Open SOAP">
+<span class="material-symbols-outlined text-sm" data-icon="edit_note">edit_note</span>
+</button>
+<button class="p-2 bg-surface-container text-on-surface rounded-lg hover:bg-surface-container-high transition-colors" title="View Record">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- GREEN ROW -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-[10px] font-black">STABLE</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-bold text-on-surface">Sarah Chen</p>
+<p class="text-xs text-on-surface-variant">ID: #WARD-7762</p>
+</td>
+<td class="px-6 py-5 text-sm">29</td>
+<td class="px-6 py-5 text-sm">Sore throat, mild fatigue</td>
+<td class="px-6 py-5">
+<span class="bg-surface-container-high px-2 py-1 rounded text-xs">P-Gen-01</span>
+</td>
+<td class="px-6 py-5 text-sm font-medium text-on-surface-variant">08:35 AM</td>
+<td class="px-6 py-5">
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-primary text-on-primary rounded-lg hover:bg-primary-container transition-colors" title="Open SOAP">
+<span class="material-symbols-outlined text-sm" data-icon="edit_note">edit_note</span>
+</button>
+<button class="p-2 bg-surface-container text-on-surface rounded-lg hover:bg-surface-container-high transition-colors" title="View Record">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- RED ROW -->
+<tr class="hover:bg-surface-container-low/50 transition-colors border-l-8 border-error/40 group">
+<td class="px-6 py-5">
+<span class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-[10px] font-black">CRITICAL</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-bold text-on-surface">Marcus Thorne</p>
+<p class="text-xs text-on-surface-variant">ID: #WARD-8114</p>
+</td>
+<td class="px-6 py-5 text-sm">54</td>
+<td class="px-6 py-5 text-sm">Sudden numbness (Left side)</td>
+<td class="px-6 py-5">
+<span class="bg-surface-container-high px-2 py-1 rounded text-xs">P-Neuro-Stroke</span>
+</td>
+<td class="px-6 py-5 text-sm font-medium text-error">08:41 AM</td>
+<td class="px-6 py-5">
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-primary text-on-primary rounded-lg hover:bg-primary-container transition-colors" title="Open SOAP">
+<span class="material-symbols-outlined text-sm" data-icon="edit_note">edit_note</span>
+</button>
+<button class="p-2 bg-surface-container text-on-surface rounded-lg hover:bg-surface-container-high transition-colors" title="View Record">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right Side Panel: Triage Detail -->
+<aside class="w-[400px] sticky top-24 h-[calc(100vh-120px)] bg-surface-container-low rounded-xl border border-outline-variant/10 flex flex-col overflow-hidden">
+<div class="p-6 border-b border-surface-variant flex justify-between items-start">
+<div>
+<h3 class="font-headline text-2xl text-on-surface leading-tight">Elena Rodriguez</h3>
+<p class="text-sm text-on-surface-variant mt-1">42y/o Female • Priority Red</p>
+</div>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto no-scrollbar p-6 space-y-8">
+<!-- Vitals & Symptom Grid -->
+<div>
+<h4 class="text-xs font-bold text-primary uppercase tracking-widest mb-4">Patient vitals</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-lg">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">SpO2</p>
+<p class="text-xl font-headline text-error">91%</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">HR</p>
+<p class="text-xl font-headline">112 bpm</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">BP</p>
+<p class="text-xl font-headline">145/95</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Temp</p>
+<p class="text-xl font-headline">37.2°C</p>
+</div>
+</div>
+</div>
+<!-- CARA AI Suggestions -->
+<div class="bg-primary/5 p-6 rounded-xl border border-primary/10 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="bolt" data-weight="fill">bolt</span>
+<h4 class="text-sm font-bold text-primary">CARA AI Insights</h4>
+</div>
+<div class="space-y-3 relative z-10">
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            Recommended: <span class="font-bold text-on-surface underline decoration-primary-container decoration-2">Chest X-ray (AP View)</span> and stat troponin levels due to suspected myocardial infarction risk.
+                        </p>
+<div class="flex flex-wrap gap-2 pt-2">
+<span class="bg-surface-container-high px-2 py-1 rounded text-[10px] font-bold text-on-surface-variant">ECG Required</span>
+<span class="bg-surface-container-high px-2 py-1 rounded text-[10px] font-bold text-on-surface-variant">Oxygen Therapy</span>
+</div>
+</div>
+</div>
+<!-- Symptom Grid -->
+<div>
+<h4 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-4">Patient Narrative</h4>
+<div class="bg-surface-container-lowest p-4 rounded-lg italic text-sm text-on-surface-variant leading-relaxed">
+                        "Patient arrived via ambulance at 08:14. Reports crushing chest pain radiating to left jaw. Shortness of breath has progressed over the last 30 minutes. History of hypertension."
+                    </div>
+</div>
+</div>
+<div class="p-6 bg-surface-container border-t border-surface-variant space-y-3">
+<button class="w-full py-3 bg-primary text-on-primary rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined text-lg" data-icon="edit_note">edit_note</span>
+                    Open SOAP Note
+                </button>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-2.5 bg-surface-container-high text-on-surface rounded-full text-xs font-bold hover:bg-surface-variant transition-colors">
+                        View Record
+                    </button>
+<button class="py-2.5 bg-surface-container-high text-on-surface rounded-full text-xs font-bold hover:bg-surface-variant transition-colors">
+                        Schedule Follow-up
+                    </button>
+</div>
+</div>
+</aside>
+</main>
+<!-- FAB (Suppressed as per rules for Details/Focused task pages, but the main queue often needs a 'New Patient' action) -->
+<button class="fixed bottom-8 right-8 h-14 w-14 rounded-full bg-primary text-on-primary shadow-xl flex items-center justify-center hover:scale-110 transition-transform z-50">
+<span class="material-symbols-outlined text-2xl" data-icon="person_add">person_add</span>
+</button>
+<script src="./js/router.js" type="module"></script>
+</body></html>

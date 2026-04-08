@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fed6ab",
+                    "surface-dim": "#e3d9c6",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "surface-tint": "#536526",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#e7c096",
+                    "primary": "#445518",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "error": "#ba1a1a",
+                    "surface": "#fff8f1",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#45483c",
+                    "outline-variant": "#c6c8b7",
+                    "surface-container-high": "#f1e7d4",
+                    "primary-fixed-dim": "#bacf84",
+                    "surface-container-low": "#fdf2df",
+                    "inverse-primary": "#bacf84",
+                    "tertiary": "#6a5e29",
+                    "background": "#fff8f1",
+                    "on-primary-container": "#daf0a1",
+                    "secondary": "#765937",
+                    "surface-container": "#f7edda",
+                    "on-primary-fixed": "#151f00",
+                    "on-secondary-fixed": "#2b1700",
+                    "on-secondary-container": "#795b39",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#ece1cf",
+                    "surface-bright": "#fff8f1",
+                    "secondary-fixed": "#ffddba",
+                    "primary-container": "#5c6e2e",
+                    "inverse-on-surface": "#faf0dc",
+                    "on-background": "#201b10",
+                    "surface-container-highest": "#ece1cf",
+                    "on-surface": "#201b10",
+                    "primary-fixed": "#d6eb9d",
+                    "tertiary-container": "#baab6d",
+                    "on-tertiary-container": "#493f0c",
+                    "error-container": "#ffdad6",
+                    "outline": "#76786a",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "tertiary-fixed": "#f3e3a0",
+                    "on-tertiary-fixed": "#211b00",
+                    "inverse-surface": "#353023"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Newsreader', serif; }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="bg-[#fff8f1] dark:bg-stone-950 fixed top-0 w-full z-50 shadow-[0_20px_40px_rgba(32,27,16,0.05)]">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-[1440px] mx-auto">
+<div class="text-3xl font-serif italic text-[#445518] dark:text-[#ece1cf] tracking-tight">CARA</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Research</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Join Us</a>
+<a class="text-[#445518] dark:text-[#ece1cf] border-b-2 border-[#445518] dark:border-[#ece1cf] pb-1 hover:scale-105 transition-all duration-300" href="#">The Ward</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Patient Compass</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-full font-bold hover:scale-105 hover:bg-primary-container transition-all duration-300 shadow-lg">
+                Access Platform →
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-24">
+<!-- Hero Section -->
+<section class="max-w-[1440px] mx-auto px-8 lg:px-16 grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full text-primary font-bold text-sm tracking-widest">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    HEALTHCARE OPERATING SYSTEM
+                </div>
+<h1 class="text-7xl lg:text-8xl text-on-surface leading-[1.1] tracking-tight">
+                    The <span class="italic font-light">Ward</span>
+</h1>
+<p class="text-2xl text-stone-600 max-w-lg leading-relaxed">
+                    Your clinic. Organized. Prioritized. Always ready.
+                </p>
+<div class="flex flex-col gap-4">
+<button class="bg-primary text-on-primary w-fit px-10 py-5 rounded-full text-xl font-bold hover:scale-[1.02] hover:bg-primary-container transition-all shadow-xl">
+                        Enter The Ward →
+                    </button>
+<p class="text-stone-500 text-sm font-medium pl-4 italic">
+                        For registered medical staff only
+                    </p>
+</div>
+</div>
+<!-- Dashboard Preview Mockup -->
+<div class="relative group">
+<div class="absolute -inset-4 bg-gradient-to-tr from-primary/10 to-transparent blur-3xl opacity-50"></div>
+<div class="relative bg-surface-container-lowest rounded-xl shadow-[0_40px_80px_rgba(32,27,16,0.08)] overflow-hidden">
+<div class="bg-surface-container px-6 py-4 flex items-center justify-between border-b border-outline-variant/10">
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-error/30"></div>
+<div class="w-3 h-3 rounded-full bg-secondary-container"></div>
+<div class="w-3 h-3 rounded-full bg-primary/30"></div>
+</div>
+<div class="text-xs font-bold text-stone-400 tracking-widest">LIVE QUEUE MONITOR</div>
+</div>
+<div class="p-8 space-y-6">
+<!-- Red Urgency Item -->
+<div class="flex items-center justify-between p-4 bg-error-container/20 rounded-lg">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-error flex items-center justify-center text-white font-bold">PT</div>
+<div>
+<h4 class="font-bold text-on-surface">P. Thompson</h4>
+<p class="text-xs text-error font-bold uppercase tracking-tighter">Emergency • Room 04</p>
+</div>
+</div>
+<div class="px-3 py-1 bg-error text-white text-[10px] font-black rounded-full">CRITICAL</div>
+</div>
+<!-- Yellow Urgency Item -->
+<div class="flex items-center justify-between p-4 bg-secondary-container/20 rounded-lg">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white font-bold">AK</div>
+<div>
+<h4 class="font-bold text-on-surface">A. Khan</h4>
+<p class="text-xs text-secondary font-bold uppercase tracking-tighter">Review • Waiting Area</p>
+</div>
+</div>
+<div class="px-3 py-1 bg-secondary text-white text-[10px] font-black rounded-full">URGENT</div>
+</div>
+<!-- Green Urgency Item -->
+<div class="flex items-center justify-between p-4 bg-primary/5 rounded-lg border border-primary/10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">SM</div>
+<div>
+<h4 class="font-bold text-on-surface">S. Miller</h4>
+<p class="text-xs text-primary font-bold uppercase tracking-tighter">Routine • Discharge</p>
+</div>
+</div>
+<div class="px-3 py-1 bg-primary text-white text-[10px] font-black rounded-full">STABLE</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Bento Grid -->
+<section class="max-w-[1440px] mx-auto px-8 lg:px-16 mt-32">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="p-10 bg-surface-container-low rounded-xl flex flex-col gap-6 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="clinical_notes">clinical_notes</span>
+<div>
+<h3 class="text-2xl font-bold mb-2">SOAP notes &lt; 60s</h3>
+<p class="text-stone-600 leading-relaxed">Ambient voice transcription specialized for field clinics. Document while you care.</p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="p-10 bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-6 border border-outline-variant/10">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="history">history</span>
+<div>
+<h3 class="text-2xl font-bold mb-2">Audit trail</h3>
+<p class="text-stone-600 leading-relaxed">Immutable logging for every decision, medication, and referral. Accountability by design.</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="p-10 bg-surface-container-low rounded-xl flex flex-col gap-6 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="monitoring">monitoring</span>
+<div>
+<h3 class="text-2xl font-bold mb-2">Impact dashboard</h3>
+<p class="text-stone-600 leading-relaxed">Real-time epidemiological mapping and resource utilization tracking for supervisors.</p>
+</div>
+</div>
+</div>
+<!-- Lower Features -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+<div class="p-10 bg-surface-container-highest rounded-xl flex items-center gap-8 group">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="list_alt">list_alt</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold mb-1">Patient queue by urgency</h3>
+<p class="text-stone-600">Smart triage logic based on vital signs and intake severity.</p>
+</div>
+</div>
+<div class="p-10 bg-primary text-on-primary rounded-xl flex items-center gap-8">
+<div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-white" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold mb-1">WHO protocol badge</h3>
+<p class="text-primary-fixed/80">Full compliance with World Health Organization emergency standards.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Aesthetic Visual Break -->
+<section class="max-w-[1440px] mx-auto px-8 lg:px-16 mt-32">
+<div class="relative h-[400px] rounded-xl overflow-hidden shadow-2xl">
+<img alt="Clean clinic interior" class="w-full h-full object-cover" data-alt="Modern minimalist medical clinic interior with soft natural light, olive green accents, and clean organized surfaces" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCozikoe5CXS8s8fJ5KRUSFsqvBv6FUMRHRcB-H3_97tGNzVHvgA5Pa3waoQxv9DgtGm1Ve5RW6Wpf8lGAL_GciiImwpwVg083RWbEdNVsxRj7sWbCnPwkWGTjf4LbwKs94STyAJNd-JJ7RoTl1ruK_ElZeMi8hssqKVFEzGOIKt_yUBv2Cb9-ulw1WkLOI-lm6HKCCfF8z4yEHmDd55eSi7z0jxul8SHOy8K4wvXF-yvskHZiYDIiKKYlarXXDuJB2QHZriD3s-VD6"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent flex flex-col justify-center px-16">
+<h2 class="text-5xl text-white max-w-md leading-tight">Built for the front lines of clinical care.</h2>
+<div class="mt-8 flex gap-4">
+<div class="h-1 w-24 bg-primary-fixed"></div>
+<div class="h-1 w-12 bg-primary-fixed/30"></div>
+<div class="h-1 w-6 bg-primary-fixed/10"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#ece1cf] dark:bg-stone-900 w-full px-12 py-16 flex flex-col items-center gap-8 text-center rounded-t-[32px]">
+<div class="text-2xl font-serif italic text-[#445518] dark:text-[#ece1cf]">CARA</div>
+<div class="flex flex-wrap justify-center gap-8 font-sans text-sm tracking-wide">
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors" href="#">Research</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors" href="#">Join Us</a>
+<a class="text-[#445518] font-bold" href="#">The Ward</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors" href="#">Patient Compass</a>
+</div>
+<div class="h-px w-24 bg-stone-300 dark:bg-stone-700"></div>
+<p class="font-sans text-sm tracking-wide text-stone-600 dark:text-stone-400">
+            © 2024 CARA. Open Source · Privacy-first · Built for the last mile
+        </p>
+</footer>
+<script src="./js/router.js" type="module"></script>
+</body></html>

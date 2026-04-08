@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Ward - AI Assistant</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#f1e7d4",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#f7edda",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#bacf84",
+                    "surface": "#fff8f1",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "surface-bright": "#fff8f1",
+                    "primary-fixed-dim": "#bacf84",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#2b1700",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "primary-container": "#5c6e2e",
+                    "tertiary-container": "#baab6d",
+                    "background": "#fff8f1",
+                    "surface-dim": "#e3d9c6",
+                    "inverse-surface": "#353023",
+                    "on-tertiary-fixed": "#211b00",
+                    "on-secondary-container": "#795b39",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#e7c096",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "error-container": "#ffdad6",
+                    "secondary": "#765937",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#faf0dc",
+                    "tertiary-fixed": "#f3e3a0",
+                    "surface-tint": "#536526",
+                    "secondary-container": "#fed6ab",
+                    "tertiary": "#6a5e29",
+                    "on-surface": "#201b10",
+                    "on-secondary": "#ffffff",
+                    "outline": "#76786a",
+                    "surface-container-low": "#fdf2df",
+                    "surface-variant": "#ece1cf",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "on-primary-container": "#daf0a1",
+                    "surface-container-highest": "#ece1cf",
+                    "primary-fixed": "#d6eb9d",
+                    "primary": "#445518",
+                    "outline-variant": "#c6c8b7",
+                    "on-surface-variant": "#45483c",
+                    "on-background": "#201b10",
+                    "secondary-fixed": "#ffddba",
+                    "on-primary-fixed": "#151f00",
+                    "on-tertiary-container": "#493f0c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"],
+                    "instrument": ["Instrument Serif", "serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-background font-body text-on-surface min-h-screen">
+<!-- SIDE NAV BAR -->
+<aside class="h-screen w-[240px] fixed left-0 top-0 border-r-0 bg-[#EDE6D6] dark:bg-stone-900 transition-colors duration-300 flex flex-col py-8 px-4 z-50">
+<div class="mb-12 px-2">
+<h1 class="font-['Newsreader'] italic text-2xl text-[#5C6E2E] dark:text-lime-400">The Ward</h1>
+<p class="font-['Satoshi'] text-sm tracking-tight text-stone-500 uppercase tracking-widest mt-1">Clinician Portal</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-full text-stone-500 dark:text-stone-400 hover:bg-[#ece1cf] dark:hover:bg-stone-800 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Satoshi'] text-sm tracking-tight">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-full text-stone-500 dark:text-stone-400 hover:bg-[#ece1cf] dark:hover:bg-stone-800 transition-all" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-['Satoshi'] text-sm tracking-tight">Patient Queue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-full text-stone-500 dark:text-stone-400 hover:bg-[#ece1cf] dark:hover:bg-stone-800 transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-['Satoshi'] text-sm tracking-tight">SOAP Notes</span>
+</a>
+<!-- Active Tab: AI Assistant -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-full text-[#5C6E2E] dark:text-lime-400 font-bold border-r-4 border-[#5C6E2E] bg-[#ece1cf]/50" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-['Satoshi'] text-sm tracking-tight">AI Assistant</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-full text-stone-500 dark:text-stone-400 hover:bg-[#ece1cf] dark:hover:bg-stone-800 transition-all" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-['Satoshi'] text-sm tracking-tight">Impact</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-full text-stone-500 dark:text-stone-400 hover:bg-[#ece1cf] dark:hover:bg-stone-800 transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-['Satoshi'] text-sm tracking-tight">Audit Log</span>
+</a>
+</nav>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 rounded-full text-stone-500 dark:text-stone-400 hover:bg-[#ece1cf] dark:hover:bg-stone-800 transition-all mb-4" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Satoshi'] text-sm tracking-tight">Settings</span>
+</a>
+<div class="flex items-center gap-3 px-2 border-t border-stone-200 pt-6">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="professional medical doctor portrait in clinical environment soft natural lighting warm tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwMZs0TQEtGKIJNyAwZjwg_9h7Cm1lTJ2oEqZ8EmXX0krI6vYsakEK49uj-gOeV_jlG693KNk_FHoopHYTAJityMu27EY_0OXGvoCk05NA2-KBHyAfc7JMQnEZZIKlcbqx5PduDK1B4byHM_ZdUMPZhS5sHkdD9jAGjCS2Om86LlOhEW3uQlNqxEQSpag5yk1P9lseq4LICY1I6T5C7AqQhmEhyZ5EwORi2wQ_W0oe2_f1QKo-1zzj_hmbCI3U8-4jbe7BKd8rVsRN"/>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Dr. Aris</p>
+<p class="text-[10px] text-stone-500">Chief Resident</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN CONTENT WRAPPER -->
+<main class="ml-[240px] flex flex-col h-screen overflow-hidden">
+<!-- TOP NAV BAR -->
+<header class="fixed top-0 right-0 h-16 w-[calc(100%-240px)] z-40 bg-[#F6F1E7]/80 dark:bg-stone-950/80 backdrop-blur-xl flex justify-between items-center px-8">
+<div class="flex items-center gap-4">
+<nav class="flex text-xs text-stone-400 font-medium">
+<span>Portal</span>
+<span class="mx-2">/</span>
+<span class="text-[#5C6E2E] font-semibold">AI Assistant</span>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-stone-400 hover:text-[#5C6E2E] transition-colors">notifications</button>
+<button class="material-symbols-outlined text-stone-400 hover:text-[#5C6E2E] transition-colors">sync</button>
+<button class="material-symbols-outlined text-stone-400 hover:text-[#5C6E2E] transition-colors">calendar_today</button>
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-[#5C6E2E]">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+</div>
+</header>
+<!-- CHAT INTERFACE AREA -->
+<div class="mt-16 flex-1 flex overflow-hidden">
+<!-- CONVERSATION CANVAS -->
+<section class="flex-1 flex flex-col relative bg-surface border-r border-surface-container-highest/30">
+<!-- Chat Header -->
+<div class="px-10 py-8">
+<h2 class="font-instrument text-5xl text-on-surface leading-none mb-2">Consult CARA</h2>
+<p class="text-on-surface-variant max-w-lg">Advanced clinical decision support anchored in global health protocols and local epidemiology.</p>
+</div>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto px-10 pb-32 space-y-8 no-scrollbar">
+<!-- Doctor Message -->
+<div class="flex justify-end ml-24">
+<div class="bg-surface-container-lowest px-6 py-4 rounded-xl rounded-tr-none shadow-sm max-w-2xl">
+<p class="text-sm font-medium text-primary mb-1">Dr. Aris</p>
+<p class="text-on-surface leading-relaxed">Checking Amara, 3 years old. Respiratory rate 52/min, chest indrawing present. Temperature 38.8°C. What is the classification?</p>
+</div>
+</div>
+<!-- CARA Response -->
+<div class="flex justify-start mr-24">
+<div class="border-l-4 border-primary-container bg-surface-container-low px-6 py-5 rounded-xl rounded-tl-none max-w-2xl">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-primary-container text-on-primary-container text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">CARA AI</span>
+<span class="text-[10px] text-primary/60 font-semibold bg-primary-fixed-dim/30 px-2 py-0.5 rounded-full uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">verified</span> WHO IMCI
+                                </span>
+</div>
+<p class="text-on-surface leading-relaxed mb-4">Based on the symptoms provided for Patient Amara (3yr):</p>
+<div class="bg-error-container/40 p-4 rounded-lg mb-4 border-l-2 border-error">
+<p class="text-error font-bold text-sm uppercase tracking-wide flex items-center gap-2">
+                                    Classification: Severe Pneumonia (RED)
+                                </p>
+<p class="text-on-surface-variant text-sm mt-1 leading-snug">Requires immediate referral to hospital. Administer first dose of appropriate antibiotic before transfer.</p>
+</div>
+<ul class="space-y-2 text-sm text-on-surface-variant list-disc pl-4">
+<li>Give first dose of Ceftriaxone (IM) if possible.</li>
+<li>Treat fever with Paracetamol.</li>
+<li>Keep the child warm.</li>
+<li>Refer URGENTLY to hospital.</li>
+</ul>
+</div>
+</div>
+<!-- Doctor Message 2 -->
+<div class="flex justify-end ml-24">
+<div class="bg-surface-container-lowest px-6 py-4 rounded-xl rounded-tr-none shadow-sm max-w-2xl">
+<p class="text-sm font-medium text-primary mb-1">Dr. Aris</p>
+<p class="text-on-surface leading-relaxed">What are the specific referral protocols for this district under current flooding conditions?</p>
+</div>
+</div>
+<!-- CARA Response 2 -->
+<div class="flex justify-start mr-24">
+<div class="border-l-4 border-primary-container bg-surface-container-low px-6 py-5 rounded-xl rounded-tl-none max-w-2xl">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-primary-container text-on-primary-container text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">CARA AI</span>
+<span class="text-[10px] text-tertiary/60 font-semibold bg-tertiary-fixed-dim/30 px-2 py-0.5 rounded-full uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]">map</span> District Health Map
+                                </span>
+</div>
+<p class="text-on-surface leading-relaxed">Primary route (Bridge B) is currently impassable. Use the southern detour. Referral time estimated: 45 mins. Logistics dispatch notified.</p>
+</div>
+</div>
+</div>
+<!-- Input Area (Floating) -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-[calc(100%-80px)] max-w-4xl">
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl p-2 rounded-full shadow-lg border border-surface-variant flex items-center">
+<button class="w-12 h-12 flex items-center justify-center text-stone-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-stone-400 font-medium px-4" placeholder="Describe the patient or ask a clinical question..." type="text"/>
+<button class="bg-primary-container text-on-primary-container h-12 px-6 rounded-full flex items-center gap-2 hover:scale-[1.02] transition-transform">
+<span class="font-bold text-sm tracking-tight">Send Query</span>
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</section>
+<!-- RIGHT SIDEBAR (GUIDES & PROMPTS) -->
+<aside class="w-[380px] bg-surface-container-low p-8 flex flex-col gap-8 overflow-y-auto no-scrollbar">
+<div>
+<h3 class="text-primary font-bold text-xs uppercase tracking-widest mb-6">Quick Clinical Prompts</h3>
+<div class="space-y-3">
+<button class="w-full text-left p-4 rounded-xl bg-surface-container-lowest hover:bg-primary-container hover:text-on-primary-container transition-all group">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm text-primary group-hover:text-on-primary-container">clinical_notes</span>
+<span class="text-xs font-bold opacity-60">PROTOCOL</span>
+</div>
+<p class="text-sm font-medium">What tests for suspected TB in children?</p>
+</button>
+<button class="w-full text-left p-4 rounded-xl bg-surface-container-lowest hover:bg-primary-container hover:text-on-primary-container transition-all group">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm text-primary group-hover:text-on-primary-container">medical_services</span>
+<span class="text-xs font-bold opacity-60">MATERNITY</span>
+</div>
+<p class="text-sm font-medium">ANC protocol for high-risk patients</p>
+</button>
+<button class="w-full text-left p-4 rounded-xl bg-surface-container-lowest hover:bg-primary-container hover:text-on-primary-container transition-all group">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm text-primary group-hover:text-on-primary-container">medication</span>
+<span class="text-xs font-bold opacity-60">DOSAGE</span>
+</div>
+<p class="text-sm font-medium">Calculate dose: Gentamicin (IM)</p>
+</button>
+</div>
+</div>
+<div>
+<h3 class="text-primary font-bold text-xs uppercase tracking-widest mb-6">Live Health Alerts</h3>
+<div class="rounded-2xl overflow-hidden bg-surface-container-lowest shadow-sm">
+<div class="h-32 w-full relative">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent z-10"></div>
+<img class="w-full h-full object-cover" data-alt="medical professional looking at microscopy samples in a laboratory setting soft laboratory lighting blue and white tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgMKrm0nKqMIlj8qb8kyEG8rr1sTGJgDNuV068IwyFVBTQBMo-xPj9tq8ZjWKs51GWk1cHPDxbFLjKAf8HpEnyCLJWcDwztnJReYifg-ELv5zOyV2K05yCJSoIfchq_PQH_qS8wowX0l0VA8LnnAiM_tzJRFe08U9c8WyHz8NDDhLRxglmgRb6r9iTl_t2yuYC1EEAcPfMe8rBd3682sy_mc2bzxFsnzS9wj1vQ_RjBd5x35tZygQDthAqpnWe3VnLjZuc0ey-2hJd"/>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-2 h-2 rounded-full bg-error animate-pulse"></div>
+<span class="text-[10px] font-bold text-error uppercase">Active Outbreak</span>
+</div>
+<h4 class="font-bold text-on-surface mb-2">Cholera Surveillance</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Spike in acute watery diarrhea reported in Zone 4. Update triage protocols for all admissions.</p>
+<button class="mt-4 text-xs font-bold text-[#5C6E2E] flex items-center gap-1">
+                                Read Protocol <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-auto">
+<div class="bg-surface-container-highest/40 p-6 rounded-3xl border border-white/40">
+<h4 class="font-instrument text-2xl mb-2 italic text-on-surface">Privacy &amp; Ethics</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">All AI interactions are anonymized before processing. Clinical decisions remain the sole responsibility of the practitioner.</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<script src="./js/router.js" type="module"></script>
+</body></html>
