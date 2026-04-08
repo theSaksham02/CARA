@@ -1,11 +1,27 @@
 'use strict';
 
 const express = require('express');
-const { body } = require('express-validator');
+const { body, param, query } = require('express-validator');
 
-const { generateSoapNote } = require('../controllers/note.controller');
+const { generateSoapNote, getSoapNoteById, getSoapNotes } = require('../controllers/note.controller');
 
 const router = express.Router();
+
+router.get(
+  '/',
+  [
+    query('patient_id').optional().isString().trim().notEmpty(),
+    query('search').optional().isString().trim(),
+    query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('limit must be between 1 and 100.'),
+  ],
+  getSoapNotes
+);
+
+router.get(
+  '/:note_id',
+  [param('note_id').isString().trim().notEmpty().withMessage('note_id is required.')],
+  getSoapNoteById
+);
 
 router.post(
   '/generate',

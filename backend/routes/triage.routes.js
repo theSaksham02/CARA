@@ -1,11 +1,21 @@
 'use strict';
 
 const express = require('express');
-const { body } = require('express-validator');
+const { body, query } = require('express-validator');
 
-const { assessTriage } = require('../controllers/triage.controller');
+const { assessTriage, getTriageQueue } = require('../controllers/triage.controller');
 
 const router = express.Router();
+
+router.get(
+  '/queue',
+  [
+    query('urgency').optional().isIn(['RED', 'YELLOW', 'GREEN']).withMessage('urgency must be RED, YELLOW, or GREEN.'),
+    query('search').optional().isString().trim(),
+    query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('limit must be between 1 and 100.'),
+  ],
+  getTriageQueue
+);
 
 router.post(
   '/assess',

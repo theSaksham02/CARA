@@ -1,11 +1,28 @@
 'use strict';
 
 const express = require('express');
-const { body } = require('express-validator');
+const { body, param, query } = require('express-validator');
 
-const { createPatientRecord, getPatients } = require('../controllers/patient.controller');
+const {
+  createPatientRecord,
+  getCurrentPatientVisitSummary,
+  getPatients,
+  getPatientVisitSummary,
+} = require('../controllers/patient.controller');
 
 const router = express.Router();
+
+router.get(
+  '/me/summary',
+  [query('patient_id').optional().isString().trim().notEmpty()],
+  getCurrentPatientVisitSummary
+);
+
+router.get(
+  '/:patient_id/summary',
+  [param('patient_id').isString().trim().notEmpty().withMessage('patient_id is required.')],
+  getPatientVisitSummary
+);
 
 router.get('/', getPatients);
 

@@ -6,9 +6,12 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const express = require('express');
 
+const analyticsRoutes = require('./routes/analytics.routes');
+const auditRoutes = require('./routes/audit.routes');
 const { bootstrapDatabase, getDbMode } = require('./db/setup');
 const { auditMiddleware } = require('./middleware/audit.middleware');
 const { authMiddleware, getAuthMode } = require('./middleware/auth.middleware');
+const dashboardRoutes = require('./routes/dashboard.routes');
 const followupRoutes = require('./routes/followup.routes');
 const noteRoutes = require('./routes/note.routes');
 const patientRoutes = require('./routes/patient.routes');
@@ -40,6 +43,9 @@ function createApp() {
   app.use('/api/patients', patientRoutes);
   app.use('/api/notes', noteRoutes);
   app.use('/api/followup', followupRoutes);
+  app.use('/api/dashboard', dashboardRoutes);
+  app.use('/api/analytics/impact', analyticsRoutes);
+  app.use('/api/audit', auditRoutes);
 
   app.use((req, res) => {
     res.status(404).json({

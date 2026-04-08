@@ -2,7 +2,7 @@
 
 const { validationResult } = require('express-validator');
 
-const { createTriageAssessment, findPatientById } = require('../db/setup');
+const { createTriageAssessment, findPatientById, listTriageQueue } = require('../db/setup');
 const { evaluateTriage } = require('../engine/engine');
 
 async function assessTriage(req, res, next) {
@@ -53,6 +53,30 @@ async function assessTriage(req, res, next) {
   }
 }
 
+async function getTriageQueue(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array(),
+    });
+  }
+
+  try {
+    const queue = await listTriageQueue({
+      urgency: req.query.urgency,
+      search: req.query.search,
+      limit: req.query.limit,
+    });
+
+    return res.status(200).json({
+      queue,
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   assessTriage,
+  getTriageQueue,
 };

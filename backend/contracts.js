@@ -16,30 +16,52 @@ function deepFreeze(value) {
 
 const apiContracts = {
   triage: {
-    method: 'POST',
-    path: '/api/triage/assess',
-    request: {
-      required: ['symptoms', 'age_months'],
-      optional: ['patient_id', 'transcript', 'metadata'],
-      example: {
-        symptoms: ['fever', 'cough'],
-        age_months: 14,
-        patient_id: 'patient-demo-001',
-        transcript: 'Child has fever and cough for two days.',
-        metadata: {
-          source: 'field-view',
+    assess: {
+      method: 'POST',
+      path: '/api/triage/assess',
+      request: {
+        required: ['symptoms', 'age_months'],
+        optional: ['patient_id', 'transcript', 'metadata'],
+        example: {
+          symptoms: ['fever', 'cough'],
+          age_months: 14,
+          patient_id: 'patient-demo-001',
+          transcript: 'Child has fever and cough for two days.',
+          metadata: {
+            source: 'field-view',
+          },
+        },
+      },
+      response: {
+        example: {
+          assessment: {
+            urgency: 'YELLOW',
+            reason: 'Fever with breathing symptoms matches the pneumonia rule.',
+            recommended_action: 'Arrange same-day clinician review.',
+            matched_rule_id: 'pneumonia-yellow',
+            symptoms: ['fever', 'cough'],
+            age_months: 14,
+          },
         },
       },
     },
-    response: {
-      example: {
-        assessment: {
-          urgency: 'YELLOW',
-          reason: 'Fever with breathing symptoms matches the pneumonia rule.',
-          recommended_action: 'Arrange same-day clinician review.',
-          matched_rule_id: 'pneumonia-yellow',
-          symptoms: ['fever', 'cough'],
-          age_months: 14,
+    queue: {
+      method: 'GET',
+      path: '/api/triage/queue',
+      query: ['urgency', 'search', 'limit'],
+      response: {
+        example: {
+          queue: [
+            {
+              patient_id: 'patient-demo-001',
+              patient_name: 'Amara Okoye',
+              age_display: '14m',
+              urgency: 'RED',
+              matched_rule_id: 'danger-sign-red',
+              symptoms: ['fever', 'difficulty breathing'],
+              triage_time: '2026-04-08T07:20:00.000Z',
+            },
+          ],
         },
       },
     },
@@ -89,25 +111,110 @@ const apiContracts = {
     },
   },
   notes: {
-    method: 'POST',
-    path: '/api/notes/generate',
-    request: {
-      required: ['transcript'],
-      optional: ['patient_id'],
-      example: {
-        patient_id: 'patient-demo-001',
-        transcript: 'Mother reports fever since yesterday. Temperature measured at home.',
-      },
-    },
-    response: {
-      example: {
-        note: {
-          subjective: ['Mother reports fever since yesterday.'],
-          objective: ['Temperature measured at home.'],
-          assessment: ['Possible uncomplicated fever.'],
-          plan: ['Monitor temperature and review if symptoms worsen.'],
+    generate: {
+      method: 'POST',
+      path: '/api/notes/generate',
+      request: {
+        required: ['transcript'],
+        optional: ['patient_id'],
+        example: {
+          patient_id: 'patient-demo-001',
+          transcript: 'Mother reports fever since yesterday. Temperature measured at home.',
         },
       },
+      response: {
+        example: {
+          note: {
+            subjective: ['Mother reports fever since yesterday.'],
+            objective: ['Temperature measured at home.'],
+            assessment: ['Possible uncomplicated fever.'],
+            plan: ['Monitor temperature and review if symptoms worsen.'],
+          },
+        },
+      },
+    },
+    list: {
+      method: 'GET',
+      path: '/api/notes',
+      query: ['patient_id', 'search', 'limit'],
+      response: {
+        example: {
+          notes: [
+            {
+              id: 'note-demo-001',
+              patient_id: 'patient-demo-001',
+              assessment: ['Possible uncomplicated fever.'],
+              plan: ['Monitor temperature and review if symptoms worsen.'],
+            },
+          ],
+        },
+      },
+    },
+    detail: {
+      method: 'GET',
+      path: '/api/notes/:note_id',
+    },
+  },
+  dashboard: {
+    overview: {
+      method: 'GET',
+      path: '/api/dashboard/overview',
+      query: ['queue_limit'],
+      response: {
+        example: {
+          overview: {
+            kpis: {
+              patients_total: 12,
+              patients_triaged_today: 5,
+              red_urgent: 2,
+              soap_notes_today: 3,
+              followups_due: 1,
+            },
+            high_urgency_cases: [
+              {
+                patient_name: 'Amara Okoye',
+                urgency: 'RED',
+                matched_rule_id: 'danger-sign-red',
+              },
+            ],
+          },
+        },
+      },
+    },
+  },
+  analytics: {
+    impact: {
+      method: 'GET',
+      path: '/api/analytics/impact',
+      query: ['range'],
+      response: {
+        example: {
+          analytics: {
+            range: 'week',
+            metrics: {
+              patients_managed: 24,
+              red_cases: 5,
+              red_resolution_rate: 20.8,
+              followup_rate: 58.3,
+              documentation_coverage: 66.7,
+            },
+            daily_volume: [{ date: '2026-04-08', count: 4 }],
+            urgency_breakdown: [{ urgency: 'RED', count: 2 }],
+            condition_mix: [{ label: 'pneumonia-yellow', count: 3 }],
+          },
+        },
+      },
+    },
+  },
+  patientSummary: {
+    byPatientId: {
+      method: 'GET',
+      path: '/api/patients/:patient_id/summary',
+    },
+    currentPatient: {
+      method: 'GET',
+      path: '/api/patients/me/summary',
+      query: ['patient_id'],
     },
   },
   followups: {
@@ -154,6 +261,13 @@ const apiContracts = {
           },
         },
       },
+    },
+  },
+  audit: {
+    list: {
+      method: 'GET',
+      path: '/api/audit',
+      query: ['actor_id', 'event_type', 'limit'],
     },
   },
 };

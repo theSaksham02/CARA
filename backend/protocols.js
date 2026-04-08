@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const externalProtocolPath = path.resolve(__dirname, '../ml/protocols/imci.json');
+const validUrgencies = new Set(['RED', 'YELLOW', 'GREEN']);
 
 const fallbackProtocols = {
   version: '1.0.0',
@@ -72,29 +73,163 @@ const fallbackProtocols = {
   ],
 };
 
+function isNonEmptyString(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+function normalizeString(value) {
+  return String(value || '').trim();
+}
+
+function normalizeStringArray(value) {
+  if (value === undefined || value === null) {
+    return [];
+  }
+
+  if (!Array.isArray(value)) {
+    throw new Error('must be an array of strings.');
+  }
+
+  const normalized = value
+    .map((entry) => normalizeString(entry))
+    .filter(Boolean);
+
+  if (normalized.length !== value.length) {
+    throw new Error('must only contain non-empty strings.');
+  }
+
+  return [...new Set(normalized)];
+}
+
+function normalizeRule(rule, index) {
+  if (!rule || typeof rule !== 'object' || Array.isArray(rule)) {
+    throw new Error(`Rule ${index + 1} must be an object.`);
+  }
+
+  const id = normalizeString(rule.id);
+  const urgency = normalizeString(rule.urgency).toUpperCase();
+  const reason = normalizeString(rule.reason);
+  const recommendedAction = normalizeString(rule.recommended_action);
+  const symptomsAll = normalizeStringArray(rule.symptomsAll);
+  const symptomsAny = normalizeStringArray(rule.symptomsAny);
+  const priority = Number.isFinite(rule.priority) ? Number(rule.priority) : 0;
+  const minAgeMonths =
+    rule.min_age_months === undefined || rule.min_age_months === null
+      ? undefined
+      : Number(rule.min_age_months);
+  const maxAgeMonths =
+    rule.max_age_months === undefined || rule.max_age_months === null
+      ? undefined
+      : Number(rule.max_age_months);
+
+  if (!id) {
+    throw new Error(`Rule ${index + 1} is missing a non-empty id.`);
+  }
+
+  if (!validUrgencies.has(urgency)) {
+    throw new Error(`Rule "${id}" must use urgency RED, YELLOW, or GREEN.`);
+  }
+
+  if (!reason) {
+    throw new Error(`Rule "${id}" is missing a non-empty reason.`);
+  }
+
+  if (!recommendedAction) {
+    throw new Error(`Rule "${id}" is missing a non-empty recommended_action.`);
+  }
+
+  if (!Number.isFinite(priority)) {
+    throw new Error(`Rule "${id}" must define a numeric priority.`);
+  }
+
+  if (symptomsAll.length === 0 && symptomsAny.length === 0) {
+    throw new Error(`Rule "${id}" must define symptomsAll, symptomsAny, or both.`);
+  }
+
+  if (minAgeMonths !== undefined && (!Number.isInteger(minAgeMonths) || minAgeMonths < 0)) {
+    throw new Error(`Rule "${id}" must use a non-negative integer min_age_months when provided.`);
+  }
+
+  if (maxAgeMonths !== undefined && (!Number.isInteger(maxAgeMonths) || maxAgeMonths < 0)) {
+    throw new Error(`Rule "${id}" must use a non-negative integer max_age_months when provided.`);
+  }
+
+  if (
+    minAgeMonths !== undefined &&
+    maxAgeMonths !== undefined &&
+    minAgeMonths > maxAgeMonths
+  ) {
+    throw new Error(`Rule "${id}" cannot have min_age_months greater than max_age_months.`);
+  }
+
+  return {
+    id,
+    priority,
+    symptomsAll,
+    symptomsAny,
+    urgency,
+    recommended_action: recommendedAction,
+    reason,
+    ...(minAgeMonths === undefined ? {} : { min_age_months: minAgeMonths }),
+    ...(maxAgeMonths === undefined ? {} : { max_age_months: maxAgeMonths }),
+  };
+}
+
+function validateProtocols(protocols) {
+  if (!protocols || typeof protocols !== 'object' || Array.isArray(protocols)) {
+    throw new Error('Protocol bundle must be an object.');
+  }
+
+  const defaultAction = normalizeString(protocols.default_action);
+  if (!defaultAction) {
+    throw new Error('Protocol bundle must define a non-empty default_action.');
+  }
+
+  if (!Array.isArray(protocols.rules) || protocols.rules.length === 0) {
+    throw new Error('Protocol bundle must define a non-empty rules array.');
+  }
+
+  const normalizedRules = protocols.rules.map((rule, index) => normalizeRule(rule, index));
+  const duplicateRuleId = normalizedRules.find(
+    (rule, index) => normalizedRules.findIndex((entry) => entry.id === rule.id) !== index
+  );
+
+  if (duplicateRuleId) {
+    throw new Error(`Duplicate protocol rule id "${duplicateRuleId.id}" detected.`);
+  }
+
+  return {
+    version: isNonEmptyString(protocols.version) ? protocols.version.trim() : '1.0.0',
+    source: isNonEmptyString(protocols.source) ? protocols.source.trim() : 'external-imci',
+    default_action: defaultAction,
+    rules: normalizedRules,
+  };
+}
+
 function loadProtocols() {
   try {
     if (!fs.existsSync(externalProtocolPath)) {
-      return fallbackProtocols;
+      return validateProtocols(fallbackProtocols);
     }
 
     const rawValue = fs.readFileSync(externalProtocolPath, 'utf8').trim();
     if (!rawValue) {
-      return fallbackProtocols;
+      return validateProtocols(fallbackProtocols);
     }
 
     const parsedValue = JSON.parse(rawValue);
-    if (!Array.isArray(parsedValue.rules) || parsedValue.rules.length === 0) {
-      return fallbackProtocols;
+    return validateProtocols(parsedValue);
+  } catch (error) {
+    if (fs.existsSync(externalProtocolPath)) {
+      throw new Error(`Invalid IMCI protocol bundle: ${error.message}`);
     }
 
-    return parsedValue;
-  } catch (_error) {
-    return fallbackProtocols;
+    return validateProtocols(fallbackProtocols);
   }
 }
 
 module.exports = {
   fallbackProtocols,
   loadProtocols,
+  validateProtocols,
 };

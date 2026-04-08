@@ -2,10 +2,22 @@
 
 const { loadProtocols } = require('../protocols');
 
+const symptomAliases = new Map([
+  ['breathing issues', 'difficulty breathing'],
+  ['breathing fast', 'fast breathing'],
+  ['can not drink', 'unable to drink'],
+  ['cannot drink', 'unable to drink'],
+  ['drinking poorly', 'drinks poorly'],
+  ['very sleepy', 'lethargy'],
+]);
+
 function normalizeSymptom(symptom) {
-  return String(symptom || '')
+  const normalizedSymptom = String(symptom || '')
     .trim()
-    .toLowerCase();
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+
+  return symptomAliases.get(normalizedSymptom) || normalizedSymptom;
 }
 
 function normalizeSymptoms(symptoms) {

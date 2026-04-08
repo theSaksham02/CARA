@@ -39,12 +39,22 @@ function getSupabaseClient() {
   return supabaseClient;
 }
 
+function mapAuthenticatedUser(user) {
+  return {
+    id: user.id,
+    email: user.email,
+    role: user.app_metadata?.role || user.user_metadata?.role || 'user',
+    patient_id: user.app_metadata?.patient_id || user.user_metadata?.patient_id || null,
+  };
+}
+
 async function authMiddleware(req, res, next) {
   if (getAuthMode() === 'bypass') {
     req.user = {
       id: 'dev-user',
       role: 'developer',
       email: 'dev@cara.local',
+      patient_id: null,
     };
     return next();
   }
@@ -66,11 +76,7 @@ async function authMiddleware(req, res, next) {
       });
     }
 
-    req.user = {
-      id: data.user.id,
-      email: data.user.email,
-      role: data.user.app_metadata?.role || data.user.user_metadata?.role || 'user',
-    };
+    req.user = mapAuthenticatedUser(data.user);
 
     return next();
   } catch (error) {
@@ -81,4 +87,5 @@ async function authMiddleware(req, res, next) {
 module.exports = {
   authMiddleware,
   getAuthMode,
+  mapAuthenticatedUser,
 };

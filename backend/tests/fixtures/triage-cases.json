@@ -42,6 +42,13 @@
     "expected_action": "Start oral rehydration guidance and arrange clinician review."
   },
   {
+    "name": "Mina symptom alias normalization",
+    "age_months": 20,
+    "symptoms": ["cough", "Breathing   Fast"],
+    "expected_urgency": "YELLOW",
+    "expected_action": "Arrange same-day clinician review for possible pneumonia."
+  },
+  {
     "name": "Mosi malaria screen",
     "age_months": 40,
     "symptoms": ["fever", "chills"],
