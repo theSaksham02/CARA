@@ -64,12 +64,10 @@ html.js [data-reveal] {
   opacity: 0;
   transform: translate3d(0, 24px, 0) scale(0.985);
   filter: blur(10px);
-  clip-path: inset(0 0 100% 0);
   transition:
     opacity 800ms var(--cara-ease-out-quint),
     transform 800ms var(--cara-ease-out-quint),
-    filter 800ms var(--cara-ease-out-quint),
-    clip-path 820ms var(--cara-ease-out-quint);
+    filter 800ms var(--cara-ease-out-quint);
   transition-delay: var(--cara-delay, 0ms);
   will-change: transform, opacity, filter;
 }
@@ -78,7 +76,6 @@ html.js [data-reveal].is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
   filter: blur(0);
-  clip-path: inset(0 0 0 0);
 }
 
 html.js body.is-scrolled nav,
@@ -550,7 +547,6 @@ html.reduced-motion [data-reveal] {
   opacity: 1;
   transform: none;
   filter: none;
-  clip-path: none;
   transition: none;
   will-change: auto;
 }
@@ -564,7 +560,6 @@ html.reduced-motion [data-reveal] {
     opacity: 1;
     transform: none;
     filter: none;
-    clip-path: none;
     transition: none;
     will-change: auto;
   }

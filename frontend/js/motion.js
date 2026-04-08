@@ -171,48 +171,36 @@ const splitWords = (element) => {
 };
 
 const setupSplitHero = (element) => {
-  const chars = splitCharacters(element);
-  chars.forEach((char, index) => {
-    char.style.setProperty("--cara-char-delay", `${index * 20}ms`);
-  });
-
   onceVisible(element, () => {
-    chars.forEach((char, index) => {
-      animate(
-        char,
-        [
-          { opacity: 0, transform: "translate3d(0, 1.15em, 0)", filter: "blur(8px)" },
-          { opacity: 1, transform: "translate3d(0, 0, 0)", filter: "blur(0)" },
-        ],
-        {
-          duration: 900,
-          delay: index * 20,
-          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-          fill: "forwards",
-        }
-      );
-    });
+    animate(
+      element,
+      [
+        { opacity: 0, transform: "translate3d(0, 28px, 0)", filter: "blur(10px)" },
+        { opacity: 1, transform: "translate3d(0, 0, 0)", filter: "blur(0)" },
+      ],
+      {
+        duration: 900,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "forwards",
+      }
+    );
   });
 };
 
 const setupWordReveal = (element) => {
-  const words = splitWords(element);
   onceVisible(element, () => {
-    words.forEach((word, index) => {
-      animate(
-        word,
-        [
-          { opacity: 0, transform: "translate3d(0, 0.5em, 0)", filter: "blur(8px)" },
-          { opacity: 1, transform: "translate3d(0, 0, 0)", filter: "blur(0)" },
-        ],
-        {
-          duration: 760,
-          delay: index * 60,
-          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-          fill: "forwards",
-        }
-      );
-    });
+    animate(
+      element,
+      [
+        { opacity: 0, transform: "translate3d(0, 18px, 0)", filter: "blur(8px)" },
+        { opacity: 1, transform: "translate3d(0, 0, 0)", filter: "blur(0)" },
+      ],
+      {
+        duration: 760,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "forwards",
+      }
+    );
   });
 };
 
