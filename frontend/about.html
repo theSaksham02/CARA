@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fed6ab",
+                    "surface-dim": "#e3d9c6",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "surface-tint": "#536526",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#e7c096",
+                    "primary": "#445518",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "error": "#ba1a1a",
+                    "surface": "#fff8f1",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#45483c",
+                    "outline-variant": "#c6c8b7",
+                    "surface-container-high": "#f1e7d4",
+                    "primary-fixed-dim": "#bacf84",
+                    "surface-container-low": "#fdf2df",
+                    "inverse-primary": "#bacf84",
+                    "tertiary": "#6a5e29",
+                    "background": "#fff8f1",
+                    "on-primary-container": "#daf0a1",
+                    "secondary": "#765937",
+                    "surface-container": "#f7edda",
+                    "on-primary-fixed": "#151f00",
+                    "on-secondary-fixed": "#2b1700",
+                    "on-secondary-container": "#795b39",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#ece1cf",
+                    "surface-bright": "#fff8f1",
+                    "secondary-fixed": "#ffddba",
+                    "primary-container": "#5c6e2e",
+                    "inverse-on-surface": "#faf0dc",
+                    "on-background": "#201b10",
+                    "surface-container-highest": "#ece1cf",
+                    "on-surface": "#201b10",
+                    "primary-fixed": "#d6eb9d",
+                    "tertiary-container": "#baab6d",
+                    "on-tertiary-container": "#493f0c",
+                    "error-container": "#ffdad6",
+                    "outline": "#76786a",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "tertiary-fixed": "#f3e3a0",
+                    "on-tertiary-fixed": "#211b00",
+                    "inverse-surface": "#353023"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": [
+                            "Newsreader"
+                    ],
+                    "body": [
+                            "Manrope"
+                    ],
+                    "label": [
+                            "Manrope"
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; background-color: #fff8f1; color: #201b10; }
+        .font-serif { font-family: 'Newsreader', serif; }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#fdf2df] dark:bg-stone-900 shadow-[0_20px_40px_rgba(32,27,16,0.05)]">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-[1440px] mx-auto">
+<div class="text-3xl font-serif italic text-[#445518] dark:text-[#ece1cf] tracking-tight">CARA</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[#445518] dark:text-[#ece1cf] border-b-2 border-[#445518] dark:border-[#ece1cf] pb-1 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Research</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Join Us</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">The Ward</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Patient Compass</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-full font-medium hover:scale-105 hover:bg-primary-container transition-all duration-300 shadow-lg">
+                Access Platform →
+            </button>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="max-w-[1440px] mx-auto px-8 py-20 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div>
+<h1 class="text-6xl md:text-8xl font-serif text-primary leading-tight tracking-tight">
+                    Built for the 1 billion people medicine forgot.
+                </h1>
+<div class="mt-12 max-w-xl">
+<p class="text-xl text-on-surface-variant leading-relaxed">
+                        At CARA, our mission is to close the diagnostic gap in underserved communities. Aligned with the World Health Organization’s Universal Health Coverage goals, we believe high-quality healthcare shouldn't be a privilege of geography. By deploying intelligent infrastructure to the "last mile," we ensure that every patient, regardless of their location, is seen and cared for with clinical precision.
+                    </p>
+</div>
+</div>
+<div class="relative h-[600px] rounded-xl overflow-hidden shadow-2xl">
+<img alt="Editorial clinical setting" class="w-full h-full object-cover" data-alt="Minimalist editorial photography of a modern medical laboratory with soft natural light hitting warm wooden surfaces and glass medicine vials" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASp956Dz97jKsmq9OmPMoxikWSXRA7pZr-vaBnAjsh3F7YeUuiC6v1kWJF-eIVs7Ej4O5Reji5IEMNkxOwXGZZhqpIkTcWupZvQAUXmNu3l4UKLEVsqwW821JFqXYb80HJNQt_v_b-wT0TghYW7XYuvkLXZQS2oW1YHbmbWMdstI_2iOpJaOkni1W2cZi074SBHuvg5PlRNSmUQm_P6MdvKByZXgcRIGkIwOM4kEN3Nl9clUPlYGLHHCGl7Tw70RaKndC6sMizA-it"/>
+</div>
+</section>
+<!-- Values Strip -->
+<section class="w-full bg-surface-container-highest py-12">
+<div class="max-w-[1440px] mx-auto px-8 flex flex-wrap justify-between items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined text-2xl">verified</span>
+<span class="font-label font-bold tracking-widest uppercase text-sm">Transparency</span>
+</div>
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined text-2xl">balance</span>
+<span class="font-label font-bold tracking-widest uppercase text-sm">Fairness</span>
+</div>
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined text-2xl">visibility</span>
+<span class="font-label font-bold tracking-widest uppercase text-sm">Human Oversight</span>
+</div>
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined text-2xl">lock</span>
+<span class="font-label font-bold tracking-widest uppercase text-sm">Privacy</span>
+</div>
+</div>
+</section>
+<!-- Timeline Section -->
+<section class="max-w-[1440px] mx-auto px-8 py-32 bg-surface">
+<h2 class="text-4xl font-serif text-on-surface mb-20 text-center italic">The Path to Presence</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-0 relative">
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-outline-variant opacity-20 hidden md:block"></div>
+<div class="relative flex flex-col items-center text-center px-8 py-12 group">
+<div class="w-4 h-4 rounded-full bg-primary mb-8 relative z-10"></div>
+<h3 class="text-2xl font-serif mb-4">Research Pilot</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Defining the core clinical benchmarks and data integrity standards in isolated rural clinics.</p>
+</div>
+<div class="relative flex flex-col items-center text-center px-8 py-12 group">
+<div class="w-4 h-4 rounded-full bg-primary mb-8 relative z-10"></div>
+<h3 class="text-2xl font-serif mb-4">MoH Partner</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Integrating CARA's operating system into National Ministries of Health to modernize regional governance.</p>
+</div>
+<div class="relative flex flex-col items-center text-center px-8 py-12 group">
+<div class="w-4 h-4 rounded-full bg-primary mb-8 relative z-10"></div>
+<h3 class="text-2xl font-serif mb-4">Scale</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Empowering community health workers across continents with autonomous, localized diagnostic tools.</p>
+</div>
+</div>
+</section>
+<!-- Team Section -->
+<section class="max-w-[1440px] mx-auto px-8 py-32">
+<div class="mb-16">
+<span class="text-primary font-bold tracking-[0.2em] uppercase text-xs">Our People</span>
+<h2 class="text-5xl font-serif text-on-surface mt-4">The Collective</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+<!-- Team Card 1 -->
+<div class="bg-surface-container-low rounded-xl p-8 transition-all duration-300 hover:bg-primary group cursor-pointer">
+<div class="aspect-square rounded-lg bg-surface-container mb-6 overflow-hidden">
+<img alt="Nirmal portrait" class="w-full h-full object-cover" data-alt="Professional headshot of an South Asian man with glasses, looking directly at camera, soft studio lighting on beige background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHViiXJiLXbjoqwHfY7JQSMyZSjP_8YgG7buGIIby5p7MjsFeJF-Z4amZxLKib_pZTOpU3tSwxux9D2IqP_5NXjtKDQlbZjSeYR38MtUOHaKATHuN5SMqZ3RKrAK90FtBXerAx2xNkQFO4rXmGntHB9vRCovkURBVd7WKze7gydHbgQ0fQVZHVb1peqdQMkmqu2C4vy3GcNp9JA1p6iD9WOU_YIlkHEqerbVW5oVRzY1wrKEBQm0nplS78JFvQolHmu_B7wq0aol_a"/>
+</div>
+<h4 class="text-xl font-serif text-on-surface group-hover:text-on-primary transition-colors">Nirmal</h4>
+<p class="text-sm text-on-surface-variant mt-2 group-hover:text-primary-fixed transition-colors">Founder &amp; Lead Clinical Officer</p>
+</div>
+<!-- Team Card 2 -->
+<div class="bg-surface-container-low rounded-xl p-8 transition-all duration-300 hover:bg-primary group cursor-pointer">
+<div class="aspect-square rounded-lg bg-surface-container mb-6 overflow-hidden">
+<img alt="Saksham portrait" class="w-full h-full object-cover" data-alt="Close up of a young South Asian man with kind eyes and short dark hair, smiling subtly, warm natural window lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-AL2RyGQgv80knLwWVRDfFlgg55dxqcNy1bbWxmegjHUggJ7C3tTKC7_DjD41-Urgsziuzger118ucAOOgJLyTQhN23TLo2HzSy0Khhc3PbFUoJiEUii2SFCbtzNbdSNt-fG8T7daviGZiqX1fVJEsLPCyD7ZIQrB91J7c_GUyzd9jQYxEDovbhHeajmOfteKmK4C9xLj2GrLcwS_sluSjrl55I45SOjf27rsEcSDqbGVoJnV3KMZqSKvtJRzD0kR0uFrqkpOJaB5"/>
+</div>
+<h4 class="text-xl font-serif text-on-surface group-hover:text-on-primary transition-colors">Saksham</h4>
+<p class="text-sm text-on-surface-variant mt-2 group-hover:text-primary-fixed transition-colors">CTO, Data Systems</p>
+</div>
+<!-- Team Card 3 -->
+<div class="bg-surface-container-low rounded-xl p-8 transition-all duration-300 hover:bg-primary group cursor-pointer">
+<div class="aspect-square rounded-lg bg-surface-container mb-6 overflow-hidden">
+<img alt="Eman portrait" class="w-full h-full object-cover" data-alt="Portrait of an African American woman with elegant features, hair in a bun, looking thoughtful, soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0o2EU0sgyeLJNGAYlzLSxT9sgAs-cA3uXGv0nwYe_QDuwz3gCByXol-MJxWqXlc1v5FFmLajSnZxzdjd8kz7tj3GVfWwqX5poqMgsLzHazMme0GRx8VQ6fEtFmejnVpILAM8bpCvnQfqNNuPm-uscu9EQIe89ZuomB-q_3y9EwZ5wnpejCKFa_YAHEfGUlNRKto1Znu1KLPb3sEFoT-H3DpKgp4KDCnz3Pvd_65ZbxOhgm5tHLhWq3yVd89mlKZoGeK6lyqdVqNTK"/>
+</div>
+<h4 class="text-xl font-serif text-on-surface group-hover:text-on-primary transition-colors">Eman</h4>
+<p class="text-sm text-on-surface-variant mt-2 group-hover:text-primary-fixed transition-colors">Head of Ethics &amp; Privacy</p>
+</div>
+<!-- Team Card 4 -->
+<div class="bg-surface-container-low rounded-xl p-8 transition-all duration-300 hover:bg-primary group cursor-pointer">
+<div class="aspect-square rounded-lg bg-surface-container mb-6 overflow-hidden">
+<img alt="Diya portrait" class="w-full h-full object-cover" data-alt="Vibrant portrait of a woman of Indian descent, smiling warmly, wearing medical professional attire, blurred garden background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLTMWk3jOyC98uBEdsg3-K5ZPHj07hhw2Q3DBDdl620cklqqlkyuM-8diZBKOHEQIThWPv-P85VbfU-5baUbocXriV0kjT_0J5Fd4fHGBrzK8ICzPZQCp9khswCw_UMV0htdJ55_dRdA8hnJxh0ribPw7hwAAGvRv4Cgp85CiRMZklWSEVCJaTAfroSBob_444gzIluD160pMP8AfSNSVztFz9y9YszevNmWSEkpiTxo5tVBRML-32hvAYL49ADDXOqMrb2lRNw56u"/>
+</div>
+<h4 class="text-xl font-serif text-on-surface group-hover:text-on-primary transition-colors">Diya</h4>
+<p class="text-sm text-on-surface-variant mt-2 group-hover:text-primary-fixed transition-colors">Chief Strategy Officer</p>
+</div>
+<!-- Team Card 5 -->
+<div class="bg-surface-container-low rounded-xl p-8 transition-all duration-300 hover:bg-primary group cursor-pointer">
+<div class="aspect-square rounded-lg bg-surface-container mb-6 overflow-hidden">
+<img alt="Anaaya portrait" class="w-full h-full object-cover" data-alt="Artistic side profile of a South Asian woman with long hair, serene expression, sunset light highlighting her features" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm1VQsjdXT4G4-8VpmmqEeqb7rUkoESbvnk5aJsDqbPHsRCEDCwxvJiUBrxef3IqmBhuOS6PWGz3C6AleirB4UcmujNplZYZmAM5RGmRVqJU9qu7Ot1_BjUvBae852BPSoT7_oX9vTFvblVXNerqDjXHfpZNR-cQQM7Nd9hWcozie0KRz1iYseDehwa_06dwBEmG_WOt-OWv27QY28aEI_vMtsyxUoa9yr5f0ROXhLg_x2XLHbwKLUjHJJr9p3pyl3sH06Avz7rHgr"/>
+</div>
+<h4 class="text-xl font-serif text-on-surface group-hover:text-on-primary transition-colors">Anaaya</h4>
+<p class="text-sm text-on-surface-variant mt-2 group-hover:text-primary-fixed transition-colors">Community Lead</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-12 py-16 flex flex-col items-center gap-8 text-center bg-[#ece1cf] dark:bg-stone-900 rounded-t-[32px]">
+<div class="text-2xl font-serif italic text-[#445518] dark:text-[#ece1cf]">CARA</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-[#445518] font-bold hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">Research</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">Join Us</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">The Ward</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">Patient Compass</a>
+</div>
+<p class="text-stone-600 dark:text-stone-400 font-sans text-sm tracking-wide">
+            © 2024 CARA. Open Source · Privacy-first · Built for the last mile
+        </p>
+</footer>
+<script src="./js/router.js" type="module"></script>
+</body></html>

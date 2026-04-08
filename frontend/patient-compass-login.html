@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Patient Compass | Secure Access</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#fff8f1",
+                    "primary-fixed": "#d6eb9d",
+                    "surface-dim": "#e3d9c6",
+                    "outline-variant": "#c6c8b7",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "surface-container-highest": "#ece1cf",
+                    "secondary": "#765937",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "secondary-container": "#fed6ab",
+                    "on-tertiary-fixed": "#211b00",
+                    "surface-container-low": "#fdf2df",
+                    "inverse-surface": "#353023",
+                    "on-surface": "#201b10",
+                    "tertiary-container": "#baab6d",
+                    "outline": "#76786a",
+                    "on-secondary-container": "#795b39",
+                    "surface-variant": "#ece1cf",
+                    "on-secondary-fixed": "#2b1700",
+                    "tertiary-fixed": "#f3e3a0",
+                    "on-primary-fixed": "#151f00",
+                    "background": "#fff8f1",
+                    "surface-container": "#f7edda",
+                    "surface-bright": "#fff8f1",
+                    "primary-fixed-dim": "#bacf84",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "primary-container": "#5c6e2e",
+                    "surface-tint": "#536526",
+                    "primary": "#445518",
+                    "on-background": "#201b10",
+                    "surface-container-high": "#f1e7d4",
+                    "inverse-on-surface": "#faf0dc",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#bacf84",
+                    "on-tertiary-container": "#493f0c",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#45483c",
+                    "secondary-fixed-dim": "#e7c096",
+                    "secondary-fixed": "#ffddba",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#6a5e29",
+                    "on-primary-container": "#daf0a1",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fff8f1;
+            color: #201b10;
+        }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="bg-[#fff8f1] dark:bg-stone-950 docked full-width top-0 w-full z-50">
+<nav class="flex justify-between items-center w-full px-8 py-6 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-serif italic text-[#445518] dark:text-[#ece1cf]">The Ward | Patient Compass</span>
+<div class="hidden lg:flex gap-6 items-center">
+<a class="text-[#201b10]/60 dark:text-[#ece1cf]/60 hover:bg-[#ece1cf]/50 dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full text-sm font-medium" href="#">Support</a>
+<a class="text-[#201b10]/60 dark:text-[#ece1cf]/60 hover:bg-[#ece1cf]/50 dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full text-sm font-medium" data-route="privacy-ethics.html" href="#">Security</a>
+<a class="text-[#201b10]/60 dark:text-[#ece1cf]/60 hover:bg-[#ece1cf]/50 dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full text-sm font-medium" data-route="privacy-ethics.html" href="#">Privacy</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-5 py-2 text-sm font-semibold text-[#445518] border border-outline-variant/20 rounded-full hover:bg-[#ece1cf]/50 transition-all active:scale-102" data-route="the-ward-login.html">Clinician Portal</button>
+<button class="px-5 py-2 text-sm font-semibold bg-primary text-on-primary rounded-full hover:bg-primary-container transition-all active:scale-102">Patient Portal</button>
+</div>
+</nav>
+<div class="h-px bg-surface-container-highest/30 w-full"></div>
+</header>
+<main class="min-h-[calc(100vh-180px)] flex items-center justify-center px-6 py-12">
+<div class="max-w-5xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<!-- Left: Hero/Identity -->
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-secondary-container/30 text-on-secondary-container rounded-full text-sm font-medium">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                    Secure Personal Archive
+                </div>
+<h1 class="text-6xl md:text-7xl font-headline italic text-primary leading-tight tracking-tight">
+                    Welcome back, Friend
+                </h1>
+<p class="text-xl text-on-surface-variant max-w-md leading-relaxed">
+                    Access your medical journey with ease. We've made your records simple to find and gentle to read.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<button class="flex items-center justify-center gap-3 px-8 py-5 bg-primary text-on-primary rounded-full font-bold text-lg hover:bg-primary-container hover:scale-102 transition-all shadow-lg shadow-on-surface/5" data-route="patient-compass-home.html">
+                        Access My Records
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="flex items-center justify-center gap-3 px-8 py-5 bg-surface-container-low text-on-surface rounded-full font-bold text-lg hover:bg-surface-container transition-all active:scale-95 border-2 border-primary-fixed" data-route="patient-compass-home.html">
+                        Demo (Skip Sign In)
+                    </button>
+</div>
+<button class="flex items-center gap-3 text-secondary font-semibold hover:text-primary transition-colors group">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed/40 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-lg">volume_up</span>
+</div>
+                    🔊 Listen to instructions
+                </button>
+</div>
+<!-- Right: Authentication Grid -->
+<div class="relative">
+<div class="absolute -inset-4 bg-primary-fixed/20 blur-3xl rounded-full"></div>
+<div class="relative bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-xl shadow-on-surface/5 border border-outline-variant/10">
+<div class="text-center mb-10">
+<h2 class="text-2xl font-serif font-bold text-on-surface">Choose your login method</h2>
+<p class="text-on-surface-variant text-sm mt-2">Pick the way that feels most comfortable for you today.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Face ID -->
+<button class="flex flex-col items-center justify-center p-6 bg-surface-container-low rounded-lg hover:bg-primary-fixed/30 transition-all hover:scale-105 group border border-transparent hover:border-primary/20" data-route="patient-compass-home.html">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary/10">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'wght' 300;">face</span>
+</div>
+<span class="font-bold text-on-surface">Face ID</span>
+</button>
+<!-- Fingerprint -->
+<button class="flex flex-col items-center justify-center p-6 bg-surface-container-low rounded-lg hover:bg-primary-fixed/30 transition-all hover:scale-105 group border border-transparent hover:border-primary/20" data-route="patient-compass-home.html">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary/10">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'wght' 300;">fingerprint</span>
+</div>
+<span class="font-bold text-on-surface">Fingerprint</span>
+</button>
+<!-- PIN -->
+<button class="flex flex-col items-center justify-center p-6 bg-surface-container-low rounded-lg hover:bg-primary-fixed/30 transition-all hover:scale-105 group border border-transparent hover:border-primary/20" data-route="patient-compass-home.html">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary/10">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'wght' 300;">dialpad</span>
+</div>
+<span class="font-bold text-on-surface">PIN Code</span>
+</button>
+</div>
+<div class="mt-10 pt-8 border-t border-surface-container-highest flex flex-col gap-4">
+<div class="flex items-center gap-4 px-4 py-3 bg-surface-container-high/50 rounded-full">
+<span class="material-symbols-outlined text-outline">alternate_email</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-outline" placeholder="Or sign in with email" type="email"/>
+</div>
+<p class="text-xs text-center text-on-surface-variant px-4">
+                            By logging in, you agree to our <u>Terms of Service</u> and confirm you are in a safe, private space.
+                        </p>
+</div>
+</div>
+<!-- Decorative Aspect -->
+<div class="mt-8 rounded-lg overflow-hidden h-40 relative group">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" data-alt="Soft focused close up of a hand holding a ceramic cup of tea with warm morning sunlight through a window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC7gAHZOnc_vac4oOZOPi3ZjlcKpC0D6wilwirNAKsPJVi6MwD92bFS22-XiIXey9O1Nb7Mnbx61Nga9PUtLSEtAY3H8FvovEPaeROFgnbZLjuppG_XN9DqS2eeOmAYVUzzRmeFPnTA50ybzWDi8OQ00mgJ-XdJG7ThVd4Oog4k4Z7lNfC1CWxpfHZg9gejk73n36PQLr0xdiGuz7vNMWp6_hFwzY37bhCRyE19exe7VRNFKF09OKL076VcmdxXKqY-nyFug2TW9iZ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest to-transparent"></div>
+<div class="absolute bottom-4 left-6">
+<span class="text-primary font-serif italic text-lg">You are safe here.</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#ece1cf] dark:bg-stone-900 full-width bottom-0 w-full mt-12">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-8 gap-4 max-w-screen-2xl mx-auto">
+<div class="flex flex-col items-center md:items-start gap-1">
+<span class="text-lg font-serif text-[#445518]">Clinical Archive</span>
+<p class="font-sans text-xs tracking-wide uppercase text-[#201b10]/70 dark:text-[#ece1cf]/70">© 2024 Clinical Archive. Editorial Healthcare Systems.</p>
+</div>
+<div class="flex gap-8 items-center">
+<a class="font-sans text-xs tracking-wide uppercase text-[#201b10]/70 dark:text-[#ece1cf]/70 hover:text-[#445518] dark:hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="font-sans text-xs tracking-wide uppercase text-[#201b10]/70 dark:text-[#ece1cf]/70 hover:text-[#445518] dark:hover:text-white transition-colors" data-route="privacy-ethics.html" href="#">HIPAA Compliance</a>
+<a class="font-sans text-xs tracking-wide uppercase text-[#201b10]/70 dark:text-[#ece1cf]/70 hover:text-[#445518] dark:hover:text-white transition-colors" data-route="privacy-ethics.html" href="#">Accessibility</a>
+</div>
+</div>
+</footer>
+<script src="./js/router.js" type="module"></script>
+</body></html>

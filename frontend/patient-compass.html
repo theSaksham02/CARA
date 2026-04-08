@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CARA | Patient Compass</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fed6ab",
+                    "surface-dim": "#e3d9c6",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "surface-tint": "#536526",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#e7c096",
+                    "primary": "#445518",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "error": "#ba1a1a",
+                    "surface": "#fff8f1",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#45483c",
+                    "outline-variant": "#c6c8b7",
+                    "surface-container-high": "#f1e7d4",
+                    "primary-fixed-dim": "#bacf84",
+                    "surface-container-low": "#fdf2df",
+                    "inverse-primary": "#bacf84",
+                    "tertiary": "#6a5e29",
+                    "background": "#fff8f1",
+                    "on-primary-container": "#daf0a1",
+                    "secondary": "#765937",
+                    "surface-container": "#f7edda",
+                    "on-primary-fixed": "#151f00",
+                    "on-secondary-fixed": "#2b1700",
+                    "on-secondary-container": "#795b39",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#ece1cf",
+                    "surface-bright": "#fff8f1",
+                    "secondary-fixed": "#ffddba",
+                    "primary-container": "#5c6e2e",
+                    "inverse-on-surface": "#faf0dc",
+                    "on-background": "#201b10",
+                    "surface-container-highest": "#ece1cf",
+                    "on-surface": "#201b10",
+                    "primary-fixed": "#d6eb9d",
+                    "tertiary-container": "#baab6d",
+                    "on-tertiary-container": "#493f0c",
+                    "error-container": "#ffdad6",
+                    "outline": "#76786a",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "tertiary-fixed": "#f3e3a0",
+                    "on-tertiary-fixed": "#211b00",
+                    "inverse-surface": "#353023"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .serif-italic { font-style: italic; }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#fdf2df] dark:bg-stone-900 shadow-[0_20px_40px_rgba(32,27,16,0.05)]">
+<nav class="flex justify-between items-center w-full px-8 py-6 max-w-[1440px] mx-auto">
+<div class="text-3xl font-serif italic text-[#445518] dark:text-[#ece1cf] tracking-tight">CARA</div>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center gap-10">
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Research</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">Join Us</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="#">The Ward</a>
+<a class="text-[#445518] dark:text-[#ece1cf] border-b-2 border-[#445518] dark:border-[#ece1cf] pb-1 hover:scale-105 transition-all duration-300" href="#">Patient Compass</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-full font-semibold hover:scale-[1.02] transition-transform active:scale-95 shadow-sm" data-route="patient-compass-login.html">
+                Access Platform →
+            </button>
+</nav>
+</header>
+<main class="pt-28">
+<!-- Hero Section -->
+<section class="relative px-6 md:px-12 py-16 md:py-24 max-w-[1440px] mx-auto overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8 z-10">
+<span class="inline-block px-4 py-1.5 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-sm font-bold tracking-wider">NEW PLATFORM</span>
+<h1 class="font-headline text-6xl md:text-8xl leading-[0.95] tracking-tight text-primary">
+                        Your health. <br/>
+<span class="serif-italic">In your hands.</span> <br/>
+                        In your language.
+                    </h1>
+<p class="text-xl text-on-surface-variant max-w-lg leading-relaxed">
+                        Navigating medical care shouldn't feel like a puzzle. Patient Compass translates clinical complexity into clear, actionable steps for you and your family.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-primary-container transition-colors shadow-lg">
+                            View Your Compass →
+                        </button>
+<button class="border-2 border-outline-variant text-secondary px-8 py-4 rounded-full font-bold text-lg hover:bg-surface-container-low transition-colors">
+                            How it works
+                        </button>
+</div>
+</div>
+<!-- Hero Infographic: Journey -->
+<div class="relative aspect-square lg:aspect-video bg-surface-container-low rounded-xl overflow-hidden shadow-2xl group">
+<div class="absolute inset-0 p-8 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="w-16 h-16 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-primary text-3xl">medical_services</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant mt-8 mx-4 border-dashed border-t-2"></div>
+<div class="w-16 h-16 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-primary text-3xl">stethoscope</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant mt-8 mx-4 border-dashed border-t-2"></div>
+<div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-on-primary text-3xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</div>
+</div>
+<div class="flex justify-between px-2 text-center text-sm font-bold text-on-surface-variant">
+<span class="w-20">Symptoms</span>
+<span class="w-20">Triage</span>
+<span class="w-20">Care &amp; Follow-up</span>
+</div>
+<div class="mt-12 bg-surface-container-lowest/80 backdrop-blur-md rounded-lg p-6 border border-white/20">
+<div class="flex items-center gap-4 mb-3">
+<span class="w-3 h-3 bg-error rounded-full animate-pulse"></span>
+<span class="font-bold text-error uppercase text-xs tracking-widest">Live Guidance</span>
+</div>
+<p class="font-headline text-2xl text-primary mb-1">“I have a sharp pain in my chest.”</p>
+<p class="text-on-surface-variant text-sm">Translating to: Acute cardiovascular assessment required. Immediate triage initiated.</p>
+</div>
+</div>
+<img class="absolute inset-0 w-full h-full object-cover -z-10 opacity-40" data-alt="Abstract soft-focus background of warm light patterns and organic shapes in olive and cream tones, suggesting a medical journey flow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0A_4Q_3qu8DTMfdHjifCgOLtEkzyozGC32zQK_rUVSyXO-eGkr5NvanW0ZL_Px0hddmoTr8hzIFXii2YIUCFsqDd3WfG3j4VM6QpBeZWxeyaGvPviiWxdXzw67XgOlyxx5hY_xPsVV1D3EHfFA0s5EYxKviRIUQc5L7loU1fbS_I0kL_RJcwDYfPnUxIMjXHRbxqOFfJ6P-DAe6-GfGcUXtjkoRXPL9W7jtyanJRrMgiqkDV4EUdghG1MgmT9YWMOoVe9ahuCRVE0"/>
+</div>
+</div>
+</section>
+<!-- Icon Cards: Dashboard Bento -->
+<section class="px-6 md:px-12 py-20 bg-surface-container-low">
+<div class="max-w-[1440px] mx-auto">
+<div class="mb-16">
+<h2 class="font-headline text-5xl text-primary mb-4">Patient Control Center</h2>
+<p class="text-on-surface-variant max-w-xl">Every tool you need to manage your health journey, simplified into four core pillars.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Symptom check -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.03)] hover:scale-[1.02] transition-transform duration-300">
+<div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">symptoms</span>
+</div>
+<h3 class="font-headline text-2xl text-primary mb-3">Symptom check</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Describe how you feel in your own words. We handle the clinical translation.</p>
+</div>
+<!-- Urgency level -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.03)] hover:scale-[1.02] transition-transform duration-300">
+<div class="w-14 h-14 bg-secondary-fixed rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary text-3xl">priority_high</span>
+</div>
+<h3 class="font-headline text-2xl text-primary mb-3">Urgency level</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Instant clarity on whether to wait, visit a clinic, or seek emergency care.</p>
+</div>
+<!-- Doctor visit -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.03)] hover:scale-[1.02] transition-transform duration-300">
+<div class="w-14 h-14 bg-tertiary-fixed rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary text-3xl">calendar_today</span>
+</div>
+<h3 class="font-headline text-2xl text-primary mb-3">Doctor visit</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Automated summaries of your appointments and digital check-ins.</p>
+</div>
+<!-- Follow-up reminder -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.03)] hover:scale-[1.02] transition-transform duration-300">
+<div class="w-14 h-14 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary-container text-3xl">notifications_active</span>
+</div>
+<h3 class="font-headline text-2xl text-primary mb-3">Follow-up reminder</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Never miss a recovery milestone. Timely alerts for medication and checks.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Features & Details -->
+<section class="px-6 md:px-12 py-24 max-w-[1440px] mx-auto">
+<div class="flex flex-col lg:flex-row gap-20 items-center">
+<div class="lg:w-1/2 space-y-12">
+<h2 class="font-headline text-5xl md:text-6xl text-primary leading-tight">Built for the <br/><span class="serif-italic">Last Mile of Care.</span></h2>
+<div class="space-y-8">
+<div class="flex gap-6">
+<div class="shrink-0 w-12 h-12 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl">translate</span>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-2">Plain language triage</h4>
+<p class="text-on-surface-variant">We strip away medical jargon, explaining conditions in terms that resonate with your daily life.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="shrink-0 w-12 h-12 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl">event_upcoming</span>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-2">Follow-up dates</h4>
+<p class="text-on-surface-variant">A synchronized calendar that bridges the gap between the hospital discharge and home recovery.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="shrink-0 w-12 h-12 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl">security</span>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-2">Secure records</h4>
+<p class="text-on-surface-variant">Your data is encrypted end-to-end. You own your history; we just help you carry it.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="shrink-0 w-12 h-12 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl">wifi_off</span>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-2">Offline access</h4>
+<p class="text-on-surface-variant">Crucial medical instructions are stored locally, accessible even without an active data connection.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 relative">
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-primary-fixed/30 rounded-full blur-3xl -z-10"></div>
+<div class="absolute -bottom-10 -left-10 w-64 h-64 bg-secondary-fixed/30 rounded-full blur-3xl -z-10"></div>
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-2xl">
+<img class="w-full h-auto rounded-lg" data-alt="A clean mobile app interface showing a patient's health journey with large colorful icons and simplified bold typography in olive and cream" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNVTw547CEYNKHkp9mASOf5E6EPYAHupM2wt2obJ17bfcCNG_IrkcAuU7j1nNGaFF7E42UzyC2IRdXA4VC63muV4j_jGrgVtKElyFTgJM1PffNVL61uXORDhCCeTkzuciTKDHz2bL_ackSYszzNEXGsSm74K0tSko5EpoRJXI_AURlx6qo9FriXe-J7gTHQreXHTMO23QsUEWxSl7hAij8TtwD9wVhOnnDf07H-cYfhX2fOcaxu1BLNX5rsMu6_68J6yYOLNuucWQs"/>
+</div>
+<!-- Accessibility Callout Card -->
+<div class="mt-8 bg-primary text-on-primary p-8 rounded-lg shadow-xl relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined">universal_currency_alt</span>
+<span class="font-bold tracking-widest text-xs uppercase">Accessibility First</span>
+</div>
+<p class="font-headline text-3xl mb-6">Designed for low-literacy users. Icon-first. Voice-ready.</p>
+<p class="text-primary-fixed/80 leading-relaxed">
+                                We believe healthcare navigation is a right, not a privilege. Our interface adapts to the user's needs, offering audio guides and visual storytelling.
+                            </p>
+</div>
+<span class="material-symbols-outlined absolute -bottom-10 -right-10 text-[200px] opacity-10 rotate-12">record_voice_over</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="px-6 md:px-12 py-32 text-center max-w-[1440px] mx-auto">
+<div class="bg-surface-container-highest rounded-xl py-24 px-8 relative overflow-hidden">
+<div class="relative z-10 max-w-2xl mx-auto space-y-8">
+<h2 class="font-headline text-5xl md:text-7xl text-primary leading-none">Ready to take the <br/><span class="serif-italic">next step?</span></h2>
+<p class="text-lg text-on-surface-variant">Join thousands of patients who are navigating their health with confidence and clarity.</p>
+<button class="bg-primary text-on-primary px-12 py-5 rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-2xl">
+                        View Your Compass →
+                    </button>
+</div>
+<!-- Decorative organic blobs -->
+<div class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+<div class="absolute top-10 left-10 w-32 h-32 bg-primary rounded-full blur-2xl"></div>
+<div class="absolute bottom-10 right-10 w-48 h-48 bg-secondary rounded-full blur-3xl"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-12 py-16 flex flex-col items-center gap-8 text-center bg-[#ece1cf] dark:bg-stone-900 rounded-t-[32px]">
+<div class="text-2xl font-serif italic text-[#445518] dark:text-[#ece1cf]">CARA</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-stone-600 dark:text-stone-400 font-sans text-sm tracking-wide hover:text-[#445518] dark:hover:text-[#fff] transition-colors" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 font-sans text-sm tracking-wide hover:text-[#445518] dark:hover:text-[#fff] transition-colors" href="#">Research</a>
+<a class="text-stone-600 dark:text-stone-400 font-sans text-sm tracking-wide hover:text-[#445518] dark:hover:text-[#fff] transition-colors" href="#">Join Us</a>
+<a class="text-stone-600 dark:text-stone-400 font-sans text-sm tracking-wide hover:text-[#445518] dark:hover:text-[#fff] transition-colors" href="#">The Ward</a>
+<a class="text-[#445518] font-bold font-sans text-sm tracking-wide" href="#">Patient Compass</a>
+</div>
+<div class="pt-8 border-t border-outline-variant/20 w-full max-w-4xl">
+<p class="text-stone-600 dark:text-stone-400 font-sans text-sm tracking-wide">
+                © 2024 CARA. Open Source · Privacy-first · Built for the last mile
+            </p>
+</div>
+</footer>
+<script src="./js/router.js" type="module"></script>
+</body></html>

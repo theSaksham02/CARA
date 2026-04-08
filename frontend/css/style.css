@@ -1,0 +1,597 @@
+:root {
+  --cara-ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --cara-ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --cara-shell-shadow: 0 20px 40px rgba(32, 27, 16, 0.05);
+  --cara-shell-shadow-strong: 0 28px 64px rgba(32, 27, 16, 0.08);
+  --cara-focus-ring: rgba(92, 110, 46, 0.38);
+  --cara-grain-opacity: 0.038;
+  --cara-progress: 0;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+body.cara-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: var(--cara-grain-opacity);
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(32, 27, 16, 0.12) 0.6px, transparent 0.8px),
+    radial-gradient(circle at 80% 10%, rgba(32, 27, 16, 0.08) 0.8px, transparent 1px),
+    radial-gradient(circle at 40% 70%, rgba(32, 27, 16, 0.08) 0.7px, transparent 0.9px),
+    radial-gradient(circle at 70% 80%, rgba(32, 27, 16, 0.1) 0.6px, transparent 0.85px);
+  background-size: 160px 160px, 220px 220px, 180px 180px, 200px 200px;
+  animation: cara-grain-drift 14s steps(8) infinite;
+  mix-blend-mode: multiply;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--cara-focus-ring);
+  outline-offset: 4px;
+}
+
+.cara-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 2px;
+  transform-origin: left center;
+  transform: scaleX(var(--cara-progress));
+  background:
+    linear-gradient(90deg, rgba(68, 85, 24, 0.9) 0%, rgba(92, 110, 46, 0.85) 70%, rgba(214, 199, 134, 0.8) 100%);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0) scale(0.985);
+  filter: blur(10px);
+  transition:
+    opacity 800ms var(--cara-ease-out-quint),
+    transform 800ms var(--cara-ease-out-quint),
+    filter 800ms var(--cara-ease-out-quint);
+  transition-delay: var(--cara-delay, 0ms);
+  will-change: transform, opacity, filter;
+}
+
+html.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+}
+
+html.js body.is-scrolled nav,
+html.js body.is-scrolled header {
+  box-shadow: var(--cara-shell-shadow-strong);
+}
+
+html.js nav,
+html.js header {
+  transition:
+    box-shadow 400ms var(--cara-ease-out-quart),
+    background-color 400ms var(--cara-ease-out-quart),
+    backdrop-filter 400ms var(--cara-ease-out-quart);
+}
+
+.cara-link {
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0% 1px;
+  transition:
+    color 260ms var(--cara-ease-out-quart),
+    background-size 260ms var(--cara-ease-out-quart),
+    transform 260ms var(--cara-ease-out-quart);
+}
+
+.cara-link:hover,
+.cara-link:focus-visible {
+  background-size: 100% 1px;
+}
+
+.cara-link:not(:hover):not(:focus-visible) {
+  background-position: right bottom;
+}
+
+.cara-interactive {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cara-ripple {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.32);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  animation: cara-ripple 540ms var(--cara-ease-out-quart) forwards;
+  z-index: 0;
+}
+
+.cara-magnetic {
+  transform: translate3d(var(--cara-mx, 0px), var(--cara-my, 0px), 0);
+  transition: transform 240ms var(--cara-ease-out-quart);
+}
+
+.cara-tilt-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transform:
+    perspective(1000px)
+    rotateX(var(--cara-tilt-x, 0deg))
+    rotateY(var(--cara-tilt-y, 0deg))
+    translateZ(0);
+  transition:
+    transform 220ms var(--cara-ease-out-quart),
+    box-shadow 220ms var(--cara-ease-out-quart);
+  will-change: transform;
+}
+
+.cara-tilt-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(circle at var(--cara-glare-x, 50%) var(--cara-glare-y, 50%), rgba(255, 255, 255, 0.28), transparent 44%),
+    radial-gradient(circle at 30% 20%, rgba(32, 27, 16, 0.06), transparent 60%);
+  mix-blend-mode: screen;
+  transition: opacity 240ms var(--cara-ease-out-quart);
+}
+
+.cara-tilt-card:hover::after,
+.cara-tilt-card:focus-within::after {
+  opacity: 1;
+}
+
+.cara-tilt-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 25% 20%, rgba(32, 27, 16, 0.1) 0.6px, transparent 0.8px),
+    radial-gradient(circle at 80% 75%, rgba(32, 27, 16, 0.07) 0.7px, transparent 0.9px);
+  background-size: 120px 120px, 180px 180px;
+  opacity: 0;
+  transition: opacity 320ms var(--cara-ease-out-quart);
+  mix-blend-mode: overlay;
+}
+
+.cara-tilt-card:hover::before,
+.cara-tilt-card:focus-within::before {
+  opacity: 0.08;
+}
+
+.cara-parallax {
+  transform: translate3d(0, var(--cara-parallax-y, 0px), 0);
+  will-change: transform;
+}
+
+.cara-hero-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.cara-hero-shell::before,
+.cara-hero-shell::after {
+  content: "";
+  position: absolute;
+  inset: -14%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.cara-hero-shell::before {
+  background:
+    radial-gradient(circle at 20% 28%, rgba(214, 235, 157, 0.26) 0, transparent 38%),
+    radial-gradient(circle at 80% 20%, rgba(237, 230, 214, 0.88) 0, transparent 45%),
+    radial-gradient(circle at 64% 72%, rgba(241, 231, 212, 0.8) 0, transparent 44%);
+  animation: cara-mesh-shift 14s ease-in-out infinite alternate;
+}
+
+.cara-hero-shell::after {
+  background:
+    radial-gradient(circle at 36% 30%, rgba(32, 27, 16, 0.08) 0.7px, transparent 1px),
+    radial-gradient(circle at 72% 62%, rgba(32, 27, 16, 0.08) 0.8px, transparent 1.1px);
+  background-size: 170px 170px, 200px 200px;
+  opacity: 0.08;
+}
+
+.cara-char,
+.cara-word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+.cara-type-cursor {
+  position: relative;
+}
+
+.cara-type-cursor::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  margin-left: 0.18em;
+  vertical-align: -0.08em;
+  background: currentColor;
+  animation: cara-blink 900ms steps(1) infinite;
+}
+
+.cara-field {
+  position: relative;
+}
+
+.cara-field::after {
+  content: "";
+  position: absolute;
+  left: 1.1rem;
+  right: 1.1rem;
+  bottom: 0.9rem;
+  height: 2px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: rgba(68, 85, 24, 0.34);
+  transition: transform 220ms var(--cara-ease-out-quart);
+}
+
+.cara-field-label {
+  transition:
+    transform 220ms var(--cara-ease-out-quart),
+    color 220ms var(--cara-ease-out-quart),
+    opacity 220ms var(--cara-ease-out-quart);
+  transform-origin: left top;
+}
+
+.cara-field.is-active::after {
+  transform: scaleX(1);
+}
+
+.cara-field.is-active .cara-field-label {
+  transform: translateY(-6px) scale(0.94);
+  color: rgba(68, 85, 24, 0.92);
+}
+
+.cara-field-input {
+  transition:
+    transform 220ms var(--cara-ease-out-quart),
+    background-color 220ms var(--cara-ease-out-quart),
+    box-shadow 220ms var(--cara-ease-out-quart);
+}
+
+.cara-field.is-active .cara-field-input {
+  transform: translateY(2px);
+  background-color: rgba(214, 235, 157, 0.12);
+}
+
+.cara-search-shell {
+  transition:
+    transform 220ms var(--cara-ease-out-quart),
+    box-shadow 220ms var(--cara-ease-out-quart),
+    background-color 220ms var(--cara-ease-out-quart);
+  border-radius: 9999px;
+}
+
+.cara-search-shell:focus-within {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(32, 27, 16, 0.06);
+  background-color: rgba(214, 235, 157, 0.08);
+}
+
+.cara-alert-bell {
+  transform-origin: top center;
+}
+
+.cara-bell-ring {
+  animation: cara-bell-shake 560ms ease-in-out both;
+}
+
+.cara-badge {
+  position: relative;
+  overflow: visible;
+  transform: scale(0.85);
+  opacity: 0;
+}
+
+.cara-badge::after {
+  content: "";
+  position: absolute;
+  inset: -0.55rem;
+  border-radius: 9999px;
+  border: 1px solid currentColor;
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.cara-badge-live {
+  animation: cara-badge-bloom 620ms var(--cara-ease-out-quint) forwards;
+}
+
+.cara-badge-live::after {
+  animation: cara-badge-ripple 620ms var(--cara-ease-out-quint) forwards;
+}
+
+.cara-skeleton-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.cara-skeleton-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(110deg, rgba(247, 237, 218, 0.96) 8%, rgba(255, 255, 255, 0.74) 18%, rgba(247, 237, 218, 0.96) 33%);
+  background-size: 200% 100%;
+  animation: cara-shimmer 1.4s linear infinite;
+  transition: opacity 220ms var(--cara-ease-out-quart);
+  pointer-events: none;
+}
+
+.cara-skeleton-shell.cara-skeleton-loaded::before {
+  opacity: 0;
+}
+
+.cara-image-wipe {
+  position: relative;
+  overflow: hidden;
+}
+
+.cara-image-wipe::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(68, 85, 24, 0.9), rgba(92, 110, 46, 0.82) 58%, rgba(247, 237, 218, 0.88));
+  transform: translateX(0%);
+  transition: transform 1000ms var(--cara-ease-out-quint);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cara-image-wipe.cara-image-ready::after {
+  transform: translateX(110%);
+}
+
+.cara-scale-y,
+.cara-scale-x {
+  will-change: transform;
+}
+
+.cara-scale-y {
+  transform-origin: center bottom;
+  transform: scaleY(0);
+}
+
+.cara-scale-x {
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.cara-chart-ready.cara-scale-y,
+.cara-chart-ready.cara-scale-x {
+  transform: scale(1);
+  transition: transform 900ms var(--cara-ease-out-quint);
+}
+
+.cara-donut {
+  transform: scale(0.88) rotate(-18deg);
+  opacity: 0;
+  transition:
+    transform 900ms var(--cara-ease-out-quint),
+    opacity 900ms var(--cara-ease-out-quint);
+}
+
+.cara-donut-live {
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+.cara-return-date {
+  position: relative;
+  overflow: visible;
+}
+
+.cara-return-date::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(92, 110, 46, 0.28);
+  opacity: 0;
+}
+
+.cara-return-live::after {
+  animation: cara-soft-pulse 1.4s ease-out 3;
+}
+
+.cara-symptom-card {
+  opacity: 0;
+}
+
+@keyframes cara-grain-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(1.5%, 1.5%, 0);
+  }
+}
+
+@keyframes cara-mesh-shift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(2.5%, -2%, 0) scale(1.04);
+  }
+}
+
+@keyframes cara-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(14);
+    opacity: 0;
+  }
+}
+
+@keyframes cara-blink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cara-badge-bloom {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes cara-badge-ripple {
+  0% {
+    opacity: 0.32;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}
+
+@keyframes cara-bell-shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-14deg);
+  }
+  40% {
+    transform: rotate(14deg);
+  }
+  60% {
+    transform: rotate(-10deg);
+  }
+  80% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes cara-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes cara-soft-pulse {
+  0% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(92, 110, 46, 0.28);
+  }
+  100% {
+    opacity: 0;
+    box-shadow: 0 0 0 16px rgba(92, 110, 46, 0);
+  }
+}
+
+html.reduced-motion [data-reveal] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition: none;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.cara-shell::before {
+    animation: none;
+  }
+
+  html.js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .cara-magnetic,
+  .cara-tilt-card,
+  .cara-parallax,
+  .cara-donut,
+  .cara-symptom-card,
+  .cara-scale-x,
+  .cara-scale-y,
+  .cara-badge {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .cara-type-cursor::after,
+  .cara-image-wipe::after,
+  .cara-skeleton-shell::before,
+  .cara-return-date::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html.js nav,
+  html.js header,
+  a,
+  button {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
