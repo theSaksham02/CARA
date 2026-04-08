@@ -11,11 +11,15 @@
         ...(options.headers || {}),
       };
 
+      let token = null;
       if (typeof this.tokenProvider === 'function') {
-        const token = await this.tokenProvider();
-        if (token) {
-          headers.Authorization = `Bearer ${token}`;
-        }
+        token = await this.tokenProvider();
+      } else if (globalScope.CaraAuth && typeof globalScope.CaraAuth.getAccessToken === 'function') {
+        token = await globalScope.CaraAuth.getAccessToken();
+      }
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
       }
 
       const response = await fetch(`${this.baseUrl}${path}`, {

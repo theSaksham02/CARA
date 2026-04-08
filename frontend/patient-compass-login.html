@@ -122,13 +122,13 @@
                     Access your medical journey with ease. We've made your records simple to find and gentle to read.
                 </p>
 <div class="flex flex-col sm:flex-row gap-4 pt-4">
-<button class="flex items-center justify-center gap-3 px-8 py-5 bg-primary text-on-primary rounded-full font-bold text-lg hover:bg-primary-container hover:scale-102 transition-all shadow-lg shadow-on-surface/5" data-route="patient-compass-home.html">
+<a class="flex items-center justify-center gap-3 px-8 py-5 bg-primary text-on-primary rounded-full font-bold text-lg hover:bg-primary-container hover:scale-102 transition-all shadow-lg shadow-on-surface/5" href="#patient-auth-card">
                         Access My Records
                         <span class="material-symbols-outlined">arrow_forward</span>
-</button>
-<button class="flex items-center justify-center gap-3 px-8 py-5 bg-surface-container-low text-on-surface rounded-full font-bold text-lg hover:bg-surface-container transition-all active:scale-95 border-2 border-primary-fixed" data-route="patient-compass-home.html">
-                        Demo (Skip Sign In)
-                    </button>
+</a>
+<a class="flex items-center justify-center gap-3 px-8 py-5 bg-surface-container-low text-on-surface rounded-full font-bold text-lg hover:bg-surface-container transition-all active:scale-95 border-2 border-primary-fixed" href="#patient-auth-card">
+                        Create My Account
+                    </a>
 </div>
 <button class="flex items-center gap-3 text-secondary font-semibold hover:text-primary transition-colors group">
 <div class="w-10 h-10 rounded-full bg-tertiary-fixed/40 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -140,43 +140,27 @@
 <!-- Right: Authentication Grid -->
 <div class="relative">
 <div class="absolute -inset-4 bg-primary-fixed/20 blur-3xl rounded-full"></div>
-<div class="relative bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-xl shadow-on-surface/5 border border-outline-variant/10">
+<div class="relative bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-xl shadow-on-surface/5 border border-outline-variant/10" id="patient-auth-card">
 <div class="text-center mb-10">
-<h2 class="text-2xl font-serif font-bold text-on-surface">Choose your login method</h2>
-<p class="text-on-surface-variant text-sm mt-2">Pick the way that feels most comfortable for you today.</p>
+<h2 class="text-2xl font-serif font-bold text-on-surface">Sign in simply</h2>
+<p class="text-on-surface-variant text-sm mt-2">Use email and password to sign in or create your account.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<!-- Face ID -->
-<button class="flex flex-col items-center justify-center p-6 bg-surface-container-low rounded-lg hover:bg-primary-fixed/30 transition-all hover:scale-105 group border border-transparent hover:border-primary/20" data-route="patient-compass-home.html">
-<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary/10">
-<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'wght' 300;">face</span>
-</div>
-<span class="font-bold text-on-surface">Face ID</span>
-</button>
-<!-- Fingerprint -->
-<button class="flex flex-col items-center justify-center p-6 bg-surface-container-low rounded-lg hover:bg-primary-fixed/30 transition-all hover:scale-105 group border border-transparent hover:border-primary/20" data-route="patient-compass-home.html">
-<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary/10">
-<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'wght' 300;">fingerprint</span>
-</div>
-<span class="font-bold text-on-surface">Fingerprint</span>
-</button>
-<!-- PIN -->
-<button class="flex flex-col items-center justify-center p-6 bg-surface-container-low rounded-lg hover:bg-primary-fixed/30 transition-all hover:scale-105 group border border-transparent hover:border-primary/20" data-route="patient-compass-home.html">
-<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-4 group-hover:bg-primary/10">
-<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'wght' 300;">dialpad</span>
-</div>
-<span class="font-bold text-on-surface">PIN Code</span>
-</button>
-</div>
-<div class="mt-10 pt-8 border-t border-surface-container-highest flex flex-col gap-4">
+<form class="mt-10 pt-8 border-t border-surface-container-highest flex flex-col gap-4" data-auth-form="" data-portal="patient" data-redirect-to="patient-compass-home.html">
 <div class="flex items-center gap-4 px-4 py-3 bg-surface-container-high/50 rounded-full">
 <span class="material-symbols-outlined text-outline">alternate_email</span>
-<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-outline" placeholder="Or sign in with email" type="email"/>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-outline" data-auth-email="" placeholder="Email address" type="email"/>
 </div>
+<div class="flex items-center gap-4 px-4 py-3 bg-surface-container-high/50 rounded-full">
+<span class="material-symbols-outlined text-outline">lock</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-outline" data-auth-password="" placeholder="Password" type="password"/>
+</div>
+<p class="text-sm min-h-6 text-on-surface-variant px-2" data-auth-message=""></p>
+<button class="w-full bg-primary text-on-primary rounded-full font-bold py-4 hover:bg-primary-container transition-all" data-auth-submit="" type="submit">Sign In</button>
+<button class="w-full bg-surface-container-low text-on-surface rounded-full font-bold py-4 border border-outline-variant/20 hover:bg-surface-container transition-all" data-auth-toggle="" type="button">Need an account? Create one</button>
 <p class="text-xs text-center text-on-surface-variant px-4">
                             By logging in, you agree to our <u>Terms of Service</u> and confirm you are in a safe, private space.
                         </p>
-</div>
+</form>
 </div>
 <!-- Decorative Aspect -->
 <div class="mt-8 rounded-lg overflow-hidden h-40 relative group">
@@ -203,5 +187,8 @@
 </div>
 </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./js/api.js"></script>
+<script src="./js/auth.js"></script>
 <script src="./js/router.js" type="module"></script>
 </body></html>
