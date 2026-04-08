@@ -99,10 +99,10 @@
 <div class="flex justify-between items-center px-6 py-4 w-full h-20">
 <div class="font-serif text-2xl font-bold text-[#445518] dark:text-[#ece1cf]">CARA</div>
 <div class="hidden md:flex items-center space-x-8">
-<a class="text-[#201b10] dark:text-[#ece1cf] opacity-70 hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full" href="#">Home</a>
-<a class="text-[#445518] dark:text-[#ece1cf] font-bold border-b-2 border-[#445518] px-3 py-1 scale-102 active:scale-95 transition-transform duration-200" href="#">My Visit</a>
-<a class="text-[#201b10] dark:text-[#ece1cf] opacity-70 hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full" href="#">My Medicines</a>
-<a class="text-[#201b10] dark:text-[#ece1cf] opacity-70 hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full" href="#">Return Date</a>
+<a class="text-[#201b10] dark:text-[#ece1cf] opacity-70 hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full" data-route="patient-compass-home.html" href="#">Home</a>
+<a class="text-[#445518] dark:text-[#ece1cf] font-bold border-b-2 border-[#445518] px-3 py-1 scale-102 active:scale-95 transition-transform duration-200" data-route="patient-compass-my-visit-summary.html#my-visit" href="#">My Visit</a>
+<a class="text-[#201b10] dark:text-[#ece1cf] opacity-70 hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full" data-route="patient-compass-my-visit-summary.html#medicines" href="#">My Medicines</a>
+<a class="text-[#201b10] dark:text-[#ece1cf] opacity-70 hover:bg-[#fdf2df] dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-full" data-route="patient-compass-home.html#next-visit" href="#">Return Date</a>
 </div>
 <div class="flex items-center gap-4 text-[#445518] dark:text-[#ece1cf]">
 <button class="text-sm font-semibold hover:bg-[#fdf2df] transition-colors px-3 py-2 rounded-full" data-auth-logout="" data-redirect-to="patient-compass-login.html" type="button">Log out</button>
@@ -112,7 +112,7 @@
 </div>
 <div class="bg-[#fdf2df] dark:bg-stone-900 h-[2px] w-full"></div>
 </header>
-<main class="max-w-4xl mx-auto px-6 pt-8">
+<main class="max-w-4xl mx-auto px-6 pt-8 scroll-mt-28" id="my-visit">
 <!-- Page Title & Header -->
 <section class="mb-10">
 <h1 class="font-instrument text-6xl md:text-7xl text-primary mb-4 leading-none">Your Visit Today</h1>
@@ -133,7 +133,7 @@
 </div>
 </section>
 <!-- Summary Status Card -->
-<section class="mb-12">
+<section class="mb-12 scroll-mt-28" id="medicines">
 <div class="bg-primary text-on-primary p-8 rounded-xl flex items-center justify-between shadow-[0_20px_40px_rgba(68,85,24,0.1)]">
 <div class="flex items-center gap-6">
 <div class="bg-primary-container p-4 rounded-full">
@@ -221,23 +221,23 @@
 </main>
 <!-- Shared BottomNavBar -->
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-4 h-28 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-[0_-10px_40px_rgba(32,27,16,0.05)] rounded-t-[32px]">
-<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" href="#">
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" data-route="patient-compass-home.html" href="#">
 <span class="material-symbols-outlined" data-icon="home">home</span>
 <span class="font-sans text-[18px] font-semibold Manrope">Home</span>
 </a>
-<a class="flex flex-col items-center justify-center bg-[#fdf2df] dark:bg-[#445518] text-[#445518] dark:text-white rounded-full px-6 py-3 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" href="#">
+<a class="flex flex-col items-center justify-center bg-[#fdf2df] dark:bg-[#445518] text-[#445518] dark:text-white rounded-full px-6 py-3 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" data-route="patient-compass-my-visit-summary.html#my-visit" href="#">
 <span class="material-symbols-outlined active-nav-icon" data-icon="medical_services">medical_services</span>
 <span class="font-sans text-[18px] font-semibold Manrope">My Visit</span>
 </a>
-<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" href="#">
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" data-route="patient-compass-my-visit-summary.html#medicines" href="#">
 <span class="material-symbols-outlined" data-icon="medication">medication</span>
 <span class="font-sans text-[18px] font-semibold Manrope">My Medicines</span>
 </a>
-<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" href="#">
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" data-route="patient-compass-home.html#next-visit" href="#">
 <span class="material-symbols-outlined" data-icon="event">event</span>
 <span class="font-sans text-[18px] font-semibold Manrope">Return Date</span>
 </a>
-<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" href="#">
+<a class="flex flex-col items-center justify-center text-[#201b10] dark:text-stone-400 px-4 py-2 hover:scale-105 transition-transform active:scale-90 duration-150 ease-out" data-route="guided-tour.html" href="#">
 <span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
 <span class="font-sans text-[18px] font-semibold Manrope">Help</span>
 </a>

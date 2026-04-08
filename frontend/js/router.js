@@ -21,7 +21,12 @@ const routes = {
   "ai assistant": "the-ward-ai-assistant.html",
   impact: "the-ward-impact-dashboard.html",
   home: "patient-compass-home.html",
-  "my visit": "patient-compass-my-visit-summary.html",
+  "my visit": "patient-compass-my-visit-summary.html#my-visit",
+  "my medicines": "patient-compass-my-visit-summary.html#medicines",
+  medicines: "patient-compass-my-visit-summary.html#medicines",
+  "return date": "patient-compass-home.html#next-visit",
+  "next visit": "patient-compass-home.html#next-visit",
+  help: "guided-tour.html",
   "view full queue": "the-ward-patient-queue.html",
   "view record": "the-ward-patient-profile.html",
   "patient profile": "the-ward-patient-profile.html",
@@ -59,6 +64,12 @@ const normalize = (value) =>
     .trim()
     .toLowerCase();
 
+const getRouteText = (element) => {
+  const clone = element.cloneNode(true);
+  clone.querySelectorAll(".material-symbols-outlined").forEach((icon) => icon.remove());
+  return normalize(clone.textContent || "");
+};
+
 const bindRoute = (element, route) => {
   if (!route) return;
 
@@ -91,7 +102,7 @@ const resolveRoute = (element) => {
   const explicit = element.dataset.route;
   if (explicit) return explicit;
 
-  const text = normalize(element.textContent || "");
+  const text = getRouteText(element);
   const title = normalize(element.getAttribute("title") || "");
 
   if (routes[text]) return routes[text];
