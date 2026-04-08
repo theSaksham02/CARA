@@ -6,9 +6,12 @@ const routes = {
   "join us": "join-us.html",
   "the ward": "the-ward.html",
   "patient compass": "patient-compass.html",
-  "access platform": "the-ward-overview.html",
-  "enter the ward": "the-ward-overview.html",
-  "view patient compass": "patient-compass-home.html",
+  "access platform": "the-ward-login.html",
+  "enter the ward": "the-ward-login.html",
+  "view patient compass": "patient-compass-login.html",
+  "view your compass": "patient-compass-login.html",
+  "clinician portal": "the-ward-login.html",
+  "patient portal": "patient-compass-login.html",
   overview: "the-ward-overview.html",
   "patient queue": "the-ward-patient-queue.html",
   "soap notes": "the-ward-soap-notes.html",
@@ -45,7 +48,8 @@ const bindRoute = (element, route) => {
     element.setAttribute("role", "link");
   }
 
-  const activate = () => {
+  const activate = (event) => {
+    event?.preventDefault();
     window.location.href = route;
   };
 
@@ -59,6 +63,9 @@ const bindRoute = (element, route) => {
 };
 
 const resolveRoute = (element) => {
+  const explicit = element.dataset.route;
+  if (explicit) return explicit;
+
   const text = normalize(element.textContent || "");
   const title = normalize(element.getAttribute("title") || "");
 
@@ -76,7 +83,7 @@ const resolveRoute = (element) => {
 };
 
 const wireRoutes = () => {
-  const interactive = document.querySelectorAll("a[href='#'], button, [title='Open SOAP']");
+  const interactive = document.querySelectorAll("a[href='#'], button, [title='Open SOAP'], [data-route]");
   interactive.forEach((element) => {
     const route = resolveRoute(element);
     if (route) bindRoute(element, route);

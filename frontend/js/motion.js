@@ -34,6 +34,17 @@ const prepareSequence = (elements, start = 0, step = 70) => {
   elements.forEach((element, index) => markReveal(element, start + index * step));
 };
 
+const revealNow = (element) => {
+  if (!element) return;
+  element.classList.add("is-visible");
+  const callback = revealCallbacks.get(element);
+  if (callback) {
+    callback(element);
+    revealCallbacks.delete(element);
+  }
+  revealObserver?.unobserve(element);
+};
+
 const applyReadyState = () => {
   document.documentElement.classList.add("js");
   if (prefersReducedMotion) {
@@ -75,11 +86,7 @@ const initRevealObserver = () => {
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-
-        entry.target.classList.add("is-visible");
-        const callback = revealCallbacks.get(entry.target);
-        if (callback) callback(entry.target);
-        revealObserver.unobserve(entry.target);
+        revealNow(entry.target);
       });
     },
     {
@@ -90,9 +97,12 @@ const initRevealObserver = () => {
 
   qa("[data-reveal]").forEach((element) => {
     if (prefersReducedMotion) {
-      element.classList.add("is-visible");
-      const callback = revealCallbacks.get(element);
-      if (callback) callback(element);
+      revealNow(element);
+      return;
+    }
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+      revealNow(element);
       return;
     }
     revealObserver.observe(element);
@@ -715,6 +725,22 @@ const initPageSpecific = () => {
     case "patient-compass-my-visit-summary.html": {
       registerTilt(qa("main .grid.grid-cols-1.md\\:grid-cols-3 > div"));
       initImageWipes([q("main .md\\:col-span-2 .h-24.rounded-lg")].filter(Boolean));
+      break;
+    }
+    case "the-ward-login.html": {
+      const paragraph = q("main p.text-xl");
+      if (paragraph) setupWordReveal(paragraph);
+      registerTilt(qa("main form .group, main form button, main > div > div:last-child"));
+      initImageWipes([q("main .relative.rounded-lg.overflow-hidden.h-80.w-full")].filter(Boolean));
+      prepareSequence(qa("main form .group, main form .pt-4 > button, main .flex.items-start.gap-4.p-6"), 120, 90);
+      break;
+    }
+    case "patient-compass-login.html": {
+      const paragraph = q("main p.text-xl");
+      if (paragraph) setupWordReveal(paragraph);
+      registerTilt(qa("main .grid.grid-cols-1.md\\:grid-cols-3 > button, main .relative.bg-surface-container-lowest.rounded-xl, main .mt-8.rounded-lg.overflow-hidden.h-40"));
+      initImageWipes([q("main .mt-8.rounded-lg.overflow-hidden.h-40.relative.group")].filter(Boolean));
+      prepareSequence(qa("main .grid.grid-cols-1.md\\:grid-cols-3 > button, main .flex.flex-col.sm\\:flex-row.gap-4 > button"), 120, 90);
       break;
     }
     default:

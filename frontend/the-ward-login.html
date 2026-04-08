@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Ward | Clinician Portal Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#fff8f1",
+                    "primary-fixed": "#d6eb9d",
+                    "surface-dim": "#e3d9c6",
+                    "outline-variant": "#c6c8b7",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "surface-container-highest": "#ece1cf",
+                    "secondary": "#765937",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "secondary-container": "#fed6ab",
+                    "on-tertiary-fixed": "#211b00",
+                    "surface-container-low": "#fdf2df",
+                    "inverse-surface": "#353023",
+                    "on-surface": "#201b10",
+                    "tertiary-container": "#baab6d",
+                    "outline": "#76786a",
+                    "on-secondary-container": "#795b39",
+                    "surface-variant": "#ece1cf",
+                    "on-secondary-fixed": "#2b1700",
+                    "tertiary-fixed": "#f3e3a0",
+                    "on-primary-fixed": "#151f00",
+                    "background": "#fff8f1",
+                    "surface-container": "#f7edda",
+                    "surface-bright": "#fff8f1",
+                    "primary-fixed-dim": "#bacf84",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "primary-container": "#5c6e2e",
+                    "surface-tint": "#536526",
+                    "primary": "#445518",
+                    "on-background": "#201b10",
+                    "surface-container-high": "#f1e7d4",
+                    "inverse-on-surface": "#faf0dc",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#bacf84",
+                    "on-tertiary-container": "#493f0c",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#45483c",
+                    "secondary-fixed-dim": "#e7c096",
+                    "secondary-fixed": "#ffddba",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#6a5e29",
+                    "on-primary-container": "#daf0a1",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"],
+                    "serif-display": ["Instrument Serif", "serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fff8f1; /* Warm cream per JSON and DS */
+        }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="font-body text-on-surface selection:bg-primary-fixed">
+<!-- TopNavBar -->
+<nav class="bg-[#fff8f1] dark:bg-stone-950 docked full-width top-0 w-full tonal transition">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-serif italic text-[#445518] dark:text-[#ece1cf]">The Ward | Patient Compass</span>
+<div class="hidden md:flex gap-6">
+<a class="text-[#201b10]/60 dark:text-[#ece1cf]/60 hover:bg-[#ece1cf]/50 dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-md" href="#">Support</a>
+<a class="text-[#201b10]/60 dark:text-[#ece1cf]/60 hover:bg-[#ece1cf]/50 dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-md" data-route="privacy-ethics.html" href="#">Security</a>
+<a class="text-[#201b10]/60 dark:text-[#ece1cf]/60 hover:bg-[#ece1cf]/50 dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-md" data-route="privacy-ethics.html" href="#">Privacy</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#445518] dark:text-[#ece1cf] font-bold border-b-2 border-[#445518] scale-102 transition-transform duration-200 ease-out py-1">Clinician Portal</button>
+<button class="text-[#201b10]/60 dark:text-[#ece1cf]/60 hover:bg-[#ece1cf]/50 dark:hover:bg-stone-800 transition-colors px-3 py-1 rounded-md" data-route="patient-compass-login.html">Patient Portal</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="min-h-[819px] flex items-center justify-center px-4 py-12">
+<div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<!-- Left Side: Editorial Branding -->
+<div class="space-y-8">
+<div class="space-y-4">
+<span class="text-primary font-bold tracking-[0.2em] uppercase text-xs">Secure Gateway</span>
+<h1 class="text-7xl md:text-8xl font-serif-display leading-none text-on-surface">
+                        Clinician Access
+                    </h1>
+<p class="text-xl text-on-surface-variant max-w-md font-headline italic leading-relaxed">
+                        The Patient Compass clinical interface designed for precision, clarity, and the archival dignity of medical history.
+                    </p>
+</div>
+<div class="relative rounded-lg overflow-hidden h-80 w-full group">
+<img alt="Clinical environment" class="w-full h-full object-cover" data-alt="Close-up of a vintage fountain pen resting on a stack of high-quality medical parchment paper with soft afternoon sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4bezJXJCr_B7MbjhNq1D39AP0a0j4O3jTkG0Hgp2W2Vzb9N-kNoCU-TXgknbu-zxI90VuaS_JBFcaG7PxHVzX7Dhl2D20x7sIxNarmXl_5zYZgltoqWe2btBCrsA5j1UbuFKBYrTg-0Q_1prdQ5UuTcVYQcAs2wnF035pGkJs7184zcGqR62beaTqw6lBsiG7GCaklrDi-c_d2aJWtac-kvjcchWeHIBVJTb5sDtoteyVeDvgthUvZX4iMtFFTp-WGWwqRDTWhFRY"/>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+</div>
+<div class="flex items-start gap-4 p-6 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">offline_pin</span>
+<div>
+<h4 class="font-bold text-on-surface text-sm">Secure Offline Sync</h4>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">
+                            Your sessions are encrypted and cached locally. The Archive will synchronize automatically once a secure hospital network connection is restored.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Right Side: Login Form Card -->
+<div class="bg-surface-container-lowest p-8 md:p-12 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.05)] flex flex-col gap-8 border border-outline-variant/15">
+<div class="text-center space-y-2">
+<h2 class="text-2xl font-serif text-on-surface">Identify Yourself</h2>
+<p class="text-sm text-on-surface-variant">Enter your institutional credentials to enter the ward.</p>
+</div>
+<form class="space-y-6">
+<div class="space-y-4">
+<div class="group">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2 ml-1">Clinician ID or Email</label>
+<input class="w-full bg-surface-container-low border-none rounded-full px-6 py-4 text-on-surface placeholder:text-on-surface-variant/40 focus:ring-2 focus:ring-primary/40 transition-all outline-none" placeholder="e.g. j.smith@clinicalarchive.org" type="text"/>
+</div>
+<div class="group">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2 ml-1">Access PIN</label>
+<input class="w-full bg-surface-container-low border-none rounded-full px-6 py-4 text-on-surface placeholder:text-on-surface-variant/40 focus:ring-2 focus:ring-primary/40 transition-all outline-none tracking-widest" placeholder="••••••" type="password"/>
+</div>
+</div>
+<div class="pt-4 flex flex-col gap-4">
+<button class="bg-primary text-on-primary font-bold py-4 px-8 rounded-full hover:bg-primary-container transition-all hover:scale-102 active:scale-95 shadow-md" data-route="the-ward-overview.html" type="submit">
+                            Sign In
+                        </button>
+<button class="border-2 border-outline-variant/20 text-secondary font-bold py-4 px-8 rounded-full hover:bg-surface-container-high transition-all hover:scale-102 active:scale-95" data-route="the-ward-overview.html" type="button">
+                            Demo (Skip Sign In)
+                        </button>
+</div>
+<div class="text-center">
+<a class="text-xs text-on-surface-variant/70 hover:text-primary transition-colors underline decoration-primary/20" href="#">Forgot access credentials?</a>
+</div>
+</form>
+<div class="mt-4 flex justify-center gap-6 grayscale opacity-40">
+<img alt="HIPAA Logo" class="h-8" data-alt="Minimalist monochromatic medical compliance badge icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCWCXQQhqtWJB0zRwC5xPbXgNkS75F620AsaFnM9jJfE9mLv7BD8bI5kAD0ObGWyMXH-cjh241Ti4gxb7wkUHkABL5RNTRwUyKfRFGjztxmt9KCI-fMHRbFn_Vi5kRI6c9rRYG4_2F5qzVfLCd_eNE9YU2BRMy0gRgvB-XChn-5UKQou8l4TU8nHwvOHIpYSN5vUPBq-ZCea5YDS53JUg5YHPWqjNahYABOacT90J4f4n3DIm7MW3R5vFn9pMeZiYa4x43LYt3jIWD"/>
+<img alt="Security Shield" class="h-8" data-alt="Abstract secure shield vector icon in olive green" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBDPYPaShZ-CTPv2orf6GTDSBPpG3rD3MTUvINlF5k1RTxgfrh3LaiWaJ6yEh-ZcETQSUjhGTo51jOoP9qv_OqocAAKLyazoeBfG-D2oeHScKdAonA5Hvzf8czW8T61zkb_IRvoZ8jLV7TjJ3DNL94OlBteHDVKQrTuOkBkIJdroWAa67AnJmP_9aKamXDeXwT2X2QwrN1ytr8zcSEvP_Q-Xt0BW-DDJWuGEd09bh-mjc8QxIQCh7-UJdz1BK7in3U9_sp0ICbaF7i"/>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#ece1cf] dark:bg-stone-900 full-width bottom-0 w-full tonal shift from surface to container-highest">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-8 gap-4 max-w-screen-2xl mx-auto">
+<span class="text-lg font-serif text-[#445518]">The Ward</span>
+<div class="flex gap-8">
+<a class="font-sans text-xs tracking-wide uppercase text-[#201b10]/70 dark:text-[#ece1cf]/70 hover:text-[#445518] dark:hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-sans text-xs tracking-wide uppercase text-[#201b10]/70 dark:text-[#ece1cf]/70 hover:text-[#445518] dark:hover:text-white transition-colors opacity-80 hover:opacity-100" data-route="privacy-ethics.html" href="#">HIPAA Compliance</a>
+<a class="font-sans text-xs tracking-wide uppercase text-[#201b10]/70 dark:text-[#ece1cf]/70 hover:text-[#445518] dark:hover:text-white transition-colors opacity-80 hover:opacity-100" data-route="privacy-ethics.html" href="#">Accessibility</a>
+</div>
+<span class="font-sans text-xs tracking-wide uppercase text-[#201b10]/70 dark:text-[#ece1cf]/70 opacity-80">© 2024 Clinical Archive. Editorial Healthcare Systems.</span>
+</div>
+</footer>
+<script src="./js/router.js" type="module"></script>
+</body></html>
