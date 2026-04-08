@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The CARA Guided Tour | Ward Compass</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#5c4122",
+                        "surface-bright": "#fff8f1",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#e3d9c6",
+                        "on-surface": "#201b10",
+                        "primary-container": "#5c6e2e",
+                        "primary": "#445518",
+                        "tertiary-container": "#baab6d",
+                        "secondary": "#765937",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#ffddba",
+                        "surface-container-low": "#fdf2df",
+                        "primary-fixed": "#d6eb9d",
+                        "on-secondary-container": "#795b39",
+                        "outline": "#76786a",
+                        "surface": "#fff8f1",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#faf0dc",
+                        "surface-container-highest": "#ece1cf",
+                        "on-surface-variant": "#45483c",
+                        "on-tertiary-container": "#493f0c",
+                        "on-primary-fixed": "#151f00",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#2b1700",
+                        "primary-fixed-dim": "#bacf84",
+                        "tertiary": "#6a5e29",
+                        "tertiary-fixed": "#f3e3a0",
+                        "inverse-primary": "#bacf84",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#514713",
+                        "on-background": "#201b10",
+                        "tertiary-fixed-dim": "#d6c786",
+                        "surface-variant": "#ece1cf",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#e7c096",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#353023",
+                        "background": "#fff8f1",
+                        "surface-container": "#f7edda",
+                        "surface-tint": "#536526",
+                        "outline-variant": "#c6c8b7",
+                        "on-tertiary-fixed": "#211b00",
+                        "surface-container-high": "#f1e7d4",
+                        "on-primary-fixed-variant": "#3c4c0f",
+                        "on-primary-container": "#daf0a1",
+                        "secondary-container": "#fed6ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Newsreader', serif; }
+</style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<header class="bg-[#F6F1E7] dark:bg-stone-950 fixed top-0 w-full z-50">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-serif italic text-[#5C6E2E] dark:text-[#A4B573]">Ward Compass</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-[#5C6E2E] transition-colors duration-300" data-route="the-ward-overview.html" href="#">Ward</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-[#5C6E2E] transition-colors duration-300" data-route="the-ward-patient-queue.html" href="#">Patients</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-[#5C6E2E] transition-colors duration-300" data-route="the-ward-impact-dashboard.html" href="#">Insights</a>
+</nav>
+<div class="flex items-center space-x-6">
+<div class="hidden lg:flex items-center bg-[#ECE1CF] dark:bg-stone-900 rounded-full px-4 py-2">
+<span class="material-symbols-outlined text-stone-500 text-lg">search</span>
+<span class="ml-2 text-sm text-stone-500">Search patients...</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer">settings</span>
+<img alt="Provider profile avatar" class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="Professional portrait of a healthcare provider in a clinical setting with warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5VK2QeJ96vMeFpM10VRDoOEXe3-sqLcKQGsijmjA0WwzxVWIW6tUzX-eD9XQwLJ46LZVyvDjnbWTH8D-NyiNP7v2YeXgtbJPAy0SqfZ___tJUvYxxDJOdwC_xxdxJDNjSIpJFOkRx9s6UdB6-OBDScNJTOvEURXbYiPX7tcmh09eGSCU1OLehLsH2NAPQQopNerMiAk-axWAZnyYnugDXGtmU4ms2T-3ijFkkuN2-_XoZmEyYt2ZxFrXY4X1vmErXe4pbmKS_tcnb"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 min-h-screen flex flex-col items-center">
+<section class="max-w-7xl mx-auto px-6 w-full mb-20 text-center">
+<span class="inline-block px-4 py-1.5 mb-6 rounded-full bg-primary-fixed text-on-primary-fixed text-sm font-semibold tracking-wide">
+                SYSTEM WALKTHROUGH
+            </span>
+<h1 class="text-6xl md:text-8xl font-medium tracking-tight mb-8 leading-[0.9]">
+                The CARA <br/><span class="italic text-primary">Guided Tour</span>
+</h1>
+<p class="text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed mb-12">
+                Experience the precision of clinical intelligence designed for the speed of modern healthcare.
+            </p>
+<button class="bg-primary text-on-primary px-12 py-5 rounded-full text-lg font-bold shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-3 mx-auto" data-route="the-ward-login.html">
+                Start the Demo
+                <span class="material-symbols-outlined">play_arrow</span>
+</button>
+</section>
+<section class="w-full max-w-7xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+<div class="bg-surface-container-lowest p-10 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.05)] flex flex-col h-full group hover:bg-primary transition-colors duration-500">
+<div class="mb-8 flex items-center justify-between">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl" data-icon="pulse">pulse_alert</span>
+</div>
+<span class="text-4xl font-serif text-outline-variant group-hover:text-primary-container transition-colors">01</span>
+</div>
+<h3 class="text-3xl font-medium mb-4 group-hover:text-white transition-colors">Smart Triage</h3>
+<p class="text-on-surface-variant group-hover:text-on-primary-container/80 transition-colors leading-relaxed">
+                    Prioritize patients with AI-driven severity scoring that updates in real-time based on vitals and nurse observations.
+                </p>
+<div class="mt-auto pt-10">
+<img class="rounded-lg w-full aspect-video object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Modern medical dashboard on a tablet showing patient heart rate and clinical health data charts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMs16lGQPcnYKy9vch8XBOQ45bCxynz7-BwctRqHCRVPxHrI9dcPVmvu22axlpRv_dVqF_-a3z_Bk3xM6fZa4oBQeKcxA02XysEcfh8GLFJKNeBTpomXEKOxZUb4AWCQgP4pFObUv2e4TCQhhkYnsledrYOmKqEWaMk9eBrMrhmDQawpPg2yYGkzk247c6UNTn4zEe5VH2U9vVX770-Kph9esNG6b5_6Tf2TFxzEKHi8unTX0aBce67mZ4yqjHQcGnLJpENnCp9exE"/>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-10 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.05)] flex flex-col h-full group hover:bg-primary transition-colors duration-500">
+<div class="mb-8 flex items-center justify-between">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl" data-icon="mic">mic</span>
+</div>
+<span class="text-4xl font-serif text-outline-variant group-hover:text-primary-container transition-colors">02</span>
+</div>
+<h3 class="text-3xl font-medium mb-4 group-hover:text-white transition-colors">Voice-to-Note</h3>
+<p class="text-on-surface-variant group-hover:text-on-primary-container/80 transition-colors leading-relaxed">
+                    Dictate clinical notes hands-free. CARA automatically extracts medical terminology and structures data into EHR formats.
+                </p>
+<div class="mt-auto pt-10">
+<img class="rounded-lg w-full aspect-video object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Doctor talking while using a stethoscope in a bright modern clinic setting, professional atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXhor6N7JwhZ0L7X7_h8CHLDQ3QwEeYvOasEgL_aG9dk6SKoN3nunK-UJpzFjXXWs2GVMq0Wv2lw3WZ1Z21M6c044hs-zOASnBtnnQToJhI9nxI5uTC5tb63lQOHdWRAFHzJclcIrYiMvRVqlYp8ZDjEP9dzCdXhgIX4_PQXUjws63SliiDvY5ewv6ANIjhgJNrq-uSabitIYhXN9UqafWM6vIirFQrvxfS1J1TICn1mSJqZj-ge_gWvngAmubWsZB71Ji_JhNIGsK"/>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-10 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.05)] flex flex-col h-full group hover:bg-primary transition-colors duration-500">
+<div class="mb-8 flex items-center justify-between">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl" data-icon="cloud">cloud</span>
+</div>
+<span class="text-4xl font-serif text-outline-variant group-hover:text-primary-container transition-colors">03</span>
+</div>
+<h3 class="text-3xl font-medium mb-4 group-hover:text-white transition-colors">Offline Sync</h3>
+<p class="text-on-surface-variant group-hover:text-on-primary-container/80 transition-colors leading-relaxed">
+                    Work without interruption in areas with low connectivity. Data syncs securely as soon as a connection is restored.
+                </p>
+<div class="mt-auto pt-10">
+<img class="rounded-lg w-full aspect-video object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Close up of high tech server room with blinking lights representing data storage and cloud security" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfWx9gnHVWxa1Z_bPLpdaX-jLGG4Sbta5sUJunLTafVAeYBmgK36uNtCYpMsFkxV7gGhJS9mXuvDSFkEwksWIYxSc8dMnDl-4t2zFwrJRSTIUbD6Fa72Rg8jQq8eD9mnfPpJOM74-TfBnuN30MogYEUeQRWq9w0-TqWln8d0X8qSGN1zMKaOIsCZ1WhqKAtNiyHGId_Ed-32NrzhsyMSM96rMPVmz_9aRZ6XJqlXKnWp96ksFui_nv6p-IeeUHJ233FNLJGPs3Mdhj"/>
+</div>
+</div>
+</section>
+<section class="max-w-4xl mx-auto px-6 w-full text-center">
+<div class="bg-surface-container-low rounded-xl p-12 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-4xl mb-6">Ready to see it in action?</h2>
+<p class="text-on-surface-variant mb-10 text-lg">Join over 2,500 providers who have transformed their clinical workflow.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold transition-all hover:opacity-90" data-route="the-ward-login.html">Get Started Now</button>
+<button class="border-2 border-outline-variant text-secondary px-8 py-4 rounded-full font-bold transition-all hover:bg-surface-container-highest" data-route="join-us.html">Talk to an Expert</button>
+</div>
+</div>
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container opacity-5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+</div>
+</section>
+</main>
+<footer class="bg-surface-container-highest pt-20 pb-12 mt-auto">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-outline-variant/20 pb-12 mb-12">
+<div class="col-span-1 md:col-span-2">
+<div class="text-3xl font-serif italic text-primary mb-6">Ward Compass</div>
+<p class="text-on-surface-variant max-w-sm leading-relaxed">
+                    Advancing patient care through intelligent infrastructure and human-centered design.
+                </p>
+</div>
+<div>
+<h4 class="font-bold mb-6 text-sm uppercase tracking-widest text-on-surface">Product</h4>
+<ul class="space-y-4 text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" data-route="the-ward.html" href="#">Features</a></li>
+<li><a class="hover:text-primary transition-colors" data-route="privacy-ethics.html" href="#">Security</a></li>
+<li><a class="hover:text-primary transition-colors" data-route="research.html" href="#">Integrations</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6 text-sm uppercase tracking-widest text-on-surface">Company</h4>
+<ul class="space-y-4 text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" data-route="about.html" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" data-route="join-us.html" href="#">Contact</a></li>
+<li><a class="hover:text-primary transition-colors" data-route="privacy-ethics.html" href="#">Support</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 flex justify-between items-center text-sm text-stone-500">
+<p>© 2024 Ward Compass. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:underline" data-route="privacy-ethics.html" href="#">Privacy Policy</a>
+<a class="hover:underline" data-route="privacy-ethics.html" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 pt-4 bg-[#F6F1E7]/80 dark:bg-stone-950/80 backdrop-blur-xl md:hidden shadow-[0_-10px_40px_rgba(32,27,16,0.05)] rounded-t-[32px]">
+<div class="flex flex-col items-center justify-center text-stone-500 p-3 hover:bg-[#ECE1CF] dark:hover:bg-stone-800 rounded-full transition-all" data-route="the-ward-overview.html">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="text-xs font-semibold Manrope mt-1">Ward</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 p-3 hover:bg-[#ECE1CF] dark:hover:bg-stone-800 rounded-full transition-all" data-route="the-ward-patient-queue.html">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+<span class="text-xs font-semibold Manrope mt-1">Patients</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 p-3 hover:bg-[#ECE1CF] dark:hover:bg-stone-800 rounded-full transition-all" data-route="research.html">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-xs font-semibold Manrope mt-1">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 p-3 hover:bg-[#ECE1CF] dark:hover:bg-stone-800 rounded-full transition-all" data-route="the-ward-login.html">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-xs font-semibold Manrope mt-1">Profile</span>
+</div>
+</nav>
+<script src="./js/router.js" type="module"></script>
+</body></html>

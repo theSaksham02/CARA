@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Offline Mode | Ward Compass</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "surface-bright": "#fff8f1",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#e3d9c6",
+                    "on-surface": "#201b10",
+                    "primary-container": "#5c6e2e",
+                    "primary": "#445518",
+                    "tertiary-container": "#baab6d",
+                    "secondary": "#765937",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#ffddba",
+                    "surface-container-low": "#fdf2df",
+                    "primary-fixed": "#d6eb9d",
+                    "on-secondary-container": "#795b39",
+                    "outline": "#76786a",
+                    "surface": "#fff8f1",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#faf0dc",
+                    "surface-container-highest": "#ece1cf",
+                    "on-surface-variant": "#45483c",
+                    "on-tertiary-container": "#493f0c",
+                    "on-primary-fixed": "#151f00",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#2b1700",
+                    "primary-fixed-dim": "#bacf84",
+                    "tertiary": "#6a5e29",
+                    "tertiary-fixed": "#f3e3a0",
+                    "inverse-primary": "#bacf84",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "on-background": "#201b10",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "surface-variant": "#ece1cf",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#e7c096",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#353023",
+                    "background": "#fff8f1",
+                    "surface-container": "#f7edda",
+                    "surface-tint": "#536526",
+                    "outline-variant": "#c6c8b7",
+                    "on-tertiary-fixed": "#211b00",
+                    "surface-container-high": "#f1e7d4",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "on-primary-container": "#daf0a1",
+                    "secondary-container": "#fed6ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #fff8f1; color: #201b10; }
+        .font-serif { font-family: 'Newsreader', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<header class="bg-[#F6F1E7] dark:bg-stone-950 docked full-width top-0 z-50">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-serif italic text-[#5C6E2E] dark:text-[#A4B573]">Ward Compass</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-[#5C6E2E] transition-colors duration-300" data-route="the-ward-overview.html" href="#">Ward</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-[#5C6E2E] transition-colors duration-300" data-route="the-ward-patient-queue.html" href="#">Patients</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-[#5C6E2E] transition-colors duration-300" data-route="the-ward-impact-dashboard.html" href="#">Insights</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#5C6E2E] p-2 hover:bg-[#ECE1CF] rounded-full transition-colors">notifications</button>
+<button class="material-symbols-outlined text-[#5C6E2E] p-2 hover:bg-[#ECE1CF] rounded-full transition-colors">settings</button>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border-2 border-white">
+<img alt="Provider profile avatar" class="w-full h-full object-cover" data-alt="Professional portrait of a healthcare provider in clinical attire against a soft neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAedQGWqUgzSMOj7CuqvcjLZu9VXXpgndGzUUYJO103lF77_-8OfrZuM_HE2FgOtJCf9wflQDeQq-ve3GXBOE6F3zEH1eX-u3hFL5YV3627pwv3KbAxoGs0kdbD4eaV06NSfqdUOtXEVx3JpyUGBCaGDrXsxNqvQspu_64E2WAG3W0Rnmuh_OaQnQGmdZITJUIOTuUfAcl-JOk4nWhla8HM1pRHF_7ZsneGYFHXimOlesplL-PK_rP_Mbdvwg5Pvs8wcybXmbDkdo6U"/>
+</div>
+</div>
+</nav>
+</header>
+<main class="min-h-[calc(100vh-80px)] flex items-center justify-center px-6 py-12">
+<div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<!-- Hero Content -->
+<div class="space-y-8 order-2 md:order-1">
+<div class="inline-flex items-center gap-3 px-4 py-2 bg-surface-container-high rounded-full text-primary font-semibold text-sm tracking-wide">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+                    OFFLINE MODE ACTIVE
+                </div>
+<div class="space-y-4">
+<h1 class="text-5xl md:text-7xl font-serif text-on-surface leading-[1.1] tracking-tight">
+                        Offline, but Still <span class="italic text-primary">On Duty.</span>
+</h1>
+<p class="text-lg md:text-xl text-on-surface-variant font-body leading-relaxed max-w-lg">
+                        CARA is built for the last mile. You can still access your local patient queue and create SOAP notes. They will sync automatically when you reconnect.
+                    </p>
+</div>
+<div class="grid gap-4 py-4">
+<div class="flex items-center gap-3 text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        Local Database Active
+                    </div>
+<div class="flex items-center gap-3 text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        Voice Transcription Ready
+                    </div>
+<div class="flex items-center gap-3 text-on-surface-variant font-medium">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                        Offline Protocols Loaded
+                    </div>
+</div>
+<div class="pt-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-3 shadow-[0_20px_40px_rgba(68,85,24,0.15)]" data-route="the-ward-overview.html">
+                        Go to Local Dashboard
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Visual Section -->
+<div class="order-1 md:order-2 flex justify-center items-center">
+<div class="relative w-full aspect-square max-w-md">
+<!-- Layered Decorative Elements -->
+<div class="absolute inset-0 bg-surface-container-high rounded-xl rotate-6 scale-95 opacity-50"></div>
+<div class="absolute inset-0 bg-surface-container-low rounded-xl -rotate-3 scale-100 shadow-[0_40px_80px_rgba(32,27,16,0.08)]"></div>
+<div class="relative h-full w-full bg-white rounded-xl overflow-hidden flex flex-col items-center justify-center p-12 text-center border border-white">
+<div class="w-32 h-32 bg-primary-fixed rounded-full flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary text-6xl" style="font-variation-settings: 'wght' 300;">signal_wifi_off</span>
+</div>
+<h3 class="text-2xl font-serif text-on-surface mb-4 italic">Resilient Connectivity</h3>
+<div class="w-full space-y-3 opacity-60">
+<div class="h-2 bg-surface-container rounded-full w-3/4 mx-auto"></div>
+<div class="h-2 bg-surface-container rounded-full w-1/2 mx-auto"></div>
+<div class="h-2 bg-surface-container rounded-full w-2/3 mx-auto"></div>
+</div>
+<!-- Floating Detail Card (Asymmetric Layout) -->
+<div class="absolute -bottom-6 -right-6 bg-secondary-container p-6 rounded-lg shadow-xl max-w-[200px] text-left transform rotate-2">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-on-secondary-container text-sm">sync</span>
+<span class="text-[10px] font-bold tracking-widest uppercase text-on-secondary-container">Pending Sync</span>
+</div>
+<p class="text-xs text-on-secondary-container font-semibold">12 Notes queued for upload</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile only, based on JSON logic) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 pt-4 bg-[#F6F1E7]/80 dark:bg-stone-950/80 backdrop-blur-xl rounded-t-[32px] shadow-[0_-10px_40px_rgba(32,27,16,0.05)]">
+<div class="flex flex-col items-center justify-center text-stone-500 p-3 hover:bg-[#ECE1CF] dark:hover:bg-stone-800 rounded-full transition-all" data-route="the-ward-overview.html">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-xs font-semibold mt-1">Ward</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 p-3 hover:bg-[#ECE1CF] dark:hover:bg-stone-800 rounded-full transition-all" data-route="the-ward-patient-queue.html">
+<span class="material-symbols-outlined">person_search</span>
+<span class="text-xs font-semibold mt-1">Patients</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#5C6E2E] text-white rounded-full p-3 scale-95 transition-all" data-route="research.html">
+<span class="material-symbols-outlined">search</span>
+<span class="text-xs font-semibold mt-1">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 p-3 hover:bg-[#ECE1CF] dark:hover:bg-stone-800 rounded-full transition-all" data-route="the-ward-patient-profile.html">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-xs font-semibold mt-1">Profile</span>
+</div>
+</nav>
+<script src="./js/router.js" type="module"></script>
+</body></html>

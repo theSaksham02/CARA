@@ -16,6 +16,7 @@ const longPages = new Set([
   "privacy-ethics.html",
   "index.html",
   "join-us.html",
+  "guided-tour.html",
 ]);
 
 const onceVisible = (element, callback) => {
@@ -729,6 +730,38 @@ const initPageSpecific = () => {
       registerTilt(qa("main .grid.grid-cols-1.md\\:grid-cols-3 > button, main .relative.bg-surface-container-lowest.rounded-xl, main .mt-8.rounded-lg.overflow-hidden.h-40"));
       initImageWipes([q("main .mt-8.rounded-lg.overflow-hidden.h-40.relative.group")].filter(Boolean));
       prepareSequence(qa("main .grid.grid-cols-1.md\\:grid-cols-3 > button, main .flex.flex-col.sm\\:flex-row.gap-4 > button"), 120, 90);
+      break;
+    }
+    case "guided-tour.html": {
+      const headline = q("main section:first-of-type h1");
+      if (headline) setupSplitHero(headline);
+      registerTilt(qa("main section:nth-of-type(2) > div, main section:last-of-type .bg-surface-container-low"));
+      initImageWipes(qa("main section:nth-of-type(2) img"));
+      prepareSequence(qa("main section:nth-of-type(2) > div, main section:last-of-type .flex.flex-col.sm\\:flex-row > button"), 120, 90);
+      break;
+    }
+    case "offline-mode.html": {
+      const headline = q("main h1");
+      const visual = q("main .relative.w-full.aspect-square.max-w-md");
+      if (headline) setupSplitHero(headline);
+      registerTilt([visual].filter(Boolean));
+      prepareSequence(qa("main .grid.gap-4 > div, main .pt-4 > button"), 120, 90);
+      break;
+    }
+    case "404.html": {
+      const headline = q("main h1");
+      const paragraph = q("main p.text-xl");
+      if (headline) setupSplitHero(headline);
+      if (paragraph) setupWordReveal(paragraph);
+      initImageWipes([q("main .relative.bg-surface-container-lowest")].filter(Boolean));
+      prepareSequence(qa("main nav a, footer a"), 100, 70);
+      break;
+    }
+    case "the-ward-patient-profile.html": {
+      initBadgeMorphs();
+      registerTilt(qa("section.col-span-12.grid > div, main .col-span-12.lg\\:col-span-4 > section, main .col-span-12.lg\\:col-span-4 > div"));
+      initImageWipes([q("main .bg-surface-container-high.rounded-lg.overflow-hidden.group")].filter(Boolean));
+      prepareSequence(qa("section.col-span-12.grid > div, .col-span-12.lg\\:col-span-8 > section, .col-span-12.lg\\:col-span-4 > section"), 80, 90);
       break;
     }
     default:

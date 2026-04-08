@@ -5,7 +5,10 @@ const routes = {
   research: "research.html",
   "join us": "join-us.html",
   "the ward": "the-ward.html",
+  ward: "the-ward-overview.html",
   "patient compass": "patient-compass.html",
+  patients: "the-ward-patient-queue.html",
+  insights: "the-ward-impact-dashboard.html",
   "access platform": "the-ward-login.html",
   "enter the ward": "the-ward-login.html",
   "view patient compass": "patient-compass-login.html",
@@ -20,9 +23,31 @@ const routes = {
   home: "patient-compass-home.html",
   "my visit": "patient-compass-my-visit-summary.html",
   "view full queue": "the-ward-patient-queue.html",
+  "view record": "the-ward-patient-profile.html",
+  "patient profile": "the-ward-patient-profile.html",
   "open soap": "the-ward-soap-notes.html",
   "open soap note": "the-ward-soap-notes.html",
   "send to patient compass": "patient-compass-my-visit-summary.html",
+  "guided tour": "guided-tour.html",
+  "offline mode": "offline-mode.html",
+  "back to safety (dashboard)": "the-ward-overview.html",
+  "search patient registry": "the-ward-patient-queue.html",
+  "contact registrar": "join-us.html",
+  "help center": "guided-tour.html",
+  "go to local dashboard": "the-ward-overview.html",
+  "start the demo": "the-ward-login.html",
+  "get started now": "the-ward-login.html",
+  "talk to an expert": "join-us.html",
+  "data privacy": "privacy-ethics.html",
+  "system status": "offline-mode.html",
+  "security protocols": "privacy-ethics.html",
+  "features": "the-ward.html",
+  "security": "privacy-ethics.html",
+  "integrations": "research.html",
+  "about us": "about.html",
+  contact: "join-us.html",
+  support: "privacy-ethics.html",
+  "terms of service": "privacy-ethics.html",
   "privacy policy": "privacy-ethics.html",
   cara: "index.html",
 };
@@ -83,7 +108,7 @@ const resolveRoute = (element) => {
 };
 
 const wireRoutes = () => {
-  const interactive = document.querySelectorAll("a[href='#'], button, [title='Open SOAP'], [data-route]");
+  const interactive = document.querySelectorAll("a[href='#'], button, [title='Open SOAP'], [title='View Record'], [data-route]");
   interactive.forEach((element) => {
     const route = resolveRoute(element);
     if (route) bindRoute(element, route);

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ward Compass | Patient Profile</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4122",
+                    "surface-bright": "#fff8f1",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#e3d9c6",
+                    "on-surface": "#201b10",
+                    "primary-container": "#5c6e2e",
+                    "primary": "#445518",
+                    "tertiary-container": "#baab6d",
+                    "secondary": "#765937",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#ffddba",
+                    "surface-container-low": "#fdf2df",
+                    "primary-fixed": "#d6eb9d",
+                    "on-secondary-container": "#795b39",
+                    "outline": "#76786a",
+                    "surface": "#fff8f1",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#faf0dc",
+                    "surface-container-highest": "#ece1cf",
+                    "on-surface-variant": "#45483c",
+                    "on-tertiary-container": "#493f0c",
+                    "on-primary-fixed": "#151f00",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#2b1700",
+                    "primary-fixed-dim": "#bacf84",
+                    "tertiary": "#6a5e29",
+                    "tertiary-fixed": "#f3e3a0",
+                    "inverse-primary": "#bacf84",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#514713",
+                    "on-background": "#201b10",
+                    "tertiary-fixed-dim": "#d6c786",
+                    "surface-variant": "#ece1cf",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#e7c096",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#353023",
+                    "background": "#fff8f1",
+                    "surface-container": "#f7edda",
+                    "surface-tint": "#536526",
+                    "outline-variant": "#c6c8b7",
+                    "on-tertiary-fixed": "#211b00",
+                    "surface-container-high": "#f1e7d4",
+                    "on-primary-fixed-variant": "#3c4c0f",
+                    "on-primary-container": "#daf0a1",
+                    "secondary-container": "#fed6ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F6F1E7; }
+        .serif-text { font-family: 'Newsreader', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex overflow-hidden">
+<!-- Sidebar Navigation (Responsive implementation) -->
+<aside class="hidden md:flex flex-col w-72 bg-surface-container-highest h-screen p-8 sticky top-0">
+<div class="mb-12">
+<h1 class="text-2xl font-headline italic font-bold text-primary-container">Ward Compass</h1>
+</div>
+<nav class="flex-1 space-y-6">
+<div class="space-y-1">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-bold mb-4 ml-2">Clinical</p>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 font-medium hover:text-primary transition-colors duration-300" data-route="the-ward-overview.html" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Ward</span>
+</a>
+<!-- Active State Logic: Mapping to Patients tab as this is a Patient Profile -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold border-r-4 border-primary bg-primary/5 transition-all" data-route="the-ward-patient-queue.html" href="#">
+<span class="material-symbols-outlined" data-icon="person_search" style="font-variation-settings: 'FILL' 1;">person_search</span>
+<span>Patients</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 font-medium hover:text-primary transition-colors duration-300" data-route="the-ward-impact-dashboard.html" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span>Insights</span>
+</a>
+</div>
+<div class="pt-8 space-y-1 border-t border-outline-variant/20">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-bold mb-4 ml-2">System</p>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 font-medium hover:text-primary transition-colors duration-300" data-route="the-ward-overview.html" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span>Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 font-medium hover:text-primary transition-colors duration-300" data-route="privacy-ethics.html" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</nav>
+<div class="mt-auto flex items-center gap-4 bg-surface-container-low p-4 rounded-xl">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="portrait of a focused female medical doctor in professional clinical setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8Cxw6qbA5vnO04_VvlzAue9kr7w_xAqz-U79agBZn5wLqWKpAhn7f_JzQ1Q7sIiIQlX35EoFyWbJaCzBunzBX3b1xLnAchuqGiTGJi05pY2Jnjk0WVmaiOHstCtAKrUp9gdAkslhWGeC-Z39h77REmYCDGXAulA4vjXr-m2dq6EmmdWRDCu5wGwELW1iI_w4LfmRAAVDTPPxgoeD10nksv7IFjGjkyd0nq-rqbXbjkCppv6DwdqC236S5-PpDhEu8tOgLg9gx0AKR"/>
+<div>
+<p class="text-sm font-bold">Dr. Sarah Chen</p>
+<p class="text-xs text-on-surface-variant">Attending Physician</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 h-screen overflow-y-auto bg-surface">
+<!-- Top Navigation Bar (Mobile & Header Details) -->
+<header class="flex justify-between items-center w-full px-8 py-6 max-w-7xl mx-auto border-b-0">
+<div class="flex items-center gap-6">
+<button class="md:hidden p-2 text-primary">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div>
+<h2 class="text-4xl font-headline font-bold tracking-tight text-on-surface">Amara Okafor</h2>
+<div class="flex items-center gap-3 mt-1">
+<span class="px-3 py-0.5 bg-error/10 text-error rounded-full text-xs font-bold tracking-wider uppercase">Status: RED — Urgent</span>
+<span class="text-stone-400 text-sm font-medium">|</span>
+<p class="text-on-surface-variant text-sm font-medium">3y/o • Female • ID: WC-8921-X</p>
+</div>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-4">
+<button class="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-full font-bold hover:scale-[1.02] transition-transform duration-200" data-route="the-ward-soap-notes.html">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+<span>Add Progress Note</span>
+</button>
+</div>
+</header>
+<!-- Main Grid Layout -->
+<div class="px-8 pb-12 max-w-7xl mx-auto grid grid-cols-12 gap-8 mt-4">
+<!-- Vital Signs KPI Cards -->
+<section class="col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.03)] border-b-4 border-error/20 hover:scale-[1.01] transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="p-3 bg-error/5 text-error rounded-full">
+<span class="material-symbols-outlined" data-icon="air">air</span>
+</span>
+<span class="text-error text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_downward">arrow_downward</span>
+                            Low
+                        </span>
+</div>
+<p class="text-on-surface-variant text-sm font-semibold uppercase tracking-wider mb-1">SPO2</p>
+<h3 class="text-5xl font-headline font-bold text-on-surface">91<span class="text-2xl ml-1 text-on-surface-variant/40">%</span></h3>
+</div>
+<div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.03)] border-b-4 border-warning/20 hover:scale-[1.01] transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="p-3 bg-secondary-container/30 text-secondary rounded-full">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</span>
+<span class="text-secondary text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span>
+                            Elevated
+                        </span>
+</div>
+<p class="text-on-surface-variant text-sm font-semibold uppercase tracking-wider mb-1">Heart Rate</p>
+<h3 class="text-5xl font-headline font-bold text-on-surface">112<span class="text-2xl ml-1 text-on-surface-variant/40">bpm</span></h3>
+</div>
+<div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(32,27,16,0.03)] border-b-4 border-error/20 hover:scale-[1.01] transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="p-3 bg-error/5 text-error rounded-full">
+<span class="material-symbols-outlined" data-icon="thermometer">thermometer</span>
+</span>
+<span class="text-error text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span>
+                            Fever
+                        </span>
+</div>
+<p class="text-on-surface-variant text-sm font-semibold uppercase tracking-wider mb-1">Temperature</p>
+<h3 class="text-5xl font-headline font-bold text-on-surface">38.8<span class="text-2xl ml-1 text-on-surface-variant/40">°C</span></h3>
+</div>
+</section>
+<!-- Middle Column: Medical History & Triage -->
+<div class="col-span-12 lg:col-span-8 space-y-8">
+<!-- Recent Triage Details -->
+<section class="bg-surface-container-low p-10 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-error/5 rounded-full -mr-16 -mt-16"></div>
+<h3 class="text-2xl font-headline font-bold mb-6 flex items-center gap-3">
+                        Current Triage Rationale
+                    </h3>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<div>
+<p class="font-bold text-on-surface">Fast Breathing (Tachypnea)</p>
+<p class="text-sm text-on-surface-variant mt-1 leading-relaxed">Respiratory rate significantly above normal for age group. Intercostal recession noted on examination.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-error" data-icon="device_thermostat">device_thermostat</span>
+<div>
+<p class="font-bold text-on-surface">High Fever</p>
+<p class="text-sm text-on-surface-variant mt-1 leading-relaxed">Sustained high temperature unresponsive to paracetamol. Patient lethargic and irritable.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Medical History Timeline -->
+<section class="bg-surface-container-lowest p-10 rounded-lg border-l-8 border-primary-fixed">
+<div class="flex justify-between items-center mb-10">
+<h3 class="text-2xl font-headline font-bold">Medical History Timeline</h3>
+<button class="text-primary font-bold text-sm underline decoration-2 underline-offset-4" data-route="the-ward-soap-notes.html">View Full Records</button>
+</div>
+<div class="relative space-y-12">
+<!-- Timeline Line -->
+<div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-surface-variant"></div>
+<!-- Entry 1 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1.5 w-6 h-6 bg-primary-fixed rounded-full flex items-center justify-center">
+<div class="w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<p class="text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest">Oct 12, 2023 • Pediatrics</p>
+<span class="text-sm font-medium text-stone-400">Dr. Aris</span>
+</div>
+<h4 class="text-lg font-bold">Upper Respiratory Infection</h4>
+<p class="text-on-surface-variant mt-2 leading-relaxed italic text-sm">"Brief cough and congestion. Clear lungs on auscultation. Recommended hydration and saline drops."</p>
+</div>
+<!-- Entry 2 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1.5 w-6 h-6 bg-surface-variant rounded-full flex items-center justify-center">
+<div class="w-2 h-2 bg-stone-400 rounded-full"></div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<p class="text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest">July 05, 2023 • Outpatient</p>
+<span class="text-sm font-medium text-stone-400">Dr. Mbeki</span>
+</div>
+<h4 class="text-lg font-bold">Routine 30-Month Wellness Check</h4>
+<p class="text-on-surface-variant mt-2 leading-relaxed text-sm">"Growth percentiles consistent (75th weight, 60th height). Developmental milestones on track. Immunizations updated."</p>
+</div>
+<!-- Entry 3 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1.5 w-6 h-6 bg-surface-variant rounded-full flex items-center justify-center">
+<div class="w-2 h-2 bg-stone-400 rounded-full"></div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<p class="text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest">Jan 20, 2023 • Emergency</p>
+<span class="text-sm font-medium text-stone-400">Dr. Voss</span>
+</div>
+<h4 class="text-lg font-bold">Mild Dehydration (Gastroenteritis)</h4>
+<p class="text-on-surface-variant mt-2 leading-relaxed text-sm">"24-hour history of vomiting. Treated with oral rehydration therapy. Observation for 4 hours then discharged."</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Actions & Quick Info -->
+<div class="col-span-12 lg:col-span-4 space-y-8">
+<!-- Recommended Actions -->
+<section class="bg-primary-container text-white p-8 rounded-lg shadow-xl">
+<h3 class="text-xl font-headline font-bold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="clinical_notes">clinical_notes</span>
+                        Prescribed Actions
+                    </h3>
+<div class="space-y-4">
+<button class="w-full flex items-center justify-between p-5 bg-white/10 hover:bg-white/20 rounded-xl transition-all group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="radiology">radiology</span>
+<span class="font-bold">Order Chest X-Ray</span>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-5 bg-white/10 hover:bg-white/20 rounded-xl transition-all group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="medication">medication</span>
+<span class="font-bold">Start Antibiotics</span>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-5 bg-white/10 hover:bg-white/20 rounded-xl transition-all group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="bloodtype">bloodtype</span>
+<span class="font-bold">Full Blood Count</span>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="mt-8 pt-8 border-t border-white/10">
+<p class="text-xs text-primary-fixed font-bold uppercase tracking-widest mb-2">Urgency Level</p>
+<p class="text-sm font-medium leading-relaxed opacity-80">Immediate clinical intervention required. Re-evaluate SPO2 in 15 minutes.</p>
+</div>
+</section>
+<!-- Patient Snapshot Image/Note -->
+<div class="bg-surface-container-high rounded-lg overflow-hidden group">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover grayscale-[0.2] group-hover:scale-105 transition-transform duration-700" data-alt="soft focus interior of a bright modern pediatric clinical ward with wooden accents and warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4vTZWlvynXVVv3GflAvgbWAlrf2BOva0ZLN-8FdbQWIBCXv3T8NZAzcQbjBIOZTFx3iB4XSrYdEcZnhuGYogCc6NpluWR-E59wQHNNVgvzRfm5UOAJF-XWdWTVuV0MxXNC0WFkIiJBiZoN2Fnbe2fxM8PMtlQ--aZLYVdrWaFYjfoh_VMtQJ4GIKhupLfz3gwceoP2eQjvMb8CsE4zvOWD0a23En7Wknbm2XeyDVdZAm875xMxjX-FnWtz4t6ZfOA3gdAap_biYXk"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+<div class="absolute bottom-4 left-6">
+<p class="text-white font-headline text-2xl font-bold">Room 302B</p>
+</div>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="group">group</span>
+<p class="text-sm font-bold text-on-surface">Guardian: Mary Okafor (Mother)</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="call">call</span>
+<p class="text-sm font-bold text-on-surface">+234 802 555 0192</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed md:hidden bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 pt-4 bg-[#F6F1E7]/80 backdrop-blur-xl shadow-[0_-10px_40px_rgba(32,27,16,0.05)] rounded-t-[32px]">
+<div class="flex flex-col items-center justify-center text-stone-500 p-3" data-route="the-ward-overview.html">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="text-xs font-semibold Manrope mt-1">Ward</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-white rounded-full p-3 scale-0.95" data-route="the-ward-patient-queue.html">
+<span class="material-symbols-outlined" data-icon="person_search" style="font-variation-settings: 'FILL' 1;">person_search</span>
+<span class="text-xs font-semibold Manrope mt-1">Patients</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 p-3" data-route="the-ward-patient-queue.html">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-xs font-semibold Manrope mt-1">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 p-3" data-route="the-ward-patient-profile.html">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-xs font-semibold Manrope mt-1">Profile</span>
+</div>
+</nav>
+<script src="./js/router.js" type="module"></script>
+</body></html>
