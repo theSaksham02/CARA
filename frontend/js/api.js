@@ -61,6 +61,36 @@
       });
     }
 
+    listNotes(query = {}) {
+      const search = new URLSearchParams(query).toString();
+      const suffix = search ? `?${search}` : '';
+      return this.request(`/api/notes${suffix}`);
+    }
+
+    getDashboardOverview(query = {}) {
+      const search = new URLSearchParams(query).toString();
+      const suffix = search ? `?${search}` : '';
+      return this.request(`/api/dashboard/overview${suffix}`);
+    }
+
+    getTriageQueue(query = {}) {
+      const search = new URLSearchParams(query).toString();
+      const suffix = search ? `?${search}` : '';
+      return this.request(`/api/triage/queue${suffix}`);
+    }
+
+    getImpactAnalytics(query = {}) {
+      const search = new URLSearchParams(query).toString();
+      const suffix = search ? `?${search}` : '';
+      return this.request(`/api/analytics/impact${suffix}`);
+    }
+
+    getCurrentPatientSummary(query = {}) {
+      const search = new URLSearchParams(query).toString();
+      const suffix = search ? `?${search}` : '';
+      return this.request(`/api/patients/me/summary${suffix}`);
+    }
+
     listFollowups(query = {}) {
       const search = new URLSearchParams(query).toString();
       const suffix = search ? `?${search}` : '';

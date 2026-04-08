@@ -126,9 +126,9 @@
                         Access My Records
                         <span class="material-symbols-outlined">arrow_forward</span>
 </a>
-<a class="flex items-center justify-center gap-3 px-8 py-5 bg-surface-container-low text-on-surface rounded-full font-bold text-lg hover:bg-surface-container transition-all active:scale-95 border-2 border-primary-fixed" href="#patient-auth-card">
-                        Create My Account
-                    </a>
+<button class="flex items-center justify-center gap-3 px-8 py-5 bg-surface-container-low text-on-surface rounded-full font-bold text-lg hover:bg-surface-container transition-all active:scale-95 border-2 border-primary-fixed" data-demo-portal="patient" data-demo-redirect="patient-compass-home.html" type="button">
+                        Demo (Skip Sign In)
+                    </button>
 </div>
 <button class="flex items-center gap-3 text-secondary font-semibold hover:text-primary transition-colors group">
 <div class="w-10 h-10 rounded-full bg-tertiary-fixed/40 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -157,6 +157,7 @@
 <p class="text-sm min-h-6 text-on-surface-variant px-2" data-auth-message=""></p>
 <button class="w-full bg-primary text-on-primary rounded-full font-bold py-4 hover:bg-primary-container transition-all" data-auth-submit="" type="submit">Sign In</button>
 <button class="w-full bg-surface-container-low text-on-surface rounded-full font-bold py-4 border border-outline-variant/20 hover:bg-surface-container transition-all" data-auth-toggle="" type="button">Need an account? Create one</button>
+<button class="w-full bg-surface-container-low text-on-surface rounded-full font-bold py-4 border border-outline-variant/20 hover:bg-surface-container transition-all" data-demo-portal="patient" data-demo-redirect="patient-compass-home.html" type="button">Demo (Skip Sign In)</button>
 <p class="text-xs text-center text-on-surface-variant px-4">
                             By logging in, you agree to our <u>Terms of Service</u> and confirm you are in a safe, private space.
                         </p>

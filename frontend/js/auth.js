@@ -5,6 +5,7 @@
     clinician: 'the-ward-overview.html',
     patient: 'patient-compass-home.html',
   };
+  const DEMO_PORTAL_KEY = 'cara-demo-portal';
 
   let supabaseClient = null;
 
@@ -39,7 +40,40 @@
   }
 
   async function signOut() {
+    clearDemoMode();
     await getSupabase().auth.signOut();
+  }
+
+  function setDemoMode(portal) {
+    globalScope.sessionStorage.setItem(DEMO_PORTAL_KEY, portal);
+  }
+
+  function getDemoMode() {
+    return globalScope.sessionStorage.getItem(DEMO_PORTAL_KEY);
+  }
+
+  function clearDemoMode() {
+    globalScope.sessionStorage.removeItem(DEMO_PORTAL_KEY);
+  }
+
+  function wireLogoutButton(button) {
+    button.addEventListener('click', async () => {
+      const originalText = button.textContent;
+      button.disabled = true;
+      button.classList.add('opacity-70');
+
+      try {
+        await signOut();
+        globalScope.location.href = button.dataset.redirectTo || 'index.html';
+      } catch (error) {
+        button.disabled = false;
+        button.classList.remove('opacity-70');
+        button.textContent = error.message || originalText;
+        globalScope.setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      }
+    });
   }
 
   function setMessage(element, message, tone = 'neutral') {
@@ -145,6 +179,7 @@
           }
 
           if (data.session) {
+            clearDemoMode();
             globalScope.location.href = redirectTo;
             return;
           }
@@ -168,6 +203,7 @@
           throw error;
         }
 
+        clearDemoMode();
         globalScope.location.href = redirectTo;
       } catch (error) {
         setMessage(statusElement, error.message || 'Authentication failed.', 'error');
@@ -182,14 +218,28 @@
     });
   }
 
+  function wireDemoButton(button) {
+    button.addEventListener('click', () => {
+      const portal = button.dataset.demoPortal || 'patient';
+      const redirectTo = button.dataset.demoRedirect || REDIRECTS[portal] || 'index.html';
+      setDemoMode(portal);
+      globalScope.location.href = redirectTo;
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-auth-form]').forEach(wireAuthForm);
+    document.querySelectorAll('[data-demo-portal]').forEach(wireDemoButton);
+    document.querySelectorAll('[data-auth-logout]').forEach(wireLogoutButton);
   });
 
   globalScope.CaraAuth = {
+    clearDemoMode,
+    getDemoMode,
     getAccessToken,
     getSession,
     getSupabase,
+    setDemoMode,
     signOut,
   };
 })(window);
