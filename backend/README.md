@@ -10,7 +10,7 @@ This folder defines the API and service layers. Files are placeholders only; imp
 | `routes/` | Endpoint definitions | Add route-level request mapping and validation boundaries | Saksham Mishra |
 | `controllers/` | Request handling logic | Add orchestration between route input, engine, and persistence | Saksham Mishra |
 | `engine/` | Triage/protocol execution | Add protocol evaluation logic using `ml/protocols/imci.json` | Saksham Mishra |
-| `db/` | SQLite lifecycle and schema setup | Add DB open/init/migration helpers | Saksham Mishra |
+| `db/` | Supabase Postgres lifecycle and schema setup | Add DB connection/init/schema helpers for Supabase Postgres | Saksham Mishra |
 | `middleware/` | Shared request middleware | Add auth/audit and request policy utilities | Saksham Mishra |
-| `.env` | Local backend configuration | Add `PORT`, `DB_PATH`, and API keys as required | Saksham |
+| `.env` | Local backend configuration | Add `PORT`, Supabase connection values, auth mode, and API keys as required | Saksham |
 | `package.json` | Backend package metadata | Add dependencies and scripts for dev/start/test | Saksham |

@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Amara severe breathing",
+    "age_months": 14,
+    "symptoms": ["fever", "cough", "difficulty breathing"],
+    "expected_urgency": "RED",
+    "expected_action": "Urgent referral to the nearest clinician or hospital."
+  },
+  {
+    "name": "Kwame convulsions",
+    "age_months": 22,
+    "symptoms": ["fever", "convulsions"],
+    "expected_urgency": "RED",
+    "expected_action": "Urgent referral to the nearest clinician or hospital."
+  },
+  {
+    "name": "Ayo unable to drink",
+    "age_months": 10,
+    "symptoms": ["diarrhoea", "unable to drink"],
+    "expected_urgency": "RED",
+    "expected_action": "Urgent referral to the nearest clinician or hospital."
+  },
+  {
+    "name": "Sade lethargic child",
+    "age_months": 36,
+    "symptoms": ["fever", "lethargy"],
+    "expected_urgency": "RED",
+    "expected_action": "Urgent referral to the nearest clinician or hospital."
+  },
+  {
+    "name": "Tolu pneumonia pathway",
+    "age_months": 24,
+    "symptoms": ["cough", "fast breathing"],
+    "expected_urgency": "YELLOW",
+    "expected_action": "Arrange same-day clinician review for possible pneumonia."
+  },
+  {
+    "name": "Binta dehydration risk",
+    "age_months": 18,
+    "symptoms": ["diarrhoea", "sunken eyes"],
+    "expected_urgency": "YELLOW",
+    "expected_action": "Start oral rehydration guidance and arrange clinician review."
+  },
+  {
+    "name": "Mosi malaria screen",
+    "age_months": 40,
+    "symptoms": ["fever", "chills"],
+    "expected_urgency": "YELLOW",
+    "expected_action": "Refer for same-day malaria or fever assessment."
+  },
+  {
+    "name": "Rina mild fever",
+    "age_months": 30,
+    "symptoms": ["fever"],
+    "expected_urgency": "GREEN",
+    "expected_action": "Provide home monitoring advice and routine follow-up."
+  },
+  {
+    "name": "Ife mild cough",
+    "age_months": 28,
+    "symptoms": ["cough"],
+    "expected_urgency": "GREEN",
+    "expected_action": "Provide supportive care advice and routine follow-up."
+  },
+  {
+    "name": "Nia routine review",
+    "age_months": 16,
+    "symptoms": ["tired"],
+    "expected_urgency": "GREEN",
+    "expected_action": "Provide home care guidance and routine follow-up."
+  }
+]

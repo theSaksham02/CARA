@@ -4,4 +4,4 @@
 
 | File | Job | How it will be filled | Assignee |
 | --- | --- | --- | --- |
-| `setup.js` | DB bootstrapping helper | Implement SQLite initialization and table/schema setup routines | Saksham + Nirmal |
+| `setup.js` | DB bootstrapping helper | Implement Supabase Postgres connection, schema setup, and local fallback routines | Saksham + Nirmal |
