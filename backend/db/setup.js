@@ -37,6 +37,8 @@ const schemaSql = `
     urgency TEXT NOT NULL,
     reason TEXT NOT NULL,
     recommended_action TEXT NOT NULL,
+    suggested_tests JSONB NOT NULL DEFAULT '[]'::jsonb,
+    protocol_version TEXT,
     matched_rule_id TEXT,
     transcript TEXT,
     metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
@@ -378,6 +380,8 @@ async function createTriageAssessment(payload, actorId) {
     urgency: payload.urgency,
     reason: payload.reason,
     recommended_action: payload.recommended_action,
+    suggested_tests: payload.suggested_tests || [],
+    protocol_version: payload.protocol_version || null,
     matched_rule_id: payload.matched_rule_id || null,
     transcript: payload.transcript || null,
     metadata: payload.metadata || {},
@@ -398,18 +402,20 @@ async function createTriageAssessment(payload, actorId) {
   const pool = createPool();
   const result = await pool.query(
     `INSERT INTO triage_assessments (
-      id, patient_id, symptoms, age_months, urgency, reason, recommended_action, matched_rule_id, transcript, metadata, created_by, created_at
+      id, patient_id, symptoms, age_months, urgency, reason, recommended_action, suggested_tests, protocol_version, matched_rule_id, transcript, metadata, created_by, created_at
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
     RETURNING *`,
     [
       assessment.id,
       assessment.patient_id,
-      assessment.symptoms,
+      JSON.stringify(assessment.symptoms),
       assessment.age_months,
       assessment.urgency,
       assessment.reason,
       assessment.recommended_action,
+      JSON.stringify(assessment.suggested_tests),
+      assessment.protocol_version,
       assessment.matched_rule_id,
       assessment.transcript,
       assessment.metadata,

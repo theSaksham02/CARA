@@ -1,0 +1,82 @@
+{
+  "version": "1.1.0",
+  "source": "WHO IMCI Guidelines 2014 / Expanded",
+  "default_action": "Provide home care guidance and routine follow-up.",
+  "rules": [
+    {
+      "id": "severe-disease-danger-signs",
+      "priority": 100,
+      "symptomsAny": [
+        "unable to drink",
+        "vomiting everything",
+        "convulsions",
+        "lethargy",
+        "unconscious",
+        "stridor",
+        "chest indrawing"
+      ],
+      "urgency": "RED",
+      "recommended_action": "Give first dose of appropriate antibiotic. Refer urgently to hospital.",
+      "reason": "Presence of a general danger sign, stridor, or chest indrawing indicates severe pneumonia or very severe disease.",
+      "suggested_tests": ["Pulse Oximetry", "Chest X-Ray", "Blood Glucose"]
+    },
+    {
+      "id": "pneumonia-fast-breathing",
+      "priority": 80,
+      "symptomsAll": ["fast breathing"],
+      "symptomsAny": ["cough"],
+      "urgency": "YELLOW",
+      "recommended_action": "Give oral amoxicillin for 5 days. Advise mother when to return immediately. Follow up in 2 days.",
+      "reason": "Fast breathing in a child with cough indicates pneumonia.",
+      "suggested_tests": ["Respiratory Rate Audit", "Temperature Check"]
+    },
+    {
+      "id": "severe-dehydration",
+      "priority": 95,
+      "symptomsAll": ["diarrhoea"],
+      "symptomsAny": ["sunken eyes", "skin pinch goes back very slowly", "lethargy", "unable to drink"],
+      "urgency": "RED",
+      "recommended_action": "Give fluid for severe dehydration (Plan C). Refer urgently to hospital.",
+      "reason": "Two or more signs including sunken eyes or lethargy indicates severe dehydration.",
+      "suggested_tests": ["Electrolyte Panel", "Blood Pressure"]
+    },
+    {
+      "id": "some-dehydration",
+      "priority": 75,
+      "symptomsAll": ["diarrhoea"],
+      "symptomsAny": ["restless", "irritable", "sunken eyes", "drinks eagerly", "thirsty"],
+      "urgency": "YELLOW",
+      "recommended_action": "Give fluid, zinc supplements, and food for some dehydration (Plan B). Follow up in 5 days.",
+      "reason": "Two or more signs like restlessness or thirst indicates some dehydration.",
+      "suggested_tests": ["Weight Check", "Zinc Prescription Audit"]
+    },
+    {
+      "id": "malaria-high-risk",
+      "priority": 90,
+      "symptomsAll": ["fever"],
+      "symptomsAny": ["stiff neck", "malaria area", "positive malaria test"],
+      "urgency": "RED",
+      "recommended_action": "Give first dose of antimalarial. Treat to prevent low blood sugar. Refer urgently.",
+      "reason": "Fever with danger signs or stiff neck in malaria area is very severe febrile disease.",
+      "suggested_tests": ["Rapid Malaria Test (RDT)", "Blood Smear", "Lumbar Puncture (if stiff neck)"]
+    },
+    {
+      "id": "malaria-confirmed",
+      "priority": 70,
+      "symptomsAll": ["fever", "positive malaria test"],
+      "urgency": "YELLOW",
+      "recommended_action": "Give recommended first-line oral antimalarial. Give paracetamol for high fever.",
+      "reason": "Confirmed malaria without danger signs.",
+      "suggested_tests": ["Complete Blood Count (CBC)"]
+    },
+    {
+      "id": "mild-cough-cold",
+      "priority": 20,
+      "symptomsAll": ["cough"],
+      "urgency": "GREEN",
+      "recommended_action": "Soothe throat and relieve cough. Advise when to return. Follow up in 5 days.",
+      "reason": "Cough without fast breathing or danger signs is likely a simple cold.",
+      "suggested_tests": []
+    }
+  ]
+}

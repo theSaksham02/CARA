@@ -112,6 +112,7 @@ function normalizeRule(rule, index) {
   const recommendedAction = normalizeString(rule.recommended_action);
   const symptomsAll = normalizeStringArray(rule.symptomsAll);
   const symptomsAny = normalizeStringArray(rule.symptomsAny);
+  const suggestedTests = normalizeStringArray(rule.suggested_tests);
   const priority = Number.isFinite(rule.priority) ? Number(rule.priority) : 0;
   const minAgeMonths =
     rule.min_age_months === undefined || rule.min_age_months === null

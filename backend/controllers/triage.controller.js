@@ -38,6 +38,8 @@ async function assessTriage(req, res, next) {
         urgency: assessment.urgency,
         reason: assessment.reason,
         recommended_action: assessment.recommended_action,
+        suggested_tests: assessment.suggested_tests,
+        protocol_version: assessment.protocol_version,
         matched_rule_id: assessment.matched_rule_id,
         transcript,
         metadata,
