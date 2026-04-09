@@ -48,10 +48,10 @@
     { "source": "/patient-compass-my-visit-summary", "destination": "/frontend/patient-compass-my-visit-summary.html" },
     { "source": "/patient-compass-my-visit-summary.html", "destination": "/frontend/patient-compass-my-visit-summary.html" },
 
-    { "source": "/field", "destination": "/frontend/field.html" },
-    { "source": "/field.html", "destination": "/frontend/field.html" },
-    { "source": "/clinic", "destination": "/frontend/clinic.html" },
-    { "source": "/clinic.html", "destination": "/frontend/clinic.html" },
+    { "source": "/ward", "destination": "/frontend/ward/index.html" },
+    { "source": "/ward/", "destination": "/frontend/ward/index.html" },
+    { "source": "/compass", "destination": "/frontend/compass/index.html" },
+    { "source": "/compass/", "destination": "/frontend/compass/index.html" },
 
     { "source": "/css/:path*", "destination": "/frontend/css/:path*" },
     { "source": "/js/:path*", "destination": "/frontend/js/:path*" },

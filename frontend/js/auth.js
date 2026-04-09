@@ -15,22 +15,30 @@
     }
 
     if (!globalScope.supabase || typeof globalScope.supabase.createClient !== 'function') {
-      throw new Error('Supabase client failed to load.');
+      console.warn('CARA Auth: Supabase client not available. Demo mode only.');
+      return null;
     }
 
-    supabaseClient = globalScope.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      auth: {
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: true,
-      },
-    });
+    try {
+      supabaseClient = globalScope.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: {
+          autoRefreshToken: true,
+          persistSession: true,
+          detectSessionInUrl: true,
+        },
+      });
+    } catch (error) {
+      console.warn('CARA Auth: Failed to init Supabase:', error.message);
+      return null;
+    }
 
     return supabaseClient;
   }
 
   async function getSession() {
-    const { data } = await getSupabase().auth.getSession();
+    const client = getSupabase();
+    if (!client) return null;
+    const { data } = await client.auth.getSession();
     return data.session || null;
   }
 
