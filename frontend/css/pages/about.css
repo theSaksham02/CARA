@@ -1,0 +1,29 @@
+.page-hero {
+  padding-block: var(--space-12) var(--space-8);
+}
+
+.page-hero h1 {
+  font-family: var(--font-display);
+}
+
+.split-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-6);
+}
+
+.timeline {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.timeline-item {
+  border-left: 0.18rem solid color-mix(in srgb, var(--color-olive) 40%, var(--color-divider));
+  padding-left: var(--space-4);
+}
+
+@media (max-width: 64rem) {
+  .split-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,40 @@
+.hero {
+  display: grid;
+  gap: var(--space-8);
+  padding-block: var(--space-16);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  max-width: 15ch;
+}
+
+.hero p {
+  max-width: 60ch;
+  color: var(--color-text-muted);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.impact-band {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+@media (max-width: 64rem) {
+  .module-grid,
+  .impact-band {
+    grid-template-columns: 1fr;
+  }
+}

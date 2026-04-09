@@ -1,3 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CARA | Community Health Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,0,0"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/tokens.css" />
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+    <link rel="stylesheet" href="./css/nav.css" />
+    <link rel="stylesheet" href="./css/animations.css" />
+    <link rel="stylesheet" href="./css/pages/landing.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script defer src="./js/nav.js"></script>
+    <script defer src="./js/animations.js"></script>
+    <script defer src="./js/counters.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="site-header-inner container">
+        <a class="brand" href="./index.html" data-public-link>CARA</a>
+        <nav class="site-links" aria-label="Primary">
+          <a href="./about.html" data-public-link>About</a>
+          <a href="./research.html" data-public-link>Research</a>
+          <a href="./join-us.html" data-public-link>Join Us</a>
+          <a href="./privacy-ethics.html" data-public-link>Privacy &amp; Ethics</a>
+        </nav>
+        <div class="site-actions">
+          <a class="btn btn-primary" href="./ward/">Enter The Ward &rarr;</a>
+          <a class="btn btn-secondary" href="./compass/">Patient Compass</a>
+          <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false">
+            Menu
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-menu" aria-label="Mobile" data-mobile-menu>
+        <a href="./about.html" data-public-link>About</a>
+        <a href="./research.html" data-public-link>Research</a>
+        <a href="./join-us.html" data-public-link>Join Us</a>
+        <a href="./privacy-ethics.html" data-public-link>Privacy &amp; Ethics</a>
+        <a href="./ward/">Enter The Ward &rarr;</a>
+        <a href="./compass/">Patient Compass</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" data-hero>
+        <h1 data-hero-item data-parallax="0.06">
+          CARA turns frontline care into connected, explainable action.
+        </h1>
+        <p data-hero-item data-parallax="0.03">
+          A warm, clinician-first platform for triage, SOAP notes, and follow-up continuity across
+          The Ward and Patient Compass.
+        </p>
+        <div class="hero-actions" data-hero-item>
+          <a class="btn btn-primary" href="./ward/">Enter The Ward &rarr;</a>
+          <a class="btn btn-secondary" href="./compass/">View Patient Compass</a>
+        </div>
+      </section>
+
+      <section>
+        <h2 data-reveal>CARA modules</h2>
+        <p class="text-muted" data-reveal>
+          Each module is tuned for speed, clarity, and protocol-level reliability.
+        </p>
+        <div class="module-grid" style="margin-top: var(--space-4)">
+          <article class="card lift-on-hover" data-reveal>
+            <h3>AI Triage</h3>
+            <p class="text-muted">
+              Evaluate symptoms with WHO-style urgency output and clear one-line rationale.
+            </p>
+            <a class="btn btn-link" href="./ward/#triage">Open triage &rarr;</a>
+          </article>
+          <article class="card lift-on-hover" data-reveal>
+            <h3>Voice Notes</h3>
+            <p class="text-muted">
+              Turn spoken consults into structured SOAP notes ready for care teams.
+            </p>
+            <a class="btn btn-link" href="./ward/#soap">Open SOAP workspace &rarr;</a>
+          </article>
+          <article class="card lift-on-hover" data-reveal>
+            <h3>Follow-up Engine</h3>
+            <p class="text-muted">
+              Schedule return visits and keep patients aligned across channels.
+            </p>
+            <a class="btn btn-link" href="./ward/#followup">Open follow-up tools &rarr;</a>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2 data-reveal>Impact at the clinic level</h2>
+        <div class="impact-band" style="margin-top: var(--space-4)">
+          <article class="kpi" data-reveal>
+            <p class="text-muted">Patients managed per day</p>
+            <p class="kpi-value" data-counter="90">90</p>
+          </article>
+          <article class="kpi" data-reveal>
+            <p class="text-muted">Documentation time</p>
+            <p class="kpi-value" data-counter="2.4m">2.4m</p>
+          </article>
+          <article class="kpi" data-reveal>
+            <p class="text-muted">Follow-up adherence</p>
+            <p class="kpi-value" data-counter="80%">80%</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container" style="padding-block: var(--space-8)">
+      <div class="card card-tight">
+        <strong>CARA</strong>
+        <p class="text-muted">
+          Built for compassionate, high-throughput primary care in resource-limited environments.
+        </p>
+        <div class="site-links" style="margin-top: var(--space-2)">
+          <a href="./ward/">The Ward</a>
+          <a href="./compass/">Patient Compass</a>
+          <a href="./privacy-ethics.html">Privacy &amp; Ethics</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
 <!DOCTYPE html>
 
 <html lang="en"><head>

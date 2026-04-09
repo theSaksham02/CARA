@@ -1,7 +1,7 @@
 # frontend/assets
 
-**Owner:** Saksham Mishra
-
-| File/Folder | Job | How it will be filled | Owner |
-| --- | --- | --- | --- |
-| `icons/` | UI icon storage | Add symptom and dashboard icons used by FieldView and ClinIQ | Saksham Mishra |
+| Folder | Purpose |
+| --- | --- |
+| `icons/` | SVG icon assets (symptoms, status, UI symbols) |
+| `images/` | Dashboard and marketing image assets |
+| `fonts/` | Local fallback fonts when CDN is unavailable |

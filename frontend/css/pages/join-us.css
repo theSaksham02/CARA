@@ -1,0 +1,21 @@
+.join-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.join-form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.join-stats {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (max-width: 64rem) {
+  .join-grid {
+    grid-template-columns: 1fr;
+  }
+}

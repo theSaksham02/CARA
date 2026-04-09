@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Compass | CARA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/animations.css" />
+    <link rel="stylesheet" href="../css/pages/compass.css" />
+    <script defer src="../js/router.js"></script>
+    <script defer src="../js/nav.js"></script>
+    <script defer src="../js/animations.js"></script>
+    <script defer src="../js/voice.js"></script>
+    <script defer src="../js/compass-tts.js"></script>
+  </head>
+  <body data-router="compass">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="compass-top">
+      <div class="compass-top-inner container">
+        <a class="brand" href="../index.html">CARA</a>
+        <div class="lang-pills">
+          <button class="pill" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button class="pill" type="button" data-lang="sw" aria-pressed="false">SW</button>
+          <button class="pill" type="button" data-lang="hi" aria-pressed="false">HI</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="compass-shell">
+      <div class="compass-content">
+        <section class="compass-view" data-view="view-home">
+          <article class="compass-card stack">
+            <h1 data-i18n-key="homeHeading">Hello, Amara</h1>
+            <p class="text-muted" data-i18n-key="homeSub">Here is your health summary from today.</p>
+            <button class="btn btn-secondary tts-btn" type="button" data-tts data-tts-target="#home-voice">
+              🔊
+            </button>
+            <p id="home-voice" class="sr-only">
+              Hello, Amara. Here is your health summary from today.
+            </p>
+          </article>
+
+          <article class="compass-card status-critical stack">
+            <span class="badge badge-red">RED</span>
+            <h2 data-i18n-key="urgentTitle">See the doctor now</h2>
+            <p data-i18n-key="urgentBody">Your symptoms need immediate attention.</p>
+            <div class="site-actions">
+              <a class="btn btn-primary" href="#view-visit" data-route="view-visit" data-i18n-key="whatDo"
+                >What should I do?</a
+              >
+              <button class="btn btn-secondary tts-btn" type="button" data-tts data-tts-target="#urgent-voice">
+                🔊
+              </button>
+            </div>
+            <p id="urgent-voice" class="sr-only">Your symptoms need immediate attention.</p>
+          </article>
+
+          <div class="compass-grid">
+            <article class="compass-card card-tight">
+              <h3>Fever</h3>
+              <button class="btn btn-link tts-btn" type="button" data-tts data-tts-text="Fever detected">
+                🔊
+              </button>
+            </article>
+            <article class="compass-card card-tight">
+              <h3>Fast breathing</h3>
+              <button class="btn btn-link tts-btn" type="button" data-tts data-tts-text="Fast breathing detected">
+                🔊
+              </button>
+            </article>
+            <article class="compass-card card-tight">
+              <h3>Low hydration</h3>
+              <button class="btn btn-link tts-btn" type="button" data-tts data-tts-text="Low hydration detected">
+                🔊
+              </button>
+            </article>
+          </div>
+        </section>
+
+        <section class="compass-view" data-view="view-visit">
+          <article class="compass-card stack">
+            <h2>Your visit summary</h2>
+            <p>
+              Your nurse confirmed moderate respiratory distress. Please continue medicines, avoid
+              heavy activity, and return if breathing worsens.
+            </p>
+            <button class="btn btn-secondary tts-btn" type="button" data-tts data-tts-target="#visit-note">
+              🔊
+            </button>
+            <p id="visit-note" class="sr-only">
+              Visit summary: continue medicines and return urgently if breathing worsens.
+            </p>
+          </article>
+        </section>
+
+        <section class="compass-view" data-view="view-medicines" id="medicines">
+          <h2>My medicines</h2>
+          <div class="medicine-list">
+            <article class="medicine-item">
+              <h3>Amoxicillin 250mg</h3>
+              <p class="text-muted">One tablet, morning and evening for five days.</p>
+              <div class="site-actions">
+                <button
+                  class="btn btn-secondary medicine-toggle"
+                  type="button"
+                  data-med-toggle
+                  aria-pressed="false"
+                >
+                  I have taken today ✓
+                </button>
+                <button class="btn btn-link tts-btn" type="button" data-tts data-tts-text="Take one tablet morning and evening">
+                  🔊
+                </button>
+              </div>
+            </article>
+            <article class="medicine-item">
+              <h3>Paracetamol 500mg</h3>
+              <p class="text-muted">If fever persists, one tablet after food up to three times.</p>
+              <div class="site-actions">
+                <button
+                  class="btn btn-secondary medicine-toggle"
+                  type="button"
+                  data-med-toggle
+                  aria-pressed="false"
+                >
+                  I have taken today ✓
+                </button>
+                <button class="btn btn-link tts-btn" type="button" data-tts data-tts-text="Take after food when fever continues">
+                  🔊
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="compass-view" data-view="view-return" id="next-visit">
+          <article class="compass-card stack">
+            <h2 data-i18n-key="returnTitle">Come back on Thursday, 17 April</h2>
+            <p class="text-muted">Next visit: TB check-up with nurse review.</p>
+            <div class="site-actions">
+              <button class="btn btn-primary" type="button" data-save-calendar data-i18n-key="savePhone">
+                Save to my phone
+              </button>
+              <button class="btn btn-secondary tts-btn" type="button" data-tts data-tts-text="Come back on Thursday seventeenth April for your follow-up.">
+                🔊
+              </button>
+            </div>
+          </article>
+        </section>
+
+        <section class="compass-view" data-view="view-help">
+          <article class="compass-card stack">
+            <h2 data-i18n-key="helpLabel">Need urgent help right now?</h2>
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-help-toggle
+              aria-expanded="false"
+            >
+              RED triage help
+            </button>
+            <div class="help-expand" data-help-expand>
+              <div class="card card-tight">
+                <p>
+                  If child cannot drink, has convulsions, or severe breathing, go to nearest
+                  emergency unit immediately.
+                </p>
+              </div>
+            </div>
+            <button class="btn btn-secondary" type="button" data-open-maps>
+              Find my nearest clinic
+            </button>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    <nav class="compass-bottom-nav" aria-label="Patient Compass navigation">
+      <a href="#view-home" data-route="view-home">Home</a>
+      <a href="#view-visit" data-route="view-visit">My Visit</a>
+      <a href="#view-medicines" data-route="view-medicines">Medicines</a>
+      <a href="#view-return" data-route="view-return">Return Date</a>
+      <a href="#view-help" data-route="view-help">Help</a>
+    </nav>
+
+    <div class="toast-wrap" data-toast-wrap></div>
+  </body>
+</html>

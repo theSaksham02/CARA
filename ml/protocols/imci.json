@@ -1,0 +1,65 @@
+[
+  {
+    "condition": "Severe Pneumonia or Very Severe Disease",
+    "symptoms_required": ["fast_breathing"],
+    "danger_signs": ["chest_indrawing", "stridor", "unable_to_drink", "convulsions", "lethargic", "unconscious"],
+    "urgency": "RED",
+    "protocol": "WHO IMCI",
+    "action": "Give first dose of appropriate antibiotic. Refer urgently to hospital.",
+    "explanation": "Any general danger sign or chest indrawing or stridor in a calm child indicates severe pneumonia or very severe disease."
+  },
+  {
+    "condition": "Pneumonia",
+    "symptoms_required": ["fast_breathing"],
+    "danger_signs": [],
+    "urgency": "YELLOW",
+    "protocol": "WHO IMCI",
+    "action": "Give oral amoxicillin for 5 days. Advise mother when to return immediately. Follow up in 2 days.",
+    "explanation": "Fast breathing without danger signs indicates pneumonia needing oral antibiotics."
+  },
+  {
+    "condition": "No Pneumonia: Cough or Cold",
+    "symptoms_required": ["cough"],
+    "danger_signs": [],
+    "urgency": "GREEN",
+    "protocol": "WHO IMCI",
+    "action": "If coughing > 14 days, refer for TB assessment. Soothe throat and relieve cough with a safe remedy. Advise mother when to return immediately. Follow up in 5 days if not improving.",
+    "explanation": "Cough without fast breathing or danger signs is usually a simple cold."
+  },
+  {
+    "condition": "Severe Dehydration",
+    "symptoms_required": ["diarrhea"],
+    "danger_signs": ["lethargic", "unconscious", "sunken_eyes", "unable_to_drink", "drinks_poorly", "skin_pinch_goes_back_very_slowly"],
+    "urgency": "RED",
+    "protocol": "WHO IMCI",
+    "action": "Give fluid for severe dehydration (Plan C). Refer urgently to hospital if cholera is suspected or no IV access.",
+    "explanation": "Two or more danger signs of dehydration mean severe dehydration."
+  },
+  {
+    "condition": "Some Dehydration",
+    "symptoms_required": ["diarrhea"],
+    "danger_signs": ["restless", "irritable", "sunken_eyes", "drinks_eagerly", "thirsty", "skin_pinch_goes_back_slowly"],
+    "urgency": "YELLOW",
+    "protocol": "WHO IMCI",
+    "action": "Give fluid, zinc supplements, and food for some dehydration (Plan B). Advise mother when to return immediately. Follow up in 5 days if not improving.",
+    "explanation": "Two or more signs of some dehydration mean the child needs ORS and monitoring."
+  },
+  {
+    "condition": "Very Severe Febrile Disease / Malaria",
+    "symptoms_required": ["fever"],
+    "danger_signs": ["stiff_neck", "unable_to_drink", "convulsions", "lethargic", "unconscious"],
+    "urgency": "RED",
+    "protocol": "WHO IMCI",
+    "action": "Give first dose of appropriate antimalarial and antibiotic. Treat to prevent low blood sugar. Give one dose of paracetamol for high fever (>=38.5°C). Refer urgently to hospital.",
+    "explanation": "Any general danger sign or stiff neck in a child with fever requires urgent referral."
+  },
+  {
+    "condition": "Malaria",
+    "symptoms_required": ["fever"],
+    "danger_signs": [],
+    "urgency": "YELLOW",
+    "protocol": "WHO IMCI",
+    "action": "Give recommended first-line oral antimalarial. Give one dose of paracetamol for high fever. Advise mother when to return immediately. Follow up in 3 days if fever persists.",
+    "explanation": "Fever with a positive malaria test (or in a high-risk area) without danger signs."
+  }
+]

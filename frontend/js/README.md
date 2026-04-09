@@ -1,13 +1,18 @@
 # frontend/js
 
-**Assignees:** Saksham Mishra (frontend lead), Eman (SOAP formatter), Nirmal (API integration support)
+Runtime modules for CARA public pages + dashboards.
 
-| File | Job | How it will be filled | Assignee |
-| --- | --- | --- | --- |
-| `router.js` | Page/state navigation helper | Implement hash/router behavior for landing, FieldView, and ClinIQ transitions | Saksham Mishra |
-| `triage.js` | Field triage UI logic | Implement symptom selection, payload creation, and result rendering | Saksham Mishra |
-| `voice.js` | Voice-to-text helper | Implement browser speech capture and transcript lifecycle handling | Saksham Mishra |
-| `soap.js` | SOAP formatting adapter | Implement transcript parsing and SOAP section normalization | Eman |
-| `followup.js` | Follow-up scheduling UI logic | Implement follow-up creation, retrieval, and list rendering | Saksham Mishra |
-| `charts.js` | Analytics chart adapter | Implement chart setup for impact and audit metrics | Anaaya |
-| `api.js` | Backend API client wrappers | Implement all HTTP client methods matching backend endpoint contracts | Saksham + Nirmal |
+| File | Responsibility |
+| --- | --- |
+| `router.js` | Hash routing for Ward (7 views) and Compass (5 views) |
+| `nav.js` | Public navbar state, mobile menu, ward sidebar toggle, page transitions |
+| `animations.js` | GSAP/reveal animations, panel animation helper, toast helper |
+| `counters.js` | Scroll-triggered counter animation for KPI values |
+| `triage.js` | Symptom chip triage engine with RED/YELLOW/GREEN output |
+| `voice.js` | Speech recognition dictation + speech synthesis helper |
+| `soap.js` | SOAP formatter, note switching, PDF print trigger |
+| `charts.js` | Impact chart rendering and date-range updates |
+| `followup.js` | Queue panel actions, patient record modal, follow-up scheduling |
+| `assistant.js` | AI assistant quick prompts + mock conversational responses |
+| `compass-tts.js` | Compass TTS controls, language switching, meds toggle, ICS download, maps |
+| `api.js` | Fetch wrappers for backend API integrations |

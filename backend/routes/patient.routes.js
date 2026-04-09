@@ -1,3 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const { getPatients, createPatient, getPatientById } = require('../controllers/patient.controller');
+
+router.get('/', getPatients);
+router.get('/:id', getPatientById);
+router.post('/', createPatient);
+
+module.exports = router;
 'use strict';
 
 const express = require('express');

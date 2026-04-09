@@ -1,15 +1,55 @@
-# frontend
+# CARA frontend
 
-**Owner:** Saksham Mishra
+## Structure
 
-This folder contains all UI-facing files for landing, FieldView, and ClinIQ.
-Implementation code is intentionally not included yet.
+```
+frontend/
+├── index.html
+├── about.html
+├── research.html
+├── join-us.html
+├── privacy-ethics.html
+├── ward/
+│   └── index.html
+├── compass/
+│   └── index.html
+├── css/
+│   ├── tokens.css
+│   ├── base.css
+│   ├── components.css
+│   ├── nav.css
+│   ├── animations.css
+│   └── pages/
+│       ├── landing.css
+│       ├── about.css
+│       ├── research.css
+│       ├── join-us.css
+│       ├── privacy.css
+│       ├── ward.css
+│       └── compass.css
+├── js/
+│   ├── router.js
+│   ├── nav.js
+│   ├── animations.js
+│   ├── counters.js
+│   ├── triage.js
+│   ├── voice.js
+│   ├── soap.js
+│   ├── charts.js
+│   ├── followup.js
+│   ├── assistant.js
+│   ├── compass-tts.js
+│   └── api.js
+└── assets/
+    ├── icons/
+    ├── images/
+    └── fonts/
+```
 
-| File/Folder | Job | How it will be filled | Owner |
-| --- | --- | --- | --- |
-| `index.html` | Landing page shell | Add hero, login/register entry, and CTA flow to modules | Saksham Mishra |
-| `field.html` | FieldView shell (CHW dashboard) | Add patient list, triage panel, and patient profile/note sections | Saksham Mishra |
-| `clinic.html` | ClinIQ shell (doctor dashboard) | Add queue, patient detail, AI note review, and analytics layout | Saksham Mishra |
-| `css/` | Shared design styles | Add tokens, spacing system, and responsive styles | Saksham Mishra |
-| `js/` | Browser-side logic modules | Add routing, API calls, triage flow, voice flow, and charts wiring | Saksham Mishra |
-| `assets/` | Static assets used by UI | Add SVG/PNG assets used by pages and components | Saksham Mishra |
+## Notes
+
+- `the-ward.html`, `patient-compass.html`, `ward-*.html`, and `patient-dashboard-*.html` are compatibility redirects to the new unified dashboard routes.
+- Dashboards are hash-routed inside `ward/index.html` and `compass/index.html`.
+- Run locally with:
+  - `cd /Users/sakshammishra/CARA`
+  - `python3 -m http.server 5173 --directory frontend`

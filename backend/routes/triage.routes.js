@@ -1,3 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { assessTriage } = require('../controllers/triage.controller');
+
+router.post('/assess', assessTriage);
+
+module.exports = router;
 'use strict';
 
 const express = require('express');

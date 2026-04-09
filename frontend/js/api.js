@@ -1,3 +1,60 @@
+window.CARA = window.CARA || {};
+
+(() => {
+  const API_BASE = window.CARA_CONFIG?.apiBase || "";
+
+  async function request(path, options = {}) {
+    const response = await fetch(`${API_BASE}${path}`, {
+      headers: {
+        "Content-Type": "application/json",
+        ...(options.headers || {}),
+      },
+      ...options,
+    });
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(`API error ${response.status}: ${message || "Unknown error"}`);
+    }
+
+    const contentType = response.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) return response.json();
+    return response.text();
+  }
+
+  function getTriage(payload) {
+    return request("/api/triage", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  }
+
+  function getImpact(range = "month") {
+    return request(`/api/impact?range=${encodeURIComponent(range)}`);
+  }
+
+  function saveFollowUp(payload) {
+    return request("/api/followups", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  }
+
+  function askAssistant(payload) {
+    return request("/api/assistant", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  }
+
+  window.CARA.api = {
+    request,
+    getTriage,
+    getImpact,
+    saveFollowUp,
+    askAssistant,
+  };
+})();
 (function attachCaraApi(globalScope) {
   class CaraApi {
     constructor(options = {}) {

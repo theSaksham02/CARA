@@ -1,0 +1,154 @@
+.ward-content {
+  padding: var(--space-6) var(--space-4) var(--space-16);
+  display: grid;
+  gap: var(--space-6);
+}
+
+.ward-view {
+  display: none;
+  gap: var(--space-5);
+}
+
+.ward-view.is-active {
+  display: grid;
+}
+
+.ward-view h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1rem + 3vw, 3.5rem);
+}
+
+.ward-two-col {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 1.4fr 1fr;
+}
+
+.queue-layout {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 1fr;
+}
+
+.queue-row {
+  cursor: pointer;
+}
+
+.queue-mobile-cards {
+  display: none;
+  gap: var(--space-3);
+}
+
+.queue-card {
+  border: 0.0625rem solid color-mix(in srgb, var(--color-divider) 70%, transparent);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-soft);
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.soap-layout {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: minmax(13rem, 18rem) 1fr;
+}
+
+.note-list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.note-btn {
+  text-align: left;
+}
+
+.assistant-layout {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 2fr 1fr;
+}
+
+.thread {
+  min-height: 18rem;
+  max-height: 28rem;
+  overflow: auto;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.bubble {
+  border-radius: var(--radius-xl);
+  padding: var(--space-3) var(--space-4);
+  max-width: 75ch;
+}
+
+.bubble-user {
+  justify-self: end;
+  background: color-mix(in srgb, var(--color-olive) 18%, var(--color-surface));
+}
+
+.bubble-ai {
+  justify-self: start;
+  background: var(--color-surface);
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-4);
+}
+
+.audit-list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.audit-item {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-soft);
+}
+
+@media (max-width: 64rem) {
+  .ward-two-col,
+  .soap-layout,
+  .assistant-layout,
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 48rem) {
+  .data-table thead {
+    display: none;
+  }
+
+  .data-table,
+  .data-table tbody,
+  .data-table tr,
+  .data-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .data-table tr {
+    border: 0.0625rem solid color-mix(in srgb, var(--color-divider) 70%, transparent);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-3);
+    background: var(--color-surface-soft);
+  }
+
+  .data-table td {
+    border: 0;
+    padding: 0.5rem var(--space-3);
+  }
+
+  .queue-mobile-cards {
+    display: grid;
+  }
+
+  .queue-panel {
+    border-left: 0;
+  }
+}
