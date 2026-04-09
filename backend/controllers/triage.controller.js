@@ -1,36 +1,3 @@
-const { evaluateTriage } = require('../engine/engine');
-
-const assessTriage = (req, res) => {
-  try {
-    const { symptoms, age_group, patient_id, chw_id } = req.body;
-    
-    // Run the engine
-    const result = evaluateTriage(symptoms, age_group);
-    
-    // Audit log if patient_id is provided
-    if (patient_id) {
-      const db = req.app.locals.db;
-      db.prepare(`
-        INSERT INTO triage_audits (patient_id, symptoms, urgency_level, protocol_used, reasons, chw_id)
-        VALUES (?, ?, ?, ?, ?, ?)
-      `).run(
-        patient_id, 
-        JSON.stringify(symptoms), 
-        result.level, 
-        result.protocol, 
-        JSON.stringify(result.reasons),
-        chw_id || 'anonymous'
-      );
-    }
-
-    res.json(result);
-  } catch (error) {
-    console.error("Triage error:", error);
-    res.status(500).json({ error: "Failed to evaluate triage." });
-  }
-};
-
-module.exports = { assessTriage };
 'use strict';
 
 const { validationResult } = require('express-validator');

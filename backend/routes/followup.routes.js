@@ -1,11 +1,3 @@
-const express = require('express');
-const router = express.Router();
-const { getFollowups, scheduleFollowup } = require('../controllers/followup.controller');
-
-router.get('/', getFollowups);
-router.post('/', scheduleFollowup);
-
-module.exports = router;
 'use strict';
 
 const express = require('express');

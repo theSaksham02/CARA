@@ -1,11 +1,3 @@
-const express = require('express');
-const router = express.Router();
-const { generateNote, getNotes } = require('../controllers/note.controller');
-
-router.post('/generate', generateNote);
-router.get('/', getNotes); // Optional for viewing all notes
-
-module.exports = router;
 'use strict';
 
 const express = require('express');
