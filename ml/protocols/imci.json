@@ -1,82 +1,412 @@
 {
-  "version": "1.1.0",
-  "source": "WHO IMCI Guidelines 2014 / Expanded",
+  "version": "1.0.0",
+  "source": "WHO-IMCI-2014 + WHO-IMAI-2011",
   "default_action": "Provide home care guidance and routine follow-up.",
   "rules": [
     {
-      "id": "severe-disease-danger-signs",
+      "id": "imci-danger-sign-red-001",
       "priority": 100,
       "symptomsAny": [
-        "unable to drink",
-        "vomiting everything",
         "convulsions",
-        "lethargy",
+        "convulsing now",
+        "lethargic",
         "unconscious",
+        "unable to drink",
+        "vomiting everything"
+      ],
+      "urgency": "RED",
+      "reason": "General danger signs in children require immediate life-saving treatment and emergency referral.",
+      "recommended_action": "Give pre-referral treatment (keep warm, give glucose if at risk, give diazepam if convulsing, start oxygen if distressed) and refer urgently to hospital.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-pneumonia-severe-red-001",
+      "priority": 95,
+      "symptomsAny": [
         "stridor",
         "chest indrawing"
       ],
       "urgency": "RED",
-      "recommended_action": "Give first dose of appropriate antibiotic. Refer urgently to hospital.",
-      "reason": "Presence of a general danger sign, stridor, or chest indrawing indicates severe pneumonia or very severe disease.",
-      "suggested_tests": ["Pulse Oximetry", "Chest X-Ray", "Blood Glucose"]
+      "reason": "Severe pneumonia with chest indrawing or stridor indicates very severe respiratory infection requiring immediate hospital care.",
+      "recommended_action": "Give first dose of IV/IM antibiotic and oxygen immediately, then refer urgently to hospital with pre-referral treatment.",
+      "min_age_months": 2,
+      "max_age_months": 59
     },
     {
-      "id": "pneumonia-fast-breathing",
-      "priority": 80,
-      "symptomsAll": ["fast breathing"],
-      "symptomsAny": ["cough"],
-      "urgency": "YELLOW",
-      "recommended_action": "Give oral amoxicillin for 5 days. Advise mother when to return immediately. Follow up in 2 days.",
-      "reason": "Fast breathing in a child with cough indicates pneumonia.",
-      "suggested_tests": ["Respiratory Rate Audit", "Temperature Check"]
-    },
-    {
-      "id": "severe-dehydration",
-      "priority": 95,
-      "symptomsAll": ["diarrhoea"],
-      "symptomsAny": ["sunken eyes", "skin pinch goes back very slowly", "lethargy", "unable to drink"],
-      "urgency": "RED",
-      "recommended_action": "Give fluid for severe dehydration (Plan C). Refer urgently to hospital.",
-      "reason": "Two or more signs including sunken eyes or lethargy indicates severe dehydration.",
-      "suggested_tests": ["Electrolyte Panel", "Blood Pressure"]
-    },
-    {
-      "id": "some-dehydration",
-      "priority": 75,
-      "symptomsAll": ["diarrhoea"],
-      "symptomsAny": ["restless", "irritable", "sunken eyes", "drinks eagerly", "thirsty"],
-      "urgency": "YELLOW",
-      "recommended_action": "Give fluid, zinc supplements, and food for some dehydration (Plan B). Follow up in 5 days.",
-      "reason": "Two or more signs like restlessness or thirst indicates some dehydration.",
-      "suggested_tests": ["Weight Check", "Zinc Prescription Audit"]
-    },
-    {
-      "id": "malaria-high-risk",
+      "id": "imci-dehydration-severe-red-001",
       "priority": 90,
-      "symptomsAll": ["fever"],
-      "symptomsAny": ["stiff neck", "malaria area", "positive malaria test"],
+      "symptomsAll": [
+        "diarrhoea",
+        "sunken eyes"
+      ],
+      "symptomsAny": [
+        "lethargic",
+        "unconscious",
+        "skin pinch goes back very slowly"
+      ],
       "urgency": "RED",
-      "recommended_action": "Give first dose of antimalarial. Treat to prevent low blood sugar. Refer urgently.",
-      "reason": "Fever with danger signs or stiff neck in malaria area is very severe febrile disease.",
-      "suggested_tests": ["Rapid Malaria Test (RDT)", "Blood Smear", "Lumbar Puncture (if stiff neck)"]
+      "reason": "Severe dehydration with danger signs requires IV rehydration and urgent hospital referral.",
+      "recommended_action": "Start IV rehydration with isotonic solution immediately and refer urgently to hospital with mother.",
+      "min_age_months": 2,
+      "max_age_months": 59
     },
     {
-      "id": "malaria-confirmed",
+      "id": "imci-fever-severe-red-001",
+      "priority": 85,
+      "symptomsAll": [
+        "fever",
+        "stiff neck"
+      ],
+      "urgency": "RED",
+      "reason": "Fever with stiff neck suggests meningitis or severe bacterial infection requiring emergency treatment.",
+      "recommended_action": "Give first dose of IV/IM antibiotics immediately and refer urgently to hospital.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-anaemia-severe-red-001",
+      "priority": 80,
+      "symptomsAny": [
+        "severe palmar pallor"
+      ],
+      "urgency": "RED",
+      "reason": "Severe anaemia indicated by severe palmar pallor is a danger sign requiring urgent assessment and possible transfusion.",
+      "recommended_action": "Refer urgently to hospital for assessment of other severe classifications and possible transfusion.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-malnutrition-complicated-red-001",
+      "priority": 75,
+      "symptomsAll": [
+        "severe acute malnutrition",
+        "oedema of both feet"
+      ],
+      "urgency": "RED",
+      "reason": "Complicated severe acute malnutrition with oedema indicates medical complications requiring inpatient hospital management.",
+      "recommended_action": "Refer urgently to hospital for inpatient therapeutic feeding and treatment of complications.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-pneumonia-moderate-yellow-001",
       "priority": 70,
-      "symptomsAll": ["fever", "positive malaria test"],
+      "symptomsAll": [
+        "cough",
+        "fast breathing"
+      ],
       "urgency": "YELLOW",
-      "recommended_action": "Give recommended first-line oral antimalarial. Give paracetamol for high fever.",
-      "reason": "Confirmed malaria without danger signs.",
-      "suggested_tests": ["Complete Blood Count (CBC)"]
+      "reason": "Moderate pneumonia without chest indrawing shows pneumonia signs but can be treated at clinic with close follow-up.",
+      "recommended_action": "Give oral amoxicillin for 5 days and teach mother to return urgently if breathing worsens.",
+      "min_age_months": 2,
+      "max_age_months": 59
     },
     {
-      "id": "mild-cough-cold",
+      "id": "imci-dehydration-some-yellow-001",
+      "priority": 65,
+      "symptomsAny": [
+        "diarrhoea",
+        "vomiting"
+      ],
+      "symptomsAll": [
+        "drinks eagerly",
+        "sunken eyes"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Some dehydration with 2+ signs indicates moderate fluid loss treatable with oral rehydration and close monitoring.",
+      "recommended_action": "Give oral rehydration salts and zinc for 14 days, then return in 5 days for reassessment.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-malaria-confirmed-yellow-001",
+      "priority": 60,
+      "symptomsAll": [
+        "fever",
+        "malaria test positive"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Confirmed malaria requires prompt first-line antimalarial treatment to prevent severe disease.",
+      "recommended_action": "Give artemether-lumefantrine or artesunate + amodiaquine, then return in 3 days if fever persists.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-fever-undiagnosed-yellow-001",
+      "priority": 55,
+      "symptomsAny": [
+        "fever",
+        "high fever"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Fever without malaria detected requires identification of cause and appropriate treatment.",
+      "recommended_action": "Assess for other causes and give paracetamol for fever > 38.5°C, return if fever persists in 3 days.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-dysentery-yellow-001",
+      "priority": 50,
+      "symptomsAll": [
+        "diarrhoea",
+        "blood in stool"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Dysentery indicates bacterial infection requiring antibiotic treatment and fluid replacement.",
+      "recommended_action": "Give ciprofloxacin for 3 days, oral rehydration salts, and zinc supplementation.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-diarrhoea-persistent-yellow-001",
+      "priority": 45,
+      "symptomsAny": [
+        "persistent diarrhoea",
+        "diarrhoea"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Persistent diarrhoea lasting 14+ days increases malnutrition risk and requires nutritional intervention.",
+      "recommended_action": "Give multivitamins with zinc for 14 days and counsel mother on appropriate feeding.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-anaemia-moderate-yellow-001",
+      "priority": 40,
+      "symptomsAny": [
+        "some palmar pallor"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Moderate anaemia indicated by some palmar pallor requires iron supplementation and parasite treatment.",
+      "recommended_action": "Start iron supplementation and mebendazole if child is 1+ years old, return in 14 days.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-ear-infection-acute-yellow-001",
+      "priority": 35,
+      "symptomsAny": [
+        "pus draining from ear",
+        "ear pain"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Acute ear infection requires antibiotic treatment to prevent chronic ear disease.",
+      "recommended_action": "Give 5-day antibiotic course and paracetamol for pain, return in 5 days.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-ear-infection-chronic-yellow-001",
+      "priority": 30,
+      "symptomsAny": [
+        "pus draining from ear"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Chronic ear infection (14+ days drainage) requires quinolone eardrops and ear drying.",
+      "recommended_action": "Keep ear dry with cotton wicking and use quinolone eardrops for 14 days.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-malnutrition-moderate-yellow-001",
+      "priority": 25,
+      "symptomsAny": [
+        "moderate acute malnutrition"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Moderate acute malnutrition requires nutritional counseling and micronutrient supplementation.",
+      "recommended_action": "Counsel mother on nutrition and appropriate feeding, return in 30 days for reassessment.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-cough-mild-green-001",
       "priority": 20,
-      "symptomsAll": ["cough"],
+      "symptomsAny": [
+        "cough"
+      ],
       "urgency": "GREEN",
-      "recommended_action": "Soothe throat and relieve cough. Advise when to return. Follow up in 5 days.",
-      "reason": "Cough without fast breathing or danger signs is likely a simple cold.",
-      "suggested_tests": []
+      "reason": "Mild cough without fast breathing or chest indrawing indicates simple upper respiratory infection.",
+      "recommended_action": "Soothe throat with safe home remedy and return in 5 days if not improving.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-fever-mild-green-001",
+      "priority": 15,
+      "symptomsAny": [
+        "fever"
+      ],
+      "urgency": "GREEN",
+      "reason": "Low fever without identified cause or danger signs is usually self-limiting.",
+      "recommended_action": "Give paracetamol if temperature above 38.5°C and return in 2 days if fever persists.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-diarrhoea-no-dehydration-green-001",
+      "priority": 10,
+      "symptomsAny": [
+        "diarrhoea"
+      ],
+      "urgency": "GREEN",
+      "reason": "Diarrhoea without dehydration signs is manageable with home care and oral rehydration.",
+      "recommended_action": "Teach home fluid, zinc and food treatment (Plan A), return in 5 days if not improving.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imci-routine-green-001",
+      "priority": 5,
+      "symptomsAny": [
+        "not eating"
+      ],
+      "urgency": "GREEN",
+      "reason": "No danger signs identified during routine assessment.",
+      "recommended_action": "Provide home care guidance and routine follow-up as indicated.",
+      "min_age_months": 2,
+      "max_age_months": 59
+    },
+    {
+      "id": "imai-airway-emergency-red-001",
+      "priority": 100,
+      "symptomsAny": [
+        "stridor",
+        "difficulty breathing",
+        "respiratory distress",
+        "central cyanosis"
+      ],
+      "urgency": "RED",
+      "reason": "Airway obstruction or severe respiratory distress is immediately life-threatening.",
+      "recommended_action": "Clear airway, give oxygen 5L/min immediately, prepare airway management equipment, refer emergently.",
+      "min_age_months": 120
+    },
+    {
+      "id": "imai-shock-emergency-red-001",
+      "priority": 95,
+      "symptomsAny": [
+        "signs of shock",
+        "weak pulse",
+        "fast pulse",
+        "pale and cold",
+        "heavy bleeding"
+      ],
+      "urgency": "RED",
+      "reason": "Signs of shock or circulatory failure are immediately life-threatening.",
+      "recommended_action": "Establish two IV lines, begin rapid fluid bolus, give oxygen, control bleeding, refer emergently.",
+      "min_age_months": 120
+    },
+    {
+      "id": "imai-consciousness-emergency-red-001",
+      "priority": 90,
+      "symptomsAny": [
+        "convulsions",
+        "convulsing now",
+        "unconscious",
+        "lethargic"
+      ],
+      "urgency": "RED",
+      "reason": "Altered consciousness or current convulsions indicate critical neurological emergency.",
+      "recommended_action": "Protect from injury, manage airway, check glucose immediately, give diazepam if convulsing, refer emergently.",
+      "min_age_months": 120
+    },
+    {
+      "id": "imai-respiratory-distress-yellow-001",
+      "priority": 70,
+      "symptomsAny": [
+        "difficulty breathing",
+        "fast breathing",
+        "respiratory distress"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Significant breathing difficulty requires urgent oxygen and assessment.",
+      "recommended_action": "Measure oxygen saturation immediately, give oxygen if SpO2 < 90%.",
+      "min_age_months": 120
+    },
+    {
+      "id": "imai-appearance-very-pale-yellow-001",
+      "priority": 65,
+      "symptomsAny": [
+        "severe palmar pallor",
+        "pale and cold"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Extreme pallor suggests severe anaemia or circulatory compromise requiring urgent assessment.",
+      "recommended_action": "Establish IV access, check vital signs and pulse, assess for bleeding or shock.",
+      "min_age_months": 120
+    },
+    {
+      "id": "imai-very-ill-appearance-yellow-001",
+      "priority": 60,
+      "symptomsAny": [
+        "very weak",
+        "very ill"
+      ],
+      "urgency": "YELLOW",
+      "reason": "General appearance of severe acute illness requires urgent evaluation to identify cause.",
+      "recommended_action": "Take vital signs, perform brief focused assessment, establish IV access if needed.",
+      "min_age_months": 120
+    },
+    {
+      "id": "imai-syncope-recent-yellow-001",
+      "priority": 55,
+      "symptomsAny": [
+        "recent fainting"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Recent loss of consciousness requires urgent cardiac and metabolic assessment.",
+      "recommended_action": "Check blood glucose, take ECG if available, get vital signs, establish IV access.",
+      "min_age_months": 120
+    },
+    {
+      "id": "imai-bleeding-significant-yellow-001",
+      "priority": 50,
+      "symptomsAny": [
+        "heavy bleeding",
+        "blood in stool",
+        "vomiting"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Active significant bleeding increases shock risk and requires urgent hemorrhage control.",
+      "recommended_action": "Establish two IV lines with large-bore needles, start rapid IV fluids, identify bleeding source.",
+      "min_age_months": 120
+    },
+    {
+      "id": "imai-diarrhoea-frequent-yellow-001",
+      "priority": 45,
+      "symptomsAny": [
+        "diarrhoea"
+      ],
+      "urgency": "YELLOW",
+      "reason": "Frequent diarrhoea (>5 times daily) raises dehydration risk and possible cholera.",
+      "recommended_action": "Assess dehydration status, give oral rehydration initially, IV fluids if severe dehydration.",
+      "min_age_months": 120
+    },
+    {
+      "id": "imai-stroke-signs-yellow-001",
+      "priority": 40,
+      "symptomsAny": [
+        "weakness",
+        "difficulty breathing",
+        "inability to drink",
+        "recent fainting"
+      ],
+      "urgency": "YELLOW",
+      "reason": "New onset neurological symptoms may indicate acute stroke requiring time-sensitive intervention.",
+      "recommended_action": "Check blood glucose, assess stroke risk, arrange CT or imaging, consider thrombolytic therapy.",
+      "min_age_months": 120
+    },
+    {
+      "id": "imai-routine-green-001",
+      "priority": 5,
+      "symptomsAny": [
+        "no danger signs"
+      ],
+      "urgency": "GREEN",
+      "reason": "No emergency or priority signs present; patient can wait for routine consultation.",
+      "recommended_action": "Provide routine care and standard consultation without urgency.",
+      "min_age_months": 120
     }
   ]
 }
