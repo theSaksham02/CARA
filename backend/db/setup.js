@@ -77,6 +77,13 @@ const schemaSql = `
     payload JSONB NOT NULL DEFAULT '{}'::jsonb,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
   );
+
+  CREATE TABLE IF NOT EXISTS chw_profiles (
+    id TEXT PRIMARY KEY,
+    display_name TEXT NOT NULL,
+    village TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  );
 `;
 
 function getDbMode() {
@@ -933,6 +940,50 @@ async function getImpactAnalytics(range = 'today') {
   };
 }
 
+async function getCHWProfile(chwId) {
+  if (getDbMode() === 'memory') {
+    return null;
+  }
+  if (getDbMode() === 'supabase') {
+    const sb = getSupabaseDb();
+    const rows = throwOnError(
+      await sb.from('chw_profiles').select('*').eq('id', chwId).limit(1),
+      'getCHWProfile'
+    );
+    return rows[0] || null;
+  }
+  const pool = createPool();
+  const result = await pool.query(
+    'SELECT * FROM chw_profiles WHERE id = $1', [chwId]
+  );
+  return result.rows[0] || null;
+}
+
+async function getCHWStats(chwId, range = 'week') {
+  const [assessments, notes] = await Promise.all([
+    listTriageAssessments({ limit: 500 }),
+    listSoapNotes({ limit: 500 }),
+  ]);
+  const chwAssessments = assessments.filter(
+    a => a.created_by === chwId && isWithinRange(a.created_at, range)
+  );
+  const chwNotes = notes.filter(
+    n => n.generated_by === chwId && isWithinRange(n.created_at, range)
+  );
+  return {
+    chw_id: chwId,
+    range,
+    patients_seen: chwAssessments.length,
+    red_cases: chwAssessments.filter(a => a.urgency === 'RED').length,
+    yellow_cases: chwAssessments.filter(a => a.urgency === 'YELLOW').length,
+    green_cases: chwAssessments.filter(a => a.urgency === 'GREEN').length,
+    notes_written: chwNotes.length,
+    documentation_rate: chwAssessments.length
+      ? Number(((chwNotes.length / chwAssessments.length) * 100).toFixed(1))
+      : 0,
+  };
+}
+
 module.exports = {
   bootstrapDatabase,
   closeDatabase,
@@ -942,6 +993,8 @@ module.exports = {
   createTriageAssessment,
   findPatientById,
   findSoapNoteById,
+  getCHWProfile,
+  getCHWStats,
   getDashboardOverview,
   getDbMode,
   getImpactAnalytics,

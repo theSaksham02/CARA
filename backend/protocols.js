@@ -206,25 +206,39 @@ function validateProtocols(protocols) {
   };
 }
 
+function applyDemoRuleLimit(validated) {
+  const DEMO_RULE_LIMIT = process.env.DEMO_RULE_LIMIT
+    ? parseInt(process.env.DEMO_RULE_LIMIT, 10)
+    : null;
+
+  if (DEMO_RULE_LIMIT && Number.isFinite(DEMO_RULE_LIMIT)) {
+    validated.rules = validated.rules
+      .sort((a, b) => b.priority - a.priority)
+      .slice(0, DEMO_RULE_LIMIT);
+  }
+
+  return validated;
+}
+
 function loadProtocols() {
   try {
     if (!fs.existsSync(externalProtocolPath)) {
-      return validateProtocols(fallbackProtocols);
+      return applyDemoRuleLimit(validateProtocols(fallbackProtocols));
     }
 
     const rawValue = fs.readFileSync(externalProtocolPath, 'utf8').trim();
     if (!rawValue) {
-      return validateProtocols(fallbackProtocols);
+      return applyDemoRuleLimit(validateProtocols(fallbackProtocols));
     }
 
     const parsedValue = JSON.parse(rawValue);
-    return validateProtocols(parsedValue);
+    return applyDemoRuleLimit(validateProtocols(parsedValue));
   } catch (error) {
     if (fs.existsSync(externalProtocolPath)) {
       throw new Error(`Invalid IMCI protocol bundle: ${error.message}`);
     }
 
-    return validateProtocols(fallbackProtocols);
+    return applyDemoRuleLimit(validateProtocols(fallbackProtocols));
   }
 }
 

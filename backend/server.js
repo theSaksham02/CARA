@@ -8,6 +8,7 @@ const express = require('express');
 
 const analyticsRoutes = require('./routes/analytics.routes');
 const auditRoutes = require('./routes/audit.routes');
+const chwRoutes = require('./routes/chw.routes');
 const { bootstrapDatabase, getDbMode } = require('./db/setup');
 const { auditMiddleware } = require('./middleware/audit.middleware');
 const { authMiddleware, getAuthMode } = require('./middleware/auth.middleware');
@@ -46,6 +47,7 @@ function createApp() {
   app.use('/api/dashboard', dashboardRoutes);
   app.use('/api/analytics/impact', analyticsRoutes);
   app.use('/api/audit', auditRoutes);
+  app.use('/api/chw', chwRoutes);
 
   app.use((req, res) => {
     res.status(404).json({

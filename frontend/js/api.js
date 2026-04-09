@@ -3,13 +3,23 @@ window.CARA = window.CARA || {};
 (() => {
   const API_BASE = window.CARA_CONFIG?.apiBase || "";
 
+  async function getToken() {
+    if (window.CaraAuth && typeof window.CaraAuth.getAccessToken === 'function') {
+      return window.CaraAuth.getAccessToken();
+    }
+    return null;
+  }
+
   async function request(path, options = {}) {
+    const token = await getToken();
+    const headers = {
+      "Content-Type": "application/json",
+      ...(token ? { "Authorization": `Bearer ${token}` } : {}),
+      ...(options.headers || {}),
+    };
     const response = await fetch(`${API_BASE}${path}`, {
-      headers: {
-        "Content-Type": "application/json",
-        ...(options.headers || {}),
-      },
       ...options,
+      headers,
     });
 
     if (!response.ok) {
@@ -159,6 +169,14 @@ window.CARA = window.CARA || {};
         method: 'POST',
         body: payload,
       });
+    }
+
+    getCHWProfile() {
+      return this.request('/api/chw/me');
+    }
+
+    getCHWStats(range = 'week') {
+      return this.request(`/api/chw/me/stats?range=${range}`);
     }
   }
 
