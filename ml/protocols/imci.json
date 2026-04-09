@@ -1,0 +1,1043 @@
+{
+  "metadata": {
+    "title": "IMCI/IMAI Triage Classification Mapping",
+    "description": "Comprehensive mapping of conditions to triage classifications for both children (IMCI) and adults (IMAI)",
+    "created": "2026-04-09",
+    "version": "1.0",
+    "source": [
+      "IMAI_Vol1_eng.pdf - IMAI District Clinician Manual: Hospital Care for Adolescents and Adults",
+      "imci-chart-booklet.pdf - Integrated Management of Childhood Illness Chart Booklet"
+    ],
+    "population_coverage": {
+      "imci": "Children aged 2 months to 5 years",
+      "imai": "Adolescents and Adults aged 10+ years"
+    }
+  },
+  "triage_systems": {
+    "imci": {
+      "name": "IMCI - Integrated Management of Childhood Illness",
+      "target_age": "2 months to 5 years",
+      "color_scheme": "Pink (Very Severe), Yellow (Moderate), Green (No Danger)",
+      "levels": [
+        {
+          "level_id": "imci_pink",
+          "level_name": "VERY SEVERE DISEASE",
+          "color": "pink",
+          "urgency": "URGENT",
+          "action": "Refer URGENTLY to hospital with immediate pre-referral treatment",
+          "conditions": [
+            {
+              "condition_id": "imci_pink_pyramid",
+              "condition_name": "General Danger Signs (PYRAMID)",
+              "description": "Any child with these signs - assess, give pre-referral treatments, refer immediately",
+              "triggers": [
+                "Unable to drink or only able to drink",
+                "Unable to breastfeed or only able to breastfeed",
+                "Persistent vomiting (vomits everything)",
+                "Has had convulsions in the last 3 days",
+                "Lethargic or unconscious",
+                "Convulsing NOW"
+              ],
+              "pre_referral_treatment": [
+                "Keep child warm",
+                "Give glucose if low blood sugar risk",
+                "Give diazepam if convulsing",
+                "Start oxygen if respiratory distress"
+              ]
+            },
+            {
+              "condition_id": "imci_pink_pneumonia_severe",
+              "condition_name": "Pneumonia - VERY SEVERE (or Very Severe Pneumonia/Cough)",
+              "description": "Severe respiratory infection requiring hospital care",
+              "triggers": [
+                "Stridor in calm child",
+                "Chest indrawing",
+                "Severe respiratory distress with any general danger sign"
+              ],
+              "treatment": [
+                "First dose of appropriate IV/IM antibiotic",
+                "Manage airway and oxygenation",
+                "Treat for low blood sugar if at risk"
+              ],
+              "follow_up": "Refer URGENTLY to hospital"
+            },
+            {
+              "condition_id": "imci_pink_dehydration_severe",
+              "condition_name": "Severe Dehydration",
+              "description": "Critical fluid loss requiring IV rehydration",
+              "triggers": [
+                "Lethargic or unconscious (at least 2 of 4 signs)",
+                "Unable to drink or only able to drink",
+                "Drinks eagerly, thirsty",
+                "Sunken eyes",
+                "Skin pinch goes back very slowly (>2 seconds)"
+              ],
+              "treatment": [
+                "IV Rehydration (Plan C) - isotonic IV solution",
+                "Give first dose of appropriate ORS",
+                "Assess for cholera risk"
+              ],
+              "follow_up": "Refer URGENTLY to hospital with mother"
+            },
+            {
+              "condition_id": "imci_pink_fever_severe",
+              "condition_name": "Very Severe Febrile Disease",
+              "description": "Fever with danger signs, possible malaria/meningitis/severe bacterial infection",
+              "triggers": [
+                "Fever AND any general danger sign",
+                "Fever AND stiff neck",
+                "High fever with appearance of severe illness"
+              ],
+              "treatment": [
+                "First dose of appropriate IV/IM antibiotic(s)",
+                "First dose of antimalarial if malaria likely (artesunate)",
+                "Paracetamol for fever",
+                "Treat for low blood sugar if at risk"
+              ],
+              "follow_up": "Refer URGENTLY to hospital"
+            },
+            {
+              "condition_id": "imci_pink_anaemia_severe",
+              "condition_name": "Severe Anaemia",
+              "description": "Severe and dangerous reduction in red blood cells",
+              "triggers": [
+                "Severe palmar pallor (very pale palms)"
+              ],
+              "treatment": [
+                "Assess for other severe classifications",
+                "Prepare for possible transfusion if available"
+              ],
+              "follow_up": "Refer URGENTLY to hospital"
+            },
+            {
+              "condition_id": "imci_pink_malnutrition_complicated",
+              "condition_name": "Complicated Severe Acute Malnutrition (SAM)",
+              "description": "Severe malnutrition with medical complications",
+              "triggers": [
+                "WFH/L <-3 z-scores OR MUAC <115mm AND oedema of both feet",
+                "Any severe classification present",
+                "Fails appetite test"
+              ],
+              "treatment": [
+                "Therapeutic food assessment",
+                "Treat identified medical complications"
+              ],
+              "follow_up": "Refer URGENTLY to hospital for inpatient management"
+            },
+            {
+              "condition_id": "imci_pink_measles_complicated",
+              "condition_name": "Complicated Measles",
+              "description": "Measles with eye or mouth complications indicating severe disease",
+              "triggers": [
+                "Clouding of cornea (white spot/opacity on pupil)",
+                "Pus draining from one or both eyes",
+                "Deep/extensive mouth ulcers"
+              ],
+              "treatment": [
+                "Vitamin A supplementation",
+                "Tetracycline eye ointment for eye infection",
+                "Antibiotic if eye infected",
+                "Gentian violet for mouth ulcers"
+              ],
+              "follow_up": "Refer URGENTLY to hospital"
+            },
+            {
+              "condition_id": "imci_pink_mastoiditis",
+              "condition_name": "Mastoiditis",
+              "description": "Severe ear infection with bone inflammation",
+              "triggers": [
+                "Tender swelling behind ear",
+                "Pus draining or likely collection"
+              ],
+              "treatment": [
+                "First dose of appropriate antibiotic",
+                "Paracetamol for pain"
+              ],
+              "follow_up": "Refer URGENTLY to hospital"
+            }
+          ]
+        },
+        {
+          "level_id": "imci_yellow",
+          "level_name": "MODERATE URGENCY / SOME URGENCY",
+          "color": "yellow",
+          "urgency": "TREATMENT NEEDED",
+          "action": "Provide appropriate outpatient treatment and follow-up care",
+          "conditions": [
+            {
+              "condition_id": "imci_yellow_pneumonia",
+              "condition_name": "Pneumonia (without chest indrawing)",
+              "description": "Lower respiratory infection without severe signs",
+              "triggers": [
+                "Fast breathing for age WITHOUT chest indrawing",
+                "Age <5 months: ≥50 breaths/min",
+                "Age 5-12 months: ≥50 breaths/min",
+                "Age 12+ months: ≥40 breaths/min"
+              ],
+              "treatment": [
+                "Oral Amoxicillin for 5 days",
+                "If wheezing: give inhaled bronchodilator for 5 days",
+                "If wheezing disappeared after bronchodilator: continue treatment",
+                "Soothe throat and relieve cough with safe remedy"
+              ],
+              "follow_up": "Return in 3 days; urgent return if difficulty breathing"
+            },
+            {
+              "condition_id": "imci_yellow_cough_cold",
+              "condition_name": "Cough or Cold (No Pneumonia)",
+              "description": "Upper respiratory infection without signs of pneumonia",
+              "triggers": [
+                "Coughing but no fast breathing and no chest indrawing",
+                "Age <2 months with cough may need assessment"
+              ],
+              "treatment": [
+                "Soothe throat and relieve cough with safe home remedy",
+                "Inhaled bronchodilator if wheezing"
+              ],
+              "follow_up": "Return in 5 days if not improving"
+            },
+            {
+              "condition_id": "imci_yellow_dehydration_some",
+              "condition_name": "Some Dehydration",
+              "description": "Moderate fluid loss, treatable with oral rehydration",
+              "triggers": [
+                "Two or more of the following signs:",
+                "Restless/irritable",
+                "Sunken eyes",
+                "Drinks eagerly, very thirsty",
+                "Skin pinch goes back slowly (1-2 seconds)"
+              ],
+              "treatment": [
+                "Oral Rehydration Salts (ORS): home treatment Plan B",
+                "Zinc supplements for 14 days",
+                "Continue breastfeeding/feeding"
+              ],
+              "follow_up": "Return in 5 days or sooner if condition worsens"
+            },
+            {
+              "condition_id": "imci_yellow_diarrhoea_persistent",
+              "condition_name": "Persistent Diarrhoea",
+              "description": "Diarrhea lasting 14+ days without current dehydration",
+              "triggers": [
+                "Diarrhea lasting 14 or more days",
+                "No signs of current dehydration"
+              ],
+              "treatment": [
+                "Multivitamins and minerals (including zinc) for 14 days",
+                "Mother counseling on:  appropriate feeding, breastfeeding, nutrition"
+              ],
+              "follow_up": "Return in 5 days"
+            },
+            {
+              "condition_id": "imci_yellow_dysentery",
+              "condition_name": "Dysentery (Blood in Stool)",
+              "description": "Bloody diarrhea indicating bacterial infection",
+              "triggers": [
+                "Blood in stool with diarrhea"
+              ],
+              "treatment": [
+                "Ciprofloxacin for 3 days",
+                "ORS for any dehydration",
+                "Zinc supplementation"
+              ],
+              "follow_up": "Return in 3 days"
+            },
+            {
+              "condition_id": "imci_yellow_malaria",
+              "condition_name": "Malaria (Positive Test)",
+              "description": "Parasitic infection confirmed by test in high-risk area",
+              "triggers": [
+                "Malaria test POSITIVE",
+                "In malaria endemic area"
+              ],
+              "treatment": [
+                "First-line oral antimalarial:",
+                "  - Artemether-lumefantrine OR",
+                "  - Artesunate + amodiaquine",
+                "Paracetamol for fever"
+              ],
+              "follow_up": "Return in 3 days if fever persists"
+            },
+            {
+              "condition_id": "imci_yellow_fever_no_malaria",
+              "condition_name": "Fever (No Malaria)",
+              "description": "Fever from non-malaria cause requiring treatment",
+              "triggers": [
+                "Fever present",
+                "No malaria detected",
+                "Other cause identified or presumed"
+              ],
+              "treatment": [
+                "Treat identified bacterial cause with appropriate antibiotic",
+                "Paracetamol for fever"
+              ],
+              "follow_up": "Return in 3 days if fever persists"
+            },
+            {
+              "condition_id": "imci_yellow_ear_infection_acute",
+              "condition_name": "Acute Ear Infection",
+              "description": "Recent ear infection with discharge or pain",
+              "triggers": [
+                "Pus draining from ear for LESS than 14 days OR",
+                "Ear pain present"
+              ],
+              "treatment": [
+                "Antibiotic for 5 days (appropriate for ear infection)",
+                "Paracetamol for pain",
+                "Dry ear by wicking (insert dry cotton)"
+              ],
+              "follow_up": "Return in 5 days"
+            },
+            {
+              "condition_id": "imci_yellow_ear_infection_chronic",
+              "condition_name": "Chronic Ear Infection",
+              "description": "Persistent ear infection of longer duration",
+              "triggers": [
+                "Pus draining from ear for 14 or MORE days"
+              ],
+              "treatment": [
+                "Wick to keep ear dry",
+                "Quinolone eardrops for 14 days"
+              ],
+              "follow_up": "Return in 5 days"
+            },
+            {
+              "condition_id": "imci_yellow_measles_uncomplicated",
+              "condition_name": "Measles (with eye/mouth complications)",
+              "description": "Measles with non-severe eye or mouth involvement",
+              "triggers": [
+                "Pus draining from eye (not clouded cornea) OR",
+                "Mouth ulcers present (not deep/extensive)"
+              ],
+              "treatment": [
+                "Vitamin A supplementation",
+                "Treat eye infection with tetracycline eye ointment",
+                "Treat mouth ulcers with gentian violet solution",
+                "Appropriate antibiotic if secondary infection"
+              ],
+              "follow_up": "Return in 3 days"
+            },
+            {
+              "condition_id": "imci_yellow_malnutrition_acute_moderate",
+              "condition_name": "Moderate Acute Malnutrition (MAM)",
+              "description": "Moderate nutritional deficiency requiring intervention",
+              "triggers": [
+                "WFH/L between -3 and -2 z-scores OR",
+                "MUAC 115-125mm",
+                "No oedema"
+              ],
+              "treatment": [
+                "Assess current feeding practices",
+                "Mother counseling on appropriate nutrition and feeding",
+                "Micronutrient supplementation if indicated"
+              ],
+              "follow_up": "Return in 30 days for reassessment"
+            },
+            {
+              "condition_id": "imci_yellow_anaemia_some",
+              "condition_name": "Anaemia (Some Pallor)",
+              "description": "Mild to moderate anemia treatable at clinic",
+              "triggers": [
+                "Some palmar pallor (pale but not severe)"
+              ],
+              "treatment": [
+                "Iron supplementation",
+                "Mebendazole if child is 1 year or older",
+                "Mother counseling on diet/feeding"
+              ],
+              "follow_up": "Return in 14 days"
+            },
+            {
+              "condition_id": "imci_yellow_hiv_confirmed",
+              "condition_name": "Confirmed HIV Infection",
+              "description": "Positive virological or serological test requiring care",
+              "triggers": [
+                "Positive virological test (DNA/RNA PCR) OR",
+                "Positive serological test in child >18 months"
+              ],
+              "treatment": [
+                "Initiate ART (antiretroviral therapy) per national guidelines",
+                "Cotrimoxazole (TMP-SMX) prophylaxis",
+                "Assess and support feeding",
+                "Vitamin A supplementation",
+                "Vaccination if appropriate"
+              ],
+              "follow_up": "Regular follow-up per national guidelines"
+            }
+          ]
+        },
+        {
+          "level_id": "imci_green",
+          "level_name": "NO DANGER / ACCEPTABLE",
+          "color": "green",
+          "urgency": "ROUTINE",
+          "action": "Home treatment with reassurance and counseling",
+          "conditions": [
+            {
+              "condition_id": "imci_green_cough",
+              "condition_name": "Cough or Cold (No Signs of Pneumonia)",
+              "description": "Simple upper respiratory symptoms",
+              "triggers": [
+                "Cough present",
+                "No fast breathing",
+                "No chest indrawing",
+                "Normal respiratory rate for age"
+              ],
+              "treatment": [
+                "Soothe throat with safe home remedy",
+                "Inhaled bronchodilator if wheezing present"
+              ],
+              "follow_up": "Return in 5 days if not improving"
+            },
+            {
+              "condition_id": "imci_green_no_dehydration",
+              "condition_name": "No Dehydration (Minimal Signs)",
+              "description": "Diarrhea without significant fluid loss",
+              "triggers": [
+                "No signs of dehydration",
+                "Can drink normally",
+                "Normal skin turgor"
+              ],
+              "treatment": [
+                "Home fluid, zinc and food treatment (Plan A)",
+                "Zinc: 10mg/day for 14 days",
+                "Continue breastfeeding or normal feeding"
+              ],
+              "follow_up": "Return in 5 days if not improving"
+            },
+            {
+              "condition_id": "imci_green_fever_mild",
+              "condition_name": "Fever (No Identifiable Cause)",
+              "description": "Fever without clear source or malaria",
+              "triggers": [
+                "Fever present",
+                "No malaria detected",
+                "No other identified cause"
+              ],
+              "treatment": [
+                "Paracetamol for temperature >38.5°C",
+                "Supportive care",
+                "Mother counseling"
+              ],
+              "follow_up": "Return in 2 days if fever persists"
+            },
+            {
+              "condition_id": "imci_green_measles_simple",
+              "condition_name": "Measles (Uncomplicated)",
+              "description": "Confirmed or suspected measles without complications",
+              "triggers": [
+                "Measles present",
+                "No eye complications (no clouded cornea, no pus)",
+                "No mouth ulcers"
+              ],
+              "treatment": [
+                "Vitamin A supplementation (per guidelines)"
+              ],
+              "follow_up": "Routine care"
+            },
+            {
+              "condition_id": "imci_green_no_ear_infection",
+              "condition_name": "No Ear Infection",
+              "description": "Ear examination normal",
+              "triggers": [
+                "No ear discharge",
+                "No ear pain",
+                "No tender swelling"
+              ],
+              "treatment": [
+                "No treatment needed"
+              ],
+              "follow_up": "Routine care"
+            },
+            {
+              "condition_id": "imci_green_nutrition_adequate",
+              "condition_name": "No Acute Malnutrition",
+              "description": "Nutritional status appropriate for age",
+              "triggers": [
+                "WFH/L ≥ -2 z-scores OR",
+                "MUAC ≥125mm",
+                "No oedema"
+              ],
+              "treatment": [
+                "Routine feeding counseling as needed",
+                "Age-appropriate nutrition guidance"
+              ],
+              "follow_up": "Routine care"
+            },
+            {
+              "condition_id": "imci_green_no_anaemia",
+              "condition_name": "No Anaemia",
+              "description": "Normal hemoglobin/pallor",
+              "triggers": [
+                "No palmar pallor",
+                "Normal appearance"
+              ],
+              "treatment": [
+                "Routine assessment of feeding if <2 years",
+                "Standard counseling"
+              ],
+              "follow_up": "Routine care"
+            },
+            {
+              "condition_id": "imci_green_hiv_unlikely",
+              "condition_name": "HIV Infection Unlikely",
+              "description": "Negative HIV test or low risk",
+              "triggers": [
+                "Negative test result",
+                "Follow-up testing as per national guidelines"
+              ],
+              "treatment": [
+                "Treat minor infections as identified",
+                "Standard preventive care"
+              ],
+              "follow_up": "Standard interval"
+            }
+          ]
+        }
+      ]
+    },
+    "imai": {
+      "name": "IMAI - Integrated Management of Adolescent and Adult Illness",
+      "target_age": "10+ years (Adolescents and Adults)",
+      "color_scheme": "Red (Emergency), Yellow (Priority), Green (Non-Urgent)",
+      "levels": [
+        {
+          "level_id": "imai_red",
+          "level_name": "EMERGENCY SIGNS - RED",
+          "color": "red",
+          "urgency": "IMMEDIATE",
+          "action": "Immediate life-saving treatment and preparation for referral/admission",
+          "categories": [
+            {
+              "category_id": "imai_red_airway_breathing",
+              "category_name": "Airway and Breathing Emergencies",
+              "description": "Life-threatening respiratory compromise",
+              "emergency_signs": [
+                "Signs of airway obstruction: unusual sounds (stridor/gurgling), unable to speak or cough",
+                "Central cyanosis (blue lips, tongue, core)",
+                "Choking or foreign body obstruction",
+                "Severe respiratory distress: cannot speak, uses accessory muscles, gasping"
+              ],
+              "immediate_treatment": [
+                "Clear airway if possible",
+                "Place in recovery position if unconscious",
+                "Give oxygen 5L/min immediately",
+                "Prepare for airway management",
+                "If severe, may need intubation or cricothyrotomy"
+              ],
+              "referral": "EMERGENCY - Refer immediately to tertiary facility"
+            },
+            {
+              "category_id": "imai_red_circulation_shock",
+              "category_name": "Circulation Emergencies (SHOCK)",
+              "description": "Life-threatening circulatory failure",
+              "emergency_signs": [
+                "Signs of shock: weak pulse, fast pulse (>110/min), pale, cold, sweaty",
+                "Severe hypotension: SBP <90 mmHg",
+                "Capillary refill >3 seconds",
+                "Heavy bleeding from any site (active hemorrhage)",
+                "Severe trauma with potential internal bleeding"
+              ],
+              "immediate_treatment": [
+                "Establish TWO large-bore IV lines",
+                "Rapid IV fluid bolus (500mL-1L isotonic solution)",
+                "Give oxygen",
+                "Keep patient warm",
+                "Identify and control bleeding source",
+                "Monitor carefully for response",
+                "Keep NPO for possible surgery"
+              ],
+              "referral": "EMERGENCY - Refer immediately"
+            },
+            {
+              "category_id": "imai_red_consciousness",
+              "category_name": "Altered Consciousness/Convulsing",
+              "description": "Critical neurological emergency",
+              "emergency_signs": [
+                "Altered level of consciousness: unresponsive, confused, drowsy despite stimulation",
+                "Currently convulsing or recent convulsions",
+                "Unresponsiveness (coma)"
+              ],
+              "immediate_treatment": [
+                "Protect from injury if convulsing",
+                "Manage airway: place in recovery position",
+                "Check capillary glucose immediately",
+                "If low blood sugar (<2.2 mmol/L or cannot measure): give glucose IV 10-20mL 50%",
+                "If convulsing: give diazepam IV 10mg (or rectally 10mg) immediately",
+                "Identify cause (malaria, meningitis, hypoglycemia, intoxication, etc.)"
+              ],
+              "referral": "EMERGENCY - Refer immediately"
+            },
+            {
+              "category_id": "imai_red_pain_life_threatening",
+              "category_name": "Pain from Life-Threatening Cause",
+              "description": "Severe pain indicating immediately dangerous condition",
+              "emergency_signs": [
+                "Severe abdominal pain with hard rigid abdomen (peritonitis/perforation)",
+                "Severe headache with stiff neck (meningitis)",
+                "Crushing retrosternal chest pain (MI/ACS)",
+                "Severe headache with focal neurological signs (stroke/bleed)",
+                "Major burns (>15% TBSA in adults, >10% in children)"
+              ],
+              "immediate_treatment": [
+                "Assess quickly, give immediate treatment for cause:",
+                "Abdominal: IV antibiotics for peritonitis, IV fluids",
+                "Meningitis: IV antibiotics + IV fluids",
+                "MI: Oxygen, aspirin, IV access, cardiac monitoring",
+                "Stroke: Oxygen, IV access, NPO potential thrombolytic",
+                "Burns: Fluid resuscitation, analgesia, wound care"
+              ],
+              "referral": "EMERGENCY - Refer immediately"
+            }
+          ]
+        },
+        {
+          "level_id": "imai_yellow",
+          "level_name": "PRIORITY SIGNS - YELLOW",
+          "color": "yellow",
+          "urgency": "URGENT",
+          "action": "Urgent assessment and treatment without waiting in queue",
+          "priority_signs": [
+            {
+              "priority_id": "imai_yellow_respiratory",
+              "priority_name": "Respiratory Distress/Difficulty Breathing",
+              "description": "Significant breathing difficulty but not immediately life-threatening",
+              "triggers": [
+                "Respiratory distress without stridor or cyanosis",
+                "Difficulty breathing but able to speak",
+                "SpO2 <90% on room air (usually)"
+              ],
+              "assessment": [
+                "Measure SpO2 immediately",
+                "Count respiratory rate",
+                "Look for accessory muscle use"
+              ],
+              "management": [
+                "Give oxygen if SpO2 <90%"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_behavior",
+              "priority_name": "Violent Behavior / Very Agitated",
+              "description": "Behavioral emergency risk",
+              "triggers": [
+                "Violent, threatening, or aggressive behavior",
+                "Very agitated, uncontrollable"
+              ],
+              "assessment": [
+                "Protect staff and patient",
+                "Check blood glucose (may be cause)",
+                "Check SpO2 and respiratory status"
+              ],
+              "management": [
+                "Calm environment, physical restraint if needed",
+                "Check for medical causes",
+                "May need sedation"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_appearance",
+              "priority_name": "Very Pale Appearance",
+              "description": "Signs of severe anemia or shock",
+              "triggers": [
+                "Paleness suggesting anemia or poor perfusion",
+                "Extreme pallor"
+              ],
+              "assessment": [
+                "Check pulse, BP",
+                "Measure/estimate hemoglobin if possible",
+                "Look for signs of bleeding or shock"
+              ],
+              "management": [
+                "Establish IV access",
+                "Determine cause (bleeding, anemia, etc.)"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_weakness",
+              "priority_name": "Very Weak / Ill-Appearing",
+              "description": "General appearance of severe acute illness",
+              "triggers": [
+                "Appears very ill, weak, unable to stand",
+                "Extreme fatigue or deterioration"
+              ],
+              "assessment": [
+                "Vital signs including temperature",
+                "Brief focused history and exam"
+              ],
+              "management": [
+                "Establish IV access",
+                "Continuous monitoring",
+                "Identify cause"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_syncope",
+              "priority_name": "Recent Fainting / Syncope / Near-Syncope",
+              "description": "Loss of consciousness or near loss",
+              "triggers": [
+                "Recent fainting episode",
+                "Near-syncope (feeling like losing consciousness)"
+              ],
+              "assessment": [
+                "ECG if available",
+                "Blood glucose",
+                "Vital signs"
+              ],
+              "management": [
+                "Establish IV access",
+                "Continuous cardiac monitoring if possible",
+                "Identify cause"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_bleeding_severe",
+              "priority_name": "Significant Bleeding",
+              "description": "Active or recent significant bleeding",
+              "triggers": [
+                "Large hemoptysis (coughing up significant blood)",
+                "Active gastrointestinal bleeding (vomiting blood, black stool)",
+                "External active bleeding from any site",
+                "Heavy vaginal bleeding"
+              ],
+              "assessment": [
+                "Estimate/measure blood loss",
+                "Check vital signs",
+                "Assess for shock"
+              ],
+              "management": [
+                "Establish TWO IV lines with large-bore needles",
+                "Start IV fluids",
+                "Cross-match for possible transfusion",
+                "Search for bleeding source"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_fracture_dislocation",
+              "priority_name": "Fractures or Dislocations",
+              "description": "Bone/joint injuries",
+              "triggers": [
+                "Suspected or confirmed fracture",
+                "Visible deformity suggesting dislocation"
+              ],
+              "assessment": [
+                "Assess for compartment syndrome",
+                "Check neurovascular status"
+              ],
+              "management": [
+                "Immobilize appropriately",
+                "Analgesia",
+                "Manage open fractures with antibiotics"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_burns",
+              "priority_name": "Burns (Moderate to Severe)",
+              "description": "Thermal injury requiring urgent care",
+              "triggers": [
+                "Extensive burns (>10% TBSA in children, >15% TBSA in adults)",
+                "Burns involving face, hands, genitals",
+                "Circumferential burns"
+              ],
+              "assessment": [
+                "Calculate %TBSA using rule of 9s",
+                "Assess depth and location"
+              ],
+              "management": [
+                "Cool the burn (cold water if recent)",
+                "Pain relief",
+                "Fluid replacement as needed",
+                "Wound care"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_bite",
+              "priority_name": "Bites from Potentially Rabid Animal",
+              "description": "Exposure to rabies risk",
+              "triggers": [
+                "Bite or scratch from dog, cat, bat, or other animal",
+                "Potentially rabid animal in area"
+              ],
+              "assessment": [
+                "Assess bite severity",
+                "Determine if rabies prophylaxis needed"
+              ],
+              "management": [
+                "Wash wound thoroughly",
+                "Rabies post-exposure prophylaxis (RPEP) if indicated",
+                "Tetanus prophylaxis"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_diarrhea_frequent",
+              "priority_name": "Frequent Diarrhea (>5 times daily)",
+              "description": "Severe diarrhea with dehydration risk",
+              "triggers": [
+                "Diarrhea more than 5 times in 24 hours",
+                "Possible cholera or severe gastroenteritis"
+              ],
+              "assessment": [
+                "Assess dehydration status",
+                "Vital signs"
+              ],
+              "management": [
+                "Oral rehydration initially",
+                "IV fluids if severe dehydration",
+                "Identify cause"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_vision_change",
+              "priority_name": "Visual Changes / New Loss of Function",
+              "description": "Possible stroke or serious neurological event",
+              "triggers": [
+                "New vision loss",
+                "Sudden weakness on one side of body",
+                "Slurred speech",
+                "Facial drooping",
+                "New inability to see or function"
+              ],
+              "assessment": [
+                "Time of symptom onset",
+                "Direction (is this a stroke?)"
+              ],
+              "management": [
+                "Check blood glucose",
+                "Assess stroke risk",
+                "May need CT/imaging"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_rape_abuse",
+              "priority_name": "Rape / Sexual Abuse / Violence",
+              "description": "Trauma from interpersonal violence",
+              "triggers": [
+                "History suggestive of sexual assault",
+                "Signs of abuse or violence"
+              ],
+              "assessment": [
+                "Careful confidential history",
+                "Physical examination for injuries",
+                "Psychological support needed"
+              ],
+              "management": [
+                "Ensure patient safety",
+                "Medical care for injuries",
+                "Forensic evidence collection if appropriate",
+                "Counseling and support",
+                "Report per local guidelines"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_rash_severe",
+              "priority_name": "Extensive Rash with Peeling (Stevens-Johnson / TEN)",
+              "description": "Severe drug reaction or infectious disease with skin involvement",
+              "triggers": [
+                "New extensive rash with significant peeling",
+                "Mucosal involvement (mouth, eyes, genitals)",
+                "Blistering"
+              ],
+              "assessment": [
+                "Assess extent and pattern",
+                "Note recent medications"
+              ],
+              "management": [
+                "Stop suspected offending medication",
+                "Supportive care",
+                "Consult dermatology if available"
+              ]
+            },
+            {
+              "priority_id": "imai_yellow_sickle_cell_crisis",
+              "priority_name": "Sickle Cell Acute Crisis",
+              "description": "Acute complications in sickle cell disease patient",
+              "triggers": [
+                "Known sickle cell disease patient with:",
+                "Acute severe pain (vaso-occlusive crisis)",
+                "New cough/chest pain/dyspnea (acute chest syndrome)",
+                "Fever",
+                "Priapism (painful penile erection)",
+                "Splenic pain/crisis"
+              ],
+              "assessment": [
+                "History of sickle cell disease",
+                "Vital signs",
+                "Location and severity of pain"
+              ],
+              "management": [
+                "Strong analgesia",
+                "IV fluids",
+                "Oxygen if hypoxic",
+                "Antibiotics if infected"
+              ]
+            }
+          ]
+        },
+        {
+          "level_id": "imai_green",
+          "level_name": "NON-URGENT - GREEN",
+          "color": "green",
+          "urgency": "ROUTINE",
+          "action": "Can wait in queue; routine care",
+          "description": "No emergency or priority signs present. Patient can wait for routine consultation and care."
+        }
+      ]
+    }
+  },
+  "assessment_pathways": {
+    "imci_assessment": {
+      "name": "IMCI Assessment Pathway for Children",
+      "initial_screen": "Check for General Danger Signs (PYRAMID) - determines if URGENT referral needed",
+      "then_ask_about": [
+        "Does the child have cough or difficult breathing?",
+        "Does the child have diarrhea?",
+        "Does the child have fever?",
+        "Does the child have an ear problem?"
+      ],
+      "then_check_for": [
+        "Malnutrition status (WFH/L z-score or MUAC)",
+        "Anemia (check for palmar pallor)",
+        "HIV infection status",
+        "Immunization status"
+      ]
+    },
+    "imai_quick_check": {
+      "name": "IMAI Quick Check (First Priority Assessment)",
+      "check_for_emergency_signs": [
+        "Airway and Breathing: Obstruction, cyanosis, severe distress",
+        "Circulation: Shock signs, severe bleeding",
+        "Consciousness: Altered consciousness, convulsing",
+        "Pain: Life-threatening causes"
+      ],
+      "check_for_priority_signs": [
+        "Respiratory distress",
+        "Violent/agitated behavior",
+        "Very pale appearance",
+        "Very weak/ill-appearing",
+        "Recent syncope",
+        "Significant bleeding",
+        "Fractures/dislocations",
+        "Burns",
+        "Animal bites",
+        "Frequent diarrhea",
+        "Visual changes/stroke signs",
+        "Rape/abuse",
+        "Severe rash with peeling",
+        "Sickle cell crisis"
+      ]
+    }
+  },
+  "common_conditions_mapping": {
+    "description": "Conditions that appear in both IMCI and IMAI systems with different urgency levels",
+    "mapped_conditions": [
+      {
+        "condition": "Severe Pneumonia/Severe Respiratory Infection",
+        "imci_classification": "PINK - VERY SEVERE DISEASE",
+        "imai_classification": "RED - EMERGENCY SIGNS or YELLOW - PRIORITY SIGNS",
+        "imci_age": "2 months - 5 years",
+        "imai_age": "10+ years",
+        "common_features": "Rapid/difficult breathing, chest indrawing/distress, stridor"
+      },
+      {
+        "condition": "Shock/Severe Dehydration",
+        "imci_classification": "PINK - SEVERE DEHYDRATION",
+        "imai_classification": "RED - CIRCULATION EMERGENCY",
+        "imci_age": "2 months - 5 years",
+        "imai_age": "10+ years",
+        "common_features": "Weak pulse, pale, cold, lethargy, signs of hypovolemia"
+      },
+      {
+        "condition": "Meningitis/Severe Fever with Stiff Neck",
+        "imci_classification": "PINK - VERY SEVERE FEBRILE DISEASE",
+        "imai_classification": "RED - PAIN with LIFE-THREATENING CAUSE",
+        "imci_age": "2 months - 5 years",
+        "imai_age": "10+ years",
+        "common_features": "Fever, stiff neck, altered consciousness possible, meningeal signs"
+      },
+      {
+        "condition": "Malaria (Severe with danger signs)",
+        "imci_classification": "PINK - if danger signs OR YELLOW if uncomplicated",
+        "imai_classification": "RED - if severe with organ failure or altered consciousness",
+        "imci_age": "2 months - 5 years",
+        "imai_age": "10+ years",
+        "common_features": "Fever in endemic area, possibly altered consciousness"
+      },
+      {
+        "condition": "Severe Malnutrition with Complications",
+        "imci_classification": "PINK - COMPLICATED SEVERE ACUTE MALNUTRITION",
+        "imai_classification": "RED - EMERGENCY or YELLOW - PRIORITY depending on severity",
+        "imci_age": "2 months - 5 years",
+        "imai_age": "10+ years (adolescents)",
+        "common_features": "Very low weight for height, complications like infections"
+      },
+      {
+        "condition": "Severe Anemia",
+        "imci_classification": "PINK - SEVERE ANAEMIA",
+        "imai_classification": "YELLOW - VERY PALE APPEARANCE",
+        "imci_age": "2 months - 5 years",
+        "imai_age": "10+ years",
+        "common_features": "Severe palmar pallor, pale mucous membranes, weakness"
+      },
+      {
+        "condition": "Seizures/Convulsions",
+        "imci_classification": "PINK - General Danger Sign",
+        "imai_classification": "RED - ALTERED CONSCIOUSNESS/CONVULSING",
+        "imci_age": "2 months - 5 years",
+        "imai_age": "10+ years",
+        "common_features": "Acute seizure activity, need for immediate airway protection and diazepam"
+      },
+      {
+        "condition": "Active Bleeding",
+        "imci_classification": "Covered under specific conditions (not primary)",
+        "imai_classification": "RED - CIRCULATION or YELLOW - PRIORITY BLEEDING",
+        "imci_age": "2 months - 5 years",
+        "imai_age": "10+ years",
+        "common_features": "Active hemorrhage, signs of shock or risk thereof"
+      }
+    ]
+  },
+  "color_code_comparison": {
+    "urgency_levels": [
+      {
+        "level_name": "Most Urgent / Life-Threatening",
+        "imci_color": "PINK",
+        "imai_color": "RED",
+        "action": "Immediate life-saving treatment, expedited referral",
+        "examples": "Severe pneumonia, shock, meningitis, severe malnutrition complications"
+      },
+      {
+        "level_name": "Urgent / Needs Prompt Treatment",
+        "imci_color": "YELLOW",
+        "imai_color": "YELLOW",
+        "action": "Treat promptly, appropriate management, close follow-up",
+        "examples": "Moderate pneumonia, some dehydration, acute ear infection, priority signs"
+      },
+      {
+        "level_name": "Routine / Non-Urgent",
+        "imci_color": "GREEN",
+        "imai_color": "GREEN",
+        "action": "Standard care, can wait in queue, home treatment appropriate",
+        "examples": "Simple cough/cold, no dehydration, mild fever without findings"
+      }
+    ]
+  },
+  "usage_guide": {
+    "how_to_use": [
+      "1. Identify patient age group: IMCI (2 months - 5 years) or IMAI (10+ years)",
+      "2. Perform initial assessment per pathway (IMCI: Danger Signs, IMAI: Quick Check)",
+      "3. Match presenting signs/symptoms to classification",
+      "4. Identify triage level (color/urgency)",
+      "5. Implement indicated treatment per classification",
+      "6. Set follow-up schedule or arrange referral"
+    ],
+    "database_structure": "This JSON provides hierarchical structure: System > Levels > Classifications > Conditions with triggers and treatments",
+    "querying_examples": [
+      "Query: Find all IMCI PINK (Very Severe) conditions",
+      "Query: Find IMAI RED emergency signs for respiratory problems",
+      "Query: Find treatments for 'Pneumonia' in both IMCI and IMAI",
+      "Query: Get follow-up schedule for condition X in IMCI",
+      "Query: Find all YELLOW (moderate urgency) conditions"
+    ]
+  }
+}
+
