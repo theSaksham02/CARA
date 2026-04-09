@@ -58,7 +58,7 @@ window.CARA = window.CARA || {};
 (function attachCaraApi(globalScope) {
   class CaraApi {
     constructor(options = {}) {
-      this.baseUrl = options.baseUrl || '';
+      this.baseUrl = options.baseUrl || 'https://cara-backend.onrender.com';
       this.tokenProvider = options.tokenProvider || null;
     }
 
