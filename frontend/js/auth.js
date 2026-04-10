@@ -1,6 +1,6 @@
 (function attachCaraAuth(globalScope) {
   const SUPABASE_URL = 'https://dejibrpqparruwqsklvl.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_htxwjxFApBKZcb04_aIeNQ_pz912A0t';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRlamlicnBxcGFycnV3cXNrbHZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2MjAxMjYsImV4cCI6MjA5MTE5NjEyNn0.SAO8wx9MQXbvfgekvJ0i5gCMjtjzHDbj8PiygCozheg';
   const REDIRECTS = {
     clinician: 'the-ward-overview.html',
     patient: 'patient-compass-home.html',
