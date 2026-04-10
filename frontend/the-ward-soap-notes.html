@@ -153,7 +153,7 @@
 </div>
 </header>
 <!-- Main Content Canvas -->
-<main class="ml-[240px] pt-16 h-screen flex">
+<main class="ml-[240px] pt-16 h-[100dvh] min-h-[100vh] flex overflow-hidden">
 <!-- Left Panel: Patient Note List -->
 <aside class="w-80 h-full bg-surface-container-low flex flex-col border-r-0">
 <div class="p-6">
@@ -302,9 +302,19 @@
 </div>
 <!-- P: Plan -->
 <div class="p-8 rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow">
-<div class="flex items-center gap-3 mb-6">
+<div class="flex items-center justify-between mb-6 w-full">
+<div class="flex items-center gap-3">
 <span class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container font-headline italic font-bold text-xl">P</span>
 <h3 class="text-2xl font-headline">Plan</h3>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors" title="Voice Add Prescription">
+<span class="material-symbols-outlined text-primary">mic</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors" title="Edit Plan">
+<span class="material-symbols-outlined text-stone-500">edit</span>
+</button>
+</div>
 </div>
 <div class="space-y-4">
 <div class="flex items-center gap-3 p-3 bg-primary/5 rounded-lg border border-primary/10">

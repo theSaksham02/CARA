@@ -170,7 +170,7 @@
 <p class="text-on-surface-variant max-w-lg">Advanced clinical decision support anchored in global health protocols and local epidemiology.</p>
 </div>
 <!-- Chat History -->
-<div class="flex-1 overflow-y-auto px-10 pb-32 space-y-8 no-scrollbar">
+<div id="chat-history" class="flex-1 overflow-y-auto px-10 pb-32 space-y-8 no-scrollbar">
 <!-- Doctor Message -->
 <div class="flex justify-end ml-24">
 <div class="bg-surface-container-lowest px-6 py-4 rounded-xl rounded-tr-none shadow-sm max-w-2xl">
@@ -228,8 +228,8 @@
 <button class="w-12 h-12 flex items-center justify-center text-stone-400 hover:text-primary transition-colors">
 <span class="material-symbols-outlined">attach_file</span>
 </button>
-<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-stone-400 font-medium px-4" placeholder="Describe the patient or ask a clinical question..." type="text"/>
-<button class="bg-primary-container text-on-primary-container h-12 px-6 rounded-full flex items-center gap-2 hover:scale-[1.02] transition-transform">
+<input id="chat-input" class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-stone-400 font-medium px-4" placeholder="Describe the patient or ask a clinical question..." type="text"/>
+<button id="send-btn" class="bg-primary-container text-on-primary-container h-12 px-6 rounded-full flex items-center gap-2 hover:scale-[1.02] transition-transform">
 <span class="font-bold text-sm tracking-tight">Send Query</span>
 <span class="material-symbols-outlined text-sm">send</span>
 </button>
@@ -298,4 +298,52 @@
 <script src="./js/auth.js"></script>
 <script src="./js/portal-data.js"></script>
 <script src="./js/route-wiring.js" type="module"></script>
+<script>
+    const input = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const history = document.getElementById('chat-history');
+
+    function addMessage(text, isUser) {
+        if(!history) return;
+        const div = document.createElement('div');
+        div.className = isUser ? 'flex justify-end ml-24' : 'flex justify-start mr-24';
+        div.innerHTML = isUser ? `
+        <div class="bg-surface-container-lowest px-6 py-4 rounded-xl rounded-tr-none shadow-sm max-w-2xl">
+            <p class="text-sm font-medium text-primary mb-1">Dr. Aris</p>
+            <p class="text-on-surface leading-relaxed">${text}</p>
+        </div>` : `
+        <div class="border-l-4 border-primary-container bg-surface-container-low px-6 py-5 rounded-xl rounded-tl-none max-w-2xl">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="bg-primary-container text-on-primary-container text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">CARA AI</span>
+                <span class="text-[10px] text-primary/60 font-semibold bg-primary-fixed-dim/30 px-2 py-0.5 rounded-full uppercase tracking-widest flex items-center gap-1">
+                <span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">verified</span> WHO IMCI
+                </span>
+            </div>
+            <p class="text-on-surface leading-relaxed">${text}</p>
+        </div>`;
+        history.appendChild(div);
+        history.scrollTop = history.scrollHeight;
+    }
+
+    async function handleSend() {
+        const text = input.value.trim();
+        if (!text) return;
+        
+        addMessage(text, true);
+        input.value = '';
+        
+        // Simulating Active LLM delay
+        setTimeout(() => {
+            const llmResponse = "Based on the provided information, I recommend following the standard WHO guidelines for this condition. Please refer to the updated protocol.";
+            addMessage(llmResponse, false);
+        }, 1500);
+    }
+
+    if(sendBtn && input) {
+        sendBtn.addEventListener('click', handleSend);
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
+        });
+    }
+</script>
 </body></html>
