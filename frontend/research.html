@@ -88,6 +88,10 @@
             grid-template-columns: repeat(12, 1fr);
             gap: 2rem;
         }
+        .small-caps {
+            font-variant: small-caps;
+            letter-spacing: 0.1em;
+        }
     </style>
 <link href="./css/style.css" rel="stylesheet"/>
 </head>
@@ -182,6 +186,54 @@
 </div>
 </div>
 </section>
+<!-- Current Research Card -->
+<section class="mb-32 flex justify-center">
+<article class="w-full max-w-[700px] bg-surface-container-low rounded-lg p-8 md:p-12 border border-outline-variant/20 flex flex-col gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+<!-- Header Section -->
+<header class="flex flex-col gap-4">
+<span class="text-primary font-label text-xs font-bold tracking-[0.2em] uppercase">
+                CURRENT RESEARCH
+            </span>
+<h1 class="text-on-surface font-headline italic text-4xl md:text-5xl leading-tight">
+                Validating CARA Against WHO Clinical Standards
+            </h1>
+</header>
+<!-- Body Text -->
+<section>
+<p class="text-on-surface-variant font-body text-sm md:text-base leading-relaxed max-w-prose opacity-90">
+                Our pilot study benchmarks CARA's triage output against WHO IMCI and IMAI protocols across isolated rural clinics — measuring accuracy, CHW adoption, and documentation time reduction in offline-only environments.
+            </p>
+</section>
+<!-- Stat Pills -->
+<section class="flex flex-wrap gap-3">
+<div class="px-4 py-1.5 rounded-full border border-primary/40 bg-surface-container-low">
+<span class="text-primary font-body text-[10px] md:text-xs font-semibold tracking-wide">
+                    WHO IMCI Protocol
+                </span>
+</div>
+<div class="px-4 py-1.5 rounded-full border border-primary/40 bg-surface-container-low">
+<span class="text-primary font-body text-[10px] md:text-xs font-semibold tracking-wide">
+                    Offline-Only Clinics
+                </span>
+</div>
+<div class="px-4 py-1.5 rounded-full border border-primary/40 bg-surface-container-low">
+<span class="text-primary font-body text-[10px] md:text-xs font-semibold tracking-wide">
+                    SOAP Accuracy
+                </span>
+</div>
+</section>
+<!-- Separation Logic -->
+<hr class="border-t border-primary/30 w-full"/>
+<!-- Footer -->
+<footer class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary/60 text-lg translate-y-0.5" data-icon="info">info</span>
+<p class="text-on-surface-variant italic font-headline text-sm md:text-base opacity-70 leading-snug">
+                Seeking partnerships with Ministries of Health to expand clinical benchmarking at a national scale.
+            </p>
+</footer>
+</article>
+</section>
+
 <!-- Infographic: Decision Tree -->
 <section class="mb-32 bg-surface-container-low rounded-lg p-8 md:p-16 overflow-hidden relative">
 <div class="max-w-3xl mb-12">
