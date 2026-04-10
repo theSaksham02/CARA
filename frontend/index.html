@@ -7,7 +7,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -94,9 +93,9 @@
 <a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="./the-ward-login.html">The Ward</a>
 <a class="text-stone-600 dark:text-stone-400 font-medium hover:scale-105 hover:text-[#5c6e2e] transition-all duration-300" href="./patient-compass-login.html">Patient Compass</a>
 </div>
-<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-semibold hover:scale-[1.02] hover:bg-primary-container transition-all shadow-[0_20px_40px_rgba(32,27,16,0.05)]">
+<a href="./the-ward-login.html" class="bg-primary text-on-primary px-8 py-3 rounded-full font-semibold hover:scale-[1.02] hover:bg-primary-container transition-all shadow-[0_20px_40px_rgba(32,27,16,0.05)] no-underline">
             Access Platform →
-        </button>
+        </a>
 </nav>
 <!-- Hero Section -->
 <section class="max-w-[1440px] mx-auto px-8 py-16 md:py-32 grid md:grid-cols-2 gap-16 items-center">
@@ -109,12 +108,12 @@
                 CARA gives community health workers in rural clinics AI-assisted triage, voice-to-note documentation, and automated follow-up — all without internet.
             </p>
 <div class="flex flex-wrap gap-6 pt-4">
-<button class="bg-primary text-on-primary px-10 py-5 rounded-full text-lg font-bold hover:scale-[1.02] hover:bg-primary-container transition-all shadow-xl">
+<a href="./the-ward-login.html" class="bg-primary text-on-primary px-10 py-5 rounded-full text-lg font-bold hover:scale-[1.02] hover:bg-primary-container transition-all shadow-xl no-underline text-center">
                     Enter The Ward →
-                </button>
-<button class="border-2 border-outline-variant/20 text-on-surface px-10 py-5 rounded-full text-lg font-bold hover:scale-[1.02] transition-all">
+                </a>
+<a href="./patient-compass-login.html" class="border-2 border-outline-variant/20 text-on-surface px-10 py-5 rounded-full text-lg font-bold hover:scale-[1.02] transition-all no-underline text-center">
                     View Patient Compass
-                </button>
+                </a>
 </div>
 </div>
 <div class="relative">
@@ -281,9 +280,9 @@
 <p class="text-xl text-on-primary/80 max-w-lg mb-12 leading-relaxed">
                     By offloading clinical documentation and triage to assisted AI, we're not just saving time—we're creating a new layer of healthcare capacity where it's needed most.
                 </p>
-<button class="bg-primary-container text-on-primary px-12 py-5 rounded-full font-bold hover:scale-105 transition-all">
+<a href="./research.html" class="bg-primary-container text-on-primary px-12 py-5 rounded-full font-bold hover:scale-105 transition-all no-underline inline-block">
                     Download Impact Report
-                </button>
+                </a>
 </div>
 <div class="grid grid-cols-1 gap-12">
 <div class="border-b border-on-primary/10 pb-8">
@@ -303,6 +302,72 @@
 <!-- Decorative organic shape -->
 <div class="absolute top-0 right-0 w-[50%] h-full bg-primary-container/20 -skew-x-12 translate-x-32"></div>
 </section>
+<!-- Testimonial Marquee -->
+<section class="py-32 bg-surface-container-low overflow-hidden">
+<div class="flex whitespace-nowrap gap-12 animate-marquee py-4">
+<div class="flex-none w-[500px] bg-surface-container-lowest p-12 rounded-xl shadow-sm">
+<p class="text-2xl font-serif italic text-on-surface mb-8 whitespace-normal">"CARA has turned my clinic from a place of chaos into a place of precision. I can see more patients while being more thorough."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-200"></div>
+<div>
+<p class="font-bold">Aamina K.</p>
+<p class="text-sm opacity-60">CHW, Turkana County</p>
+</div>
+</div>
+</div>
+<div class="flex-none w-[500px] bg-surface-container-lowest p-12 rounded-xl shadow-sm">
+<p class="text-2xl font-serif italic text-on-surface mb-8 whitespace-normal">"The offline voice-to-note feature is a game changer. We finally have digitized records for everyone in the ward."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-200"></div>
+<div>
+<p class="font-bold">Dr. Samuel O.</p>
+<p class="text-sm opacity-60">Public Health Advisor, WHO</p>
+</div>
+</div>
+</div>
+<div class="flex-none w-[500px] bg-surface-container-lowest p-12 rounded-xl shadow-sm">
+<p class="text-2xl font-serif italic text-on-surface mb-8 whitespace-normal">"Finally, a technology that respects the reality of the last mile instead of trying to force Silicon Valley tools into it."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-200"></div>
+<div>
+<p class="font-bold">Jean-Claude M.</p>
+<p class="text-sm opacity-60">Ministry of Health, Rwanda</p>
+</div>
+</div>
+</div>
+<!-- Duplicate set for seamless loop -->
+<div class="flex-none w-[500px] bg-surface-container-lowest p-12 rounded-xl shadow-sm">
+<p class="text-2xl font-serif italic text-on-surface mb-8 whitespace-normal">"CARA has turned my clinic from a place of chaos into a place of precision. I can see more patients while being more thorough."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-200"></div>
+<div>
+<p class="font-bold">Aamina K.</p>
+<p class="text-sm opacity-60">CHW, Turkana County</p>
+</div>
+</div>
+</div>
+<div class="flex-none w-[500px] bg-surface-container-lowest p-12 rounded-xl shadow-sm">
+<p class="text-2xl font-serif italic text-on-surface mb-8 whitespace-normal">"The offline voice-to-note feature is a game changer. We finally have digitized records for everyone in the ward."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-200"></div>
+<div>
+<p class="font-bold">Dr. Samuel O.</p>
+<p class="text-sm opacity-60">Public Health Advisor, WHO</p>
+</div>
+</div>
+</div>
+<div class="flex-none w-[500px] bg-surface-container-lowest p-12 rounded-xl shadow-sm">
+<p class="text-2xl font-serif italic text-on-surface mb-8 whitespace-normal">"Finally, a technology that respects the reality of the last mile instead of trying to force Silicon Valley tools into it."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-200"></div>
+<div>
+<p class="font-bold">Jean-Claude M.</p>
+<p class="text-sm opacity-60">Ministry of Health, Rwanda</p>
+</div>
+</div>
+</div>
+</div>
+</section>
 <!-- Footer -->
 <footer class="bg-[#ece1cf] dark:bg-stone-900 w-full px-12 py-16 flex flex-col items-center gap-8 text-center rounded-t-[32px]">
 <div class="text-2xl font-serif italic text-[#445518] dark:text-[#ece1cf]">CARA</div>
@@ -314,7 +379,7 @@
 <a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="./patient-compass-login.html">Patient Compass</a>
 </div>
 <div class="flex flex-wrap justify-center gap-8 mt-2">
-<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="#">Support</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="./join-us.html">Support</a>
 <a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="./privacy-ethics.html">Security</a>
 <a class="text-stone-600 dark:text-stone-400 hover:text-[#445518] dark:hover:text-[#fff] transition-colors font-sans text-sm tracking-wide" href="./privacy-ethics.html">Privacy</a>
 </div>
@@ -325,13 +390,14 @@
 <style>
         @keyframes marquee {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            100% { transform: translateX(-50%); }
         }
         .animate-marquee {
-            animation: marquee 40s linear infinite;
+            animation: marquee 30s linear infinite;
         }
         .animate-marquee:hover {
             animation-play-state: paused;
         }
     </style>
+<script src="./js/route-wiring.js" type="module"></script>
 </body></html>
