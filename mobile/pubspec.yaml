@@ -1,0 +1,39 @@
+name: cara_mobile
+description: CARA — AI Healthcare Assistant for Community Health Workers
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  # State management
+  provider: ^6.1.4
+  # Local database
+  sqflite: ^2.4.2
+  path_provider: ^2.1.5
+  path: ^1.9.1
+  # HTTP client
+  http: ^1.3.0
+  # Secure storage for encryption keys
+  flutter_secure_storage: ^9.2.4
+  # Network connectivity detection
+  connectivity_plus: ^6.1.4
+  # Audio recording
+  record: ^5.2.1
+  # UUID generation
+  uuid: ^4.5.1
+  # Date formatting
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets: []

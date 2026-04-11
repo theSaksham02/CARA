@@ -1,0 +1,71 @@
+{
+  "version": "2.0.0",
+  "source": "WHO-IMCI-2014 + WHO-IMAI-2011 + WHO-ANC-2016",
+  "description": "Comprehensive triage mapping with age-based protocol branching, vital sign thresholds, and danger sign classification.",
+  "default_action": "Provide home care guidance and routine follow-up.",
+  "vital_thresholds": {
+    "respiratory_rate": {
+      "0_2_months": { "fast": 60 },
+      "2_12_months": { "fast": 50 },
+      "12_59_months": { "fast": 40 },
+      "5_plus_years": { "fast": 30 }
+    },
+    "temperature": {
+      "fever": 37.5,
+      "high_fever": 39.0,
+      "hypothermia": 35.5
+    },
+    "muac": {
+      "severe_malnutrition_mm": 115,
+      "moderate_malnutrition_mm": 125
+    },
+    "spo2": {
+      "critical": 90,
+      "low": 94
+    }
+  },
+  "age_groups": {
+    "young_infant": { "min_months": 0, "max_months": 2, "label": "Young Infant (0-2 months)" },
+    "child": { "min_months": 2, "max_months": 59, "label": "Child (2-59 months)" },
+    "older_child_adult": { "min_months": 60, "label": "Older Child/Adult (5+ years)" }
+  },
+  "danger_signs": {
+    "general": [
+      "convulsions",
+      "convulsing now",
+      "lethargic",
+      "unconscious",
+      "unable to drink",
+      "unable to breastfeed",
+      "vomiting everything"
+    ],
+    "respiratory": [
+      "stridor",
+      "chest indrawing",
+      "central cyanosis",
+      "respiratory distress",
+      "severe respiratory distress"
+    ],
+    "circulatory": [
+      "signs of shock",
+      "weak pulse",
+      "fast pulse",
+      "pale and cold",
+      "heavy bleeding"
+    ],
+    "nutritional": [
+      "severe acute malnutrition",
+      "severe palmar pallor",
+      "oedema of both feet"
+    ]
+  },
+  "symptom_checklist": {
+    "general": ["fever", "lethargy", "convulsions", "vomiting", "not eating", "weight loss"],
+    "respiratory": ["cough", "difficulty breathing", "fast breathing", "chest indrawing", "stridor", "wheezing"],
+    "gastrointestinal": ["diarrhoea", "blood in stool", "vomiting everything", "abdominal pain", "sunken eyes"],
+    "ear_nose_throat": ["ear pain", "pus draining from ear", "sore throat", "mouth ulcers"],
+    "skin": ["rash", "swelling", "blistering", "wound"],
+    "neurological": ["headache", "stiff neck", "fainting", "slurred speech", "one-sided weakness"],
+    "maternal": ["vaginal bleeding", "severe headache", "blurred vision", "convulsions", "swollen hands and face"]
+  }
+}

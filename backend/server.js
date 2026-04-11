@@ -15,7 +15,10 @@ const dashboardRoutes = require('./routes/dashboard.routes');
 const followupRoutes = require('./routes/followup.routes');
 const noteRoutes = require('./routes/note.routes');
 const patientRoutes = require('./routes/patient.routes');
+const readmissionRoutes = require('./routes/readmission.routes');
+const syncRoutes = require('./routes/sync.routes');
 const triageRoutes = require('./routes/triage.routes');
+const voiceRoutes = require('./routes/voice.routes');
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
@@ -42,10 +45,13 @@ function createApp() {
   app.use('/api/triage', triageRoutes);
   app.use('/api/patients', patientRoutes);
   app.use('/api/notes', noteRoutes);
+  app.use('/api/voice', voiceRoutes);
+  app.use('/api/readmission', readmissionRoutes);
   app.use('/api/followup', followupRoutes);
   app.use('/api/dashboard', dashboardRoutes);
   app.use('/api/analytics/impact', analyticsRoutes);
   app.use('/api/audit', auditRoutes);
+  app.use('/api', syncRoutes);
 
   app.use((req, res) => {
     res.status(404).json({

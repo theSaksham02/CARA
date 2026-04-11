@@ -14,6 +14,8 @@ const store = {
     soapNotes: [],
     followups: [],
     auditEvents: [],
+    readmissionRecords: [],
+    syncLog: [],
   },
 };
 
@@ -78,6 +80,28 @@ const schemaSql = `
     actor_id TEXT,
     payload JSONB NOT NULL DEFAULT '{}'::jsonb,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  );
+
+  CREATE TABLE IF NOT EXISTS readmission_records (
+    id TEXT PRIMARY KEY,
+    patient_id TEXT NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
+    condition TEXT NOT NULL,
+    risk_score REAL NOT NULL,
+    risk_level TEXT NOT NULL,
+    follow_up_date DATE NOT NULL,
+    reason TEXT NOT NULL,
+    features JSONB NOT NULL DEFAULT '{}'::jsonb,
+    model_version TEXT,
+    created_by TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  );
+
+  CREATE TABLE IF NOT EXISTS sync_log (
+    id TEXT PRIMARY KEY,
+    table_name TEXT NOT NULL,
+    record_id TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'pending',
+    synced_at TIMESTAMPTZ
   );
 `;
 
@@ -184,6 +208,8 @@ function resetMemoryDatabase() {
     soapNotes: [],
     followups: [],
     auditEvents: [],
+    readmissionRecords: [],
+    syncLog: [],
   };
 }
 
@@ -939,12 +965,189 @@ async function getImpactAnalytics(range = 'today') {
   };
 }
 
+async function createReadmissionRecord(payload, actorId) {
+  const record = withTimestamps({
+    id: payload.id || randomUUID(),
+    patient_id: payload.patient_id,
+    condition: payload.condition,
+    risk_score: Number(payload.risk_score),
+    risk_level: payload.risk_level,
+    follow_up_date: payload.follow_up_date,
+    reason: payload.reason,
+    features: payload.features || {},
+    model_version: payload.model_version || null,
+    created_by: actorId || null,
+  });
+
+  if (getDbMode() === 'memory') {
+    store.memory.readmissionRecords.push(record);
+    return record;
+  }
+
+  if (getDbMode() === 'supabase') {
+    const sb = getSupabaseDb();
+    const rows = throwOnError(await sb.from('readmission_records').insert(record).select(), 'createReadmissionRecord');
+    return rows[0];
+  }
+
+  const pool = createPool();
+  const result = await pool.query(
+    `INSERT INTO readmission_records (
+      id, patient_id, condition, risk_score, risk_level, follow_up_date, reason, features, model_version, created_by, created_at
+    )
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    RETURNING *`,
+    [
+      record.id,
+      record.patient_id,
+      record.condition,
+      record.risk_score,
+      record.risk_level,
+      record.follow_up_date,
+      record.reason,
+      JSON.stringify(record.features),
+      record.model_version,
+      record.created_by,
+      record.created_at,
+    ]
+  );
+
+  return result.rows[0];
+}
+
+async function listReadmissionRecords(filters = {}) {
+  const limit = normalizeLimit(filters.limit, 50);
+
+  if (getDbMode() === 'memory') {
+    return applyCreatedAtLimit(
+      store.memory.readmissionRecords.filter((record) => {
+        if (filters.patient_id && record.patient_id !== filters.patient_id) return false;
+        if (filters.condition && record.condition.toUpperCase() !== filters.condition.toUpperCase()) return false;
+        if (filters.risk_level && record.risk_level !== filters.risk_level) return false;
+        return true;
+      }),
+      limit
+    );
+  }
+
+  if (getDbMode() === 'supabase') {
+    const sb = getSupabaseDb();
+    let query = sb.from('readmission_records').select('*');
+    if (filters.patient_id) query = query.eq('patient_id', filters.patient_id);
+    if (filters.condition) query = query.ilike('condition', filters.condition);
+    if (filters.risk_level) query = query.eq('risk_level', filters.risk_level);
+    return throwOnError(await query.order('created_at', { ascending: false }).limit(limit), 'listReadmissionRecords');
+  }
+
+  const pool = createPool();
+  const clauses = [];
+  const values = [];
+
+  if (filters.patient_id) {
+    values.push(filters.patient_id);
+    clauses.push(`patient_id = $${values.length}`);
+  }
+
+  if (filters.condition) {
+    values.push(filters.condition.toUpperCase());
+    clauses.push(`UPPER(condition) = $${values.length}`);
+  }
+
+  if (filters.risk_level) {
+    values.push(filters.risk_level);
+    clauses.push(`risk_level = $${values.length}`);
+  }
+
+  values.push(limit);
+  const whereClause = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
+  const result = await pool.query(
+    `SELECT * FROM readmission_records ${whereClause} ORDER BY created_at DESC LIMIT $${values.length}`,
+    values
+  );
+  return result.rows;
+}
+
+async function createSyncLogEntry(payload) {
+  const entry = {
+    id: payload.id || randomUUID(),
+    table_name: payload.table_name,
+    record_id: payload.record_id,
+    status: payload.status || 'pending',
+    synced_at: payload.synced_at || null,
+  };
+
+  if (getDbMode() === 'memory') {
+    store.memory.syncLog.push(entry);
+    return entry;
+  }
+
+  if (getDbMode() === 'supabase') {
+    const sb = getSupabaseDb();
+    const rows = throwOnError(await sb.from('sync_log').insert(entry).select(), 'createSyncLogEntry');
+    return rows[0];
+  }
+
+  const pool = createPool();
+  const result = await pool.query(
+    `INSERT INTO sync_log (id, table_name, record_id, status, synced_at)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *`,
+    [entry.id, entry.table_name, entry.record_id, entry.status, entry.synced_at]
+  );
+  return result.rows[0];
+}
+
+async function getSyncStatusData() {
+  const mode = getDbMode();
+
+  if (mode === 'memory') {
+    const pending = store.memory.syncLog.filter((e) => e.status === 'pending').length;
+    const lastSynced = store.memory.syncLog
+      .filter((e) => e.status === 'synced' && e.synced_at)
+      .sort((a, b) => String(b.synced_at).localeCompare(String(a.synced_at)))[0];
+
+    return {
+      online: mode !== 'memory',
+      last_sync: lastSynced ? lastSynced.synced_at : null,
+      pending_records: pending,
+      db_mode: mode,
+    };
+  }
+
+  if (mode === 'supabase') {
+    const sb = getSupabaseDb();
+    const { data: pending } = await sb.from('sync_log').select('id', { count: 'exact' }).eq('status', 'pending');
+    const { data: lastSync } = await sb.from('sync_log').select('synced_at').eq('status', 'synced').order('synced_at', { ascending: false }).limit(1);
+
+    return {
+      online: true,
+      last_sync: lastSync && lastSync[0] ? lastSync[0].synced_at : null,
+      pending_records: pending ? pending.length : 0,
+      db_mode: mode,
+    };
+  }
+
+  // postgres mode
+  const pool = createPool();
+  const pendingResult = await pool.query("SELECT COUNT(*) as count FROM sync_log WHERE status = 'pending'");
+  const lastSyncResult = await pool.query("SELECT synced_at FROM sync_log WHERE status = 'synced' ORDER BY synced_at DESC LIMIT 1");
+
+  return {
+    online: true,
+    last_sync: lastSyncResult.rows[0] ? lastSyncResult.rows[0].synced_at : null,
+    pending_records: Number(pendingResult.rows[0]?.count || 0),
+    db_mode: mode,
+  };
+}
+
 module.exports = {
   bootstrapDatabase,
   closeDatabase,
   createFollowup,
   createPatient,
+  createReadmissionRecord,
   createSoapNote,
+  createSyncLogEntry,
   createTriageAssessment,
   findPatientById,
   findSoapNoteById,
@@ -952,10 +1155,12 @@ module.exports = {
   getDbMode,
   getImpactAnalytics,
   getPatientSummary,
+  getSyncStatusData,
   insertAuditEvent,
   listAuditEvents,
   listFollowups,
   listPatients,
+  listReadmissionRecords,
   listSoapNotes,
   listTriageAssessments,
   listTriageQueue,
