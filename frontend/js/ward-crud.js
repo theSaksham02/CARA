@@ -657,6 +657,169 @@
   }
 
   // ═══════════════════════════════════════════
+  // AI Assistant Page — Live Health Alerts
+  // ═══════════════════════════════════════════
+
+  async function bootAiAssistant(api) {
+    const aside = document.querySelector('aside.w-\\[380px\\]');
+    if (!aside) return;
+
+    // Target the Live Health Alerts section
+    const alertsHeading = aside.querySelector('h3');
+    const alertsSection = Array.from(aside.querySelectorAll('div > h3')).find(
+      (h) => h.textContent.trim() === 'Live Health Alerts'
+    );
+    const alertsContainer = alertsSection ? alertsSection.parentElement : null;
+
+    async function loadAlerts() {
+      try {
+        const [queueData, patientsData, analyticsData] = await Promise.all([
+          api.getTriageQueue().catch(() => ({ queue: [] })),
+          api.listPatients().catch(() => ({ patients: [] })),
+          api.getImpactAnalytics({ range: 'today' }).catch(() => ({ analytics: { metrics: {} } })),
+        ]);
+
+        const queue = queueData.queue || [];
+        const patients = patientsData.patients || [];
+        const analytics = analyticsData.analytics || { metrics: {} };
+
+        const redCases = queue.filter((q) => q.urgency === 'RED');
+        const yellowCases = queue.filter((q) => q.urgency === 'YELLOW');
+        const allUrgent = [...redCases, ...yellowCases];
+
+        if (!alertsContainer) return;
+
+        // Build alert cards from live data
+        let alertsHtml = '';
+
+        if (allUrgent.length > 0) {
+          // Render each urgent case as an alert card
+          alertsHtml = allUrgent
+            .slice(0, 4) // max 4 alerts
+            .map((item) => {
+              const isRed = item.urgency === 'RED';
+              return `
+              <div class="rounded-2xl overflow-hidden bg-surface-container-lowest shadow-sm mb-4 hover:shadow-md transition-shadow">
+                <div class="p-5">
+                  <div class="flex items-center gap-2 mb-2">
+                    <div class="w-2 h-2 rounded-full ${isRed ? 'bg-error' : 'bg-tertiary'} animate-pulse"></div>
+                    <span class="text-[10px] font-bold ${isRed ? 'text-error' : 'text-tertiary'} uppercase">${isRed ? 'Critical Alert' : 'Urgent Alert'}</span>
+                    <span class="ml-auto text-[10px] text-stone-400">${escapeHtml(item.triage_time_display || 'Recent')}</span>
+                  </div>
+                  <h4 class="font-bold text-on-surface mb-1">${escapeHtml(item.patient_name)}</h4>
+                  <p class="text-xs text-on-surface-variant leading-relaxed mb-2">${escapeHtml(item.reason || (item.symptoms || []).join(', ') || 'Requires clinical attention')}</p>
+                  ${
+                    item.recommended_action
+                      ? `<div class="bg-primary/5 p-3 rounded-lg mb-3">
+                        <p class="text-xs font-bold text-primary mb-1">Recommended Action</p>
+                        <p class="text-xs text-on-surface-variant">${escapeHtml(item.recommended_action)}</p>
+                      </div>`
+                      : ''
+                  }
+                  ${
+                    item.symptoms?.length
+                      ? `<div class="flex flex-wrap gap-1.5 mb-2">${item.symptoms.map((s) => `<span class="bg-surface-container-high px-2 py-0.5 rounded-full text-[10px] font-bold text-on-surface-variant">${escapeHtml(s)}</span>`).join('')}</div>`
+                      : ''
+                  }
+                  <div class="flex items-center justify-between mt-3 pt-3 border-t border-stone-100">
+                    <span class="${urgencyTone(item.urgency)} px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase">${escapeHtml(urgencyLabel(item.urgency))}</span>
+                    <a class="text-xs font-bold text-[#5C6E2E] flex items-center gap-1 hover:underline" href="the-ward-patient-queue.html">
+                      View in Queue <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            `;
+            })
+            .join('');
+        } else if (patients.length > 0) {
+          // No urgent cases but have patients
+          alertsHtml = `
+            <div class="rounded-2xl overflow-hidden bg-surface-container-lowest shadow-sm mb-4">
+              <div class="p-5">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-2 h-2 rounded-full bg-[#5C6E2E]"></div>
+                  <span class="text-[10px] font-bold text-[#5C6E2E] uppercase">All Clear</span>
+                </div>
+                <h4 class="font-bold text-on-surface mb-2">No Urgent Cases</h4>
+                <p class="text-xs text-on-surface-variant leading-relaxed">All ${patients.length} patients are currently stable. No critical or urgent triage alerts.</p>
+              </div>
+            </div>
+          `;
+        } else {
+          alertsHtml = `
+            <div class="rounded-2xl overflow-hidden bg-surface-container-lowest shadow-sm mb-4">
+              <div class="p-5">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-2 h-2 rounded-full bg-stone-400"></div>
+                  <span class="text-[10px] font-bold text-stone-500 uppercase">No Data</span>
+                </div>
+                <h4 class="font-bold text-on-surface mb-2">No Patients Yet</h4>
+                <p class="text-xs text-on-surface-variant leading-relaxed">Add patients and run triage assessments to see live health alerts here.</p>
+              </div>
+            </div>
+          `;
+        }
+
+        // Add summary stats bar
+        const statsHtml = `
+          <div class="grid grid-cols-3 gap-2 mb-4">
+            <div class="bg-surface-container-lowest p-3 rounded-xl text-center">
+              <div class="text-2xl font-bold font-['Instrument_Serif'] italic ${redCases.length > 0 ? 'text-error' : 'text-on-surface'}">${redCases.length}</div>
+              <div class="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Critical</div>
+            </div>
+            <div class="bg-surface-container-lowest p-3 rounded-xl text-center">
+              <div class="text-2xl font-bold font-['Instrument_Serif'] italic ${yellowCases.length > 0 ? 'text-tertiary' : 'text-on-surface'}">${yellowCases.length}</div>
+              <div class="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Urgent</div>
+            </div>
+            <div class="bg-surface-container-lowest p-3 rounded-xl text-center">
+              <div class="text-2xl font-bold font-['Instrument_Serif'] italic text-[#5C6E2E]">${patients.length}</div>
+              <div class="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Total</div>
+            </div>
+          </div>
+        `;
+
+        // Add last-updated timestamp
+        const now = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        const footerHtml = `
+          <div class="flex items-center justify-between text-[10px] text-stone-400 mt-2">
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[10px]">schedule</span>
+              Updated ${now}
+            </span>
+            <button class="flex items-center gap-1 text-[#5C6E2E] font-bold hover:underline" data-refresh-alerts>
+              <span class="material-symbols-outlined text-[10px]">refresh</span>
+              Refresh
+            </button>
+          </div>
+        `;
+
+        alertsContainer.innerHTML = `
+          <h3 class="text-primary font-bold text-xs uppercase tracking-widest mb-4">Live Health Alerts</h3>
+          ${statsHtml}
+          <div data-alerts-list>${alertsHtml}</div>
+          ${footerHtml}
+        `;
+
+        // Wire refresh button
+        const refreshBtn = alertsContainer.querySelector('[data-refresh-alerts]');
+        if (refreshBtn) {
+          refreshBtn.addEventListener('click', () => {
+            refreshBtn.innerHTML = '<span class="material-symbols-outlined text-[10px] animate-spin">refresh</span> Loading…';
+            loadAlerts();
+          });
+        }
+      } catch (err) {
+        console.warn('[ward-crud] ai-assistant alerts load error:', err.message);
+      }
+    }
+
+    await loadAlerts();
+    // Refresh alerts every 20 seconds
+    setInterval(loadAlerts, 20000);
+  }
+
+  // ═══════════════════════════════════════════
   // Inject Modal Animations CSS
   // ═══════════════════════════════════════════
 
@@ -687,6 +850,10 @@
 
     if (path === 'the-ward-patient-queue.html') {
       bootPatientQueue(api);
+    }
+
+    if (path === 'the-ward-ai-assistant.html') {
+      bootAiAssistant(api);
     }
   });
 })(window);
