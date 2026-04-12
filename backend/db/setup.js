@@ -397,6 +397,78 @@ async function createPatient(payload, actorId) {
   return result.rows[0];
 }
 
+async function updatePatient(patientId, updates) {
+  const allowed = ['full_name', 'age_months', 'caregiver_name', 'sex', 'village'];
+  const patch = {};
+  for (const key of allowed) {
+    if (updates[key] !== undefined) {
+      patch[key] = key === 'age_months' ? Number(updates[key]) : updates[key];
+    }
+  }
+
+  if (Object.keys(patch).length === 0) {
+    return findPatientById(patientId);
+  }
+
+  if (getDbMode() === 'memory') {
+    const patient = store.memory.patients.find((p) => p.id === patientId);
+    if (!patient) return null;
+    Object.assign(patient, patch);
+    return { ...patient };
+  }
+
+  if (getDbMode() === 'supabase') {
+    const sb = getSupabaseDb();
+    const rows = throwOnError(
+      await sb.from('patients').update(patch).eq('id', patientId).select(),
+      'updatePatient'
+    );
+    return rows[0] || null;
+  }
+
+  const pool = createPool();
+  const setClauses = Object.keys(patch).map((key, i) => `${key} = $${i + 2}`);
+  const values = [patientId, ...Object.values(patch)];
+  const result = await pool.query(
+    `UPDATE patients SET ${setClauses.join(', ')} WHERE id = $1 RETURNING *`,
+    values
+  );
+  return result.rows[0] || null;
+}
+
+async function deletePatient(patientId) {
+  if (getDbMode() === 'memory') {
+    const index = store.memory.patients.findIndex((p) => p.id === patientId);
+    if (index === -1) return false;
+    store.memory.patients.splice(index, 1);
+    store.memory.triageAssessments = store.memory.triageAssessments.filter((a) => a.patient_id !== patientId);
+    store.memory.soapNotes = store.memory.soapNotes.filter((n) => n.patient_id !== patientId);
+    store.memory.followups = store.memory.followups.filter((f) => f.patient_id !== patientId);
+    if (store.memory.readmissionRecords) {
+      store.memory.readmissionRecords = store.memory.readmissionRecords.filter((r) => r.patient_id !== patientId);
+    }
+    return true;
+  }
+
+  if (getDbMode() === 'supabase') {
+    const sb = getSupabaseDb();
+    await sb.from('followups').delete().eq('patient_id', patientId);
+    await sb.from('soap_notes').delete().eq('patient_id', patientId);
+    await sb.from('triage_assessments').delete().eq('patient_id', patientId);
+    await sb.from('readmission_records').delete().eq('patient_id', patientId);
+    const { error } = await sb.from('patients').delete().eq('id', patientId);
+    return !error;
+  }
+
+  const pool = createPool();
+  await pool.query('DELETE FROM followups WHERE patient_id = $1', [patientId]);
+  await pool.query('DELETE FROM soap_notes WHERE patient_id = $1', [patientId]);
+  await pool.query('DELETE FROM triage_assessments WHERE patient_id = $1', [patientId]);
+  await pool.query('DELETE FROM readmission_records WHERE patient_id = $1', [patientId]);
+  const result = await pool.query('DELETE FROM patients WHERE id = $1', [patientId]);
+  return result.rowCount > 0;
+}
+
 async function createTriageAssessment(payload, actorId) {
   const assessment = withTimestamps({
     id: payload.id || randomUUID(),
@@ -1149,6 +1221,7 @@ module.exports = {
   createSoapNote,
   createSyncLogEntry,
   createTriageAssessment,
+  deletePatient,
   findPatientById,
   findSoapNoteById,
   getDashboardOverview,
@@ -1165,4 +1238,5 @@ module.exports = {
   listTriageAssessments,
   listTriageQueue,
   resetMemoryDatabase,
+  updatePatient,
 };

@@ -111,6 +111,19 @@ window.CARA = window.CARA || {};
       });
     }
 
+    updatePatient(patientId, payload) {
+      return this.request(`/api/patients/${encodeURIComponent(patientId)}`, {
+        method: 'PUT',
+        body: payload,
+      });
+    }
+
+    deletePatient(patientId) {
+      return this.request(`/api/patients/${encodeURIComponent(patientId)}`, {
+        method: 'DELETE',
+      });
+    }
+
     generateNote(payload) {
       return this.request('/api/notes/generate', {
         method: 'POST',

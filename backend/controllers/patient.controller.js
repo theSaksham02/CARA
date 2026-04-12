@@ -2,7 +2,7 @@
 
 const { validationResult } = require('express-validator');
 
-const { createPatient, getPatientSummary, listPatients } = require('../db/setup');
+const { createPatient, deletePatient, getPatientSummary, listPatients, updatePatient } = require('../db/setup');
 
 async function getPatients(_req, res, next) {
   try {
@@ -64,9 +64,45 @@ async function getCurrentPatientVisitSummary(req, res, next) {
   return getPatientVisitSummary(req, res, next);
 }
 
+async function updatePatientRecord(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const patient = await updatePatient(req.params.patient_id, req.body);
+    if (!patient) {
+      return res.status(404).json({ error: 'Patient not found.' });
+    }
+    return res.status(200).json({ patient });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function deletePatientRecord(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const deleted = await deletePatient(req.params.patient_id);
+    if (!deleted) {
+      return res.status(404).json({ error: 'Patient not found.' });
+    }
+    return res.status(200).json({ deleted: true });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   createPatientRecord,
   getCurrentPatientVisitSummary,
+  deletePatientRecord,
   getPatients,
   getPatientVisitSummary,
+  updatePatientRecord,
 };
