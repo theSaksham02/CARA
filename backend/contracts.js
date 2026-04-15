@@ -270,6 +270,58 @@ const apiContracts = {
       query: ['actor_id', 'event_type', 'limit'],
     },
   },
+  rag: {
+    query: {
+      method: 'POST',
+      path: '/api/rag/query',
+      request: {
+        required: ['question'],
+        optional: ['patient_id', 'top_k'],
+        example: {
+          question: 'What urgent actions are needed for fever with chest indrawing?',
+          patient_id: 'patient-demo-001',
+          top_k: 5,
+        },
+      },
+      response: {
+        example: {
+          answer:
+            'Chest indrawing with fever is a severe pneumonia danger sign and requires immediate referral after pre-referral treatment.',
+          citations: [
+            {
+              chunk_id: 'rag_ab12cd34ef56',
+              source_type: 'protocol',
+              source_id: 'imci-pneumonia-severe-red-001',
+              title: 'Protocol RED rule',
+              section: 'imci_rule',
+              score: 0.91,
+            },
+          ],
+          confidence: 0.82,
+          escalate: false,
+          reason: null,
+        },
+      },
+    },
+    indexBuild: {
+      method: 'POST',
+      path: '/api/rag/index/build',
+      request: {
+        optional: ['patient_id', 'persist'],
+      },
+    },
+    indexRefresh: {
+      method: 'POST',
+      path: '/api/rag/index/refresh',
+      request: {
+        optional: ['patient_id', 'persist'],
+      },
+    },
+    indexStatus: {
+      method: 'GET',
+      path: '/api/rag/index/status',
+    },
+  },
 };
 
 module.exports = {

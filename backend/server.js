@@ -15,6 +15,7 @@ const dashboardRoutes = require('./routes/dashboard.routes');
 const followupRoutes = require('./routes/followup.routes');
 const noteRoutes = require('./routes/note.routes');
 const patientRoutes = require('./routes/patient.routes');
+const ragRoutes = require('./routes/rag.routes');
 const readmissionRoutes = require('./routes/readmission.routes');
 const syncRoutes = require('./routes/sync.routes');
 const triageRoutes = require('./routes/triage.routes');
@@ -47,6 +48,7 @@ function createApp() {
   app.use('/api/notes', noteRoutes);
   app.use('/api/voice', voiceRoutes);
   app.use('/api/readmission', readmissionRoutes);
+  app.use('/api/rag', ragRoutes);
   app.use('/api/followup', followupRoutes);
   app.use('/api/dashboard', dashboardRoutes);
   app.use('/api/analytics/impact', analyticsRoutes);

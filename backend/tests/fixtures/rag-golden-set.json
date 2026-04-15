@@ -1,0 +1,17 @@
+[
+  {
+    "id": "protocol-danger-signs",
+    "question": "What should be done when a child has fever and chest indrawing?",
+    "expect_citations_min": 1
+  },
+  {
+    "id": "patient-history-followup",
+    "question": "What follow-up instructions were recorded for this patient?",
+    "expect_citations_min": 1
+  },
+  {
+    "id": "insufficient-evidence",
+    "question": "What is the genetic subtype causing this condition?",
+    "expect_escalation": true
+  }
+]

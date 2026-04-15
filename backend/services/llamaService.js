@@ -71,6 +71,69 @@ function ollamaGenerate(prompt, options = {}) {
 }
 
 /**
+ * Generate embeddings via Ollama.
+ *
+ * @param {string} text - Input text.
+ * @returns {Promise<number[]|null>} Embedding vector or null when unavailable.
+ */
+function ollamaEmbed(text) {
+  return new Promise((resolve, reject) => {
+    const url = new URL('/api/embeddings', OLLAMA_URL);
+    const body = JSON.stringify({
+      model: OLLAMA_MODEL,
+      prompt: String(text || '').trim(),
+    });
+
+    const req = http.request(
+      {
+        hostname: url.hostname,
+        port: url.port || 11434,
+        path: url.pathname,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(body),
+        },
+        timeout: OLLAMA_TIMEOUT_MS,
+      },
+      (res) => {
+        let data = '';
+        res.on('data', (chunk) => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          if (res.statusCode < 200 || res.statusCode >= 300) {
+            reject(new Error(`Ollama embeddings failed with status ${res.statusCode}: ${data}`));
+            return;
+          }
+
+          try {
+            const parsed = JSON.parse(data);
+            if (!Array.isArray(parsed.embedding)) {
+              resolve(null);
+              return;
+            }
+
+            resolve(parsed.embedding.map(Number));
+          } catch (_error) {
+            resolve(null);
+          }
+        });
+      }
+    );
+
+    req.on('error', (err) => reject(err));
+    req.on('timeout', () => {
+      req.destroy();
+      reject(new Error('Ollama embeddings request timed out.'));
+    });
+
+    req.write(body);
+    req.end();
+  });
+}
+
+/**
  * Check if Ollama is available and the model is loaded.
  *
  * @returns {Promise<{available: boolean, model: string|null}>}
@@ -273,5 +336,7 @@ module.exports = {
   disambiguateTriage,
   extractClinicalEntities,
   generateSoapNote,
+  ollamaEmbed,
+  ollamaGenerate,
   isOllamaAvailable,
 };
