@@ -55,13 +55,53 @@ window.CARA = window.CARA || {};
     const form = document.querySelector("[data-join-form]");
     if (!form) return;
     const feedback = form.querySelector("[data-form-feedback]");
+    const submitButton = form.querySelector("button[type='submit']");
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      if (feedback) {
-        feedback.textContent = "Thanks! Your details were received. The CARA team will contact you.";
+      const payload = {
+        name: form.querySelector("[name='name']")?.value?.trim() || "",
+        email: form.querySelector("[name='email']")?.value?.trim() || "",
+        role: form.querySelector("[name='role']")?.value?.trim() || "",
+        message: form.querySelector("[name='message']")?.value?.trim() || "",
+      };
+
+      if (!payload.name || !payload.email || !payload.role || !payload.message) {
+        if (feedback) {
+          feedback.textContent = "Please complete all fields before submitting.";
+        }
+        return;
       }
-      form.reset();
+
+      if (submitButton) {
+        submitButton.disabled = true;
+      }
+
+      try {
+        if (!window.CaraApi) {
+          throw new Error("Backend API unavailable.");
+        }
+        const baseUrl =
+          typeof window.resolveCaraApiBaseUrl === "function"
+            ? window.resolveCaraApiBaseUrl()
+            : "";
+        const api = new window.CaraApi({ baseUrl });
+        const response = await api.submitJoinUs(payload);
+        if (feedback) {
+          feedback.textContent =
+            response.message ||
+            "Thanks! Your details were received. The CARA team will contact you.";
+        }
+        form.reset();
+      } catch (error) {
+        if (feedback) {
+          feedback.textContent = error.message || "Unable to submit right now.";
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+        }
+      }
     });
   }
 

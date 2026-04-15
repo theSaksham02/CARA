@@ -13,6 +13,8 @@ const store = {
     triageAssessments: [],
     soapNotes: [],
     followups: [],
+    contactSubmissions: [],
+    assistantInteractions: [],
     auditEvents: [],
     readmissionRecords: [],
     syncLog: [],
@@ -67,6 +69,31 @@ const schemaSql = `
     status TEXT NOT NULL DEFAULT 'scheduled',
     instructions TEXT NOT NULL,
     urgency TEXT,
+    created_by TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  );
+
+  CREATE TABLE IF NOT EXISTS contact_submissions (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    role TEXT NOT NULL,
+    message TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'new',
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  );
+
+  CREATE TABLE IF NOT EXISTS assistant_interactions (
+    id TEXT PRIMARY KEY,
+    patient_id TEXT REFERENCES patients(id) ON DELETE SET NULL,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    citations JSONB NOT NULL DEFAULT '[]'::jsonb,
+    confidence REAL,
+    escalate BOOLEAN NOT NULL DEFAULT FALSE,
+    reason TEXT,
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
     created_by TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
   );
@@ -207,6 +234,8 @@ function resetMemoryDatabase() {
     triageAssessments: [],
     soapNotes: [],
     followups: [],
+    contactSubmissions: [],
+    assistantInteractions: [],
     auditEvents: [],
     readmissionRecords: [],
     syncLog: [],
@@ -780,6 +809,186 @@ async function createFollowup(payload, actorId) {
   return result.rows[0];
 }
 
+async function createContactSubmission(payload) {
+  const submission = withTimestamps({
+    id: payload.id || randomUUID(),
+    name: payload.name,
+    email: payload.email,
+    role: payload.role,
+    message: payload.message,
+    status: payload.status || 'new',
+    metadata: payload.metadata || {},
+  });
+
+  if (getDbMode() === 'memory') {
+    store.memory.contactSubmissions.push(submission);
+    return submission;
+  }
+
+  if (getDbMode() === 'supabase') {
+    const sb = getSupabaseDb();
+    const rows = throwOnError(await sb.from('contact_submissions').insert(submission).select(), 'createContactSubmission');
+    return rows[0];
+  }
+
+  const pool = createPool();
+  const result = await pool.query(
+    `INSERT INTO contact_submissions (
+      id, name, email, role, message, status, metadata, created_at
+    )
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    RETURNING *`,
+    [
+      submission.id,
+      submission.name,
+      submission.email,
+      submission.role,
+      submission.message,
+      submission.status,
+      submission.metadata,
+      submission.created_at,
+    ]
+  );
+
+  return result.rows[0];
+}
+
+async function listContactSubmissions(filters = {}) {
+  const limit = normalizeLimit(filters.limit, 100);
+
+  if (getDbMode() === 'memory') {
+    return applyCreatedAtLimit(
+      store.memory.contactSubmissions.filter((entry) => {
+        if (filters.email && entry.email !== filters.email) {
+          return false;
+        }
+        return true;
+      }),
+      limit
+    );
+  }
+
+  if (getDbMode() === 'supabase') {
+    const sb = getSupabaseDb();
+    let query = sb.from('contact_submissions').select('*');
+    if (filters.email) query = query.eq('email', filters.email);
+    return throwOnError(await query.order('created_at', { ascending: false }).limit(limit), 'listContactSubmissions');
+  }
+
+  const pool = createPool();
+  const clauses = [];
+  const values = [];
+
+  if (filters.email) {
+    values.push(filters.email);
+    clauses.push(`email = $${values.length}`);
+  }
+
+  values.push(limit);
+  const whereClause = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
+  const result = await pool.query(
+    `SELECT * FROM contact_submissions ${whereClause} ORDER BY created_at DESC LIMIT $${values.length}`,
+    values
+  );
+
+  return result.rows;
+}
+
+async function createAssistantInteraction(payload, actorId) {
+  const interaction = withTimestamps({
+    id: payload.id || randomUUID(),
+    patient_id: payload.patient_id || null,
+    question: payload.question,
+    answer: payload.answer,
+    citations: Array.isArray(payload.citations) ? payload.citations : [],
+    confidence: payload.confidence === undefined ? null : Number(payload.confidence),
+    escalate: Boolean(payload.escalate),
+    reason: payload.reason || null,
+    metadata: payload.metadata || {},
+    created_by: actorId || null,
+  });
+
+  if (getDbMode() === 'memory') {
+    store.memory.assistantInteractions.push(interaction);
+    return interaction;
+  }
+
+  if (getDbMode() === 'supabase') {
+    const sb = getSupabaseDb();
+    const rows = throwOnError(
+      await sb.from('assistant_interactions').insert(interaction).select(),
+      'createAssistantInteraction'
+    );
+    return rows[0];
+  }
+
+  const pool = createPool();
+  const result = await pool.query(
+    `INSERT INTO assistant_interactions (
+      id, patient_id, question, answer, citations, confidence, escalate, reason, metadata, created_by, created_at
+    )
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    RETURNING *`,
+    [
+      interaction.id,
+      interaction.patient_id,
+      interaction.question,
+      interaction.answer,
+      JSON.stringify(interaction.citations),
+      interaction.confidence,
+      interaction.escalate,
+      interaction.reason,
+      interaction.metadata,
+      interaction.created_by,
+      interaction.created_at,
+    ]
+  );
+
+  return result.rows[0];
+}
+
+async function listAssistantInteractions(filters = {}) {
+  const limit = normalizeLimit(filters.limit, 50);
+
+  if (getDbMode() === 'memory') {
+    return applyCreatedAtLimit(
+      store.memory.assistantInteractions.filter((entry) => {
+        if (filters.patient_id && entry.patient_id !== filters.patient_id) return false;
+        return true;
+      }),
+      limit
+    );
+  }
+
+  if (getDbMode() === 'supabase') {
+    const sb = getSupabaseDb();
+    let query = sb.from('assistant_interactions').select('*');
+    if (filters.patient_id) query = query.eq('patient_id', filters.patient_id);
+    return throwOnError(
+      await query.order('created_at', { ascending: false }).limit(limit),
+      'listAssistantInteractions'
+    );
+  }
+
+  const pool = createPool();
+  const clauses = [];
+  const values = [];
+
+  if (filters.patient_id) {
+    values.push(filters.patient_id);
+    clauses.push(`patient_id = $${values.length}`);
+  }
+
+  values.push(limit);
+  const whereClause = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
+  const result = await pool.query(
+    `SELECT * FROM assistant_interactions ${whereClause} ORDER BY created_at DESC LIMIT $${values.length}`,
+    values
+  );
+
+  return result.rows;
+}
+
 async function insertAuditEvent(payload) {
   const event = withTimestamps({
     id: payload.id || randomUUID(),
@@ -1215,6 +1424,8 @@ async function getSyncStatusData() {
 module.exports = {
   bootstrapDatabase,
   closeDatabase,
+  createAssistantInteraction,
+  createContactSubmission,
   createFollowup,
   createPatient,
   createReadmissionRecord,
@@ -1230,7 +1441,9 @@ module.exports = {
   getPatientSummary,
   getSyncStatusData,
   insertAuditEvent,
+  listAssistantInteractions,
   listAuditEvents,
+  listContactSubmissions,
   listFollowups,
   listPatients,
   listReadmissionRecords,

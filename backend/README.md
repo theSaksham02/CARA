@@ -102,3 +102,18 @@ If confidence is low or evidence is insufficient, CARA returns deterministic fal
 - `escalate: true`
 - a conservative fallback `answer`
 - `reason` such as `no_evidence`, `low_confidence`, or `ollama_unavailable`
+
+## Form persistence endpoints
+
+New endpoints used by activated frontend form flows:
+
+- `POST /public/join-us` (public contact submissions)
+- `POST /api/assistant` (grounded assistant response + interaction log)
+- `GET /api/assistant/logs` (assistant interaction history)
+
+Backed persistence tables:
+
+- `contact_submissions`
+- `assistant_interactions`
+
+See `docs/form-persistence-matrix.md` for the end-to-end form/action contract map.

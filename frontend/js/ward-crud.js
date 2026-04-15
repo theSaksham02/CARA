@@ -14,8 +14,12 @@
   'use strict';
 
   const path = (globalScope.location.pathname.split('/').pop() || '').toLowerCase();
+  const ACTIVE_PATIENT_KEY = 'cara-active-patient-id';
 
   function getApiBaseUrl() {
+    if (typeof globalScope.resolveCaraApiBaseUrl === 'function') {
+      return globalScope.resolveCaraApiBaseUrl();
+    }
     const { protocol, hostname } = globalScope.location;
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       return `${protocol}//${hostname}:4000`;
@@ -28,6 +32,20 @@
       return new globalScope.CaraApi({ baseUrl: getApiBaseUrl() });
     }
     return null;
+  }
+
+  function getActivePatientId() {
+    const params = new URLSearchParams(globalScope.location.search || '');
+    const queryPatientId = params.get('patient_id');
+    if (queryPatientId) {
+      return queryPatientId;
+    }
+    return globalScope.sessionStorage.getItem(ACTIVE_PATIENT_KEY);
+  }
+
+  function setActivePatientId(patientId) {
+    if (!patientId) return;
+    globalScope.sessionStorage.setItem(ACTIVE_PATIENT_KEY, patientId);
   }
 
   function escapeHtml(value) {
@@ -176,7 +194,8 @@
       saveBtn.disabled = true;
 
       try {
-        await api.createPatient(data);
+        const response = await api.createPatient(data);
+        setActivePatientId(response.patient?.id || null);
         showToast('Patient added successfully.');
         overlay.remove();
         if (onDone) onDone();
@@ -240,6 +259,7 @@
 
       try {
         await api.updatePatient(patient.id, data);
+        setActivePatientId(patient.id);
         showToast('Patient updated successfully.');
         overlay.remove();
         if (onDone) onDone();
@@ -294,6 +314,9 @@
 
       try {
         await api.deletePatient(patient.id);
+        if (getActivePatientId() === patient.id) {
+          globalScope.sessionStorage.removeItem(ACTIVE_PATIENT_KEY);
+        }
         showToast('Patient deleted.');
         overlay.remove();
         if (onDone) onDone();
@@ -496,6 +519,7 @@
             });
           } else if (btn.dataset.action === 'view') {
             const triageEntry = allQueue.find((q) => q.patient_id === pid);
+            setActivePatientId(pid);
             updateSidePanel({ ...patient, ...(triageEntry || {}) });
           }
         });
@@ -507,6 +531,7 @@
           const pid = row.dataset.patientId;
           const patient = allPatients.find((p) => p.id === pid);
           const triageEntry = allQueue.find((q) => q.patient_id === pid);
+          setActivePatientId(pid);
           updateSidePanel({ ...patient, ...(triageEntry || {}) });
         });
       });
@@ -577,8 +602,8 @@
             <button class="py-2.5 bg-surface-container-high text-on-surface rounded-full text-xs font-bold hover:bg-surface-variant transition-colors" data-action="edit-panel">
               Edit Patient
             </button>
-            <button class="py-2.5 bg-error-container text-on-error-container rounded-full text-xs font-bold hover:bg-error/20 transition-colors" data-action="delete-panel">
-              Delete
+            <button class="py-2.5 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold hover:opacity-90 transition-colors" data-action="schedule-followup">
+              Schedule Follow-up
             </button>
           </div>
         </div>
@@ -599,18 +624,78 @@
         });
       });
 
-      aside.querySelectorAll('[data-action="delete-panel"]').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const patient = allPatients.find((p) => p.id === item.id);
-          if (patient) {
-            showDeleteConfirmation(api, patient, async () => {
-              await loadData();
-              renderQueue();
-              updateSidePanel(null);
+      const runTriageBtn = aside.querySelector('[data-action="run-triage"]');
+      if (runTriageBtn) {
+        runTriageBtn.addEventListener('click', async () => {
+          const symptomInput = globalScope.prompt(
+            'Enter symptoms (comma separated):',
+            (item.symptoms || []).join(', ')
+          );
+          if (!symptomInput) return;
+          const symptoms = symptomInput
+            .split(',')
+            .map((entry) => entry.trim())
+            .filter(Boolean);
+          if (!symptoms.length) {
+            showToast('At least one symptom is required.', true);
+            return;
+          }
+
+          runTriageBtn.disabled = true;
+          runTriageBtn.textContent = 'Running…';
+          try {
+            await api.assessTriage({
+              patient_id: item.id,
+              age_months: Number(item.age_months || 0),
+              symptoms,
             });
+            setActivePatientId(item.id);
+            showToast('Triage assessment saved.');
+            await loadData();
+            renderQueue();
+            const updated = allPatients.find((p) => p.id === item.id);
+            if (updated) {
+              updateSidePanel({ ...updated, ...(allQueue.find((q) => q.patient_id === item.id) || {}) });
+            }
+          } catch (err) {
+            showToast(err.message || 'Triage request failed.', true);
+          } finally {
+            runTriageBtn.disabled = false;
+            runTriageBtn.innerHTML = '<span class="material-symbols-outlined text-lg">assessment</span>Run Triage Assessment';
           }
         });
-      });
+      }
+
+      const followupBtn = aside.querySelector('[data-action="schedule-followup"]');
+      if (followupBtn) {
+        followupBtn.addEventListener('click', async () => {
+          const dueDate = globalScope.prompt('Enter follow-up date (YYYY-MM-DD):');
+          if (!dueDate) return;
+          const instructions = globalScope.prompt(
+            'Enter follow-up instructions:',
+            'Re-check symptoms and vitals.'
+          );
+          if (!instructions) return;
+
+          followupBtn.disabled = true;
+          followupBtn.textContent = 'Saving…';
+          try {
+            await api.createFollowup({
+              patient_id: item.id,
+              due_date: dueDate,
+              instructions,
+              urgency: item.urgency || 'YELLOW',
+            });
+            setActivePatientId(item.id);
+            showToast('Follow-up scheduled.');
+          } catch (err) {
+            showToast(err.message || 'Could not schedule follow-up.', true);
+          } finally {
+            followupBtn.disabled = false;
+            followupBtn.textContent = 'Schedule Follow-up';
+          }
+        });
+      }
     }
 
     // Wire filter buttons
@@ -819,6 +904,82 @@
     setInterval(loadAlerts, 20000);
   }
 
+  async function bootPatientProfile(api) {
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    let patientId = getActivePatientId();
+    if (!patientId) {
+      try {
+        const list = await api.listPatients();
+        patientId = list.patients?.[0]?.id || null;
+      } catch (_error) {
+        patientId = null;
+      }
+    }
+
+    if (!patientId) {
+      main.innerHTML =
+        '<section class="p-8"><h2 class="text-3xl font-bold">No patient selected</h2><p class="mt-2 text-stone-500">Open a patient from the queue to view profile details.</p></section>';
+      return;
+    }
+
+    setActivePatientId(patientId);
+
+    try {
+      const [summaryData, notesData, followupData] = await Promise.all([
+        api.request(`/api/patients/${encodeURIComponent(patientId)}/summary`),
+        api.listNotes({ patient_id: patientId, limit: 5 }),
+        api.listFollowups({ patient_id: patientId }),
+      ]);
+      const summary = summaryData.summary;
+      const notes = notesData.notes || [];
+      const followups = followupData.followups || [];
+      const patient = summary?.patient || {};
+      const latest = summary?.latest_assessment;
+
+      main.innerHTML = `
+        <section class="p-8 space-y-6">
+          <div>
+            <h1 class="text-5xl font-['Newsreader']">${escapeHtml(patient.full_name || 'Patient')}</h1>
+            <p class="text-stone-600 mt-2">ID: ${escapeHtml(patient.id || patientId)} • ${escapeHtml(formatAgeMonths(patient.age_months))}</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <article class="bg-white rounded-xl p-6">
+              <h2 class="text-xl font-bold mb-3">Latest triage</h2>
+              <p><strong>Urgency:</strong> ${escapeHtml(latest?.urgency || 'GREEN')}</p>
+              <p class="mt-2"><strong>Reason:</strong> ${escapeHtml(latest?.reason || 'No triage summary yet.')}</p>
+              <p class="mt-2"><strong>Action:</strong> ${escapeHtml(latest?.recommended_action || 'No action recorded.')}</p>
+            </article>
+            <article class="bg-white rounded-xl p-6">
+              <h2 class="text-xl font-bold mb-3">Next follow-up</h2>
+              <p>${escapeHtml(followups[0]?.due_date || 'No follow-up scheduled')}</p>
+              <p class="mt-2 text-stone-600">${escapeHtml(followups[0]?.instructions || '')}</p>
+            </article>
+          </div>
+          <article class="bg-white rounded-xl p-6">
+            <h2 class="text-xl font-bold mb-3">Recent SOAP notes</h2>
+            ${
+              notes.length
+                ? `<ul class="space-y-3">${notes
+                    .map(
+                      (note) => `<li class="border border-stone-100 rounded-lg p-3">
+                          <div class="text-sm text-stone-500">${escapeHtml(note.created_at || '')}</div>
+                          <div class="font-semibold">${escapeHtml((Array.isArray(note.assessment) ? note.assessment[0] : note.assessment) || 'No assessment')}</div>
+                          <div class="text-sm text-stone-600">${escapeHtml((Array.isArray(note.plan) ? note.plan[0] : note.plan) || '')}</div>
+                        </li>`
+                    )
+                    .join('')}</ul>`
+                : '<p class="text-stone-500">No notes available.</p>'
+            }
+          </article>
+        </section>
+      `;
+    } catch (err) {
+      main.innerHTML = `<section class="p-8"><h2 class="text-3xl font-bold">Unable to load profile</h2><p class="mt-2 text-stone-500">${escapeHtml(err.message || 'Try again shortly.')}</p></section>`;
+    }
+  }
+
   // ═══════════════════════════════════════════
   // Inject Modal Animations CSS
   // ═══════════════════════════════════════════
@@ -854,6 +1015,10 @@
 
     if (path === 'the-ward-ai-assistant.html') {
       bootAiAssistant(api);
+    }
+
+    if (path === 'the-ward-patient-profile.html') {
+      bootPatientProfile(api);
     }
   });
 })(window);

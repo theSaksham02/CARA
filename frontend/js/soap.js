@@ -19,6 +19,18 @@ window.CARA = window.CARA || {};
       "Patient reports mild throat discomfort. Exam otherwise normal. Assessment is viral upper respiratory infection. Prescribe rest and home care.",
   };
 
+  const ACTIVE_PATIENT_KEY = "cara-active-patient-id";
+  let currentNoteKey = "amara";
+
+  function createApi() {
+    if (!window.CaraApi) return null;
+    const baseUrl =
+      typeof window.resolveCaraApiBaseUrl === "function"
+        ? window.resolveCaraApiBaseUrl()
+        : "";
+    return new window.CaraApi({ baseUrl });
+  }
+
   function sectionForSentence(sentence) {
     const text = sentence.toLowerCase();
     if (KEYWORDS.objective.some((word) => text.includes(word))) return "objective";
@@ -47,12 +59,9 @@ window.CARA = window.CARA || {};
     return sections;
   }
 
-  function renderSOAP(noteKey) {
-    const note = NOTE_DATA[noteKey] || NOTE_DATA.amara;
+  function renderSOAPFromSections(sections) {
     const output = document.querySelector("#soap-output");
     if (!output) return;
-
-    const sections = formatSOAP(note);
     output.innerHTML = `
       <article class="card card-tight">
         <h3>Subjective</h3>
@@ -73,6 +82,12 @@ window.CARA = window.CARA || {};
     `;
   }
 
+  function renderSOAP(noteKey) {
+    const note = NOTE_DATA[noteKey] || NOTE_DATA.amara;
+    const sections = formatSOAP(note);
+    renderSOAPFromSections(sections);
+  }
+
   function init() {
     const noteButtons = document.querySelectorAll("[data-soap-note]");
     if (!noteButtons.length) return;
@@ -81,7 +96,8 @@ window.CARA = window.CARA || {};
       button.addEventListener("click", () => {
         noteButtons.forEach((node) => node.classList.remove("is-active"));
         button.classList.add("is-active");
-        renderSOAP(button.dataset.soapNote || "amara");
+        currentNoteKey = button.dataset.soapNote || "amara";
+        renderSOAP(currentNoteKey);
       });
     });
 
@@ -92,8 +108,41 @@ window.CARA = window.CARA || {};
 
     const sendButton = document.querySelector("[data-soap-send]");
     if (sendButton) {
-      sendButton.addEventListener("click", () => {
-        window.CARA.animations?.showToast("SOAP note sent to Patient Compass.");
+      sendButton.addEventListener("click", async () => {
+        const transcriptInput = document.querySelector("#manual-note");
+        const transcript = transcriptInput?.value?.trim() || NOTE_DATA[currentNoteKey] || "";
+        if (!transcript) {
+          window.CARA.animations?.showToast("Add a transcript before sending.");
+          return;
+        }
+
+        const api = createApi();
+        if (!api) {
+          window.CARA.animations?.showToast("Backend API unavailable.");
+          return;
+        }
+
+        sendButton.disabled = true;
+        sendButton.textContent = "Saving...";
+        try {
+          const response = await api.generateNote({
+            patient_id: window.sessionStorage.getItem(ACTIVE_PATIENT_KEY) || undefined,
+            transcript,
+          });
+          const note = response.note || {};
+          renderSOAPFromSections({
+            subjective: Array.isArray(note.subjective) ? note.subjective : [note.subjective].filter(Boolean),
+            objective: Array.isArray(note.objective) ? note.objective : [note.objective].filter(Boolean),
+            assessment: Array.isArray(note.assessment) ? note.assessment : [note.assessment].filter(Boolean),
+            plan: Array.isArray(note.plan) ? note.plan : [note.plan].filter(Boolean),
+          });
+          window.CARA.animations?.showToast("SOAP note saved to backend.");
+        } catch (error) {
+          window.CARA.animations?.showToast(error.message || "Unable to save SOAP note.");
+        } finally {
+          sendButton.disabled = false;
+          sendButton.textContent = "Send to Patient Compass";
+        }
       });
     }
 

@@ -1,11 +1,7 @@
 window.CARA = window.CARA || {};
 
 (() => {
-  const RESPONSES = [
-    "Protocol check complete: classify as YELLOW, monitor hydration and repeat vitals in 30 minutes.",
-    "Based on IMCI logic, this symptom cluster needs immediate referral and first-dose antibiotic.",
-    "No red-flag indicators detected. Continue routine care and schedule next visit.",
-  ];
+  const ACTIVE_PATIENT_KEY = "cara-active-patient-id";
 
   function appendBubble(thread, text, type = "ai") {
     const bubble = document.createElement("article");
@@ -57,6 +53,15 @@ window.CARA = window.CARA || {};
     const thread = document.querySelector("#assistant-thread");
     if (!form || !input || !thread) return;
 
+    const createApi = () => {
+      if (!window.CaraApi) return null;
+      const baseUrl =
+        typeof window.resolveCaraApiBaseUrl === "function"
+          ? window.resolveCaraApiBaseUrl()
+          : "";
+      return new window.CaraApi({ baseUrl });
+    };
+
     document.querySelectorAll("[data-quick-prompt]").forEach((button) => {
       button.addEventListener("click", () => {
         input.value = button.dataset.quickPrompt || "";
@@ -64,7 +69,7 @@ window.CARA = window.CARA || {};
       });
     });
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const text = input.value.trim();
       if (!text) return;
@@ -73,13 +78,31 @@ window.CARA = window.CARA || {};
       appendBubble(thread, text, "user");
       input.value = "";
       const typingBubble = appendTyping(thread);
-      window.setTimeout(() => {
+      try {
+        const api = createApi();
+        if (!api) {
+          throw new Error("Assistant API unavailable.");
+        }
+        const response = await api.askAssistant({
+          question: text,
+          patient_id: window.sessionStorage.getItem(ACTIVE_PATIENT_KEY) || undefined,
+          top_k: 5,
+        });
         typingBubble.remove();
-        const response = RESPONSES[Math.floor(Math.random() * RESPONSES.length)];
-        streamAIResponse(thread, response);
+        const answer = response.escalate
+          ? `${response.answer}\n\n(Escalation recommended: ${response.reason || "low confidence"})`
+          : response.answer;
+        streamAIResponse(thread, answer);
+      } catch (error) {
+        typingBubble.remove();
+        streamAIResponse(
+          thread,
+          `Unable to retrieve a grounded response right now. ${error.message || ""}`.trim(),
+        );
+      } finally {
         if (submitButton) submitButton.disabled = false;
         input.focus();
-      }, 520);
+      }
     });
   }
 

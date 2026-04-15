@@ -23,18 +23,18 @@ window.CARA = window.CARA || {};
   }
 
   function getTriage(payload) {
-    return request("/api/triage", {
+    return request("/api/triage/assess", {
       method: "POST",
       body: JSON.stringify(payload),
     });
   }
 
   function getImpact(range = "month") {
-    return request(`/api/impact?range=${encodeURIComponent(range)}`);
+    return request(`/api/analytics/impact?range=${encodeURIComponent(range)}`);
   }
 
   function saveFollowUp(payload) {
-    return request("/api/followups", {
+    return request("/api/followup", {
       method: "POST",
       body: JSON.stringify(payload),
     });
@@ -47,18 +47,34 @@ window.CARA = window.CARA || {};
     });
   }
 
+  function submitJoinUs(payload) {
+    return request("/public/join-us", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  }
+
   window.CARA.api = {
     request,
     getTriage,
     getImpact,
     saveFollowUp,
     askAssistant,
+    submitJoinUs,
   };
 })();
 (function attachCaraApi(globalScope) {
+  function resolveCaraApiBaseUrl() {
+    const { protocol, hostname } = globalScope.location;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return `${protocol}//${hostname}:4000`;
+    }
+    return '';
+  }
+
   class CaraApi {
     constructor(options = {}) {
-      this.baseUrl = options.baseUrl || 'http://localhost:4000';
+      this.baseUrl = options.baseUrl ?? resolveCaraApiBaseUrl();
       this.tokenProvider = options.tokenProvider || null;
     }
 
@@ -173,7 +189,28 @@ window.CARA = window.CARA || {};
         body: payload,
       });
     }
+
+    askAssistant(payload) {
+      return this.request('/api/assistant', {
+        method: 'POST',
+        body: payload,
+      });
+    }
+
+    listAssistantLogs(query = {}) {
+      const search = new URLSearchParams(query).toString();
+      const suffix = search ? `?${search}` : '';
+      return this.request(`/api/assistant/logs${suffix}`);
+    }
+
+    submitJoinUs(payload) {
+      return this.request('/public/join-us', {
+        method: 'POST',
+        body: payload,
+      });
+    }
   }
 
   globalScope.CaraApi = CaraApi;
+  globalScope.resolveCaraApiBaseUrl = resolveCaraApiBaseUrl;
 })(window);

@@ -322,6 +322,51 @@ const apiContracts = {
       path: '/api/rag/index/status',
     },
   },
+  assistant: {
+    ask: {
+      method: 'POST',
+      path: '/api/assistant',
+      request: {
+        required: ['question'],
+        optional: ['patient_id', 'top_k'],
+        example: {
+          question: 'What follow-up should I schedule for this patient?',
+          patient_id: 'patient-demo-001',
+          top_k: 5,
+        },
+      },
+      response: {
+        example: {
+          answer: 'Schedule a next-day follow-up to re-check breathing and fever progression.',
+          citations: [],
+          confidence: 0.71,
+          escalate: false,
+          reason: null,
+        },
+      },
+    },
+    logs: {
+      method: 'GET',
+      path: '/api/assistant/logs',
+      query: ['patient_id', 'limit'],
+    },
+  },
+  public: {
+    joinUs: {
+      method: 'POST',
+      path: '/public/join-us',
+      request: {
+        required: ['name', 'email', 'role', 'message'],
+        optional: ['metadata'],
+        example: {
+          name: 'Asha Nair',
+          email: 'asha@example.com',
+          role: 'Developer (OSS)',
+          message: 'I would like to contribute to field-clinic workflows.',
+        },
+      },
+    },
+  },
 };
 
 module.exports = {

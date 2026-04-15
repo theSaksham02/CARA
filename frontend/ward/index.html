@@ -93,6 +93,12 @@
                 <h2>Triage quick check</h2>
                 <form id="triage-form" class="stack">
                   <label class="form-field">
+                    <span>Patient</span>
+                    <select class="select" name="patient-id">
+                      <option value="">Unlinked / quick triage</option>
+                    </select>
+                  </label>
+                  <label class="form-field">
                     <span>Patient age (months)</span>
                     <input class="input" name="age-months" type="number" min="0" value="14" />
                   </label>
@@ -373,8 +379,8 @@
         <h3>Schedule follow-up</h3>
         <form class="stack" data-followup-form>
           <label class="form-field">
-            <span>Patient name</span>
-            <input class="input" name="patient" value="Elena Rodriguez" />
+            <span>Patient</span>
+            <select class="select" name="patient_id"></select>
           </label>
           <label class="form-field">
             <span>Date</span>

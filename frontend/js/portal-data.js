@@ -6,11 +6,9 @@
   };
 
   function getApiBaseUrl() {
-    const { protocol, hostname } = globalScope.location;
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      return `${protocol}//${hostname}:4000`;
+    if (typeof globalScope.resolveCaraApiBaseUrl === 'function') {
+      return globalScope.resolveCaraApiBaseUrl();
     }
-
     return '';
   }
 
@@ -347,7 +345,7 @@
     `;
   }
 
-  function renderSoap(main, notes) {
+  function renderSoap(main, notes, api) {
     main.innerHTML = `
       <aside class="w-80 h-full bg-surface-container-low flex flex-col border-r-0">
         <div class="p-6">
@@ -356,20 +354,54 @@
         </div>
         <div class="flex-grow overflow-y-auto px-4 space-y-2 pb-8" data-live-note-list=""></div>
       </aside>
-      <section class="flex-grow h-full overflow-y-auto bg-surface p-12" data-live-note-detail=""></section>
+      <section class="flex-grow h-full overflow-y-auto bg-surface p-12 space-y-6" data-live-note-detail=""></section>
     `;
 
     const list = main.querySelector('[data-live-note-list]');
     const detail = main.querySelector('[data-live-note-detail]');
+    const state = {
+      notes: Array.isArray(notes) ? notes : [],
+      selectedIndex: 0,
+    };
+
+    function firstValue(value, fallback = '') {
+      if (Array.isArray(value)) return value[0] || fallback;
+      if (value === null || value === undefined) return fallback;
+      return String(value);
+    }
+
+    async function hydratePatientOptions(select) {
+      if (!select) return;
+      try {
+        const response = await api.listPatients();
+        select.innerHTML = `<option value="">Unlinked patient note</option>${(response.patients || [])
+          .map((patient) => `<option value="${patient.id}">${escapeHtml(patient.full_name)} (${escapeHtml(patient.id.slice(0, 8))}...)</option>`)
+          .join('')}`;
+      } catch (_error) {
+        select.innerHTML = '<option value="">Unlinked patient note</option>';
+      }
+    }
 
     function renderDetail(note) {
-      if (!note) {
-        detail.innerHTML = emptyCard('No live notes yet', 'Generate a SOAP note from the backend and it will appear here.');
-        return;
-      }
-
       detail.innerHTML = `
         <div class="max-w-4xl mx-auto space-y-8">
+          <form class="p-6 rounded-xl bg-surface-container-lowest shadow-sm space-y-4" data-live-note-create>
+            <h2 class="text-2xl font-headline">Create SOAP note</h2>
+            <label class="block text-sm font-semibold text-on-surface-variant">
+              Patient
+              <select class="mt-2 w-full rounded-lg border border-outline-variant/40 bg-surface-container-low px-3 py-2" name="patient_id"></select>
+            </label>
+            <label class="block text-sm font-semibold text-on-surface-variant">
+              Transcript
+              <textarea class="mt-2 w-full rounded-lg border border-outline-variant/40 bg-surface-container-low px-3 py-2" name="transcript" rows="4" placeholder="Enter or paste encounter transcript..." required></textarea>
+            </label>
+            <button class="px-4 py-2 rounded-full bg-primary text-on-primary font-semibold" type="submit">Generate & Save</button>
+            <p class="text-sm" data-live-note-create-feedback></p>
+          </form>
+          ${
+            !note
+              ? emptyCard('No live notes yet', 'Generate a SOAP note from the backend and it will appear here.')
+              : `
           <div>
             <h1 class="text-5xl font-headline font-bold">${escapeHtml(note.patient_id || 'Unlinked patient')}</h1>
             <p class="text-sm text-stone-500 mt-2">${escapeHtml(formatDateTime(note.created_at))}</p>
@@ -382,50 +414,101 @@
               ['Plan', note.plan],
             ]
               .map(
-                ([label, section]) => `
+                ([label, section]) => {
+                  const sectionItems = Array.isArray(section)
+                    ? section
+                    : section
+                      ? [String(section)]
+                      : [];
+                  return `
               <div class="p-8 rounded-xl bg-surface-container-lowest shadow-sm">
                 <h3 class="text-2xl font-headline mb-4">${escapeHtml(label)}</h3>
                 ${
-                  section && section.length
-                    ? `<ul class="space-y-3">${section.map((item) => `<li class="text-on-surface-variant">${escapeHtml(item)}</li>`).join('')}</ul>`
+                  sectionItems.length
+                    ? `<ul class="space-y-3">${sectionItems.map((item) => `<li class="text-on-surface-variant">${escapeHtml(item)}</li>`).join('')}</ul>`
                     : '<p class="text-on-surface-variant">No content for this section yet.</p>'
                 }
               </div>
             `
+                }
               )
               .join('')}
           </div>
+          `
+          }
         </div>
       `;
+
+      const createForm = detail.querySelector('[data-live-note-create]');
+      const feedback = detail.querySelector('[data-live-note-create-feedback]');
+      const patientSelect = detail.querySelector('[name="patient_id"]');
+      hydratePatientOptions(patientSelect);
+
+      if (createForm) {
+        createForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          const submitButton = createForm.querySelector('button[type="submit"]');
+          const transcript = createForm.querySelector('[name="transcript"]')?.value?.trim() || '';
+          const patientId = createForm.querySelector('[name="patient_id"]')?.value || undefined;
+          if (!transcript) return;
+          if (submitButton) submitButton.disabled = true;
+          if (feedback) feedback.textContent = '';
+
+          try {
+            await api.generateNote({
+              patient_id: patientId || undefined,
+              transcript,
+            });
+            const refreshed = await api.listNotes();
+            state.notes = refreshed.notes || [];
+            state.selectedIndex = 0;
+            renderListAndDetail();
+            if (feedback) {
+              feedback.textContent = 'SOAP note saved successfully.';
+            }
+          } catch (error) {
+            if (feedback) {
+              feedback.textContent = error.message || 'Could not save SOAP note.';
+            }
+          } finally {
+            if (submitButton) submitButton.disabled = false;
+          }
+        });
+      }
     }
 
-    if (!notes.length) {
-      list.innerHTML = '<div class="p-4 text-sm text-on-surface-variant">No live notes yet.</div>';
-      renderDetail(null);
-      return;
-    }
+    function renderListAndDetail() {
+      if (!state.notes.length) {
+        list.innerHTML = '<div class="p-4 text-sm text-on-surface-variant">No live notes yet.</div>';
+        renderDetail(null);
+        return;
+      }
 
-    list.innerHTML = notes
-      .map(
-        (note, index) => `
+      list.innerHTML = state.notes
+        .map(
+          (note, index) => `
       <button class="w-full text-left p-4 rounded-xl ${index === 0 ? 'bg-surface-container-lowest shadow-sm' : 'bg-transparent hover:bg-surface-container-high'} transition-all" data-note-index="${index}" type="button">
         <div class="flex justify-between items-start mb-1">
           <span class="font-bold text-on-surface">${escapeHtml(note.patient_id || 'Unlinked patient')}</span>
           <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase tracking-tighter">SOAP</span>
         </div>
         <p class="text-xs text-stone-500 mb-2">${escapeHtml(formatDateTime(note.created_at))}</p>
-        <p class="text-xs text-on-surface-variant">${escapeHtml(note.assessment?.[0] || note.plan?.[0] || 'No summary available yet.')}</p>
+        <p class="text-xs text-on-surface-variant">${escapeHtml(firstValue(note.assessment, firstValue(note.plan, 'No summary available yet.')))}</p>
       </button>
     `
-      )
-      .join('');
+        )
+        .join('');
 
-    renderDetail(notes[0]);
-    list.querySelectorAll('[data-note-index]').forEach((button) => {
-      button.addEventListener('click', () => {
-        renderDetail(notes[Number(button.dataset.noteIndex)]);
+      renderDetail(state.notes[state.selectedIndex] || state.notes[0]);
+      list.querySelectorAll('[data-note-index]').forEach((button) => {
+        button.addEventListener('click', () => {
+          state.selectedIndex = Number(button.dataset.noteIndex);
+          renderDetail(state.notes[state.selectedIndex]);
+        });
       });
-    });
+    }
+
+    renderListAndDetail();
   }
 
   function renderImpact(main, analytics) {
@@ -677,36 +760,20 @@
     const api = createApi();
 
     try {
-      if (path === 'the-ward-overview.html') {
-        const [{ overview }, { analytics }] = await Promise.all([
-          api.getDashboardOverview(),
-          api.getImpactAnalytics({ range: 'week' }),
-        ]);
-        renderOverview(main, overview, analytics);
-        return;
-      }
-
-      if (path === 'the-ward-patient-queue.html') {
-        const { queue } = await api.getTriageQueue();
-        renderQueue(main, queue || []);
+      // Queue/overview/assistant pages are owned by ward-crud.js to avoid dual render conflicts.
+      if (['the-ward-overview.html', 'the-ward-patient-queue.html', 'the-ward-ai-assistant.html', 'the-ward-patient-profile.html'].includes(path)) {
         return;
       }
 
       if (path === 'the-ward-soap-notes.html') {
         const { notes } = await api.listNotes();
-        renderSoap(main, notes || []);
+        renderSoap(main, notes || [], api);
         return;
       }
 
       if (path === 'the-ward-impact-dashboard.html') {
         const { analytics } = await api.getImpactAnalytics({ range: 'month' });
         renderImpact(main, analytics || {});
-        return;
-      }
-
-      if (path === 'the-ward-ai-assistant.html') {
-        const { queue } = await api.getTriageQueue();
-        renderAssistant(main, queue || []);
         return;
       }
 

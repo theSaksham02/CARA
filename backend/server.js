@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const express = require('express');
 
 const analyticsRoutes = require('./routes/analytics.routes');
+const assistantRoutes = require('./routes/assistant.routes');
 const auditRoutes = require('./routes/audit.routes');
 const { bootstrapDatabase, getDbMode } = require('./db/setup');
 const { auditMiddleware } = require('./middleware/audit.middleware');
@@ -15,6 +16,7 @@ const dashboardRoutes = require('./routes/dashboard.routes');
 const followupRoutes = require('./routes/followup.routes');
 const noteRoutes = require('./routes/note.routes');
 const patientRoutes = require('./routes/patient.routes');
+const publicRoutes = require('./routes/public.routes');
 const ragRoutes = require('./routes/rag.routes');
 const readmissionRoutes = require('./routes/readmission.routes');
 const syncRoutes = require('./routes/sync.routes');
@@ -42,7 +44,9 @@ function createApp() {
     });
   });
 
+  app.use('/public', publicRoutes);
   app.use('/api', authMiddleware);
+  app.use('/api/assistant', assistantRoutes);
   app.use('/api/triage', triageRoutes);
   app.use('/api/patients', patientRoutes);
   app.use('/api/notes', noteRoutes);

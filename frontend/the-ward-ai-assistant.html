@@ -241,21 +241,21 @@
 <div>
 <h3 class="text-primary font-bold text-xs uppercase tracking-widest mb-6">Quick Clinical Prompts</h3>
 <div class="space-y-3">
-<button class="w-full text-left p-4 rounded-xl bg-surface-container-lowest hover:bg-primary-container hover:text-on-primary-container transition-all group">
+<button class="w-full text-left p-4 rounded-xl bg-surface-container-lowest hover:bg-primary-container hover:text-on-primary-container transition-all group" data-quick-prompt="What tests for suspected TB in children?">
 <div class="flex items-center gap-2 mb-1">
 <span class="material-symbols-outlined text-sm text-primary group-hover:text-on-primary-container">clinical_notes</span>
 <span class="text-xs font-bold opacity-60">PROTOCOL</span>
 </div>
 <p class="text-sm font-medium">What tests for suspected TB in children?</p>
 </button>
-<button class="w-full text-left p-4 rounded-xl bg-surface-container-lowest hover:bg-primary-container hover:text-on-primary-container transition-all group">
+<button class="w-full text-left p-4 rounded-xl bg-surface-container-lowest hover:bg-primary-container hover:text-on-primary-container transition-all group" data-quick-prompt="ANC protocol for high-risk patients">
 <div class="flex items-center gap-2 mb-1">
 <span class="material-symbols-outlined text-sm text-primary group-hover:text-on-primary-container">medical_services</span>
 <span class="text-xs font-bold opacity-60">MATERNITY</span>
 </div>
 <p class="text-sm font-medium">ANC protocol for high-risk patients</p>
 </button>
-<button class="w-full text-left p-4 rounded-xl bg-surface-container-lowest hover:bg-primary-container hover:text-on-primary-container transition-all group">
+<button class="w-full text-left p-4 rounded-xl bg-surface-container-lowest hover:bg-primary-container hover:text-on-primary-container transition-all group" data-quick-prompt="Calculate dose: Gentamicin (IM)">
 <div class="flex items-center gap-2 mb-1">
 <span class="material-symbols-outlined text-sm text-primary group-hover:text-on-primary-container">medication</span>
 <span class="text-xs font-bold opacity-60">DOSAGE</span>
@@ -299,88 +299,5 @@
 <script src="./js/portal-data.js"></script>
 <script src="./js/route-wiring.js" type="module"></script>
 <script src="./js/ward-crud.js"></script>
-<script>
-    const input = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('send-btn');
-    const history = document.getElementById('chat-history');
-
-    function addMessage(text, isUser) {
-        if(!history) return;
-        const div = document.createElement('div');
-        div.className = isUser ? 'flex justify-end ml-24' : 'flex justify-start mr-24';
-        div.innerHTML = isUser ? `
-        <div class="bg-surface-container-lowest px-6 py-4 rounded-xl rounded-tr-none shadow-sm max-w-2xl mt-4">
-            <p class="text-sm font-medium text-primary mb-1">Dr. Aris</p>
-            <p class="text-on-surface leading-relaxed whitespace-pre-wrap">${text}</p>
-        </div>` : `
-        <div class="border-l-4 border-primary-container bg-surface-container-low px-6 py-5 rounded-xl rounded-tl-none max-w-2xl mt-4">
-            <div class="flex items-center gap-2 mb-3">
-                <span class="bg-primary-container text-on-primary-container text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">CARA AI</span>
-                <span class="text-[10px] text-primary/60 font-semibold bg-primary-fixed-dim/30 px-2 py-0.5 rounded-full uppercase tracking-widest flex items-center gap-1">
-                <span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">verified</span> WHO IMCI
-                </span>
-            </div>
-            <p class="text-on-surface leading-relaxed whitespace-pre-wrap">${text}</p>
-        </div>`;
-        history.appendChild(div);
-        history.scrollTop = history.scrollHeight;
-    }
-
-    async function handleSend() {
-        const text = input.value.trim();
-        if (!text) return;
-        
-        addMessage(text, true);
-        input.value = '';
-        
-        // Add a temporary typing indicator message
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'flex justify-start mr-24';
-        typingDiv.id = 'typing-indicator';
-        typingDiv.innerHTML = `
-        <div class="border-l-4 border-primary-container bg-surface-container-low px-6 py-5 rounded-xl rounded-tl-none max-w-2xl mt-4">
-            <div class="flex items-center gap-2 mb-3">
-                <span class="bg-primary-container text-on-primary-container text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">CARA AI</span>
-            </div>
-            <p class="text-on-surface leading-relaxed animate-pulse">Thinking...</p>
-        </div>`;
-        history.appendChild(typingDiv);
-        history.scrollTop = history.scrollHeight;
-
-        try {
-            const response = await fetch("https://text.pollinations.ai/openai", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    messages: [
-                        { role: "system", content: "You are CARA, an advanced clinical AI assistant. You answer medical queries based on WHO guidelines. Your responses are strictly clinical, professional, concise, and structured. Always recommend seeking a qualified healthcare professional's direct diagnosis for final validation." },
-                        { role: "user", content: text }
-                    ]
-                })
-            });
-            const data = await response.json();
-            const llmResponse = data.choices && data.choices.length > 0 ? data.choices[0].message.content : "I encountered an error connecting to my clinical intelligence network. Please try again.";
-            
-            // Remove typing indicator and add real message
-            const indicator = document.getElementById('typing-indicator');
-            if (indicator) indicator.remove();
-            
-            addMessage(llmResponse, false);
-        } catch (error) {
-            console.error("LLM Error:", error);
-            const indicator = document.getElementById('typing-indicator');
-            if (indicator) indicator.remove();
-            addMessage("Error: Could not connect to CARA AI services. Please check your network.", false);
-        }
-    }
-
-    if(sendBtn && input) {
-        sendBtn.addEventListener('click', handleSend);
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleSend();
-        });
-    }
-</script>
+<script src="./js/the-ward-ai-assistant.js"></script>
 </body></html>

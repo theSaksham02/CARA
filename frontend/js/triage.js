@@ -39,7 +39,40 @@ window.CARA = window.CARA || {};
     const form = document.querySelector("#triage-form");
     if (!form) return;
     const result = document.querySelector("#triage-result");
+    const ACTIVE_PATIENT_KEY = "cara-active-patient-id";
     const selected = new Set();
+
+    const createApi = () => {
+      if (!window.CaraApi) return null;
+      const baseUrl =
+        typeof window.resolveCaraApiBaseUrl === "function"
+          ? window.resolveCaraApiBaseUrl()
+          : "";
+      return new window.CaraApi({ baseUrl });
+    };
+
+    const patientSelect = form.querySelector("[name='patient-id']");
+
+    async function hydratePatientOptions() {
+      if (!patientSelect) return;
+      const api = createApi();
+      if (!api) return;
+
+      try {
+        const { patients } = await api.listPatients();
+        const activeId = window.sessionStorage.getItem(ACTIVE_PATIENT_KEY);
+        patientSelect.innerHTML = `<option value="">Unlinked / quick triage</option>${(patients || [])
+          .map((patient) => {
+            const selectedAttr = activeId && patient.id === activeId ? "selected" : "";
+            return `<option value="${patient.id}" ${selectedAttr}>${patient.full_name} (${patient.id.slice(0, 8)}...)</option>`;
+          })
+          .join("")}`;
+      } catch (_error) {
+        patientSelect.innerHTML = `<option value="">Unlinked / quick triage</option>`;
+      }
+    }
+
+    hydratePatientOptions();
 
     form.querySelectorAll("[data-symptom]").forEach((chip) => {
       chip.addEventListener("click", () => {
@@ -56,7 +89,7 @@ window.CARA = window.CARA || {};
       });
     });
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (!selected.size) {
         window.CARA.animations?.showToast("Select at least one symptom before running triage.");
@@ -64,7 +97,32 @@ window.CARA = window.CARA || {};
       }
 
       const ageMonths = Number(form.querySelector("[name='age-months']")?.value || 0);
-      const triage = classify(Array.from(selected), ageMonths);
+      const patientId = patientSelect?.value || null;
+      const api = createApi();
+      let triage = null;
+
+      if (api) {
+        try {
+          const response = await api.assessTriage({
+            patient_id: patientId || undefined,
+            symptoms: Array.from(selected),
+            age_months: ageMonths,
+          });
+          triage = {
+            urgency: response.assessment?.urgency || "Green",
+            reason: response.assessment?.reason || "No reason provided.",
+          };
+          if (patientId) {
+            window.sessionStorage.setItem(ACTIVE_PATIENT_KEY, patientId);
+          }
+        } catch (error) {
+          window.CARA.animations?.showToast(error.message || "Backend triage failed. Showing local fallback.");
+        }
+      }
+
+      if (!triage) {
+        triage = classify(Array.from(selected), ageMonths);
+      }
 
       if (!result) return;
       result.hidden = false;
@@ -72,7 +130,7 @@ window.CARA = window.CARA || {};
       result.querySelector("[data-triage-badge]").textContent = triage.urgency;
       result.querySelector("[data-triage-reason]").textContent = triage.reason;
       result.querySelector("[data-triage-json]").textContent = JSON.stringify(
-        { symptoms: Array.from(selected), age_months: ageMonths },
+        { patient_id: patientId, symptoms: Array.from(selected), age_months: ageMonths },
         null,
         2,
       );

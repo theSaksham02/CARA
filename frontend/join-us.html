@@ -162,19 +162,19 @@
 </div>
 </div>
 <div class="md:w-2/3 w-full">
-<form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6" data-join-form>
 <div class="flex flex-col gap-2">
 <label class="text-stone-600 text-sm font-bold ml-2">Name</label>
-<input class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all" placeholder="Your name" type="text"/>
+<input class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all" name="name" placeholder="Your name" required="" type="text"/>
 </div>
 <div class="flex flex-col gap-2">
 <label class="text-stone-600 text-sm font-bold ml-2">Email</label>
-<input class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all" placeholder="your@email.com" type="email"/>
+<input class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all" name="email" placeholder="your@email.com" required="" type="email"/>
 </div>
 <div class="flex flex-col gap-2 md:col-span-2">
 <label class="text-stone-600 text-sm font-bold ml-2">Role</label>
-<select class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all appearance-none cursor-pointer">
-<option>Select your primary focus</option>
+<select class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all appearance-none cursor-pointer" name="role" required="">
+<option value="">Select your primary focus</option>
 <option>Developer (OSS)</option>
 <option>Health Professional</option>
 <option>Policy Maker / Researcher</option>
@@ -183,12 +183,13 @@
 </div>
 <div class="flex flex-col gap-2 md:col-span-2">
 <label class="text-stone-600 text-sm font-bold ml-2">Message</label>
-<textarea class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all resize-none" placeholder="How would you like to contribute?" rows="5"></textarea>
+<textarea class="bg-surface-container-lowest border-none p-5 rounded-lg focus:ring-2 focus:ring-primary/40 outline-none transition-all resize-none" name="message" placeholder="How would you like to contribute?" required="" rows="5"></textarea>
 </div>
 <div class="md:col-span-2 mt-4">
 <button class="w-full bg-primary text-on-primary py-5 rounded-full font-bold text-lg hover:bg-primary-container hover:scale-[1.01] active:scale-[0.98] transition-all shadow-lg shadow-primary/10" type="submit">
                                 Send Message
                             </button>
+<p class="mt-2 text-sm font-semibold text-primary" data-form-feedback=""></p>
 </div>
 </form>
 </div>
@@ -221,5 +222,7 @@
             </div>
 </div>
 </footer>
+<script src="./js/api.js"></script>
 <script src="./js/route-wiring.js" type="module"></script>
+<script src="./js/join-us.js"></script>
 </body></html>
