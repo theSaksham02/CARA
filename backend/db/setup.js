@@ -1267,8 +1267,13 @@ async function createReadmissionRecord(payload, actorId) {
 
   if (getDbMode() === 'supabase') {
     const sb = getSupabaseDb();
-    const rows = throwOnError(await sb.from('readmission_records').insert(record).select(), 'createReadmissionRecord');
-    return rows[0];
+    const result = await sb.from('readmission_records').insert(record).select();
+    if (result.error && result.error.message.includes('readmission_records')) {
+      console.warn('readmission_records table missing in Supabase. Storing in memory fallback.');
+      store.memory.readmissionRecords.push(record);
+      return record;
+    }
+    return throwOnError(result, 'createReadmissionRecord')[0];
   }
 
   const pool = createPool();
@@ -1317,7 +1322,12 @@ async function listReadmissionRecords(filters = {}) {
     if (filters.patient_id) query = query.eq('patient_id', filters.patient_id);
     if (filters.condition) query = query.ilike('condition', filters.condition);
     if (filters.risk_level) query = query.eq('risk_level', filters.risk_level);
-    return throwOnError(await query.order('created_at', { ascending: false }).limit(limit), 'listReadmissionRecords');
+    const result = await query.order('created_at', { ascending: false }).limit(limit);
+    if (result.error && result.error.message.includes('readmission_records')) {
+      console.warn('readmission_records table missing. Returning memory fallback.');
+      return applyCreatedAtLimit(store.memory.readmissionRecords, limit);
+    }
+    return throwOnError(result, 'listReadmissionRecords');
   }
 
   const pool = createPool();
@@ -1364,8 +1374,13 @@ async function createSyncLogEntry(payload) {
 
   if (getDbMode() === 'supabase') {
     const sb = getSupabaseDb();
-    const rows = throwOnError(await sb.from('sync_log').insert(entry).select(), 'createSyncLogEntry');
-    return rows[0];
+    const result = await sb.from('sync_log').insert(entry).select();
+    if (result.error && result.error.message.includes('sync_log')) {
+      console.warn('sync_log table missing in Supabase. Storing in memory.');
+      store.memory.syncLog.push(entry);
+      return entry;
+    }
+    return throwOnError(result, 'createSyncLogEntry')[0];
   }
 
   const pool = createPool();
@@ -1397,13 +1412,16 @@ async function getSyncStatusData() {
 
   if (mode === 'supabase') {
     const sb = getSupabaseDb();
-    const { data: pending } = await sb.from('sync_log').select('id', { count: 'exact' }).eq('status', 'pending');
+    const pendingResult = await sb.from('sync_log').select('id', { count: 'exact' }).eq('status', 'pending');
+    if (pendingResult.error && pendingResult.error.message.includes('sync_log')) {
+      return { online: true, last_sync: null, pending_records: 0, db_mode: mode, note: 'sync_log table not yet created' };
+    }
     const { data: lastSync } = await sb.from('sync_log').select('synced_at').eq('status', 'synced').order('synced_at', { ascending: false }).limit(1);
 
     return {
       online: true,
       last_sync: lastSync && lastSync[0] ? lastSync[0].synced_at : null,
-      pending_records: pending ? pending.length : 0,
+      pending_records: pendingResult.data ? pendingResult.data.length : 0,
       db_mode: mode,
     };
   }

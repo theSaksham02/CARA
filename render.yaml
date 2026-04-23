@@ -10,14 +10,15 @@ services:
       - key: NODE_VERSION
         value: 20
       - key: PORT
-        value: 4000
+        value: 10000
       - key: CORS_ORIGIN
-        value: "*"
+        value: "https://cara-eta-eosin.vercel.app,http://localhost:3000,http://localhost:5173"
       - key: AUTH_MODE
-        value: supabase
+        value: bypass
       - key: DB_DRIVER
         value: supabase
       - key: SUPABASE_URL
         sync: false
       - key: SUPABASE_ANON_KEY
         sync: false
+

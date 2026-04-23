@@ -1,7 +1,13 @@
 window.CARA = window.CARA || {};
 
 (() => {
-  const API_BASE = window.CARA_CONFIG?.apiBase || "";
+  function resolveBase() {
+    if (typeof window.resolveCaraApiBaseUrl === 'function') return window.resolveCaraApiBaseUrl();
+    const { protocol, hostname } = window.location;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') return `${protocol}//${hostname}:4000`;
+    return '';
+  }
+  const API_BASE = window.CARA_CONFIG?.apiBase || resolveBase();
 
   async function request(path, options = {}) {
     const response = await fetch(`${API_BASE}${path}`, {
@@ -64,8 +70,16 @@ window.CARA = window.CARA || {};
   };
 })();
 (function attachCaraApi(globalScope) {
+  // ── Backend URL Resolution ──────────────────────────────
+  // Priority: CARA_CONFIG.apiBase → known production mapping → localhost
+  const PRODUCTION_API_MAP = {
+    'cara-eta-eosin.vercel.app': 'https://cara-backend.onrender.com',
+  };
+
   function resolveCaraApiBaseUrl() {
+    if (globalScope.CARA_CONFIG?.apiBase) return globalScope.CARA_CONFIG.apiBase;
     const { protocol, hostname } = globalScope.location;
+    if (PRODUCTION_API_MAP[hostname]) return PRODUCTION_API_MAP[hostname];
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       return `${protocol}//${hostname}:4000`;
     }
@@ -201,6 +215,71 @@ window.CARA = window.CARA || {};
       const search = new URLSearchParams(query).toString();
       const suffix = search ? `?${search}` : '';
       return this.request(`/api/assistant/logs${suffix}`);
+    }
+
+    // ─── Readmission ──────────────────────────────────
+
+    predictReadmission(payload) {
+      return this.request('/api/readmission/predict', {
+        method: 'POST',
+        body: payload,
+      });
+    }
+
+    listReadmissionRecords(query = {}) {
+      const search = new URLSearchParams(query).toString();
+      const suffix = search ? `?${search}` : '';
+      return this.request(`/api/readmission${suffix}`);
+    }
+
+    // ─── Voice ────────────────────────────────────────
+
+    transcribeAudio(formData) {
+      // Special handling — FormData, not JSON
+      return fetch(`${this.baseUrl}/api/voice/transcribe`, {
+        method: 'POST',
+        body: formData,
+      }).then((r) => r.json());
+    }
+
+    // ─── RAG ──────────────────────────────────────────
+
+    getRagIndexStatus() {
+      return this.request('/api/rag/index/status');
+    }
+
+    buildRagIndex(payload = {}) {
+      return this.request('/api/rag/index/build', {
+        method: 'POST',
+        body: payload,
+      });
+    }
+
+    queryRag(payload) {
+      return this.request('/api/rag/query', {
+        method: 'POST',
+        body: payload,
+      });
+    }
+
+    // ─── Audit ────────────────────────────────────────
+
+    listAuditEvents(query = {}) {
+      const search = new URLSearchParams(query).toString();
+      const suffix = search ? `?${search}` : '';
+      return this.request(`/api/audit${suffix}`);
+    }
+
+    // ─── Sync ─────────────────────────────────────────
+
+    getSyncStatus() {
+      return this.request('/api/sync-status');
+    }
+
+    // ─── Patient Summary (single) ─────────────────────
+
+    getPatientSummary(patientId) {
+      return this.request(`/api/patients/${encodeURIComponent(patientId)}/summary`);
     }
 
     submitJoinUs(payload) {

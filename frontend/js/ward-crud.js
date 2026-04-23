@@ -981,6 +981,146 @@
   }
 
   // ═══════════════════════════════════════════
+  // Impact Dashboard Page — Live KPIs
+  // ═══════════════════════════════════════════
+
+  async function bootImpactDashboard(api) {
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    // Wire date filter buttons
+    const filterBtns = main.querySelectorAll('.rounded-full.text-sm.font-medium, .rounded-full.text-sm.font-bold');
+    let currentRange = 'month';
+
+    async function loadImpact(range) {
+      try {
+        const [analyticsData, patientsData, queueData] = await Promise.all([
+          api.getImpactAnalytics({ range }).catch(() => ({ analytics: { metrics: {} } })),
+          api.listPatients().catch(() => ({ patients: [] })),
+          api.getTriageQueue().catch(() => ({ queue: [] })),
+        ]);
+
+        const metrics = analyticsData.analytics?.metrics || {};
+        const patients = patientsData.patients || [];
+        const queue = queueData.queue || [];
+        const redCases = queue.filter((q) => q.urgency === 'RED');
+
+        // Update the 4 KPI cards
+        const kpiCards = main.querySelectorAll('section.grid.grid-cols-1.md\\:grid-cols-4 > div');
+        if (kpiCards.length >= 4) {
+          // Card 1: Patients Managed
+          const val1 = kpiCards[0].querySelector('.text-5xl');
+          if (val1) val1.textContent = String(metrics.patients_managed ?? patients.length).toLocaleString();
+
+          // Card 2: RED Cases Resolved
+          const val2 = kpiCards[1].querySelector('.text-5xl');
+          const rr = metrics.red_resolution_rate ?? 0;
+          if (val2) val2.innerHTML = `${(rr * 100).toFixed(1)}<span class="text-2xl ml-1 text-on-surface-variant/40">%</span>`;
+
+          // Card 3: Follow-up Rate
+          const val3 = kpiCards[2].querySelector('.text-5xl');
+          const fr = metrics.followup_rate ?? 0;
+          if (val3) val3.innerHTML = `${Math.round(fr * 100)}<span class="text-2xl ml-1 text-on-surface-variant/40">%</span>`;
+
+          // Card 4: Documentation Coverage
+          const val4 = kpiCards[3].querySelector('.text-5xl');
+          const dc = metrics.documentation_coverage ?? 0;
+          if (val4) {
+            if (dc > 0) {
+              val4.innerHTML = `${(dc * 100).toFixed(0)}<span class="text-2xl ml-1 text-on-surface-variant/40">%</span>`;
+            } else {
+              val4.textContent = '—';
+            }
+          }
+        }
+
+        // Update donut chart center number
+        const donutCenter = main.querySelector('.text-3xl.font-headline');
+        if (donutCenter) {
+          donutCenter.textContent = String(queue.length || patients.length);
+        }
+        const donutLabel = donutCenter?.nextElementSibling;
+        if (donutLabel) donutLabel.textContent = 'Triage Cases';
+      } catch (err) {
+        console.warn('[ward-crud] impact load error:', err.message);
+      }
+    }
+
+    // Wire filter buttons
+    filterBtns.forEach((btn) => {
+      const label = btn.textContent.trim().toLowerCase();
+      if (['today', 'week', 'month'].includes(label)) {
+        btn.addEventListener('click', () => {
+          currentRange = label;
+          filterBtns.forEach((b) => {
+            b.className = b.className
+              .replace('bg-primary text-on-primary font-bold', 'text-on-surface-variant hover:text-on-surface font-medium')
+              .replace('font-bold', 'font-medium');
+          });
+          btn.className = btn.className
+            .replace('text-on-surface-variant hover:text-on-surface font-medium', 'bg-primary text-on-primary font-bold')
+            .replace('font-medium', 'font-bold');
+          loadImpact(currentRange);
+        });
+      }
+    });
+
+    await loadImpact(currentRange);
+    setInterval(() => loadImpact(currentRange), 30000);
+  }
+
+  // ═══════════════════════════════════════════
+  // SOAP Notes Page — Live Notes List  
+  // ═══════════════════════════════════════════
+
+  async function bootSoapNotes(api) {
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    try {
+      const [notesData, patientsData] = await Promise.all([
+        api.listNotes({ limit: 20 }).catch(() => ({ notes: [] })),
+        api.listPatients().catch(() => ({ patients: [] })),
+      ]);
+
+      const notes = notesData.notes || [];
+      const patients = patientsData.patients || [];
+
+      // Build a patient lookup map
+      const patientMap = {};
+      patients.forEach((p) => (patientMap[p.id] = p.full_name));
+
+      // Try to find the notes list container — usually a table or card list
+      const notesContainer = main.querySelector('tbody') || main.querySelector('[data-notes-list]');
+
+      if (notesContainer && notes.length) {
+        notesContainer.innerHTML = notes
+          .map((note) => {
+            const patientName = patientMap[note.patient_id] || 'Unknown';
+            const assessment = Array.isArray(note.assessment) ? note.assessment[0] : note.assessment || '';
+            const plan = Array.isArray(note.plan) ? note.plan[0] : note.plan || '';
+            const date = note.created_at ? new Date(note.created_at).toLocaleDateString() : '—';
+            return `
+            <tr class="hover:bg-surface-container-low/50 transition-colors group">
+              <td class="px-6 py-4 text-sm font-bold text-on-surface">${escapeHtml(patientName)}</td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">${escapeHtml(assessment)}</td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">${escapeHtml(plan)}</td>
+              <td class="px-6 py-4 text-xs text-stone-400">${escapeHtml(date)}</td>
+              <td class="px-6 py-4 text-xs text-stone-400">${escapeHtml(note.generated_by || 'CARA AI')}</td>
+            </tr>`;
+          })
+          .join('');
+      }
+
+      // Update any note count badges
+      const countBadge = main.querySelector('[data-notes-count]');
+      if (countBadge) countBadge.textContent = String(notes.length);
+    } catch (err) {
+      console.warn('[ward-crud] soap notes load error:', err.message);
+    }
+  }
+
+  // ═══════════════════════════════════════════
   // Inject Modal Animations CSS
   // ═══════════════════════════════════════════
 
@@ -1019,6 +1159,14 @@
 
     if (path === 'the-ward-patient-profile.html') {
       bootPatientProfile(api);
+    }
+
+    if (path === 'the-ward-impact-dashboard.html') {
+      bootImpactDashboard(api);
+    }
+
+    if (path === 'the-ward-soap-notes.html') {
+      bootSoapNotes(api);
     }
   });
 })(window);
